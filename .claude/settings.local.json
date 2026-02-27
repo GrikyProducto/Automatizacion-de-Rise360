@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import playwright; print\\(playwright.__version__\\)\")",
+      "Bash(python -c \"import fitz; print\\(fitz.__version__\\)\")",
+      "Bash(python -c \"import tkinter; print\\(''tkinter OK''\\)\")",
+      "Bash(python -c \"import pyinstaller; print\\(pyinstaller.__version__\\)\")",
+      "Bash(python -m PyInstaller --version)",
+      "Bash(python -c \"import fitz; print\\(dir\\(fitz\\)[:10]\\); print\\(fitz.__version__\\)\")",
+      "Bash(python -c \":*)",
+      "Bash(__NEW_LINE_39ffa62fbba4bb3d__ python -c \":*)",
+      "Bash(python -m py_compile config.py)",
+      "Bash(python -m py_compile utils.py)",
+      "Bash(python -m py_compile pdf_parser.py)",
+      "Bash(python -m py_compile visual_learner.py)",
+      "Bash(python -m py_compile rise_automation.py)",
+      "Bash(python -m py_compile content_builder.py)",
+      "Bash(python -m py_compile self_learning.py)",
+      "Bash(python -m py_compile main.py)"
+    ]
+  }
+}

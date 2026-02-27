@@ -1,0 +1,26 @@
+# Rise 360 Automator — Dependencias Python
+# Instalar con: pip install -r requirements.txt
+
+# Automatización de navegador (ya instalado)
+playwright==1.58.0
+
+# Extracción de PDF (ya instalado)
+PyMuPDF==1.27.1
+
+# Visión por computadora
+opencv-python>=4.9.0
+
+# OCR
+pytesseract>=0.3.13
+
+# Procesamiento de imágenes
+Pillow>=10.3.0
+
+# Control de mouse/teclado (opcional para fallback)
+pyautogui>=0.9.54
+
+# Portapapeles (para texto largo)
+pyperclip>=1.9.0
+
+# Empaquetado en .exe
+pyinstaller>=6.0.0

@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-27",
+  "description": "Mapa de correspondencia entre tipos de contenido PDF y bloques de Rise 360",
+  "reference_course": "Gesti\u00f3n de la Cadena de Suministro en Entornos Competitivos",
+  "mappings": {
+    "titulo": {
+      "rise_block": "banner",
+      "action": "edit_existing",
+      "position": 0,
+      "selectors": [
+        ".lesson-banner",
+        "[data-block-type='banner']",
+        ".block-banner"
+      ],
+      "notes": "Banner principal del curso (hero). Siempre es el primer bloque."
+    },
+    "introduccion": {
+      "rise_block": "text",
+      "action": "edit_existing",
+      "position": 1,
+      "selectors": [
+        ".ql-editor[contenteditable='true']",
+        "[data-block-type='text']"
+      ],
+      "notes": "Bloque de texto introductorio. Suele estar preexistente en la plantilla."
+    },
+    "h1": {
+      "rise_block": "section_banner",
+      "action": "add_new",
+      "color": "#1a73e8",
+      "selectors": [
+        "[data-block-type='section-banner']",
+        ".lesson-section-banner"
+      ],
+      "notes": "Banner de sección para cada Tema principal (Tema 1, Tema 2, etc.)"
+    },
+    "h2": {
+      "rise_block": "text_subheading",
+      "action": "add_new",
+      "selectors": [
+        ".ql-editor[contenteditable='true']"
+      ],
+      "quill_format": "header-2",
+      "notes": "Subtema insertado como H2 dentro de un bloque de texto."
+    },
+    "h3": {
+      "rise_block": "text_subheading",
+      "action": "add_new",
+      "selectors": [
+        ".ql-editor[contenteditable='true']"
+      ],
+      "quill_format": "header-3",
+      "notes": "Sub-subtema insertado como H3."
+    },
+    "parrafo": {
+      "rise_block": "text",
+      "action": "add_new",
+      "selectors": [
+        ".ql-editor[contenteditable='true']",
+        "[data-block-type='text']"
+      ],
+      "notes": "P\u00e1rrafo de desarrollo. Texto verbatim del PDF."
+    },
+    "lista_vinetas": {
+      "rise_block": "bulleted_list",
+      "action": "add_new",
+      "selectors": [
+        "[data-block-type='bulleted-list']",
+        ".lesson-bulleted-list"
+      ],
+      "notes": "Lista con vi\u00f1etas. Cada item en l\u00ednea separada."
+    },
+    "lista_numerada": {
+      "rise_block": "numbered_list",
+      "action": "add_new",
+      "selectors": [
+        "[data-block-type='numbered-list']",
+        ".lesson-numbered-list"
+      ],
+      "notes": "Lista numerada."
+    },
+    "tabla": {
+      "rise_block": "table",
+      "action": "add_new",
+      "selectors": [
+        "[data-block-type='table']",
+        ".lesson-table"
+      ],
+      "notes": "Tabla de datos. Se inserta como bloque Table de Rise 360."
+    },
+    "imagen": {
+      "rise_block": "image",
+      "action": "add_new",
+      "selectors": [
+        "[data-block-type='image']",
+        ".lesson-image"
+      ],
+      "notes": "Im\u00e1gen del PDF. Se extrae y sube a Rise 360."
+    },
+    "caso_practico": {
+      "rise_block": "accordion",
+      "action": "add_new",
+      "selectors": [
+        "[data-block-type='accordion']",
+        ".lesson-accordion"
+      ],
+      "notes": "Caso pr\u00e1ctico o actividad interactiva. Se mapea a Accordion."
+    },
+    "conclusion": {
+      "rise_block": "text",
+      "action": "add_new",
+      "selectors": [
+        ".ql-editor[contenteditable='true']",
+        "[data-block-type='text']"
+      ],
+      "notes": "Conclusi\u00f3n del curso. Bloque de texto libre."
+    },
+    "referencias": {
+      "rise_block": "text",
+      "action": "add_new",
+      "selectors": [
+        ".ql-editor[contenteditable='true']",
+        "[data-block-type='text']"
+      ],
+      "notes": "Referencias bibliogr\u00e1ficas. Texto verbatim al final del curso."
+    }
+  },
+  "block_menu_labels": {
+    "text": "Text",
+    "section_banner": "Divider",
+    "bulleted_list": "Bulleted List",
+    "numbered_list": "Numbered List",
+    "table": "Table",
+    "image": "Image",
+    "accordion": "Accordion",
+    "tabs": "Tabs",
+    "banner": "Statement"
+  },
+  "corrections_history": [],
+  "learned_selectors": {},
+  "visual_signatures": {
+    "banner": {"dominant_color": "dark_blue", "aspect_ratio": "wide"},
+    "text": {"dominant_color": "white", "has_quill_editor": true},
+    "section_banner": {"dominant_color": "colored", "aspect_ratio": "medium"},
+    "bulleted_list": {"dominant_color": "white", "has_bullets": true},
+    "table": {"dominant_color": "light_gray", "has_grid": true}
+  }
+}
