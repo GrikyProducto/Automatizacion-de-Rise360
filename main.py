@@ -14,6 +14,10 @@ import subprocess
 import sys
 import os
 
+# Forzar UTF-8 en stdout para evitar errores con caracteres especiales en Windows
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 REQUIRED_PACKAGES = [
     "opencv-python",
     "pytesseract",
@@ -41,16 +45,16 @@ def auto_install_packages():
     print(f"Instalando dependencias faltantes: {', '.join(missing)}")
     for pkg in missing:
         try:
-            print(f"  → pip install {pkg}")
+            print(f"  >> pip install {pkg}")
             subprocess.check_call(
                 [sys.executable, "-m", "pip", "install", pkg, "--quiet"],
                 timeout=120,
             )
-            print(f"  ✓ {pkg} instalado")
+            print(f"  [OK] {pkg} instalado")
         except subprocess.CalledProcessError as e:
-            print(f"  ✗ Error instalando {pkg}: {e}")
+            print(f"  [ERROR] instalando {pkg}: {e}")
         except subprocess.TimeoutExpired:
-            print(f"  ✗ Timeout instalando {pkg}")
+            print(f"  [TIMEOUT] instalando {pkg}")
 
 
 def auto_install_playwright():
@@ -432,7 +436,7 @@ class RiseAutomatorApp(tk.Tk):
                 self._log("Analizando diseño del curso de referencia...")
 
                 try:
-                    rise.navigate_to_course_editor(config.TEMPLATE_URL)
+                    rise.navigate_to_course_outline(config.TEMPLATE_URL)
                     reference_patterns = visual_learner.analyze_reference_course(rise.page)
                     self._log(
                         f"✓ Análisis visual completado: "
@@ -458,8 +462,8 @@ class RiseAutomatorApp(tk.Tk):
                 except Exception as e:
                     self._log(f"✗ Error duplicando plantilla: {e}")
                     # Fallback: usar la URL de template directamente para testing
-                    self._log("⚠ Usando plantilla original como fallback")
-                    rise.navigate_to_course_editor(template_url)
+                    self._log("[!] Usando plantilla original como fallback")
+                    rise.navigate_to_course_outline(template_url)
 
                 self._update("Plantilla lista para edición", 55)
 

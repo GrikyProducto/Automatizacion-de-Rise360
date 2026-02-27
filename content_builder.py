@@ -188,7 +188,7 @@ class ContentBuilder:
         if not title:
             return
         logger.info(f"Estableciendo título del curso: '{title}'")
-        success = self.rise.set_block_title(title)
+        success = self.rise.set_course_title(title)
         if success:
             self._blocks_inserted += 1
         else:
@@ -201,7 +201,7 @@ class ContentBuilder:
 
     def _handle_titulo(self, text: str) -> bool:
         """Handler para bloques tipo 'titulo'."""
-        return self.rise.set_block_title(text)
+        return self.rise.set_course_title(text)
 
     def _handle_h1_section(self, text: str) -> bool:
         """

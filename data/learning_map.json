@@ -2,7 +2,7 @@
   "version": "1.0",
   "last_updated": "2026-02-27",
   "description": "Mapa de correspondencia entre tipos de contenido PDF y bloques de Rise 360",
-  "reference_course": "Gesti\u00f3n de la Cadena de Suministro en Entornos Competitivos",
+  "reference_course": "Gestión de la Cadena de Suministro en Entornos Competitivos",
   "mappings": {
     "titulo": {
       "rise_block": "banner",
@@ -60,7 +60,7 @@
         ".ql-editor[contenteditable='true']",
         "[data-block-type='text']"
       ],
-      "notes": "P\u00e1rrafo de desarrollo. Texto verbatim del PDF."
+      "notes": "Párrafo de desarrollo. Texto verbatim del PDF."
     },
     "lista_vinetas": {
       "rise_block": "bulleted_list",
@@ -69,7 +69,7 @@
         "[data-block-type='bulleted-list']",
         ".lesson-bulleted-list"
       ],
-      "notes": "Lista con vi\u00f1etas. Cada item en l\u00ednea separada."
+      "notes": "Lista con viñetas. Cada item en línea separada."
     },
     "lista_numerada": {
       "rise_block": "numbered_list",
@@ -96,7 +96,7 @@
         "[data-block-type='image']",
         ".lesson-image"
       ],
-      "notes": "Im\u00e1gen del PDF. Se extrae y sube a Rise 360."
+      "notes": "Imágen del PDF. Se extrae y sube a Rise 360."
     },
     "caso_practico": {
       "rise_block": "accordion",
@@ -105,7 +105,7 @@
         "[data-block-type='accordion']",
         ".lesson-accordion"
       ],
-      "notes": "Caso pr\u00e1ctico o actividad interactiva. Se mapea a Accordion."
+      "notes": "Caso práctico o actividad interactiva. Se mapea a Accordion."
     },
     "conclusion": {
       "rise_block": "text",
@@ -114,7 +114,7 @@
         ".ql-editor[contenteditable='true']",
         "[data-block-type='text']"
       ],
-      "notes": "Conclusi\u00f3n del curso. Bloque de texto libre."
+      "notes": "Conclusión del curso. Bloque de texto libre."
     },
     "referencias": {
       "rise_block": "text",
@@ -123,7 +123,7 @@
         ".ql-editor[contenteditable='true']",
         "[data-block-type='text']"
       ],
-      "notes": "Referencias bibliogr\u00e1ficas. Texto verbatim al final del curso."
+      "notes": "Referencias bibliográficas. Texto verbatim al final del curso."
     }
   },
   "block_menu_labels": {
@@ -140,10 +140,42 @@
   "corrections_history": [],
   "learned_selectors": {},
   "visual_signatures": {
-    "banner": {"dominant_color": "dark_blue", "aspect_ratio": "wide"},
-    "text": {"dominant_color": "white", "has_quill_editor": true},
-    "section_banner": {"dominant_color": "colored", "aspect_ratio": "medium"},
-    "bulleted_list": {"dominant_color": "white", "has_bullets": true},
-    "table": {"dominant_color": "light_gray", "has_grid": true}
+    "banner": {
+      "dominant_color": "dark_blue",
+      "aspect_ratio": "wide"
+    },
+    "text": {
+      "dominant_color": "white",
+      "has_quill_editor": true
+    },
+    "section_banner": {
+      "dominant_color": "colored",
+      "aspect_ratio": "medium"
+    },
+    "bulleted_list": {
+      "dominant_color": "white",
+      "has_bullets": true
+    },
+    "table": {
+      "dominant_color": "light_gray",
+      "has_grid": true
+    }
+  },
+  "visual_map": {
+    "detected_patterns": [
+      {
+        "index": 0,
+        "block_type": "desconocido",
+        "ocr_preview": "",
+        "color": "white"
+      }
+    ],
+    "block_order": [
+      "desconocido"
+    ],
+    "visual_map": {},
+    "screenshots": [
+      "C:\\Users\\Jersson\\Documents\\GrikyDev\\ScriptUSS-Articulate\\screenshots\\reference_initial_20260227_110451_381.png"
+    ]
   }
 }
