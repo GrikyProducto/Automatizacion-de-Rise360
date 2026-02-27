@@ -12,7 +12,7 @@ PASSWORD = "GrikyRise2026!"
 
 # ── URLs ──────────────────────────────────────────────────────────────────
 RISE_BASE_URL = "https://rise.articulate.com"
-RISE_DASHBOARD_URL = "https://rise.articulate.com"
+RISE_DASHBOARD_URL = "https://rise.articulate.com/manage/all-content"
 TEMPLATE_URL = "https://rise.articulate.com/authoring/3mktt-_LKSTVtVKb8QC-i3D0EHSD-n-v"
 REFERENCE_COURSE_TITLE = "Gestión de la Cadena de Suministro en Entornos Competitivos"
 
