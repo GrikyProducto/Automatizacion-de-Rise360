@@ -1,0 +1,3 @@
+10:38:55 [DEBUG   ] rise_automator: learning_map.json cargado exitosamente
+10:38:55 [DEBUG   ] rise_automator: Script: click → button#login
+10:38:55 [DEBUG   ] rise_automator: Script: add_block → h1
