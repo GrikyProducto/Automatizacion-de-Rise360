@@ -1,0 +1,2044 @@
+{
+  "script": {
+    "label": "SCRIPT",
+    "url": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+    "title": "Gestión de la Cadena de Suministro en Entornos Competitivos: enfoque sistémico, flujos clave y estra",
+    "lessons_count": 5,
+    "lesson_titles": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "lessons": [
+      {
+        "index": 0,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin comprometer la calidad, la agilidad ni la sostenibilidad. Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente está íntimamente ligado a la rapidez con la que lo recibe, a la disponibilidad en el canal elegido, al nivel de servicio recibido y al compromiso ético y ambiental demostrado a lo largo de toda la cadena."
+            ],
+            "visible_text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin comprometer la calidad, la agilidad ni la sostenibilidad. Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente está íntimamente ligado a la rapidez con la que lo recibe, a"
+          },
+          {
+            "index": 2,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.1. Concepto general"
+            ],
+            "visible_text": "1.1. Concepto general"
+          },
+          {
+            "index": 3,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Chain Management (SCM), se ha consolidado como una disciplina clave para garantizar la competitividad y la viabilidad de las organizaciones en el mediano y largo plazo. Más que una simple evolución de la logística tradicional, el SCM representa un enfoque integral que articula decisiones operativas, tácticas y estratégicas, abarcando desde la gestión de proveedores y la planificación de la demanda hasta la entrega final y la logística inversa. Su alcance no se limita al movimiento de productos, sino que se extiende a la coordinación efectiva de información, materiales, capacidades humanas, infraestructura tecnológica y flujos financieros, dentro de una red cada vez más interconectada y compleja."
+            ],
+            "visible_text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Chain Management (SCM), se ha consolidado como una disciplina clave para garantizar la competitividad y la viabilidad de las organizaciones en el mediano y largo plazo. Más que una simple evolución de la logística tradicional, el SCM representa un enfoque integral que articula decisiones operativas, tácticas y estratégicas, abarcando desde la gestión de proveedores y la planificación de la demanda h"
+          },
+          {
+            "index": 4,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\n\nSubtítulo\n\nHaz clic para voltear\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum, nec viverra magna sagittis. Sed et fermentum nisl.\n\nHaz clic para voltear\n\nSubtítulo\n\nHaz clic para voltear\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum, nec viverra magna sagittis. Sed et fermentum nisl.\n\nHaz clic para voltear\n\nSubtítulo\n\nHaz clic para voltear\n\nLorem ipsum dolor sit ame"
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.2. Evolución y alcance"
+            ],
+            "visible_text": "1.2. Evolución y alcance"
+          },
+          {
+            "index": 6,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.3. Flujos en la cadena de suministro"
+            ],
+            "visible_text": "1.3. Flujos en la cadena de suministro"
+          },
+          {
+            "index": 8,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 9,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.4. Caso práctico: la cadena de suministro de Cencosud"
+            ],
+            "visible_text": "1.4. Caso práctico: la cadena de suministro de Cencosud"
+          },
+          {
+            "index": 10,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 11,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro"
+            ],
+            "visible_text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro"
+          },
+          {
+            "index": 12,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.6. En la práctica: sostenibilidad y digitalización"
+            ],
+            "visible_text": "1.6. En la práctica: sostenibilidad y digitalización"
+          },
+          {
+            "index": 13,
+            "type": "numbered_list",
+            "editables_count": 3,
+            "editable_texts": [
+              "Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes— permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total y capacidad de respuesta. Esta mirada sistémica, basada en principios de integración, sincronización y alineación estratégica, permite transformar la cadena de suministro en una fuente de ventajas competitivas sostenibles. Una red bien diseñada y gestionada no solo permite cumplir con los estándares operacionales, sino también adaptarse con rapidez a las variaciones del mercado, reducir riesgos, incorporar criterios de sostenibilidad y generar experiencias de cliente diferenciadoras.",
+              "De hecho, autores como Chopra y Meindl, Ballou, Heizer, Render, Chase, Jacobs y Aquilano coinciden en señalar que una cadena de suministro eficiente y flexible es uno de los pilares fundamentales para alcanzar niveles superiores de productividad, rentabilidad y diferenciación. El foco de la cadena moderna está, por tanto, en generar valor agregado en cada etapa del proceso, alineando capacidades logísticas con decisiones comerciales, tecnológicas, financieras y humanas. Esto implica dominar una propuesta integral de servicio que combine alta disponibilidad, tiempos de respuesta reducidos, control de costos y consistencia en la experiencia de cliente, tanto en canales físicos como digitales. En el caso chileno, esta visión adquiere especial relevancia debido a una serie de características estructurales y culturales:",
+              "una geografía extensa y segmentada que impone retos logísticos de cobertura; una economía abierta y orientada al comercio exterior; una creciente digitalización del consumo, que transforma los patrones tradicionales de abastecimiento; y una presión internacional por cumplir estándares de sostenibilidad, trazabilidad y ética en las operaciones. En sectores clave como la agroindustria, la minería, el comercio minorista y el e-commerce, la eficiencia logística se ha transformado en un factor decisivo de competitividad y acceso a nuevos mercados. De allí que el aprendizaje profundo y aplicado de este tema resulte crucial para quienes se están formando en campos como la ingeniería, la administración, la logística y las tecnologías de gestión."
+            ],
+            "visible_text": "1\n\nComprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes— permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total y capacidad de respuesta. Esta mirada sistémica, basada en principios de integración, sincronización y alineación estratégica, permite transformar la cadena de suministro en una fuente de ventajas"
+          },
+          {
+            "index": 14,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 15,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q"
+            ],
+            "visible_text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q"
+          },
+          {
+            "index": 16,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q"
+            ],
+            "visible_text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q"
+          },
+          {
+            "index": 17,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más que nunca, una competencia esencial para liderar procesos organizacionales en entornos volátiles, inciertos y altamente exigentes. Esta unidad abordará cuatro dimensiones fundamentales: 1. La definición de la cadena de suministros, su evolución conceptual y su funcionamiento a través de flujos clave. 2. La estrategia de la cadena de suministros, entendida como el diseño intencional de operaciones para generar ventajas competitivas en función del entorno y del modelo de negocio. 3. Mapa conceptual de la cadena de suministros. 4. Definición de logística integral.",
+              "Dichas perspectivas permitirán comprender la importancia de la logística integrada, de las decisiones basadas en datos, de la colaboración interorganizacional y del enfoque ético en la creación de redes de valor."
+            ],
+            "visible_text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más que nunca, una competencia esencial para liderar procesos organizacionales en entornos volátiles, inciertos y altamente exigentes. Esta unidad abordará cuatro dimensiones fundamentales: 1. La definición de la cadena de suministros, su evolución conceptual y su funcionamiento a través de flujos clave. 2. La estrategia de la cadena de suministros, entendida como el diseño intencio"
+          },
+          {
+            "index": 18,
+            "type": "quote_carousel",
+            "editables_count": 6,
+            "editable_texts": [
+              "Definición de la cadena de suministros",
+              "Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de forma eficiente, rentable y sostenible. Va mucho más allá del transporte o del almacenamiento: abarca la forma en que una empresa se conecta con sus proveedores, transforma insumos en productos, gestiona inventarios, organiza entregas, responde al cliente y aprende del mercado. Chopra y Meindl definen su propósito como la maximización del valor total generado, entendido como la diferencia entre el valor que el cliente percibe y el costo total incurrido para satisfacer esa necesidad.",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 3\n\nDefinición de la cadena de suministros\n\nSegún lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de forma eficiente, rentable y sostenible. Va mucho más allá del transporte o del almacenamiento: abarca la forma en que una empresa se conecta con sus provee"
+          },
+          {
+            "index": 19,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas, integración con servicios de última milla y atención postventa personalizada. La gestión se ha vuelto más compleja, pero también más estratégica."
+            ],
+            "visible_text": "Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas, integración con servicios de última milla y atención postventa personalizada. La gestión se ha vuelto más compleja, pero también más estratégica."
+          },
+          {
+            "index": 20,
+            "type": "labeled",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 21,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 22,
+            "type": "wrapper",
+            "editables_count": 2,
+            "editable_texts": [
+              "",
+              ""
+            ],
+            "visible_text": ""
+          },
+          {
+            "index": 23,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "•  Flujo de información: Es el sistema nervioso de la cadena."
+            ],
+            "visible_text": "•  Flujo de información: Es el sistema nervioso de la cadena."
+          },
+          {
+            "index": 24,
+            "type": "image",
+            "editables_count": 1,
+            "editable_texts": [
+              "•  Flujo de información: Es el sistema nervioso de la cadena. Sin información precisa, actualizada y compartida, se producen distorsiones como el efecto látigo, donde una pequeña variación en la demanda genera una ola de sobreproducción o desabastecimiento. Este flujo debe ser digital, trazable, y en tiempo real."
+            ],
+            "visible_text": "•  Flujo de información: Es el sistema nervioso de la cadena. Sin información precisa, actualizada y compartida, se producen distorsiones como el efecto látigo, donde una pequeña variación en la demanda genera una ola de sobreproducción o desabastecimiento. Este flujo debe ser digital, trazable, y en tiempo real."
+          },
+          {
+            "index": 25,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Estrategia de la cadena de suministros"
+            ],
+            "visible_text": "Estrategia de la cadena de suministros"
+          },
+          {
+            "index": 2,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.1. Alineación estratégica"
+            ],
+            "visible_text": "2.1. Alineación estratégica"
+          },
+          {
+            "index": 3,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 4,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.2. Enfoques estratégicos"
+            ],
+            "visible_text": "2.2. Enfoques estratégicos"
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.3. Casos comparativos"
+            ],
+            "visible_text": "2.3. Casos comparativos"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.4. Resiliencia y gestión del riesgo"
+            ],
+            "visible_text": "2.4. Resiliencia y gestión del riesgo"
+          },
+          {
+            "index": 7,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "Toda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prioridades competitivas de la organización. Cuando la cadena de suministros no está alineada con la propuesta de valor, se generan tensiones internas, desperdicio de recursos, duplicación de esfuerzos y, sobre todo, insatisfacción del cliente. Diseñar una cadena de suministro alineada implica comprender qué es lo que la empresa promete a sus clientes y cómo puede cumplirlo sistemáticamente. Si una organización basa su estrategia en el liderazgo en costos, su cadena debe maximizar la eficiencia, eliminar actividades sin valor, operar con altos volúmenes y minimizar las variaciones. Por el contrario, si la promesa se enfoca en la innovación, el servicio o la exclusividad, la cadena debe ser flexible, altamente responsiva y capaz de adaptarse a cambios en la demanda o en el entorno. En el caso chileno, esta distinción se observa con claridad entre distintos formatos del retail.",
+              "Cadenas como Líder estructuran su red logística bajo un paradigma de eficiencia, con centros de distribución regionales que consolidan grandes volúmenes y optimizan costos mediante escalas de operación. En cambio, empresas como Falabella o Ripley, que se han orientado hacia modelos omnicanal, diseñan sus operaciones para atender tanto al consumidor digital como al físico, adaptando sus entregas, devoluciones y servicio postventa a distintos canales y comportamientos de compra. La alineación estratégica también debe considerar factores estructurales, como la ubicación geográfica de los centros de distribución, el grado de automatización de los procesos, las políticas de stock y reposición, la red de proveedores, el nivel de integración con socios logísticos, y el tipo de tecnologías adoptadas. Cada una de estas variables puede reforzar o contradecir los objetivos comerciales. Una empresa que dice ser ágil, pero opera con sistemas lentos y procesos burocráticos, crea una contradicción que impacta en su reputación y desempeño.",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nToda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prioridades competitivas de la organización. Cuando la cadena de suministros no está alineada con la propuesta de valor, se generan tensiones internas, desperdicio de recursos, duplicación de esfue"
+          },
+          {
+            "index": 8,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.5. Tecnología, digitalización e inteligencia artificial"
+            ],
+            "visible_text": "2.5. Tecnología, digitalización e inteligencia artificial"
+          },
+          {
+            "index": 9,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "•  Estrategia de eficiencia: Se orienta a la reducción de costos mediante la estandarización, la planificación detallada y la optimización de recursos. Es ideal en mercados donde la demanda es estable y el precio es un factor decisivo. Las operaciones se diseñan para evitar desperdicios, minimizar inventarios y utilizar economías de escala. En Chile, empresas como CMPC y Coca-Cola Andina aplican este modelo en su gestión de productos de alto volumen y baja variabilidad."
+            ],
+            "visible_text": "•  Estrategia de eficiencia: Se orienta a la reducción de costos mediante la estandarización, la planificación detallada y la optimización de recursos. Es ideal en mercados donde la demanda es estable y el precio es un factor decisivo. Las operaciones se diseñan para evitar desperdicios, minimizar inventarios y utilizar economías de escala. En Chile, empresas como CMPC y Coca-Cola Andina aplican este modelo en su gestión de productos de alto volumen y baja variabilidad."
+          },
+          {
+            "index": 10,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\nHaz clic para voltear\nBack of card 1\nHaz clic para voltear\nHaz clic para voltear\nBack of card 2\nHaz clic para voltear\nHaz clic para voltear\nBack of card 3"
+          },
+          {
+            "index": 11,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "•  Estrategia de respuesta: Prioriza la agilidad, la flexibilidad y la velocidad. Es aplicable en contextos de alta volatilidad o cuando los consumidores valoran más la personalización y la rapidez que el precio. Este enfoque requiere mantener cierta capacidad ociosa, operar con inventarios intermedios, diversificar rutas y aceptar costos operativos más altos. La industria de la moda rápida, como H&M; o Basement, o el retail electrónico, como Cornershop, son ejemplos donde este modelo es crucial."
+            ],
+            "visible_text": "•  Estrategia de respuesta: Prioriza la agilidad, la flexibilidad y la velocidad. Es aplicable en contextos de alta volatilidad o cuando los consumidores valoran más la personalización y la rapidez que el precio. Este enfoque requiere mantener cierta capacidad ociosa, operar con inventarios intermedios, diversificar rutas y aceptar costos operativos más altos. La industria de la moda rápida, como H&M; o Basement, o el retail electrónico, como Cornershop, son ejemplos donde este modelo es crucial"
+          },
+          {
+            "index": 12,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.1. ¿Qué es un mapa conceptual?"
+            ],
+            "visible_text": "3.1. ¿Qué es un mapa conceptual?"
+          },
+          {
+            "index": 2,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "Mapa conceptual de la cadena de suministros",
+              "Un mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos mediante enlaces explicativos que representan proposiciones. La utilidad del mapa conceptual no radica únicamente en su valor pedagógico, sino en su capacidad para modelar sistemas complejos de forma comprensible y operativa (Gorbaneff & Cancino, 2009). En el contexto de la logística y la gestión de la cadena de suministros, los mapas conceptuales permiten observar la lógica interna que articula procesos, actores, flujos e infraestructuras. Son una herramienta de pensamiento visual que facilita el entendimiento sistémico de un conjunto de operaciones interdependientes y que, además, permite detectar dinámicas de coordinación, secuencia y control. La cadena de suministros, por su propia naturaleza, involucra múltiples niveles de interacción:"
+            ],
+            "visible_text": "Mapa conceptual de la cadena de suministros\n\nUn mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos mediante enlaces explicativos que representan proposiciones. La utilidad del mapa conceptual no radica únicamente en su valor pedagógico, sino en su capaci"
+          },
+          {
+            "index": 3,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.2. Elementos del mapa conceptual logístico"
+            ],
+            "visible_text": "3.2. Elementos del mapa conceptual logístico"
+          },
+          {
+            "index": 4,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.3. Ejemplo de construcción del mapa conceptual"
+            ],
+            "visible_text": "3.3. Ejemplo de construcción del mapa conceptual"
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.4. Caso práctico: Carozzi S.A."
+            ],
+            "visible_text": "3.4. Caso práctico: Carozzi S.A."
+          },
+          {
+            "index": 6,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el producto final. Todos estos elementos están conectados por flujos constantes de materiales, información y dinero. Representar esa red mediante un mapa conceptual permite convertir una estructura abstracta en una herramienta de trabajo visual, adaptable y comprensible.",
+              "Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial comprender que este sistema no opera de manera lineal ni aislada. Por el contrario, se trata de una red compleja y dinámica de interacciones que involucran múltiples actores, flujos, procesos y tecnologías. Por esta razón, un mapa conceptual eficaz debe representar con claridad las interdependencias que caracterizan al sistema logístico moderno, permitiendo su análisis desde una perspectiva sistémica, estratégica y operativa. A continuación, se describen cinco elementos fundamentales que deben estar presentes en un mapa conceptual orientado a la gestión logística:"
+            ],
+            "visible_text": "proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el producto final. Todos estos elementos están conectados por flujos constantes de materiales, información y dinero. Representar esa red mediante un mapa conceptual permite convertir una estructura abstracta en una herramienta de trabajo visual, adaptable y comprensible.\n\nAl diseñar un mapa conceptu"
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.5. Estructura general de la cadena de suministros de Carozzi"
+            ],
+            "visible_text": "3.5. Estructura general de la cadena de suministros de Carozzi"
+          },
+          {
+            "index": 8,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.6. En la práctica: el mapa conceptual como herramienta de mejora"
+            ],
+            "visible_text": "3.6. En la práctica: el mapa conceptual como herramienta de mejora"
+          },
+          {
+            "index": 9,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "1 de 3\n1 de 3\nHaz clic para voltear\n\nTitulo del Subtema\n\nHaz clic para voltear\n\nBut the now is full of beauty simply waiting for our attention. When we show up to the present moment with all of our senses, we invite the world to fill us with joy. The pains of the past are behind us. The future has yet to unfold. But the now is full of beauty simply waiting for our attention."
+          },
+          {
+            "index": 10,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.1. Concepto de logística integral"
+            ],
+            "visible_text": "4.1. Concepto de logística integral"
+          },
+          {
+            "index": 1,
+            "type": "quote",
+            "editables_count": 2,
+            "editable_texts": [
+              "Definición de logística integral",
+              "La logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no como un conjunto de funciones aisladas, sino como un sistema interdependiente y transversal, donde todas las actividades deben alinearse en torno al cumplimiento eficiente, rentable y sostenible de los requerimientos del cliente (Sánchez-Suárez, 2024). En términos académicos y operativos, se entiende por logística integral el conjunto coordinado de actividades que permite planificar, ejecutar y controlar eficientemente el flujo de bienes, servicios e información desde el punto de origen hasta el cliente final, de forma tal que se generen niveles superiores de valor agregado."
+            ],
+            "visible_text": "Definición de logística integral\n\nLa logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no como un conjunto de funciones aisladas, sino como un sistema interdependiente y transversal, donde todas las actividades deben alinearse en torno al cumplimiento eficie"
+          },
+          {
+            "index": 2,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "Como señalan Ballou (2004) y Heizer & Render (2008), este enfoque implica la integración de todos los subsistemas logísticos bajo una misma lógica de gestión, articulando áreas internas y externas de la organización en función de objetivos estratégicos comunes.",
+              "La logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos de operar de forma aislada, deben coordinarse mediante sistemas de información, decisiones estratégicas y procedimientos estandarizados que aseguren la fluidez del flujo físico, informativo y financiero. Cada uno cumple una función específica dentro del sistema, pero su valor solo se maximiza cuando están correctamente alineados con los objetivos generales de la organización. A continuación, se describen los cinco componentes principales que configuran un modelo de logística integral:"
+            ],
+            "visible_text": "Como señalan Ballou (2004) y Heizer & Render (2008), este enfoque implica la integración de todos los subsistemas logísticos bajo una misma lógica de gestión, articulando áreas internas y externas de la organización en función de objetivos estratégicos comunes.\n\nLa logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos d"
+          },
+          {
+            "index": 3,
+            "type": "text_twocol",
+            "editables_count": 2,
+            "editable_texts": [
+              "Aprovisionamiento",
+              "El aprovisionamiento, también conocido como gestión de compras o abastecimiento, es el primer eslabón de la logística integral. Consiste en la planificación, selección, adquisición y recepción de materias primas, insumos, productos semi-elaborados o bienes terminados necesarios para la operación. Esta etapa incluye el análisis del mercado de proveedores, la negociación de condiciones comerciales, la evaluación de calidad, la gestión de contratos y la programación de entregas."
+            ],
+            "visible_text": "Aprovisionamiento\n\nEl aprovisionamiento, también conocido como gestión de compras o abastecimiento, es el primer eslabón de la logística integral. Consiste en la planificación, selección, adquisición y recepción de materias primas, insumos, productos semi-elaborados o bienes terminados necesarios para la operación. Esta etapa incluye el análisis del mercado de proveedores, la negociación de condiciones comerciales, la evaluación de calidad, la gestión de contratos y la programación de entregas."
+          },
+          {
+            "index": 4,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "Producción",
+              "La producción representa el conjunto de procesos mediante los cuales los insumos adquiridos son transformados en productos terminados, listos para ser distribuidos al mercado. En el enfoque integral, la gestión de la producción no puede entenderse de manera aislada, sino como una fase interconectada con las etapas anteriores (aprovisionamiento) y posteriores (distribución).",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nProducción\n\nLa producción representa el conjunto de procesos mediante los cuales los insumos adquiridos son transformados en productos terminados, listos para ser distribuidos al mercado. En el enfoque integral, la gestión de la producción no puede entenderse de manera aislada, sino como una fase interconectada con las etapas anteriores (aprovisionamiento) y posteriores (distribución)."
+          },
+          {
+            "index": 5,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "Servicio al cliente y logística inversa",
+              "El servicio al cliente constituye una función clave en la cadena de suministros, ya que representa el punto de contacto entre la operación logística y la percepción del consumidor. Incluye actividades como la entrega puntual, la atención de reclamos, el seguimiento de pedidos, la postventa y la personalización del servicio. Un sistema logístico verdaderamente integral debe diseñarse con el cliente en el centro, asegurando que cada interacción contribuya a la satisfacción, la fidelización y la construcción de valor de marca."
+            ],
+            "visible_text": "Servicio al cliente y logística inversa\n\nEl servicio al cliente constituye una función clave en la cadena de suministros, ya que representa el punto de contacto entre la operación logística y la percepción del consumidor. Incluye actividades como la entrega puntual, la atención de reclamos, el seguimiento de pedidos, la postventa y la personalización del servicio. Un sistema logístico verdaderamente integral debe diseñarse con el cliente en el centro, asegurando que cada interacción contribuya a"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.2. Componentes esenciales de la logística integral"
+            ],
+            "visible_text": "4.2. Componentes esenciales de la logística integral"
+          },
+          {
+            "index": 7,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 8,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.3. Diferencias entre logística tradicional e integral"
+            ],
+            "visible_text": "4.3. Diferencias entre logística tradicional e integral"
+          },
+          {
+            "index": 9,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Sistemas de información y soporte tecnológico"
+            ],
+            "visible_text": "Sistemas de información y soporte tecnológico"
+          },
+          {
+            "index": 10,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "spacer",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "numbered_list",
+            "editables_count": 3,
+            "editable_texts": [
+              "Conclusión general",
+              "La primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la cadena se configura como un ecosistema dinámico donde convergen decisiones comerciales, tecnológicas, financieras, sociales y ambientales. Esta visión ampliada obliga a abandonar interpretaciones fragmentadas y asumir un enfoque sistémico que reconozca la interdependencia entre actores, procesos y flujos de información, materiales y recursos económicos. Entender la cadena de suministros bajo esta lógica implica reconocer que cada decisión adoptada en compras, producción, almacenamiento, transporte o servicio al cliente genera efectos acumulativos que impactan en la competitividad, la rentabilidad y la sostenibilidad organizacional. En este marco, la incorporación del mapa conceptual como herramienta de análisis fortalece la capacidad de estructurar y representar la complejidad logística de manera ordenada y jerarquizada.",
+              "El ejercicio de construir un mapa conceptual no constituye únicamente una actividad académica, sino un entrenamiento riguroso del pensamiento sistémico. Al representar gráficamente proveedores, procesos productivos, plataformas tecnológicas, flujos financieros, canales de distribución y clientes finales, el estudiante desarrolla la habilidad de visualizar conexiones, dependencias y puntos críticos. Una manifestación clara de este potencial se encuentra en situaciones empresariales donde la red logística presenta fallas recurrentes en tiempos de entrega; al diagramar los nodos y relaciones, emergen cuellos de botella, duplicidades operativas o fallas de coordinación que permanecían ocultas en un análisis lineal. Esta capacidad de representación estructurada favorece diagnósticos más precisos y decisiones fundamentadas. El valor del mapa conceptual se intensifica cuando se inserta en dinámicas colaborativas propias del entorno profesional. En proyectos de rediseño logístico, procesos de auditoría interna o sesiones estratégicas, disponer de una representación compartida del sistema facilita la construcción de consensos y la identificación de oportunidades de mejora."
+            ],
+            "visible_text": "1\n\nConclusión general\n\n2\n\nLa primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la cadena se configura como un ecosistema dinámico donde convergen decisiones comerciales, tecnológicas, financieras, sociales y ambientales. Esta visión ampliada obliga a aband"
+          },
+          {
+            "index": 2,
+            "type": "spacer",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 3,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      }
+    ]
+  },
+  "human": {
+    "label": "HUMANO",
+    "url": "https://rise.articulate.com/authoring/UQRGGAk6oiAl4-M3bvjLnTpynuEIgpmI",
+    "title": "Gestión de la Cadena de Suministro en Entornos Competitivos",
+    "lessons_count": 9,
+    "lesson_titles": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "lessons": [
+      {
+        "index": 0,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin comprometer la calidad, la agilidad ni la sostenibilidad."
+            ],
+            "visible_text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin comprometer la calidad, la agilidad ni la sostenibilidad."
+          },
+          {
+            "index": 2,
+            "type": "text_twocol",
+            "editables_count": 2,
+            "editable_texts": [
+              "Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente está íntimamente ligado a la rapidez con la que lo recibe, a la disponibilidad en el canal elegido, al nivel de servicio recibido y al compromiso ético y ambiental demostrado a lo largo de toda la cadena. En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Chain Management (SCM), se ha consolidado como una disciplina clave para garantizar la competitividad y la viabilidad de las organizaciones en el mediano y largo plazo.",
+              "Más que una simple evolución de la logística tradicional, el SCM representa un enfoque integral que articula decisiones operativas, tácticas y estratégicas, abarcando desde la gestión de proveedores y la planificación de la demanda hasta la entrega final y la logística inversa. Su alcance no se limita al movimiento de productos, sino que se extiende a la coordinación efectiva de información, materiales, capacidades humanas, infraestructura tecnológica y flujos financieros, dentro de una red cada vez más interconectada y compleja."
+            ],
+            "visible_text": "Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente está íntimamente ligado a la rapidez con la que lo recibe, a la disponibilidad en el canal elegido, al nivel de servicio recibido y al compromiso ético y ambiental demostrado a lo largo de toda la cadena. En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Chain Management (SCM), se ha consolidado como una disciplina clave para garantizar la competitividad y la viabilida"
+          },
+          {
+            "index": 3,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Comprender cómo fluyen estos elementos entre los distintos actores proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total y capacidad de respuesta."
+            ],
+            "visible_text": "Comprender cómo fluyen estos elementos entre los distintos actores proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total y capacidad de respuesta."
+          },
+          {
+            "index": 4,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 5,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\n\nFoco de la cadena moderna\n\nHaz clic para voltear\n\nEl foco de la cadena moderna está, por tanto, en generar valor agregado en cada etapa del proceso, alineando capacidades logísticas con decisiones comerciales, tecnológicas, financieras y humanas. Esto implica dominar una propuesta integral de servicio que combine alta disponibilidad, tiempos de respuesta reducidos, control de costos y consistencia en la experiencia de cliente, tanto en canales físicos como digitales. \n\nHaz"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Esta unidad abordará cuatro dimensiones fundamentales: \n\nLa definición de la cadena de suministros, su evolución conceptual y su funcionamiento a través de flujos clave. \n\nLa estrategia de la cadena de suministros, entendida como el diseño intencional de operaciones para generar ventajas competitivas en función del entorno y del modelo de negocio. \n\nMapa conceptual de la cadena de suministros. \n\nDefinición de logística integral."
+            ],
+            "visible_text": "Esta unidad abordará cuatro dimensiones fundamentales: \n\nLa definición de la cadena de suministros, su evolución conceptual y su funcionamiento a través de flujos clave. \n\nLa estrategia de la cadena de suministros, entendida como el diseño intencional de operaciones para generar ventajas competitivas en función del entorno y del modelo de negocio. \n\nMapa conceptual de la cadena de suministros. \n\nDefinición de logística integral."
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Dichas perspectivas permitirán comprender la importancia de la logística integrada, de las decisiones basadas en datos, de la colaboración interorganizacional y del enfoque ético en la creación de redes de valor."
+            ],
+            "visible_text": "Dichas perspectivas permitirán comprender la importancia de la logística integrada, de las decisiones basadas en datos, de la colaboración interorganizacional y del enfoque ético en la creación de redes de valor."
+          },
+          {
+            "index": 8,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de forma eficiente, rentable y sostenible. Va mucho más allá del transporte o del almacenamiento: abarca la forma en que una empresa se conecta con sus proveedores, transforma insumos en productos, gestiona inventarios, organiza entregas, responde al cliente y aprende del mercado."
+            ],
+            "visible_text": "Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de forma eficiente, rentable y sostenible. Va mucho más allá del transporte o del almacenamiento: abarca la forma en que una empresa se conecta con sus proveedores, transforma insumos en productos, gestiona"
+          },
+          {
+            "index": 2,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Da clic en cada tarjeta para ver su información al reverso"
+            ],
+            "visible_text": "Da clic en cada tarjeta para ver su información al reverso"
+          },
+          {
+            "index": 3,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\n\nMaximización del valor total\n\nHaz clic para voltear\n\nChopra y Meindl definen su propósito como la maximización del valor total generado, entendido como la diferencia entre el valor que el cliente percibe y el costo total incurrido para satisfacer esa necesidad. Desde esa perspectiva, cada actor en la red debe generar aportes que incrementen el valor de forma conjunta, no fragmentada. \n\nHaz clic para voltear\n\nLogística empresarial\n\nHaz clic para voltear\n\nEn sus orígenes, la"
+          },
+          {
+            "index": 4,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Un caso representativo en Chile es el del sector agroexportador, en particular el de la fruta fresca. Una cereza cosechada en diciembre debe estar en menos de una semana en China. Esto exige coordinación entre productores, frigoríficos, operadores logísticos, aduanas, navieras y canales de distribución internacionales. Todos dependen de decisiones integradas que optimicen recursos, aseguren frescura y cumplan los plazos críticos."
+            ],
+            "visible_text": "Un caso representativo en Chile es el del sector agroexportador, en particular el de la fruta fresca. Una cereza cosechada en diciembre debe estar en menos de una semana en China. Esto exige coordinación entre productores, frigoríficos, operadores logísticos, aduanas, navieras y canales de distribución internacionales. Todos dependen de decisiones integradas que optimicen recursos, aseguren frescura y cumplan los plazos críticos."
+          },
+          {
+            "index": 5,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.2 Evolución y alcance"
+            ],
+            "visible_text": "1.2 Evolución y alcance"
+          },
+          {
+            "index": 7,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 8,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Durante los años 80 y 90, la introducción de sistemas de información integrados, como los ERP (Enterprise Resource Planning), permitió por primera vez consolidar datos de compras, producción, inventario, finanzas y distribución en una misma plataforma. Esto dio origen a las primeras experiencias de planificación colaborativa y permitió tomar decisiones basadas en el flujo total, no por funciones aisladas."
+            ],
+            "visible_text": "Durante los años 80 y 90, la introducción de sistemas de información integrados, como los ERP (Enterprise Resource Planning), permitió por primera vez consolidar datos de compras, producción, inventario, finanzas y distribución en una misma plataforma. Esto dio origen a las primeras experiencias de planificación colaborativa y permitió tomar decisiones basadas en el flujo total, no por funciones aisladas."
+          },
+          {
+            "index": 9,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 10,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Este avance técnico coincidió con un cambio cultural: las empresas comenzaron a comprender que competir en un mercado global no dependía solo de la calidad del producto, sino también de la eficiencia de su cadena de suministro. Se pasó de competir entre empresas, a competir entre cadenas. Hoy, en muchos sectores, gana quien tiene la red más ágil, flexible, digitalizada y resiliente."
+            ],
+            "visible_text": "Este avance técnico coincidió con un cambio cultural: las empresas comenzaron a comprender que competir en un mercado global no dependía solo de la calidad del producto, sino también de la eficiencia de su cadena de suministro. Se pasó de competir entre empresas, a competir entre cadenas. Hoy, en muchos sectores, gana quien tiene la red más ágil, flexible, digitalizada y resiliente."
+          },
+          {
+            "index": 11,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Chase, Jacobs y Aquilano enfatizan que una cadena moderna debe ser una red dinámica, colaborativa y apoyada por tecnologías de información avanzadas. La analítica de datos, los sistemas de trazabilidad, la visibilidad en tiempo real y la inteligencia artificial permiten predecir la demanda, optimizar rutas, planificar capacidad y responder de manera más efectiva ante cambios del entorno. \n\nUn ejemplo ilustrativo es el sistema logístico de e-commerce en Chile, especialmente en regiones alejadas. Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas, integración con servicios de última milla y atención postventa personalizada. La gestión se ha vuelto más compleja, pero también más estratégica."
+            ],
+            "visible_text": "Chase, Jacobs y Aquilano enfatizan que una cadena moderna debe ser una red dinámica, colaborativa y apoyada por tecnologías de información avanzadas. La analítica de datos, los sistemas de trazabilidad, la visibilidad en tiempo real y la inteligencia artificial permiten predecir la demanda, optimizar rutas, planificar capacidad y responder de manera más efectiva ante cambios del entorno. \n\nUn ejemplo ilustrativo es el sistema logístico de e-commerce en Chile, especialmente en regiones alejadas. "
+          },
+          {
+            "index": 12,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.3 Flujos en la cadena de suministro"
+            ],
+            "visible_text": "1.3 Flujos en la cadena de suministro"
+          },
+          {
+            "index": 13,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Una cadena de suministro opera mediante la gestión coordinada de varios flujos fundamentales, todos ellos interdependientes:"
+            ],
+            "visible_text": "Una cadena de suministro opera mediante la gestión coordinada de varios flujos fundamentales, todos ellos interdependientes:"
+          },
+          {
+            "index": 14,
+            "type": "numbered_list",
+            "editables_count": 4,
+            "editable_texts": [
+              "Flujo de materiales: Incluye el movimiento físico de bienes desde el origen hasta el cliente. Abarca desde materias primas hasta productos terminados, incluyendo almacenamiento, transformación, embalaje y distribución. En CCU, este flujo parte con insumos como agua, malta y lúpulo, sigue con la elaboración en planta y culmina con el despacho desde centros logísticos estratégicamente ubicados en el país.",
+              "Flujo de información: Es el sistema nervioso de la cadena. Sin información precisa, actualizada y compartida, se producen distorsiones como el efecto látigo, donde una pequeña variación en la demanda genera una ola de sobreproducción o desabastecimiento. Este flujo debe ser digital, trazable, y en tiempo real.",
+              "Flujo financiero: Comprende pagos, cobros, financiamiento y reembolsos. Una cadena eficiente requiere un sistema financiero alineado, que permita reducir plazos de pago, gestionar liquidez y disminuir el riesgo comercial. En el retail chileno, los sistemas de facturación electrónica han mejorado drásticamente este flujo, alineando proveedores y canales.",
+              "Flujo inverso o logística reversa: Incluye devoluciones, reciclaje, reparación, reusó o disposición final. Su importancia ha crecido por razones ambientales, regulatorias y reputacionales. Walmart Chile, por ejemplo, ha desarrollado un modelo para recuperar pallets y embalajes, integrando criterios de sostenibilidad y eficiencia."
+            ],
+            "visible_text": "1\n\nFlujo de materiales: Incluye el movimiento físico de bienes desde el origen hasta el cliente. Abarca desde materias primas hasta productos terminados, incluyendo almacenamiento, transformación, embalaje y distribución. En CCU, este flujo parte con insumos como agua, malta y lúpulo, sigue con la elaboración en planta y culmina con el despacho desde centros logísticos estratégicamente ubicados en el país. \n\n2\n\nFlujo de información: Es el sistema nervioso de la cadena. Sin información precisa, a"
+          },
+          {
+            "index": 15,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Cada uno de estos flujos debe ser gestionado en coherencia, ya que cualquier desequilibrio repercute en la eficiencia total del sistema."
+            ],
+            "visible_text": "Cada uno de estos flujos debe ser gestionado en coherencia, ya que cualquier desequilibrio repercute en la eficiencia total del sistema."
+          },
+          {
+            "index": 16,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tabla 1 Tipología de flujos en la cadena de suministros y su impacto operativo"
+            ],
+            "visible_text": "Tabla 1 Tipología de flujos en la cadena de suministros y su impacto operativo"
+          },
+          {
+            "index": 17,
+            "type": "text",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tipo de flujo\n\n\t\n\nDescripción funcional\n\n\t\n\nImpacto en la gestión estratégica\n\n\t\n\nEjemplo aplicado en Chile\n\n\n\n\nFlujo de materiales\n\n\t\n\nMovimiento físico de materias primas, productos en proceso y productos terminados\n\n\t\n\nDetermina niveles de inventario, tiempos de entrega y costos logísticos\n\n\t\n\nDistribución de bebidas CCU a nivel nacional\n\n\n\n\nFlujo de información\n\n\t\n\nIntercambio de datos sobre demanda, inventarios, órdenes y entregas\n\n\t\n\nReduce incertidumbre y mejora la toma de decisiones\n\n\t\n\nSistemas ERP en retail chileno\n\n\n\n\nFlujo financiero\n\n\t\n\nPagos, facturación, condiciones de crédito y financiamiento\n\n\t\n\nImpacta liquidez, riesgo comercial y sostenibilidad financiera\n\n\t\n\nFacturación electrónica en supermercados\n\n\n\n\nFlujo reverso\n\n\t\n\nGestión de devoluciones, reciclaje y disposición final\n\n\t\n\nIncide en sostenibilidad, reputación y recuperación de valor\n\n\t\n\nRecuperación de pallets en Walmart Chile\n\n\nNota. Elaboración propia con base en ​(Pacheco, 2024)​."
+            ],
+            "visible_text": "Tipo de flujo\n\n\t\n\nDescripción funcional\n\n\t\n\nImpacto en la gestión estratégica\n\n\t\n\nEjemplo aplicado en Chile\n\n\n\n\nFlujo de materiales\n\n\t\n\nMovimiento físico de materias primas, productos en proceso y productos terminados\n\n\t\n\nDetermina niveles de inventario, tiempos de entrega y costos logísticos\n\n\t\n\nDistribución de bebidas CCU a nivel nacional\n\n\n\n\nFlujo de información\n\n\t\n\nIntercambio de datos sobre demanda, inventarios, órdenes y entregas\n\n\t\n\nReduce incertidumbre y mejora la toma de decisiones\n\n\t\n\n"
+          },
+          {
+            "index": 18,
+            "type": "divider",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 19,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.4 Caso práctico: la cadena de suministro de Cencosud"
+            ],
+            "visible_text": "1.4 Caso práctico: la cadena de suministro de Cencosud"
+          },
+          {
+            "index": 20,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Analizar el funcionamiento logístico de una empresa como Cencosud permite comprender la aplicación concreta de los principios teóricos de la cadena de suministros en una operación compleja y altamente sincronizada. Esta compañía, una de las más grandes del retail en América Latina, administra marcas como Jumbo, Paris, Easy y Santa Isabel, lo cual implica gestionar una red de miles de productos, múltiples canales de venta y millones de clientes cada mes."
+            ],
+            "visible_text": "Analizar el funcionamiento logístico de una empresa como Cencosud permite comprender la aplicación concreta de los principios teóricos de la cadena de suministros en una operación compleja y altamente sincronizada. Esta compañía, una de las más grandes del retail en América Latina, administra marcas como Jumbo, Paris, Easy y Santa Isabel, lo cual implica gestionar una red de miles de productos, múltiples canales de venta y millones de clientes cada mes."
+          },
+          {
+            "index": 21,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "La cadena de suministro de Cencosud se basa en una integración tecnológica avanzada, donde destacan sistemas como el Warehouse Management System (WMS) para la administración de bodegas, y el Transportation Management System (TMS) para la optimización de rutas y control de entregas. Estas plataformas no solo automatizan tareas, sino que permiten tomar decisiones estratégicas en tiempo real, anticipar problemas y gestionar inventarios con criterios dinámicos.",
+              ""
+            ],
+            "visible_text": "La cadena de suministro de Cencosud se basa en una integración tecnológica avanzada, donde destacan sistemas como el Warehouse Management System (WMS) para la administración de bodegas, y el Transportation Management System (TMS) para la optimización de rutas y control de entregas. Estas plataformas no solo automatizan tareas, sino que permiten tomar decisiones estratégicas en tiempo real, anticipar problemas y gestionar inventarios con criterios dinámicos."
+          },
+          {
+            "index": 22,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "En su centro de distribución en Santiago, la empresa emplea inteligencia artificial para calcular rutas de despacho considerando variables como distancia, tipo de carga, nivel de urgencia y zonas de alta demanda. Este enfoque ha reducido los tiempos de entrega, mejorado la precisión de stock y disminuido hasta en un 20 % los costos asociados al transporte.",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nEn su centro de distribución en Santiago, la empresa emplea inteligencia artificial para calcular rutas de despacho considerando variables como distancia, tipo de carga, nivel de urgencia y zonas de alta demanda. Este enfoque ha reducido los tiempos de entrega, mejorado la precisión de stock y disminuido hasta en un 20 % los costos asociados al transporte."
+          },
+          {
+            "index": 23,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.5 Ejemplo visual: mapa conceptual de la cadena de suministro"
+            ],
+            "visible_text": "1.5 Ejemplo visual: mapa conceptual de la cadena de suministro"
+          },
+          {
+            "index": 24,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Una forma eficaz de comprender la estructura y funcionamiento de la cadena de suministros es a través de mapas conceptuales. Estas representaciones gráficas permiten visualizar las relaciones entre actores, los tipos de flujos y las interacciones clave del sistema. \n\nEn un modelo circular o en flujo continuo, los elementos básicos serían: \n\nProveedores → Fabricantes → Centros de distribución → Minoristas → Clientes finales"
+            ],
+            "visible_text": "Una forma eficaz de comprender la estructura y funcionamiento de la cadena de suministros es a través de mapas conceptuales. Estas representaciones gráficas permiten visualizar las relaciones entre actores, los tipos de flujos y las interacciones clave del sistema. \n\nEn un modelo circular o en flujo continuo, los elementos básicos serían: \n\nProveedores → Fabricantes → Centros de distribución → Minoristas → Clientes finales"
+          },
+          {
+            "index": 25,
+            "type": "heading",
+            "editables_count": 2,
+            "editable_texts": [
+              "",
+              "Figura Ciclo de distribución de productos"
+            ],
+            "visible_text": "Figura Ciclo de distribución de productos"
+          },
+          {
+            "index": 26,
+            "type": "image",
+            "editables_count": 1,
+            "editable_texts": [
+              "Nota. La imagen representa el ciclo de distribución de productos dentro de la cadena de suministros, mostrando la secuencia integrada entre proveedores, fabricantes, centros de distribución, minoristas y clientes finales, así como el flujo continuo que articula la generación y entrega de valor. Elaboración propia con base en ​(Pacheco, 2024)​."
+            ],
+            "visible_text": "Nota. La imagen representa el ciclo de distribución de productos dentro de la cadena de suministros, mostrando la secuencia integrada entre proveedores, fabricantes, centros de distribución, minoristas y clientes finales, así como el flujo continuo que articula la generación y entrega de valor. Elaboración propia con base en ​(Pacheco, 2024)​."
+          },
+          {
+            "index": 27,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "A lo largo de esta secuencia se superponen los flujos materiales (de entrada y salida), flujos de información (bidireccionales), flujos financieros (transaccionales) y flujos reversos (logística inversa). Cada eslabón puede ser optimizado o convertirse en un cuello de botella, y su desempeño afecta al resto de la red."
+            ],
+            "visible_text": "A lo largo de esta secuencia se superponen los flujos materiales (de entrada y salida), flujos de información (bidireccionales), flujos financieros (transaccionales) y flujos reversos (logística inversa). Cada eslabón puede ser optimizado o convertirse en un cuello de botella, y su desempeño afecta al resto de la red."
+          },
+          {
+            "index": 28,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Al construir este tipo de mapa en el contexto chileno, se puede utilizar como ejemplo la cadena de exportación de salmón desde Puerto Montt a Japón, integrando procesos como cultivo, procesamiento, certificación sanitaria, transporte terrestre y aéreo, y distribución en destino. Los estudiantes pueden representar visualmente dónde se generan los mayores costos, en qué puntos hay más riesgo, y qué eslabones permiten mayor creación de valor. \n\nHerramientas como Lucidchart, Miro o incluso PowerPoint son útiles para este ejercicio, que estimula el pensamiento sistémico y la toma de decisiones fundamentadas."
+            ],
+            "visible_text": "Al construir este tipo de mapa en el contexto chileno, se puede utilizar como ejemplo la cadena de exportación de salmón desde Puerto Montt a Japón, integrando procesos como cultivo, procesamiento, certificación sanitaria, transporte terrestre y aéreo, y distribución en destino. Los estudiantes pueden representar visualmente dónde se generan los mayores costos, en qué puntos hay más riesgo, y qué eslabones permiten mayor creación de valor. \n\nHerramientas como Lucidchart, Miro o incluso PowerPoin"
+          },
+          {
+            "index": 29,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "1.6 En la práctica: sostenibilidad y digitalización"
+            ],
+            "visible_text": "1.6 En la práctica: sostenibilidad y digitalización"
+          },
+          {
+            "index": 30,
+            "type": "wrapper",
+            "editables_count": 3,
+            "editable_texts": [
+              "",
+              "",
+              ""
+            ],
+            "visible_text": ""
+          },
+          {
+            "index": 31,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "ENAP ha integrado sistemas de monitoreo satelital para optimizar el uso de combustible en su flota, reduciendo emisiones y mejorando seguridad. Estas innovaciones no solo generan ahorro, sino que elevan la capacidad de reacción ante eventos inesperados."
+            ],
+            "visible_text": "ENAP ha integrado sistemas de monitoreo satelital para optimizar el uso de combustible en su flota, reduciendo emisiones y mejorando seguridad. Estas innovaciones no solo generan ahorro, sino que elevan la capacidad de reacción ante eventos inesperados."
+          },
+          {
+            "index": 32,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Toda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prioridades competitivas de la organización. Cuando la cadena de suministros no está alineada con la propuesta de valor, se generan tensiones internas, desperdicio de recursos, duplicación de esfuerzos y, sobre todo, insatisfacción del cliente."
+            ],
+            "visible_text": "Toda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prioridades competitivas de la organización. Cuando la cadena de suministros no está alineada con la propuesta de valor, se generan tensiones internas, desperdicio de recursos, duplicación de esfuerzos y, "
+          },
+          {
+            "index": 2,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Diseñar una cadena de suministro alineada implica comprender qué es lo que la empresa promete a sus clientes y cómo puede cumplirlo sistemáticamente. Si una organización basa su estrategia en el liderazgo en costos, su cadena debe maximizar la eficiencia, eliminar actividades sin valor, operar con altos volúmenes y minimizar las variaciones. Por el contrario, si la promesa se enfoca en la innovación, el servicio o la exclusividad, la cadena debe ser flexible, altamente responsiva y capaz de adaptarse a cambios en la demanda o en el entorno."
+            ],
+            "visible_text": "Diseñar una cadena de suministro alineada implica comprender qué es lo que la empresa promete a sus clientes y cómo puede cumplirlo sistemáticamente. Si una organización basa su estrategia en el liderazgo en costos, su cadena debe maximizar la eficiencia, eliminar actividades sin valor, operar con altos volúmenes y minimizar las variaciones. Por el contrario, si la promesa se enfoca en la innovación, el servicio o la exclusividad, la cadena debe ser flexible, altamente responsiva y capaz de adap"
+          },
+          {
+            "index": 3,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "En el caso chileno, esta distinción se observa con claridad entre distintos formatos del retail. Cadenas como Líder estructuran su red logística bajo un paradigma de eficiencia, con centros de distribución regionales que consolidan grandes volúmenes y optimizan costos mediante escalas de operación. En cambio, empresas como Falabella o Ripley, que se han orientado hacia modelos omnicanal, diseñan sus operaciones para atender tanto al consumidor digital como al físico, adaptando sus entregas, devoluciones y servicio postventa a distintos canales y comportamientos de compra."
+            ],
+            "visible_text": "En el caso chileno, esta distinción se observa con claridad entre distintos formatos del retail. Cadenas como Líder estructuran su red logística bajo un paradigma de eficiencia, con centros de distribución regionales que consolidan grandes volúmenes y optimizan costos mediante escalas de operación. En cambio, empresas como Falabella o Ripley, que se han orientado hacia modelos omnicanal, diseñan sus operaciones para atender tanto al consumidor digital como al físico, adaptando sus entregas, devo"
+          },
+          {
+            "index": 4,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "La alineación estratégica también debe considerar factores estructurales, como la ubicación geográfica de los centros de distribución, el grado de automatización de los procesos, las políticas de stock y reposición, la red de proveedores, el nivel de integración con socios logísticos, y el tipo de tecnologías adoptadas. Cada una de estas variables puede reforzar o contradecir los objetivos comerciales. Una empresa que dice ser ágil, pero opera con sistemas lentos y procesos burocráticos, crea una contradicción que impacta en su reputación y desempeño",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nLa alineación estratégica también debe considerar factores estructurales, como la ubicación geográfica de los centros de distribución, el grado de automatización de los procesos, las políticas de stock y reposición, la red de proveedores, el nivel de integración con socios logísticos, y el tipo de tecnologías adoptadas. Cada una de estas variables puede reforzar o contradecir los objetivos comerciales. Una empresa que dice ser ágil, pero opera con sistemas lentos y procesos burocráticos,"
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.1. Enfoques estratégicos"
+            ],
+            "visible_text": "2.1. Enfoques estratégicos"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Los enfoques estratégicos de la cadena de suministros reflejan diferentes maneras de competir en el mercado. No existe una receta única: el enfoque adecuado dependerá del tipo de producto, del comportamiento de la demanda, del segmento de clientes, del entorno competitivo y de las capacidades internas de la organización. Sin embargo, podemos identificar tres modelos predominantes:"
+            ],
+            "visible_text": "Los enfoques estratégicos de la cadena de suministros reflejan diferentes maneras de competir en el mercado. No existe una receta única: el enfoque adecuado dependerá del tipo de producto, del comportamiento de la demanda, del segmento de clientes, del entorno competitivo y de las capacidades internas de la organización. Sin embargo, podemos identificar tres modelos predominantes:"
+          },
+          {
+            "index": 7,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Da clic en cada tarjeta para ver su información al reverso"
+            ],
+            "visible_text": "Da clic en cada tarjeta para ver su información al reverso"
+          },
+          {
+            "index": 8,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\nHaz clic para voltear\n\nEstrategia de eficiencia: Se orienta a la reducción de costos mediante la estandarización, la planificación detallada y la optimización de recursos. Es ideal en mercados donde la demanda es estable y el precio es un factor decisivo. Las operaciones se diseñan para\n\nevitar desperdicios, minimizar inventarios y utilizar economías de escala. En Chile, empresas como CMPC y Coca-Cola Andina aplican este modelo en su gestión de productos de alto volumen y b"
+          },
+          {
+            "index": 9,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "La elección del enfoque debe realizarse con conciencia estratégica y mantenerse actualizada frente a cambios del entorno. En tiempos de crisis o transformaciones tecnológicas, muchas empresas deben migrar de un modelo a otro, ajustando capacidades, cultura organizacional y tecnologías."
+            ],
+            "visible_text": "La elección del enfoque debe realizarse con conciencia estratégica y mantenerse actualizada frente a cambios del entorno. En tiempos de crisis o transformaciones tecnológicas, muchas empresas deben migrar de un modelo a otro, ajustando capacidades, cultura organizacional y tecnologías."
+          },
+          {
+            "index": 10,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tabla 2 Enfoques estratégicos de la cadena de suministros"
+            ],
+            "visible_text": "Tabla 2 Enfoques estratégicos de la cadena de suministros"
+          },
+          {
+            "index": 11,
+            "type": "text",
+            "editables_count": 1,
+            "editable_texts": [
+              "Estrategia\n\n\t\n\nCaracterísticas operativas principales\n\n\t\n\nContexto de aplicación\n\n\t\n\nEjemplo empresarial\n\n\n\n\nEstrategia de eficiencia\n\n\t\n\nAlta estandarización, economías de escala, reducción de costos\n\n\t\n\nDemanda estable y alta sensibilidad al precio\n\n\t\n\nCMPC, Coca-Cola Andina\n\n\n\n\nEstrategia de respuesta\n\n\t\n\nFlexibilidad, rapidez, capacidad de adaptación\n\n\t\n\nMercados volátiles y orientados al servicio\n\n\t\n\nCornershop, H&M\n\n\n\n\nEstrategia híbrida\n\n\t\n\nCombinación de eficiencia en origen y flexibilidad en etapas finales\n\n\t\n\nModelos omnicanal y segmentación de productos\n\n\t\n\nFalabella, Zara\n\n\nNota. Síntesis conceptual elaborada a partir del análisis estratégico desarrollado en el texto con base en (Pacheco, 2024)."
+            ],
+            "visible_text": "Estrategia\n\n\t\n\nCaracterísticas operativas principales\n\n\t\n\nContexto de aplicación\n\n\t\n\nEjemplo empresarial\n\n\n\n\nEstrategia de eficiencia\n\n\t\n\nAlta estandarización, economías de escala, reducción de costos\n\n\t\n\nDemanda estable y alta sensibilidad al precio\n\n\t\n\nCMPC, Coca-Cola Andina\n\n\n\n\nEstrategia de respuesta\n\n\t\n\nFlexibilidad, rapidez, capacidad de adaptación\n\n\t\n\nMercados volátiles y orientados al servicio\n\n\t\n\nCornershop, H&M\n\n\n\n\nEstrategia híbrida\n\n\t\n\nCombinación de eficiencia en origen y flexibilid"
+          },
+          {
+            "index": 12,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.3. Casos comparativos"
+            ],
+            "visible_text": "2.3. Casos comparativos"
+          },
+          {
+            "index": 13,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Los casos de empresas líderes en logística muestran que la estrategia de la cadena de suministros es un factor decisivo de competitividad y no un mero componente operacional. A continuación, se describen tres modelos con impacto regional y global:"
+            ],
+            "visible_text": "Los casos de empresas líderes en logística muestran que la estrategia de la cadena de suministros es un factor decisivo de competitividad y no un mero componente operacional. A continuación, se describen tres modelos con impacto regional y global:"
+          },
+          {
+            "index": 14,
+            "type": "quote_carousel",
+            "editables_count": 6,
+            "editable_texts": [
+              "Amazon: Su ventaja competitiva radica en la capacidad de anticipar la demanda y controlar casi todas las fases del proceso. Ha invertido en automatización, inteligencia artificial, robótica, redes propias de distribución y análisis predictivo. Su estrategia no se limita a despachar rápido: está diseñada para saber qué querrá el cliente antes de que este lo solicite. Su sistema de \"preposición de inventario\" permite ubicar productos en centros cercanos a la demanda prevista, reduciendo los plazos de entrega a horas.",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 3\n\nAmazon: Su ventaja competitiva radica en la capacidad de anticipar la demanda y controlar casi todas las fases del proceso. Ha invertido en automatización, inteligencia artificial, robótica, redes propias de distribución y análisis predictivo. Su estrategia no se limita a despachar rápido: está diseñada para saber qué querrá el cliente antes de que este lo solicite. Su sistema de \"preposición de inventario\" permite ubicar productos en centros cercanos a la demanda prevista, reduciendo lo"
+          },
+          {
+            "index": 15,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Estos casos demuestran que la cadena de suministros puede ser mucho más que un centro de costos: puede convertirse en una palanca de diferenciación, fidelización y liderazgo de mercado."
+            ],
+            "visible_text": "Estos casos demuestran que la cadena de suministros puede ser mucho más que un centro de costos: puede convertirse en una palanca de diferenciación, fidelización y liderazgo de mercado."
+          },
+          {
+            "index": 16,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.4. Resiliencia y gestión del riesgo"
+            ],
+            "visible_text": "2.4. Resiliencia y gestión del riesgo"
+          },
+          {
+            "index": 17,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La pandemia, los conflictos internacionales, las crisis energéticas y los eventos climáticos extremos han expuesto la fragilidad de muchas cadenas de suministro. En este escenario, la resiliencia ha emergido como una capacidad estratégica clave: no basta con ser eficiente, hay que ser capaz de resistir y recuperarse ante lo inesperado. \n\nSer resiliente implica anticipar riesgos, diversificar fuentes, construir redundancias inteligentes y tener flexibilidad operativa. No se trata de acumular inventarios excesivos, sino de diseñar estructuras adaptables que puedan redirigir flujos, cambiar de proveedores o ajustar capacidades con rapidez. \n\nLas acciones clave para construir resiliencia incluyen:"
+            ],
+            "visible_text": "La pandemia, los conflictos internacionales, las crisis energéticas y los eventos climáticos extremos han expuesto la fragilidad de muchas cadenas de suministro. En este escenario, la resiliencia ha emergido como una capacidad estratégica clave: no basta con ser eficiente, hay que ser capaz de resistir y recuperarse ante lo inesperado. \n\nSer resiliente implica anticipar riesgos, diversificar fuentes, construir redundancias inteligentes y tener flexibilidad operativa. No se trata de acumular inve"
+          },
+          {
+            "index": 18,
+            "type": "bulleted_list",
+            "editables_count": 5,
+            "editable_texts": [
+              "Diversificación de proveedores: evitar dependencia de un solo origen.",
+              "Contratos flexibles: permitir ajustes de volumen o condiciones sin penalizaciones.",
+              "Monitoreo en tiempo real: detectar interrupciones antes de que escalen.",
+              "Redes colaborativas: compartir inventarios, capacidades o información con aliados.",
+              "Gestión de escenarios: simular crisis y planificar respuestas."
+            ],
+            "visible_text": "•\n\nDiversificación de proveedores: evitar dependencia de un solo origen. \n\n•\n\nContratos flexibles: permitir ajustes de volumen o condiciones sin penalizaciones. \n\n•\n\nMonitoreo en tiempo real: detectar interrupciones antes de que escalen. \n\n•\n\nRedes colaborativas: compartir inventarios, capacidades o información con aliados. \n\n•\n\nGestión de escenarios: simular crisis y planificar respuestas."
+          },
+          {
+            "index": 19,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "En Chile, la distribución nacional de vacunas durante la pandemia fue una operación logística de alta complejidad. Involucró transporte en frío extremo, coordinación entre instituciones públicas y privadas, trazabilidad absoluta y cobertura territorial sin precedentes. La experiencia dejó capacidades instaladas que hoy se proyectan en otros sectores. \n\nEmpresas que incorporan la resiliencia desde el diseño no solo sobreviven en tiempos de crisis, sino que generan confianza, reputación y continuidad operativa sostenible."
+            ],
+            "visible_text": "En Chile, la distribución nacional de vacunas durante la pandemia fue una operación logística de alta complejidad. Involucró transporte en frío extremo, coordinación entre instituciones públicas y privadas, trazabilidad absoluta y cobertura territorial sin precedentes. La experiencia dejó capacidades instaladas que hoy se proyectan en otros sectores. \n\nEmpresas que incorporan la resiliencia desde el diseño no solo sobreviven en tiempos de crisis, sino que generan confianza, reputación y continui"
+          },
+          {
+            "index": 20,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.5. Tecnología, digitalización e inteligencia artificial"
+            ],
+            "visible_text": "2.5. Tecnología, digitalización e inteligencia artificial"
+          },
+          {
+            "index": 21,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El desarrollo tecnológico ha redefinido la cadena de suministro. Las herramientas de inteligencia artificial, big data, analítica avanzada, machine learning e Internet de las Cosas (IoT) permiten a las organizaciones pasar de la gestión reactiva a la gestión predictiva e inteligente. \n\nEstas tecnologías permiten:"
+            ],
+            "visible_text": "El desarrollo tecnológico ha redefinido la cadena de suministro. Las herramientas de inteligencia artificial, big data, analítica avanzada, machine learning e Internet de las Cosas (IoT) permiten a las organizaciones pasar de la gestión reactiva a la gestión predictiva e inteligente. \n\nEstas tecnologías permiten:"
+          },
+          {
+            "index": 22,
+            "type": "bulleted_list",
+            "editables_count": 5,
+            "editable_texts": [
+              "Predecir demanda con mayor precisión.",
+              "Automatizar compras y reposiciones.",
+              "Detectar fallas o anomalías antes de que se materialicen.",
+              "Optimizar rutas en tiempo real.",
+              "Simular escenarios y evaluar decisiones antes de implementarlas."
+            ],
+            "visible_text": "•\n\nPredecir demanda con mayor precisión. \n\n•\n\nAutomatizar compras y reposiciones. \n\n•\n\nDetectar fallas o anomalías antes de que se materialicen. \n\n•\n\nOptimizar rutas en tiempo real. \n\n•\n\nSimular escenarios y evaluar decisiones antes de implementarlas."
+          },
+          {
+            "index": 23,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Un ejemplo local es Sodimac Chile, que ha desarrollado modelos de reposición predictiva basados en análisis climático, eventos regionales y patrones históricos de venta. Esto ha reducido quiebres de stock, mejorado la rotación y aumentado la satisfacción del cliente. \n\nLas empresas que incorporan estas herramientas no solo ganan en eficiencia, sino en capacidad de anticipación, agilidad y adaptabilidad. La tecnología ya no es un lujo: es una condición mínima para competir."
+            ],
+            "visible_text": "Un ejemplo local es Sodimac Chile, que ha desarrollado modelos de reposición predictiva basados en análisis climático, eventos regionales y patrones históricos de venta. Esto ha reducido quiebres de stock, mejorado la rotación y aumentado la satisfacción del cliente. \n\nLas empresas que incorporan estas herramientas no solo ganan en eficiencia, sino en capacidad de anticipación, agilidad y adaptabilidad. La tecnología ya no es un lujo: es una condición mínima para competir."
+          },
+          {
+            "index": 24,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.6 Nearshoring y sostenibilidad global"
+            ],
+            "visible_text": "2.6 Nearshoring y sostenibilidad global"
+          },
+          {
+            "index": 25,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El nearshoring se ha consolidado como estrategia para reducir la dependencia de cadenas globales largas, costosas y frágiles. Tras la pandemia, muchas empresas reubicaron operaciones productivas y logísticas más cerca de sus mercados principales. Esto permite mejorar tiempos de entrega, reducir costos de transporte, aumentar visibilidad y responder mejor a disrupciones ​(Guasch, 2011)​."
+            ],
+            "visible_text": "El nearshoring se ha consolidado como estrategia para reducir la dependencia de cadenas globales largas, costosas y frágiles. Tras la pandemia, muchas empresas reubicaron operaciones productivas y logísticas más cerca de sus mercados principales. Esto permite mejorar tiempos de entrega, reducir costos de transporte, aumentar visibilidad y responder mejor a disrupciones ​(Guasch, 2011)​."
+          },
+          {
+            "index": 26,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Chile, gracias a su infraestructura, acuerdos comerciales y estabilidad institucional, se proyecta como un hub logístico en el Cono Sur. Zonas como Iquique, San Antonio y la Región Metropolitana ofrecen ventajas comparativas para establecer centros de distribución regionales."
+            ],
+            "visible_text": "Chile, gracias a su infraestructura, acuerdos comerciales y estabilidad institucional, se proyecta como un hub logístico en el Cono Sur. Zonas como Iquique, San Antonio y la Región Metropolitana ofrecen ventajas comparativas para establecer centros de distribución regionales."
+          },
+          {
+            "index": 27,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Paralelamente, la sostenibilidad se ha vuelto una exigencia ineludible. No solo por razones éticas o regulatorias, sino por presión de consumidores y mercados. Las empresas deben medir su huella de carbono, minimizar impactos, garantizar condiciones laborales y demostrar transparencia en toda su cadena. \n\nCasos como el de Agrosuper, que ha certificado gran parte de su producción con estándares ambientales y sociales, le permiten acceder a mercados premium europeos con barreras no arancelarias muy exigentes."
+            ],
+            "visible_text": "Paralelamente, la sostenibilidad se ha vuelto una exigencia ineludible. No solo por razones éticas o regulatorias, sino por presión de consumidores y mercados. Las empresas deben medir su huella de carbono, minimizar impactos, garantizar condiciones laborales y demostrar transparencia en toda su cadena. \n\nCasos como el de Agrosuper, que ha certificado gran parte de su producción con estándares ambientales y sociales, le permiten acceder a mercados premium europeos con barreras no arancelarias mu"
+          },
+          {
+            "index": 28,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El nearshoring y la sostenibilidad convergen en un nuevo modelo de cadena corta, limpia, trazable y competitiva."
+            ],
+            "visible_text": "El nearshoring y la sostenibilidad convergen en un nuevo modelo de cadena corta, limpia, trazable y competitiva."
+          },
+          {
+            "index": 29,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "2.7. Responsabilidad social y desempeño ético"
+            ],
+            "visible_text": "2.7. Responsabilidad social y desempeño ético"
+          },
+          {
+            "index": 30,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La cadena de suministros ya no puede evaluarse solo por métricas financieras o logísticas. Su legitimidad social depende del cumplimiento de principios de justicia, ética y responsabilidad. \n\nEsto incluye:"
+            ],
+            "visible_text": "La cadena de suministros ya no puede evaluarse solo por métricas financieras o logísticas. Su legitimidad social depende del cumplimiento de principios de justicia, ética y responsabilidad. \n\nEsto incluye:"
+          },
+          {
+            "index": 31,
+            "type": "bulleted_list",
+            "editables_count": 5,
+            "editable_texts": [
+              "Condiciones laborales dignas.",
+              "Trazabilidad social de productos.",
+              "Relación respetuosa con comunidades.",
+              "Diversidad e inclusión en proveedores.",
+              "Cumplimiento de estándares internacionales."
+            ],
+            "visible_text": "•\n\nCondiciones laborales dignas. \n\n•\n\nTrazabilidad social de productos. \n\n•\n\nRelación respetuosa con comunidades. \n\n•\n\nDiversidad e inclusión en proveedores.\n\n•\n\nCumplimiento de estándares internacionales."
+          },
+          {
+            "index": 32,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La certificación como Empresa B en Chile refleja este enfoque integral. Empresas como Algramo, Karun o Triciclos han logrado demostrar que es posible integrar rentabilidad, propósito e impacto social. \n\nLas cadenas éticas construyen reputación, atraen talento, reducen riesgos y abren nuevas oportunidades de negocio. Son más sostenibles en el sentido amplio del término."
+            ],
+            "visible_text": "La certificación como Empresa B en Chile refleja este enfoque integral. Empresas como Algramo, Karun o Triciclos han logrado demostrar que es posible integrar rentabilidad, propósito e impacto social. \n\nLas cadenas éticas construyen reputación, atraen talento, reducen riesgos y abren nuevas oportunidades de negocio. Son más sostenibles en el sentido amplio del término."
+          },
+          {
+            "index": 33,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Un mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos mediante enlaces explicativos que representan proposiciones. La utilidad del mapa conceptual no radica únicamente en su valor pedagógico, sino en su capacidad para modelar sistemas complejos de forma comprensible y operativa ​(Gorbaneff & Cancino, 2009)​."
+            ],
+            "visible_text": "Un mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos mediante enlaces explicativos que representan proposiciones. La utilidad del mapa conceptual no radica únicamente en su valor pedagógico, sino en su capacidad para modelar sistemas complejos de forma "
+          },
+          {
+            "index": 2,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "",
+              "En el contexto de la logística y la gestión de la cadena de suministros, los mapas conceptuales permiten observar la lógica interna que articula procesos, actores, flujos e infraestructuras. Son una herramienta de pensamiento visual que facilita el entendimiento sistémico de un conjunto de operaciones interdependientes y que, además, permite detectar dinámicas de coordinación, secuencia y control."
+            ],
+            "visible_text": "En el contexto de la logística y la gestión de la cadena de suministros, los mapas conceptuales permiten observar la lógica interna que articula procesos, actores, flujos e infraestructuras. Son una herramienta de pensamiento visual que facilita el entendimiento sistémico de un conjunto de operaciones interdependientes y que, además, permite detectar dinámicas de coordinación, secuencia y control."
+          },
+          {
+            "index": 3,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La cadena de suministros, por su propia naturaleza, involucra múltiples niveles de interacción: proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el producto final. Todos estos elementos están conectados por flujos constantes de materiales, información y dinero. Representar esa red mediante un mapa conceptual permite convertir una estructura abstracta en una herramienta de trabajo visual, adaptable y comprensible."
+            ],
+            "visible_text": "La cadena de suministros, por su propia naturaleza, involucra múltiples niveles de interacción: proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el producto final. Todos estos elementos están conectados por flujos constantes de materiales, información y dinero. Representar esa red mediante un mapa conceptual permite convertir una estructura abstra"
+          },
+          {
+            "index": 4,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.2 Elementos del mapa conceptual logístico"
+            ],
+            "visible_text": "3.2 Elementos del mapa conceptual logístico"
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial comprender que este sistema no opera de manera lineal ni aislada. Por el contrario, se trata de una red compleja y dinámica de interacciones que involucran múltiples actores, flujos, procesos y tecnologías. Por esta razón, un mapa conceptual eficaz debe representar con claridad las interdependencias que caracterizan al sistema logístico moderno, permitiendo su análisis desde una perspectiva sistémica, estratégica y operativa. \n\nA continuación, se describen cinco elementos fundamentales que deben estar presentes en un mapa conceptual orientado a la gestión logística:"
+            ],
+            "visible_text": "Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial comprender que este sistema no opera de manera lineal ni aislada. Por el contrario, se trata de una red compleja y dinámica de interacciones que involucran múltiples actores, flujos, procesos y tecnologías. Por esta razón, un mapa conceptual eficaz debe representar con claridad las interdependencias que caracterizan al sistema logístico moderno, permitiendo su análisis desde una perspectiva sistémica, estratégica y o"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Eslabones o actores logísticos \n\nLos eslabones representan las entidades organizativas o unidades funcionales que participan en la cadena de suministros. Estos actores pueden ser internos como áreas de compras, producción o distribución o externos, como proveedores, operadores logísticos, agentes aduaneros, plataformas de e-commerce o clientes finales. Cada actor cumple un rol específico en la transformación, el almacenamiento, el movimiento o la entrega de productos y servicios."
+            ],
+            "visible_text": "Eslabones o actores logísticos \n\nLos eslabones representan las entidades organizativas o unidades funcionales que participan en la cadena de suministros. Estos actores pueden ser internos como áreas de compras, producción o distribución o externos, como proveedores, operadores logísticos, agentes aduaneros, plataformas de e-commerce o clientes finales. Cada actor cumple un rol específico en la transformación, el almacenamiento, el movimiento o la entrega de productos y servicios."
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Flujos principales \n\nUn mapa conceptual logístico debe representar explícitamente los distintos tipos de flujos que permiten la operación continua de la cadena de suministros. Estos flujos no son únicamente físicos, sino también informacionales y financieros. Se clasifican en:"
+            ],
+            "visible_text": "Flujos principales \n\nUn mapa conceptual logístico debe representar explícitamente los distintos tipos de flujos que permiten la operación continua de la cadena de suministros. Estos flujos no son únicamente físicos, sino también informacionales y financieros. Se clasifican en:"
+          },
+          {
+            "index": 8,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "1 de 4\n1 de 4\nHaz clic para voltear\n\nFlujo de materiales:\n\nHaz clic para voltear\n\nIncluye el movimiento físico de bienes e insumos a lo largo de los eslabones de la cadena, desde las materias primas hasta el producto terminado entregado al cliente."
+          },
+          {
+            "index": 9,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Figura 2 Flujos logísticos en la cadena de suministros"
+            ],
+            "visible_text": "Figura 2 Flujos logísticos en la cadena de suministros"
+          },
+          {
+            "index": 10,
+            "type": "image",
+            "editables_count": 1,
+            "editable_texts": [
+              "Nota. La imagen muestra los cuatro flujos logísticos clave material, información, financiero y reverso que estructuran la cadena de suministros. Elaboración propia con base en ​(Guasch, 2011)​."
+            ],
+            "visible_text": "Nota. La imagen muestra los cuatro flujos logísticos clave material, información, financiero y reverso que estructuran la cadena de suministros. Elaboración propia con base en ​(Guasch, 2011)​."
+          },
+          {
+            "index": 11,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Procesos logísticos fundamentales"
+            ],
+            "visible_text": "Procesos logísticos fundamentales"
+          },
+          {
+            "index": 12,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Cada eslabón de la cadena ejecuta procesos específicos que deben integrarse de forma coherente. Estos procesos incluyen, entre otros: \n\nAprovisionamiento y compras \n\nPlanificación de la demanda \n\nProducción o transformación \n\nAlmacenamiento y manejo de inventario \n\nTransporte y distribución \n\nServicio postventa \n\nIncorporar estos procesos en el mapa permite comprender qué tipo de actividades se realizan en cada etapa, cómo se relacionan entre sí y qué recursos o decisiones afectan su desempeño. Asimismo, permite identificar duplicidades, desalineaciones y oportunidades de mejora continua."
+            ],
+            "visible_text": "Cada eslabón de la cadena ejecuta procesos específicos que deben integrarse de forma coherente. Estos procesos incluyen, entre otros: \n\nAprovisionamiento y compras \n\nPlanificación de la demanda \n\nProducción o transformación \n\nAlmacenamiento y manejo de inventario \n\nTransporte y distribución \n\nServicio postventa \n\nIncorporar estos procesos en el mapa permite comprender qué tipo de actividades se realizan en cada etapa, cómo se relacionan entre sí y qué recursos o decisiones afectan su desempeño. "
+          },
+          {
+            "index": 13,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tecnologías y soportes estratégicos"
+            ],
+            "visible_text": "Tecnologías y soportes estratégicos"
+          },
+          {
+            "index": 14,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "En la actualidad, la cadena de suministros depende fuertemente de sistemas de información y tecnologías de soporte. Por ello, el mapa conceptual debe reflejar las herramientas digitales que sustentan cada proceso, tales como: \n\nSistemas ERP (Enterprise Resource Planning), que integran todas las áreas de la empresa. \n\nSistemas WMS (Warehouse Management System), que optimizan la gestión de bodegas. \n\nSistemas TMS (Transportation Management System), que mejoran la eficiencia del transporte. \n\nIoT (Internet de las Cosas), aplicado al monitoreo en tiempo real. \n\nBlockchain, utilizado para la trazabilidad de productos y procesos."
+            ],
+            "visible_text": "En la actualidad, la cadena de suministros depende fuertemente de sistemas de información y tecnologías de soporte. Por ello, el mapa conceptual debe reflejar las herramientas digitales que sustentan cada proceso, tales como: \n\nSistemas ERP (Enterprise Resource Planning), que integran todas las áreas de la empresa. \n\nSistemas WMS (Warehouse Management System), que optimizan la gestión de bodegas. \n\nSistemas TMS (Transportation Management System), que mejoran la eficiencia del transporte. \n\nIoT ("
+          },
+          {
+            "index": 15,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Entorno y contexto logístico"
+            ],
+            "visible_text": "Entorno y contexto logístico"
+          },
+          {
+            "index": 16,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El mapa conceptual debe incorporar variables contextuales que influyen directa o indirectamente en la cadena de suministros. Entre ellas se encuentran: \n\nLa infraestructura vial, portuaria y ferroviaria. \n\nLas normativas aduaneras o sanitarias. \n\nLos tratados de libre comercio. \n\nLa ubicación geográfica y las condiciones climáticas. \n\nLa estacionalidad de la demanda y la oferta."
+            ],
+            "visible_text": "El mapa conceptual debe incorporar variables contextuales que influyen directa o indirectamente en la cadena de suministros. Entre ellas se encuentran: \n\nLa infraestructura vial, portuaria y ferroviaria. \n\nLas normativas aduaneras o sanitarias. \n\nLos tratados de libre comercio. \n\nLa ubicación geográfica y las condiciones climáticas. \n\nLa estacionalidad de la demanda y la oferta."
+          },
+          {
+            "index": 17,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "En el caso de Chile, por ejemplo, la logística de productos frescos debe considerar tanto las restricciones estacionales como los tiempos de tránsito hacia los principales mercados internacionales. Incluir estas variables en el mapa permite una comprensión más realista de los desafíos logísticos y facilita la toma de decisiones informadas."
+            ],
+            "visible_text": "En el caso de Chile, por ejemplo, la logística de productos frescos debe considerar tanto las restricciones estacionales como los tiempos de tránsito hacia los principales mercados internacionales. Incluir estas variables en el mapa permite una comprensión más realista de los desafíos logísticos y facilita la toma de decisiones informadas."
+          },
+          {
+            "index": 18,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.3 Ejemplo de construcción del mapa conceptual"
+            ],
+            "visible_text": "3.3 Ejemplo de construcción del mapa conceptual"
+          },
+          {
+            "index": 19,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "La construcción de un mapa conceptual de la cadena de suministros debe responder a principios de claridad, jerarquía y funcionalidad. Su propósito no es solo representar gráficamente una red de conceptos, sino también modelar una estructura logística real o hipotética que permita su análisis, comprensión y mejora. Para ello, es necesario aplicar un enfoque metodológico que permita descomponer el sistema logístico en sus componentes fundamentales, mostrar las relaciones entre ellos y destacar los flujos que los conectan.",
+              ""
+            ],
+            "visible_text": "La construcción de un mapa conceptual de la cadena de suministros debe responder a principios de claridad, jerarquía y funcionalidad. Su propósito no es solo representar gráficamente una red de conceptos, sino también modelar una estructura logística real o hipotética que permita su análisis, comprensión y mejora. Para ello, es necesario aplicar un enfoque metodológico que permita descomponer el sistema logístico en sus componentes fundamentales, mostrar las relaciones entre ellos y destacar los"
+          },
+          {
+            "index": 20,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "A continuación, se detallan los pasos recomendados para construir un mapa conceptual efectivo aplicado a la cadena de suministros, considerando tanto el componente académico como su aplicabilidad en contextos reales:"
+            ],
+            "visible_text": "A continuación, se detallan los pasos recomendados para construir un mapa conceptual efectivo aplicado a la cadena de suministros, considerando tanto el componente académico como su aplicabilidad en contextos reales:"
+          },
+          {
+            "index": 21,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "1 de 4\n1 de 4\nHaz clic para voltear\n\nIdentificación del concepto central \n\nHaz clic para voltear\n\nTodo mapa conceptual parte de un concepto nuclear desde el cual se organiza el resto de la estructura. En este caso, se sugiere colocar en el centro el término “Gestión integral de la cadena de suministros”. Este concepto resume el enfoque sistémico y coordinado que se busca representar. Desde él se desprenderán todas las ramas que conforman el sistema logístico: actores, procesos, flujos y tecnolog"
+          },
+          {
+            "index": 22,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Figura 3 Esquema de flujos en la cadena de suministros"
+            ],
+            "visible_text": "Figura 3 Esquema de flujos en la cadena de suministros"
+          },
+          {
+            "index": 23,
+            "type": "image",
+            "editables_count": 1,
+            "editable_texts": [
+              "Nota. La imagen representa la interacción entre proveedores, fabricantes, distribuidores y minoristas, destacando los flujos de materiales, información, recursos financieros y procesos reversos que conectan y coordinan la red logística. Elaboración propia con base en ​(Sánchez-Suárez, 2024)​."
+            ],
+            "visible_text": "Nota. La imagen representa la interacción entre proveedores, fabricantes, distribuidores y minoristas, destacando los flujos de materiales, información, recursos financieros y procesos reversos que conectan y coordinan la red logística. Elaboración propia con base en ​(Sánchez-Suárez, 2024)​."
+          },
+          {
+            "index": 24,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.4 Caso práctico: Carozzi S.A."
+            ],
+            "visible_text": "3.4 Caso práctico: Carozzi S.A."
+          },
+          {
+            "index": 25,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 26,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.5 Estructura general de la cadena de suministros de Carozzi"
+            ],
+            "visible_text": "3.5 Estructura general de la cadena de suministros de Carozzi"
+          },
+          {
+            "index": 27,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "A continuación, se detallan los principales eslabones que componen esta red, cada uno de los cuales podría representarse como un nodo en el mapa conceptual:"
+            ],
+            "visible_text": "A continuación, se detallan los principales eslabones que componen esta red, cada uno de los cuales podría representarse como un nodo en el mapa conceptual:"
+          },
+          {
+            "index": 28,
+            "type": "wrapper",
+            "editables_count": 5,
+            "editable_texts": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": ""
+          },
+          {
+            "index": 29,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "3.6 En la práctica: el mapa conceptual como herramienta de mejora"
+            ],
+            "visible_text": "3.6 En la práctica: el mapa conceptual como herramienta de mejora"
+          },
+          {
+            "index": 30,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El mapa conceptual aplicado a la cadena de suministros trasciende su uso como herramienta de aprendizaje o recurso visual. En contextos profesionales, se consolida como un instrumento estratégico de diagnóstico, comunicación y rediseño logístico. Su capacidad para representar de manera clara y sintética la estructura, relaciones y flujos de una red logística compleja lo convierte en un apoyo fundamental para procesos de mejora continua, toma de decisiones colaborativas y planificación operativa de alto nivel."
+            ],
+            "visible_text": "El mapa conceptual aplicado a la cadena de suministros trasciende su uso como herramienta de aprendizaje o recurso visual. En contextos profesionales, se consolida como un instrumento estratégico de diagnóstico, comunicación y rediseño logístico. Su capacidad para representar de manera clara y sintética la estructura, relaciones y flujos de una red logística compleja lo convierte en un apoyo fundamental para procesos de mejora continua, toma de decisiones colaborativas y planificación operativa "
+          },
+          {
+            "index": 31,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no como un conjunto de funciones aisladas, sino como un sistema interdependiente y transversal, donde todas las actividades deben alinearse en torno al cumplimiento eficiente, rentable y sostenible de los requerimientos del cliente​ (Sánchez-Suárez, 2024)​."
+            ],
+            "visible_text": "La logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no como un conjunto de funciones aisladas, sino como un sistema interdependiente y transversal, donde todas las actividades deben alinearse en torno al cumplimiento eficiente, rentable y sostenible de los "
+          },
+          {
+            "index": 2,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "",
+              "En términos académicos y operativos, se entiende por logística integral el conjunto coordinado de actividades que permite planificar, ejecutar y controlar eficientemente el flujo de bienes, servicios e información desde el punto de origen hasta el cliente final, de forma tal que se generen niveles superiores de valor agregado. Como señalan Ballou (2004) y Heizer & Render (2008), este enfoque implica la integración de todos los subsistemas logísticos bajo una misma lógica de gestión, articulando áreas internas y externas de la organización en función de objetivos estratégicos comunes."
+            ],
+            "visible_text": "En términos académicos y operativos, se entiende por logística integral el conjunto coordinado de actividades que permite planificar, ejecutar y controlar eficientemente el flujo de bienes, servicios e información desde el punto de origen hasta el cliente final, de forma tal que se generen niveles superiores de valor agregado. Como señalan Ballou (2004) y Heizer & Render (2008), este enfoque implica la integración de todos los subsistemas logísticos bajo una misma lógica de gestión, articulando "
+          },
+          {
+            "index": 3,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.2 Componentes esenciales de la logística integral"
+            ],
+            "visible_text": "4.2 Componentes esenciales de la logística integral"
+          },
+          {
+            "index": 4,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos de operar de forma aislada, deben coordinarse mediante sistemas de información, decisiones estratégicas y procedimientos estandarizados que aseguren la fluidez del flujo físico, informativo y financiero. Cada uno cumple una función específica dentro del sistema, pero su valor solo se maximiza cuando están correctamente alineados con los objetivos generales de la organización. \n\nA continuación, se describen los cinco componentes principales que configuran un modelo de logística integral:"
+            ],
+            "visible_text": "La logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos de operar de forma aislada, deben coordinarse mediante sistemas de información, decisiones estratégicas y procedimientos estandarizados que aseguren la fluidez del flujo físico, informativo y financiero. Cada uno cumple una función específica dentro del sistema, p"
+          },
+          {
+            "index": 5,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "1 de 5\n1 de 5\nHaz clic para voltear\n\nAprovisionamiento \n\nHaz clic para voltear\n\nEl aprovisionamiento, también conocido como gestión de compras o abastecimiento, es el primer eslabón de la logística integral. Consiste en la planificación, selección, adquisición y recepción de materias primas, insumos, productos semi-elaborados o bienes terminados necesarios para la operación. Esta etapa incluye el análisis del mercado de proveedores, la negociación de condiciones comerciales, la evaluación de cal"
+          },
+          {
+            "index": 6,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.3 Diferencias entre logística tradicional e integral"
+            ],
+            "visible_text": "4.3 Diferencias entre logística tradicional e integral"
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "El paso desde un enfoque de logística tradicional hacia una logística integral representa uno de los cambios más significativos en la evolución de las operaciones empresariales modernas. Esta transformación no implica únicamente la incorporación de nuevas tecnologías o metodologías, sino un cambio profundo en la visión organizacional, en la forma de tomar decisiones y en la manera de articular las distintas funciones logísticas como un sistema unificado orientado a la generación de valor. \n\nA continuación, se detallan las principales diferencias estructurales y operativas entre ambos modelos de gestión logística:"
+            ],
+            "visible_text": "El paso desde un enfoque de logística tradicional hacia una logística integral representa uno de los cambios más significativos en la evolución de las operaciones empresariales modernas. Esta transformación no implica únicamente la incorporación de nuevas tecnologías o metodologías, sino un cambio profundo en la visión organizacional, en la forma de tomar decisiones y en la manera de articular las distintas funciones logísticas como un sistema unificado orientado a la generación de valor. \n\nA co"
+          },
+          {
+            "index": 8,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tabla 3 Comparación estructural entre logística tradicional y logística integral"
+            ],
+            "visible_text": "Tabla 3 Comparación estructural entre logística tradicional y logística integral"
+          },
+          {
+            "index": 9,
+            "type": "text",
+            "editables_count": 1,
+            "editable_texts": [
+              "Aspecto\n\n\t\n\nLogística Tradicional\n\n\t\n\nLogística Integral\n\n\n\n\nEnfoque de gestión\n\n\t\n\nFragmentado, centrado en áreas funcionales específicas como transporte o almacenamiento.\n\n\t\n\nSistémico y transversal. Todas las funciones logísticas se coordinan bajo una estrategia común.\n\n\n\n\nObjetivo principal\n\n\t\n\nMinimizar costos operativos individuales (por ejemplo, reducir costos de transporte o inventario).\n\n\t\n\nMaximizar el valor global, optimizando la experiencia del cliente, la eficiencia y la sostenibilidad.\n\n\n\n\nRelación entre áreas\n\n\t\n\nTrabajo en silos, con escasa comunicación e integración.\n\n\t\n\nTrabajo colaborativo e interdependiente, con flujos de información compartidos entre todas las áreas.\n\n\n\n\nToma de decisiones\n\n\t\n\nReactiva, basada en la experiencia o en indicadores aislados.\n\n\t\n\nProactiva y basada en análisis de datos integrados y predicciones.\n\n\n\n\nTecnología y sistemas\n\n\t\n\nUso limitado o aislado de herramientas tecnológicas.\n\n\t\n\nUso intensivo de plataformas digitales (ERP, WMS, TMS, IoT, IA) para integrar y automatizar procesos.\n\n\n\n\nIndicadores de desempeño (KPIs)\n\n\t\n\nSe enfocan en eficiencia operativa puntual (tiempo de despacho, costo de flete).\n\n\t\n\nMiden el desempeño global del sistema (nivel de servicio, rotación de inventario, satisfacción del cliente).\n\n\n\n\nAdaptabilidad al entorno\n\n\t\n\nBaja capacidad de adaptación ante cambios en la demanda o en el entorno.\n\n\t\n\nAlta capacidad de respuesta y resiliencia frente a eventos imprevistos, gracias a la planificación integral.\n\n\n\n\nRelación con el cliente\n\n\t\n\nSe percibe como un actor pasivo, receptor del producto final.\n\n\t\n\nEl cliente es el eje de la operación: sus necesidades y comportamiento definen la logística.\n\n\n\n\nSostenibilidad\n\n\t\n\nNo forma parte de las prioridades logísticas.\n\n\t\n\nEs un eje transversal. Se busca minimizar el impacto ambiental y cumplir con normativas y expectativas sociales.\n\n\nNota. Elaboración propia con base en ​(Sánchez-Suárez, 2024)​."
+            ],
+            "visible_text": "Aspecto\n\n\t\n\nLogística Tradicional\n\n\t\n\nLogística Integral\n\n\n\n\nEnfoque de gestión\n\n\t\n\nFragmentado, centrado en áreas funcionales específicas como transporte o almacenamiento.\n\n\t\n\nSistémico y transversal. Todas las funciones logísticas se coordinan bajo una estrategia común.\n\n\n\n\nObjetivo principal\n\n\t\n\nMinimizar costos operativos individuales (por ejemplo, reducir costos de transporte o inventario).\n\n\t\n\nMaximizar el valor global, optimizando la experiencia del cliente, la eficiencia y la sostenibili"
+          },
+          {
+            "index": 10,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.4 Caso práctico: CCU (Compañía de Cervecerías Unidas)"
+            ],
+            "visible_text": "4.4 Caso práctico: CCU (Compañía de Cervecerías Unidas)"
+          },
+          {
+            "index": 11,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La Compañía de Cervecerías Unidas (CCU) constituye un caso paradigmático en el contexto chileno para ilustrar la implementación efectiva de una logística integral como componente estratégico dentro de la gestión de operaciones. Esta empresa, con más de un siglo de historia y presencia en varios países de América Latina, ha desarrollado una red logística compleja, moderna y altamente coordinada que integra todos los eslabones de su cadena de suministro, desde la producción hasta la entrega final al cliente. CCU opera en el sector de bebidas cervezas, gaseosas, aguas, jugos, vinos y licores y gestiona una amplia variedad de productos que requieren diferentes condiciones de manejo, tiempos de almacenamiento, controles sanitarios y ciclos de distribución. Esta diversidad de productos y mercados obliga a la compañía a adoptar una visión sistémica e integrada de la logística, ya que un error en cualquiera de los eslabones impacta directamente en la calidad del servicio, en la rentabilidad del negocio y en la percepción del consumidor final."
+            ],
+            "visible_text": "La Compañía de Cervecerías Unidas (CCU) constituye un caso paradigmático en el contexto chileno para ilustrar la implementación efectiva de una logística integral como componente estratégico dentro de la gestión de operaciones. Esta empresa, con más de un siglo de historia y presencia en varios países de América Latina, ha desarrollado una red logística compleja, moderna y altamente coordinada que integra todos los eslabones de su cadena de suministro, desde la producción hasta la entrega final "
+          },
+          {
+            "index": 12,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "4.5 La logística integral en la era digital"
+            ],
+            "visible_text": "4.5 La logística integral en la era digital"
+          },
+          {
+            "index": 13,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "La transformación digital ha reconfigurado profundamente la forma en que las organizaciones diseñan, ejecuta y optimizan sus operaciones logísticas. En este contexto, la logística integral ya no puede concebirse sin el uso intensivo de tecnologías digitales que  permiten integrar flujos de trabajo, aumentar la visibilidad de la cadena de suministro,  anticipar la demanda, automatizar procesos y mejorar la experiencia del cliente. Este  fenómeno ha dado origen al concepto de logística 4.0, caracterizado por la incorporación  de herramientas como big data, inteligencia artificial (IA), Internet de las Cosas (IoT),  blockchain, robótica, automatización y sistemas ciberfísicos.",
+              ""
+            ],
+            "visible_text": "La transformación digital ha reconfigurado profundamente la forma en que las organizaciones diseñan, ejecuta y optimizan sus operaciones logísticas. En este contexto, la logística integral ya no puede concebirse sin el uso intensivo de tecnologías digitales que  permiten integrar flujos de trabajo, aumentar la visibilidad de la cadena de suministro,  anticipar la demanda, automatizar procesos y mejorar la experiencia del cliente. Este  fenómeno ha dado origen al concepto de logística 4.0, caract"
+          },
+          {
+            "index": 14,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Bajo este enfoque, la logística deja de ser una función reactiva y operativa, para convertirse en un proceso predictivo, proactivo y estratégico, que actúa con base en datos en tiempo real, análisis de comportamiento del consumidor y coordinación avanzada entre múltiples actores. Este cambio no solo incrementa la eficiencia interna, sino que redefine las capacidades competitivas de la organización en un entorno donde la incertidumbre, la velocidad y la exigencia de personalización son la norma."
+            ],
+            "visible_text": "Bajo este enfoque, la logística deja de ser una función reactiva y operativa, para convertirse en un proceso predictivo, proactivo y estratégico, que actúa con base en datos en tiempo real, análisis de comportamiento del consumidor y coordinación avanzada entre múltiples actores. Este cambio no solo incrementa la eficiencia interna, sino que redefine las capacidades competitivas de la organización en un entorno donde la incertidumbre, la velocidad y la exigencia de personalización son la norma."
+          },
+          {
+            "index": 15,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Principales tecnologías aplicadas a la logística integral"
+            ],
+            "visible_text": "Principales tecnologías aplicadas a la logística integral"
+          },
+          {
+            "index": 16,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Da clic en cada tarjeta para ver su información al reverso"
+            ],
+            "visible_text": "Da clic en cada tarjeta para ver su información al reverso"
+          },
+          {
+            "index": 17,
+            "type": "flashcards",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "Haz clic para voltear\n\nBig Data y analítica avanzada  \n\nHaz clic para voltear\n\nLas empresas recolectan millones de datos provenientes de sensores, plataformas de ventas, sistemas de gestión y redes sociales. A través de técnicas de analítica avanzada y modelos de machine learning, es posible: \n\nPrever la demanda con mayor exactitud. \n\nOptimizar niveles de inventario para reducir costos de almacenamiento. \n\nIdentificar patrones de consumo por región, temporada o cliente. \n\nTomar decisiones inform"
+          },
+          {
+            "index": 18,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tabla 4 Tecnologías habilitadoras de la logística integral 4.0"
+            ],
+            "visible_text": "Tabla 4 Tecnologías habilitadoras de la logística integral 4.0"
+          },
+          {
+            "index": 19,
+            "type": "text",
+            "editables_count": 1,
+            "editable_texts": [
+              "Tecnología\n\n\t\n\nAplicación logística principal\n\n\t\n\nBeneficio estratégico generado\n\n\t\n\nCaso ilustrativo\n\n\n\n\nBig Data y analítica avanzada\n\n\t\n\nPredicción de demanda y optimización de inventarios\n\n\t\n\nMejora en precisión, reducción de quiebres de stock\n\n\t\n\nSodimac Chile\n\n\n\n\nInteligencia Artificial\n\n\t\n\nAutomatización de rutas y clasificación en centros de distribución\n\n\t\n\nAumento de eficiencia operativa y reducción de tiempos\n\n\t\n\nCentros automatizados de retail\n\n\n\n\nIoT\n\n\t\n\nMonitoreo en tiempo real de temperatura y ubicación\n\n\t\n\nControl de calidad y trazabilidad completa\n\n\t\n\nTransporte en cadena de frío\n\n\n\n\nBlockchain\n\n\t\n\nRegistro inalterable del origen y tránsito de productos\n\n\t\n\nTransparencia, confianza y cumplimiento normativo\n\n\t\n\nExportaciones agroindustriales\n\n\nNota. Elaboración propia con base en ​(Sánchez-Suárez, 2024)​."
+            ],
+            "visible_text": "Tecnología\n\n\t\n\nAplicación logística principal\n\n\t\n\nBeneficio estratégico generado\n\n\t\n\nCaso ilustrativo\n\n\n\n\nBig Data y analítica avanzada\n\n\t\n\nPredicción de demanda y optimización de inventarios\n\n\t\n\nMejora en precisión, reducción de quiebres de stock\n\n\t\n\nSodimac Chile\n\n\n\n\nInteligencia Artificial\n\n\t\n\nAutomatización de rutas y clasificación en centros de distribución\n\n\t\n\nAumento de eficiencia operativa y reducción de tiempos\n\n\t\n\nCentros automatizados de retail\n\n\n\n\nIoT\n\n\t\n\nMonitoreo en tiempo real de "
+          },
+          {
+            "index": 20,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la cadena se configura como un ecosistema dinámico donde convergen decisiones comerciales, tecnológicas, financieras, sociales y ambientales. Esta visión ampliada obliga a abandonar interpretaciones fragmentadas y asumir un enfoque sistémico que reconozca la interdependencia entre actores, procesos y flujos de información, materiales y recursos económicos."
+            ],
+            "visible_text": "La primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la cadena se configura como un ecosistema dinámico donde convergen decisiones comerciales, tecnológicas, financieras, sociales y ambientales. Esta visión ampliada obliga a abandonar interpretaciones frag"
+          },
+          {
+            "index": 1,
+            "type": "quote",
+            "editables_count": 2,
+            "editable_texts": [
+              "Entender la cadena de suministros bajo esta lógica implica reconocer que cada decisión adoptada en compras, producción, almacenamiento, transporte o servicio al cliente genera efectos acumulativos que impactan en la competitividad, la rentabilidad y la sostenibilidad organizacional.",
+              ""
+            ],
+            "visible_text": "Entender la cadena de suministros bajo esta lógica implica reconocer que cada decisión adoptada en compras, producción, almacenamiento, transporte o servicio al cliente genera efectos acumulativos que impactan en la competitividad, la rentabilidad y la sostenibilidad organizacional."
+          },
+          {
+            "index": 2,
+            "type": "image",
+            "editables_count": 2,
+            "editable_texts": [
+              "En este marco, la incorporación del mapa conceptual como herramienta de análisis fortalece la capacidad de estructurar y representar la complejidad logística de manera ordenada y jerarquizada. El ejercicio de construir un mapa conceptual no constituye únicamente una actividad académica, sino un entrenamiento riguroso del pensamiento sistémico. Al representar gráficamente proveedores, procesos productivos, plataformas tecnológicas, flujos financieros, canales de distribución y clientes finales, el estudiante desarrolla la habilidad de visualizar conexiones, dependencias y puntos críticos.",
+              ""
+            ],
+            "visible_text": "En este marco, la incorporación del mapa conceptual como herramienta de análisis fortalece la capacidad de estructurar y representar la complejidad logística de manera ordenada y jerarquizada. El ejercicio de construir un mapa conceptual no constituye únicamente una actividad académica, sino un entrenamiento riguroso del pensamiento sistémico. Al representar gráficamente proveedores, procesos productivos, plataformas tecnológicas, flujos financieros, canales de distribución y clientes finales, e"
+          },
+          {
+            "index": 3,
+            "type": "text_twocol",
+            "editables_count": 2,
+            "editable_texts": [
+              "Una manifestación clara de este potencial se encuentra en situaciones empresariales donde la red logística presenta fallas recurrentes en tiempos de entrega; al diagramar los nodos y relaciones, emergen cuellos de botella, duplicidades operativas o fallas de coordinación que permanecían ocultas en un análisis lineal.",
+              "Esta capacidad de representación estructurada favorece diagnósticos más precisos y decisiones fundamentadas."
+            ],
+            "visible_text": "Una manifestación clara de este potencial se encuentra en situaciones empresariales donde la red logística presenta fallas recurrentes en tiempos de entrega; al diagramar los nodos y relaciones, emergen cuellos de botella, duplicidades operativas o fallas de coordinación que permanecían ocultas en un análisis lineal.\n\nEsta capacidad de representación estructurada favorece diagnósticos más precisos y decisiones fundamentadas."
+          },
+          {
+            "index": 4,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "Esto se observa en equipos que planifican la apertura de un nuevo centro de distribución y requieren evaluar variables como ubicación geográfica, costos de transporte, tiempos de abastecimiento y niveles de inventario; al visualizar el sistema completo, se minimizan decisiones aisladas y se fortalece la coherencia estratégica.",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nEsto se observa en equipos que planifican la apertura de un nuevo centro de distribución y requieren evaluar variables como ubicación geográfica, costos de transporte, tiempos de abastecimiento y niveles de inventario; al visualizar el sistema completo, se minimizan decisiones aisladas y se fortalece la coherencia estratégica."
+          },
+          {
+            "index": 5,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La herramienta se convierte así en un puente entre el conocimiento teórico y la práctica organizacional, consolidando competencias analíticas aplicables a contextos reales."
+            ],
+            "visible_text": "La herramienta se convierte así en un puente entre el conocimiento teórico y la práctica organizacional, consolidando competencias analíticas aplicables a contextos reales."
+          },
+          {
+            "index": 6,
+            "type": "banner",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 7,
+            "type": "heading",
+            "editables_count": 1,
+            "editable_texts": [
+              "La integración entre pensamiento sistémico, herramientas de representación y coordinación operativa adquiere mayor relevancia en un contexto global caracterizado por disrupciones, volatilidad de mercados, exigencias regulatorias crecientes y aceleración tecnológica. La digitalización logística, expresada en plataformas integradas de gestión, sistemas de trazabilidad en tiempo real y analítica avanzada, demanda profesionales capaces de interpretar el sistema completo antes de implementar soluciones tecnológicas."
+            ],
+            "visible_text": "La integración entre pensamiento sistémico, herramientas de representación y coordinación operativa adquiere mayor relevancia en un contexto global caracterizado por disrupciones, volatilidad de mercados, exigencias regulatorias crecientes y aceleración tecnológica. La digitalización logística, expresada en plataformas integradas de gestión, sistemas de trazabilidad en tiempo real y analítica avanzada, demanda profesionales capaces de interpretar el sistema completo antes de implementar solucion"
+          },
+          {
+            "index": 8,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "La tecnología amplifica resultados cuando se inserta en un modelo lógico coherente; de lo contrario, amplifica ineficiencias. Esto se aprecia en organizaciones que implementan sistemas de gestión de transporte con monitoreo satelital y logran optimizar rutas, disminuir tiempos de entrega y mejorar la experiencia del cliente al proporcionar información precisa sobre el estado de los pedidos."
+            ],
+            "visible_text": "La tecnología amplifica resultados cuando se inserta en un modelo lógico coherente; de lo contrario, amplifica ineficiencias. Esto se aprecia en organizaciones que implementan sistemas de gestión de transporte con monitoreo satelital y logran optimizar rutas, disminuir tiempos de entrega y mejorar la experiencia del cliente al proporcionar información precisa sobre el estado de los pedidos."
+          },
+          {
+            "index": 9,
+            "type": "quote_carousel",
+            "editables_count": 4,
+            "editable_texts": [
+              "En consecuencia, la conclusión de esta primera semana consolida una idea central: la excelencia en la cadena de suministros constituye un factor determinante para la supervivencia y el liderazgo empresarial. Diseñar, gestionar y evolucionar la red logística con criterio sistémico permite agregar valor, reducir riesgos y responder de manera efectiva a las expectativas de clientes, mercados y reguladores.",
+              "",
+              "",
+              ""
+            ],
+            "visible_text": "1 de 2\n\nEn consecuencia, la conclusión de esta primera semana consolida una idea central: la excelencia en la cadena de suministros constituye un factor determinante para la supervivencia y el liderazgo empresarial. Diseñar, gestionar y evolucionar la red logística con criterio sistémico permite agregar valor, reducir riesgos y responder de manera efectiva a las expectativas de clientes, mercados y reguladores."
+          },
+          {
+            "index": 10,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "embed",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "heading",
+            "editables_count": 2,
+            "editable_texts": [
+              "",
+              "Esta semana exploraremos los conceptos fundamentales de la cadena de suministros y su estrategia, y para ayudarte a visualizar cómo estos principios operan en la práctica real, te invitamos a ver este TEDx de Mick Mountz. En esta charla, Mountz uno de los pioneros en soluciones robóticas aplicadas a logística comparte una perspectiva fascinante sobre cómo la tecnología, la innovación y el pensamiento estratégico pueden transformar procesos que tradicionalmente consumían horas de trabajo ineficiente en tareas rápidas, coordinadas y orientadas al valor.  \n\nLo interesante de este recurso es que te hará conectar la teoría con situaciones reales del día a día profesional, especialmente si te interesa trabajar en logística, operaciones, comercio electrónico o gestión de inventarios. Cuando estudies temas como flujos de materiales, optimización de inventarios y automatización logística, podrás recordar lo que Mountz explica: que una buena estrategia de cadena significa diseñar sistemas que no solo respondan a la demanda, sino que se anticipen a ella, disminuyan errores y generen experiencia positiva para el cliente final.  \n\nImagina que eres responsable del inventario en una empresa de retail o e‑commerce. Los planteamientos de este video te muestran cómo tomar decisiones estratégicas respaldadas por tecnología puede transformar la productividad del almacén, eliminar actividades que no agregan valor (como desplazamientos innecesarios), y permitir que la fuerza laboral se enfoque en tareas de mayor impacto. Además, esta charla te ayudará a comprender por qué las empresas invierten en robótica, algoritmos adaptativos y sistemas inteligentes: no por moda, sino por resultados medibles en eficiencia, precisión y costo operativo.  \n\nEste recurso no solo es inspirador sino también muy útil para asentar conceptos teóricos clave, como la importancia de la gestión eficaz de inventarios, la automatización del pick & pack, la integración tecnológica y la toma de decisiones basada en datos todas habilidades que te servirán en tu vida profesional para diseñar, analizar y mejorar cadenas de suministro reales.\n\nLet the inventory walk and talk | Mick Mountz | TEDxBoston\n\nEn esta charla TEDxBoston, Mick Mountz explica cómo revolucionó la gestión de inventarios en los centros de distribución mediante el uso de robots móviles, algoritmos adaptativos y sistemas automatizados que transforman los procesos tradicionales de pick, pack and ship. El enfoque propone que, en vez de que los trabajadores recorran largas distancias dentro del almacén, la tecnología hace que los estantes con inventario “caminen” hacia las estaciones de trabajo, reduciendo tiempos muertos, mejorando la productividad y elevando la precisión en cada operación logística.\n\nMountz, M. (2011, July 14). Let the inventory walk and talk | Mick Mountz | TEDxBoston [Video]. YouTube. https://www.youtube.com/watch?v=szU2-1infqc"
+            ],
+            "visible_text": "Esta semana exploraremos los conceptos fundamentales de la cadena de suministros y su estrategia, y para ayudarte a visualizar cómo estos principios operan en la práctica real, te invitamos a ver este TEDx de Mick Mountz. En esta charla, Mountz uno de los pioneros en soluciones robóticas aplicadas a logística comparte una perspectiva fascinante sobre cómo la tecnología, la innovación y el pensamiento estratégico pueden transformar procesos que tradicionalmente consumían horas de trabajo ineficie"
+          },
+          {
+            "index": 2,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "spacer",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "numbered_list",
+            "editables_count": 9,
+            "editable_texts": [
+              "​​​Ballou, R. H. (2004). Business Logistics/Supply Chain Management (5th ed.). Pearson Prentice Hall.",
+              "​Cerofolini, A. (2 de 01 de 2024). El derecho a un medio ambiente limpio, saludable y sostenible y los litigios estratégicos. ¿Qué repercusiones tiene para las empresas? Revista Española de Empresas y Derechos Humanos. Universidad de Bolonia: https://revistas.colex.es/index.php/empresasyderechoshumanos/article/view/96/141",
+              "​Chase, R. B., Jacobs, F. R., & Aquilano, N. J. (2019). Operations and Supply Chain Management (15th ed.). McGraw-Hill.",
+              "​Chopra, S., & Meindl, P. (2015). Administración de la cadena de suministro: Estrategia, planeación y operación (5ª ed.). México: Pearson Prentice Hall.",
+              "​Heizer, J., & Render, B. (2008). Operations Management (8th ed.). Pearson Education.",
+              "​Gorbaneff, Y., & Cancino, A. (2009). Mapa conceptual para el aprendizaje basado en problemas. https://www.icesi.edu.co/revistas/index.php/estudios_gerenciales/article/view/299/297",
+              "​Guasch, J. L. (Nov de 2011). La logística como motor d e la competitividad en A mérica Latina y el Caribe . Banco Interamericano de Desarrollo : https://publications.iadb.org/es/publications/spanish/viewer/La-log%C3%ADstica-como-motor-de-la-competitividad-en-Am%C3%A9rica-Latina-y-el-Caribe.pdf",
+              "​Pacheco, R. A. (2024). Capacidad de respuesta de la cadena de suministros, Definición del concepto y marco para mejorar la gestión . Universitat Polutecnica de Catalunya, ETSEIB: https://www.tesisenred.net/handle/10803/693422#page=1",
+              "Sánchez-Suárez, Y. A.-N.-N.-S.-G.-B. (2024). Tendencias de las investigaciones sobre logística integral y cadenas de suministro enfocadas al logro de la calidad de los procesos. Revista Gestión y Desarrollo Libre, 9(18), 1-20. . https://revistas.unilibre.edu.co/index.php/gestion_libre/article/view/12112/11989"
+            ],
+            "visible_text": "1\n\n​​​Ballou, R. H. (2004). Business Logistics/Supply Chain Management (5th ed.). Pearson Prentice Hall. \n\n2\n\n​Cerofolini, A. (2 de 01 de 2024). El derecho a un medio ambiente limpio, saludable y sostenible y los litigios estratégicos. ¿Qué repercusiones tiene para las empresas? Revista Española de Empresas y Derechos Humanos. Universidad de Bolonia: https://revistas.colex.es/index.php/empresasyderechoshumanos/article/view/96/141 \n\n3\n\n​Chase, R. B., Jacobs, F. R., & Aquilano, N. J. (2019). Opera"
+          },
+          {
+            "index": 1,
+            "type": "error",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "",
+            "error": "'charmap' codec can't encode characters in position 30-32: character maps to <undefined>"
+          },
+          {
+            "index": 2,
+            "type": "spacer",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 3,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      },
+      {
+        "index": 8,
+        "title": "",
+        "blocks": [
+          {
+            "index": 0,
+            "type": "spacer",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 1,
+            "type": "statement",
+            "editables_count": 1,
+            "editable_texts": [
+              "Revisa la siguiente cápsula interactiva"
+            ],
+            "visible_text": "Revisa la siguiente cápsula interactiva"
+          },
+          {
+            "index": 2,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": ""
+          },
+          {
+            "index": 3,
+            "type": "wrapper",
+            "editables_count": 0,
+            "editable_texts": [],
+            "visible_text": "CONTINUAR"
+          }
+        ]
+      }
+    ]
+  }
+}
