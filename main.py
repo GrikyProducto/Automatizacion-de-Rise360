@@ -23,6 +23,7 @@ REQUIRED_PACKAGES = [
     "pytesseract",
     "Pillow",
     "pyautogui",
+    "pyperclip",
 ]
 
 

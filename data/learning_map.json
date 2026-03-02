@@ -139,1904 +139,1904 @@
   },
   "corrections_history": [
     {
-      "timestamp": "2026-03-02T10:27:17.162899",
+      "timestamp": "2026-03-02T12:20:47.054380",
       "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T10:27:17.162732",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 398.398277
-    },
-    {
-      "timestamp": "2026-03-02T10:27:18.815277",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:18.815125",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 400.05067
-    },
-    {
-      "timestamp": "2026-03-02T10:27:21.047062",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:21.046877",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 402.282422
-    },
-    {
-      "timestamp": "2026-03-02T10:27:21.818413",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:21.818264",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 403.053809
-    },
-    {
-      "timestamp": "2026-03-02T10:27:23.684865",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:23.684713",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 404.920258
-    },
-    {
-      "timestamp": "2026-03-02T10:27:25.836971",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:25.836777",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 407.072322
-    },
-    {
-      "timestamp": "2026-03-02T10:27:27.459652",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:27.459483",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 408.695028
-    },
-    {
-      "timestamp": "2026-03-02T10:27:29.633132",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:29.632910",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 410.868455
-    },
-    {
-      "timestamp": "2026-03-02T10:27:30.474260",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:30.474088",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 411.709633
-    },
-    {
-      "timestamp": "2026-03-02T10:27:32.248606",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:32.248439",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 413.483984
-    },
-    {
-      "timestamp": "2026-03-02T10:27:34.408983",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:34.408787",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 415.644332
-    },
-    {
-      "timestamp": "2026-03-02T10:27:36.053263",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:36.053037",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 417.288582
-    },
-    {
-      "timestamp": "2026-03-02T10:27:38.185279",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:38.185119",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 419.420664
-    },
-    {
-      "timestamp": "2026-03-02T10:27:39.061281",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:39.061112",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 420.296657
-    },
-    {
-      "timestamp": "2026-03-02T10:27:40.845229",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:40.844960",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 422.080505
-    },
-    {
-      "timestamp": "2026-03-02T10:27:42.986046",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:42.985878",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 424.221423
-    },
-    {
-      "timestamp": "2026-03-02T10:27:44.654847",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:44.654684",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 425.890229
-    },
-    {
-      "timestamp": "2026-03-02T10:27:46.788801",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:46.788641",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 428.024186
-    },
-    {
-      "timestamp": "2026-03-02T10:27:47.668413",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:47.668224",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 428.903769
-    },
-    {
-      "timestamp": "2026-03-02T10:27:49.429100",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:49.428900",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 430.664445
-    },
-    {
-      "timestamp": "2026-03-02T10:27:51.633894",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:51.633629",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 432.869174
-    },
-    {
-      "timestamp": "2026-03-02T10:27:53.256191",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:53.256040",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 434.491585
-    },
-    {
-      "timestamp": "2026-03-02T10:27:55.406960",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:55.406686",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 436.642231
-    },
-    {
-      "timestamp": "2026-03-02T10:27:56.258124",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:56.257955",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 437.4935
-    },
-    {
-      "timestamp": "2026-03-02T10:27:58.044262",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:27:58.044070",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 439.279615
-    },
-    {
-      "timestamp": "2026-03-02T10:28:00.193690",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:00.193536",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 441.429081
-    },
-    {
-      "timestamp": "2026-03-02T10:28:01.848375",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:01.848208",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 443.083753
-    },
-    {
-      "timestamp": "2026-03-02T10:28:04.011488",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:04.011269",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 445.246814
-    },
-    {
-      "timestamp": "2026-03-02T10:28:04.860638",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:04.860451",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 446.095996
-    },
-    {
-      "timestamp": "2026-03-02T10:28:06.621795",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:06.621633",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 447.857178
-    },
-    {
-      "timestamp": "2026-03-02T10:28:08.757611",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:08.757338",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 449.992883
-    },
-    {
-      "timestamp": "2026-03-02T10:28:10.409974",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:10.409776",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 451.645321
-    },
-    {
-      "timestamp": "2026-03-02T10:28:12.601032",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:12.600867",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 453.836412
-    },
-    {
-      "timestamp": "2026-03-02T10:28:13.419611",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:13.419463",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 454.655008
-    },
-    {
-      "timestamp": "2026-03-02T10:28:15.198889",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:15.198723",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 456.434268
-    },
-    {
-      "timestamp": "2026-03-02T10:28:17.347699",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:17.347507",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 458.583052
-    },
-    {
-      "timestamp": "2026-03-02T10:28:19.026412",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:19.026257",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 460.261802
-    },
-    {
-      "timestamp": "2026-03-02T10:28:21.194918",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:21.194738",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 462.430283
-    },
-    {
-      "timestamp": "2026-03-02T10:28:22.040555",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:22.040401",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 463.275946
-    },
-    {
-      "timestamp": "2026-03-02T10:28:23.846162",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:23.845844",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 465.081389
-    },
-    {
-      "timestamp": "2026-03-02T10:28:25.962272",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:25.962104",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 467.197649
-    },
-    {
-      "timestamp": "2026-03-02T10:28:27.630601",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:27.630432",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 468.865977
-    },
-    {
-      "timestamp": "2026-03-02T10:28:29.764837",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:29.764659",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 471.000204
-    },
-    {
-      "timestamp": "2026-03-02T10:28:30.638847",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:30.638645",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 471.87419
-    },
-    {
-      "timestamp": "2026-03-02T10:28:32.392050",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:32.391860",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 473.627405
-    },
-    {
-      "timestamp": "2026-03-02T10:28:34.539905",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:34.539737",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 475.775282
-    },
-    {
-      "timestamp": "2026-03-02T10:28:36.193080",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:36.192912",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 477.428457
-    },
-    {
-      "timestamp": "2026-03-02T10:28:38.342584",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:38.342415",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 479.57796
-    },
-    {
-      "timestamp": "2026-03-02T10:28:39.195307",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:39.195154",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 480.430699
-    },
-    {
-      "timestamp": "2026-03-02T10:28:40.969180",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:40.968993",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 482.204538
-    },
-    {
-      "timestamp": "2026-03-02T10:28:43.115612",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:43.115444",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 484.350989
-    },
-    {
-      "timestamp": "2026-03-02T10:28:43.287391",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:43.287212",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://browser-intake-datadoghq.com/api/v2/rum",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 484.522757
-    },
-    {
-      "timestamp": "2026-03-02T10:28:43.295827",
-      "script_action": {
-        "timestamp": "2026-03-02T10:20:38.764455",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/k2IjYzAN37lTbJ9xZ2GGEAymP7GevvDf",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T10:28:43.295564",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 484.531109
-    },
-    {
-      "timestamp": "2026-03-02T11:01:38.858907",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:01:38.858716",
+        "timestamp": "2026-03-02T12:20:47.054147",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 21.119005
+      "time_gap_seconds": 140.686138
     },
     {
-      "timestamp": "2026-03-02T11:01:46.461301",
+      "timestamp": "2026-03-02T12:20:57.864295",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:01:46.460981",
+        "timestamp": "2026-03-02T12:20:57.864071",
         "actor": "user",
         "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/user/GET_STATUS",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 28.72127
+      "time_gap_seconds": 151.496062
     },
     {
-      "timestamp": "2026-03-02T11:01:49.967017",
+      "timestamp": "2026-03-02T12:20:57.875842",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:01:49.966681",
+        "timestamp": "2026-03-02T12:20:57.875620",
         "actor": "user",
         "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 32.22697
+      "time_gap_seconds": 151.507611
     },
     {
-      "timestamp": "2026-03-02T11:01:53.555774",
+      "timestamp": "2026-03-02T12:20:57.883943",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:01:53.555544",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 35.815833
-    },
-    {
-      "timestamp": "2026-03-02T11:01:57.100192",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:01:57.099941",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 39.36023
-    },
-    {
-      "timestamp": "2026-03-02T11:02:00.614600",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:00.614430",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 42.874719
-    },
-    {
-      "timestamp": "2026-03-02T11:02:04.092847",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:04.092579",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 46.352868
-    },
-    {
-      "timestamp": "2026-03-02T11:02:07.794505",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:07.794294",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 50.054583
-    },
-    {
-      "timestamp": "2026-03-02T11:02:10.394577",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:10.394270",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 52.654559
-    },
-    {
-      "timestamp": "2026-03-02T11:02:14.704603",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:14.704313",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 56.964602
-    },
-    {
-      "timestamp": "2026-03-02T11:02:14.721796",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:14.721481",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 56.98177
-    },
-    {
-      "timestamp": "2026-03-02T11:02:35.822926",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:35.822687",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 78.082976
-    },
-    {
-      "timestamp": "2026-03-02T11:02:39.118766",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:39.118475",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 81.378764
-    },
-    {
-      "timestamp": "2026-03-02T11:02:42.531749",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:42.531543",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 84.791832
-    },
-    {
-      "timestamp": "2026-03-02T11:02:45.884955",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:45.884752",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 88.145041
-    },
-    {
-      "timestamp": "2026-03-02T11:02:49.257755",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:49.257527",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 91.517816
-    },
-    {
-      "timestamp": "2026-03-02T11:02:52.676324",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:52.676144",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 94.936433
-    },
-    {
-      "timestamp": "2026-03-02T11:02:56.096973",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:56.096633",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 98.356922
-    },
-    {
-      "timestamp": "2026-03-02T11:02:59.795576",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:02:59.795202",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 102.055491
-    },
-    {
-      "timestamp": "2026-03-02T11:03:02.387339",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:02.387043",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 104.647332
-    },
-    {
-      "timestamp": "2026-03-02T11:03:06.890777",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:06.890502",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 109.150791
-    },
-    {
-      "timestamp": "2026-03-02T11:03:06.917663",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:06.917366",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 109.177655
-    },
-    {
-      "timestamp": "2026-03-02T11:03:28.433832",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:28.433624",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 130.693913
-    },
-    {
-      "timestamp": "2026-03-02T11:03:31.373474",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:31.373235",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 133.633524
-    },
-    {
-      "timestamp": "2026-03-02T11:03:34.651306",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:34.651069",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 136.911358
-    },
-    {
-      "timestamp": "2026-03-02T11:03:37.865362",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:37.865050",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 140.125339
-    },
-    {
-      "timestamp": "2026-03-02T11:03:41.160065",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:41.159723",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 143.420012
-    },
-    {
-      "timestamp": "2026-03-02T11:03:44.446506",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:44.446199",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 146.706488
-    },
-    {
-      "timestamp": "2026-03-02T11:03:44.988991",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:03:44.988817",
+        "timestamp": "2026-03-02T12:20:57.883749",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/track/TRACK",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 147.249106
+      "time_gap_seconds": 151.51574
     },
     {
-      "timestamp": "2026-03-02T11:04:07.073088",
+      "timestamp": "2026-03-02T12:20:57.929334",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:07.072909",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/track/TRACK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 169.333198
-    },
-    {
-      "timestamp": "2026-03-02T11:04:08.177621",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:08.177401",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 170.43769
-    },
-    {
-      "timestamp": "2026-03-02T11:04:12.896617",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:12.896439",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 175.156728
-    },
-    {
-      "timestamp": "2026-03-02T11:04:15.013957",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:15.013796",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 177.274085
-    },
-    {
-      "timestamp": "2026-03-02T11:04:19.308213",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:19.307620",
+        "timestamp": "2026-03-02T12:20:57.929103",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 181.567909
+      "time_gap_seconds": 151.561094
     },
     {
-      "timestamp": "2026-03-02T11:04:19.324517",
+      "timestamp": "2026-03-02T12:20:57.937336",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:19.324299",
+        "timestamp": "2026-03-02T12:20:57.937087",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 181.584588
+      "time_gap_seconds": 151.569078
     },
     {
-      "timestamp": "2026-03-02T11:04:38.725572",
+      "timestamp": "2026-03-02T12:20:58.988667",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:38.725405",
+        "timestamp": "2026-03-02T12:20:58.988418",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/uploads/CHECK_STATUS",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 152.620409
+    },
+    {
+      "timestamp": "2026-03-02T12:20:58.995560",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:20:58.995401",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE_SHARE_DISABLED",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 152.627392
+    },
+    {
+      "timestamp": "2026-03-02T12:21:12.815179",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:21:12.815009",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 200.985694
+      "time_gap_seconds": 166.447
     },
     {
-      "timestamp": "2026-03-02T11:04:41.593925",
+      "timestamp": "2026-03-02T12:21:25.935978",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:41.593741",
+        "timestamp": "2026-03-02T12:21:25.935750",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 203.85403
+      "time_gap_seconds": 179.567741
     },
     {
-      "timestamp": "2026-03-02T11:04:44.926009",
+      "timestamp": "2026-03-02T12:21:46.026133",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:44.925736",
+        "timestamp": "2026-03-02T12:21:46.025948",
         "actor": "user",
         "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/user/GET_STATUS",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 207.186025
+      "time_gap_seconds": 199.657939
     },
     {
-      "timestamp": "2026-03-02T11:04:48.169078",
+      "timestamp": "2026-03-02T12:21:46.034284",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:48.168893",
+        "timestamp": "2026-03-02T12:21:46.034106",
         "actor": "user",
         "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 210.429182
+      "time_gap_seconds": 199.666097
     },
     {
-      "timestamp": "2026-03-02T11:04:51.447438",
+      "timestamp": "2026-03-02T12:21:46.041970",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:04:51.447259",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 213.707548
-    },
-    {
-      "timestamp": "2026-03-02T11:04:54.736271",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:54.736007",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 216.996296
-    },
-    {
-      "timestamp": "2026-03-02T11:04:57.227125",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:04:57.226873",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 219.487162
-    },
-    {
-      "timestamp": "2026-03-02T11:05:01.512687",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:05:01.512356",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 223.772645
-    },
-    {
-      "timestamp": "2026-03-02T11:05:01.527559",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:05:01.527312",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 223.787601
-    },
-    {
-      "timestamp": "2026-03-02T11:05:18.283247",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:05:18.282851",
-        "actor": "user",
-        "type": "api_call",
-        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
-        "method": "POST",
-        "value": ""
-      },
-      "time_gap_seconds": 240.54314
-    },
-    {
-      "timestamp": "2026-03-02T11:05:18.779287",
-      "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
-        "actor": "script",
-        "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
-        "value": ""
-      },
-      "user_correction": {
-        "timestamp": "2026-03-02T11:05:18.778967",
+        "timestamp": "2026-03-02T12:21:46.041795",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/track/TRACK",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 241.039256
+      "time_gap_seconds": 199.673786
     },
     {
-      "timestamp": "2026-03-02T11:06:21.654366",
+      "timestamp": "2026-03-02T12:21:51.758449",
       "script_action": {
-        "timestamp": "2026-03-02T11:01:17.739711",
+        "timestamp": "2026-03-02T12:18:26.368009",
         "actor": "script",
         "type": "navigate",
-        "target": "https://rise.articulate.com/authoring/3Cof2wyRApAPvPIg6KDaMbJXLn8k1WdX",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
         "value": ""
       },
       "user_correction": {
-        "timestamp": "2026-03-02T11:06:21.654127",
+        "timestamp": "2026-03-02T12:21:51.758214",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/uploads/CHECK_STATUS",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 205.390205
+    },
+    {
+      "timestamp": "2026-03-02T12:21:51.764768",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:21:51.764641",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE_SHARE_DISABLED",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 205.396632
+    },
+    {
+      "timestamp": "2026-03-02T12:21:51.864276",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:21:51.864096",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 205.496087
+    },
+    {
+      "timestamp": "2026-03-02T12:22:15.768278",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:15.768015",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/user/GET_STATUS",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.400006
+    },
+    {
+      "timestamp": "2026-03-02T12:22:15.777872",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:15.777681",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.409672
+    },
+    {
+      "timestamp": "2026-03-02T12:22:15.785286",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:15.785138",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/track/TRACK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.417129
+    },
+    {
+      "timestamp": "2026-03-02T12:22:16.168113",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:16.167937",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.799928
+    },
+    {
+      "timestamp": "2026-03-02T12:22:16.180483",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:16.180156",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/uploads/CHECK_STATUS",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.812147
+    },
+    {
+      "timestamp": "2026-03-02T12:22:16.186897",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:16.186766",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/courses/GET_COURSE_SHARE_DISABLED",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 229.818757
+    },
+    {
+      "timestamp": "2026-03-02T12:22:25.034471",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:25.034081",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 238.666072
+    },
+    {
+      "timestamp": "2026-03-02T12:22:32.906935",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:32.906718",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 246.538709
+    },
+    {
+      "timestamp": "2026-03-02T12:22:51.793725",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:22:51.793500",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 265.425491
+    },
+    {
+      "timestamp": "2026-03-02T12:23:07.223221",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:23:07.223024",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 280.855015
+    },
+    {
+      "timestamp": "2026-03-02T12:23:30.296217",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:23:30.295990",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 303.927981
+    },
+    {
+      "timestamp": "2026-03-02T12:23:32.092886",
+      "script_action": {
+        "timestamp": "2026-03-02T12:18:26.368009",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/yFaacUibbPVXDgIZfvVaI9Q8kL05YvX1",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T12:23:32.092657",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/track/TRACK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 305.724648
+    },
+    {
+      "timestamp": "2026-03-02T17:15:56.271981",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:15:56.271290",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 2.065695
+    },
+    {
+      "timestamp": "2026-03-02T17:15:56.282481",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:15:56.282246",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 2.076651
+    },
+    {
+      "timestamp": "2026-03-02T17:16:56.869527",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:16:56.869334",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 62.663739
+    },
+    {
+      "timestamp": "2026-03-02T17:17:02.370224",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:02.369981",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 68.164386
+    },
+    {
+      "timestamp": "2026-03-02T17:17:05.656138",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:05.655939",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 71.450344
+    },
+    {
+      "timestamp": "2026-03-02T17:17:13.132376",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:13.131847",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 78.926252
+    },
+    {
+      "timestamp": "2026-03-02T17:17:19.907195",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:19.906956",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 85.701361
+    },
+    {
+      "timestamp": "2026-03-02T17:17:29.756404",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:29.755995",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 95.5504
+    },
+    {
+      "timestamp": "2026-03-02T17:17:38.507271",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:38.507054",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 104.301459
+    },
+    {
+      "timestamp": "2026-03-02T17:17:46.255003",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:46.254822",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 112.049227
+    },
+    {
+      "timestamp": "2026-03-02T17:17:49.568845",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:49.568625",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 115.36303
+    },
+    {
+      "timestamp": "2026-03-02T17:17:51.405630",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:51.405419",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 117.199824
+    },
+    {
+      "timestamp": "2026-03-02T17:17:53.156512",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:17:53.156327",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 118.950732
+    },
+    {
+      "timestamp": "2026-03-02T17:18:05.110899",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:05.110693",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 130.905098
+    },
+    {
+      "timestamp": "2026-03-02T17:18:17.665423",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:17.665242",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 143.459647
+    },
+    {
+      "timestamp": "2026-03-02T17:18:20.583199",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:20.583009",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 146.377414
+    },
+    {
+      "timestamp": "2026-03-02T17:18:37.530686",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:37.530441",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 163.324846
+    },
+    {
+      "timestamp": "2026-03-02T17:18:43.438014",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:43.437840",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 169.232245
+    },
+    {
+      "timestamp": "2026-03-02T17:18:44.885088",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:18:44.884840",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 170.679245
+    },
+    {
+      "timestamp": "2026-03-02T17:19:06.075489",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:06.075276",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 191.869681
+    },
+    {
+      "timestamp": "2026-03-02T17:19:16.929376",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:16.929047",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 202.723452
+    },
+    {
+      "timestamp": "2026-03-02T17:19:19.842898",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:19.842670",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 205.637075
+    },
+    {
+      "timestamp": "2026-03-02T17:19:30.658249",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:30.658012",
         "actor": "user",
         "type": "api_call",
         "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
         "method": "POST",
         "value": ""
       },
-      "time_gap_seconds": 303.914416
+      "time_gap_seconds": 216.452417
+    },
+    {
+      "timestamp": "2026-03-02T17:19:36.545693",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:36.545417",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 222.339822
+    },
+    {
+      "timestamp": "2026-03-02T17:19:36.555101",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:19:36.554851",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 222.349256
+    },
+    {
+      "timestamp": "2026-03-02T17:20:23.262899",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:23.262661",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 269.057066
+    },
+    {
+      "timestamp": "2026-03-02T17:20:27.971138",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:27.970914",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 273.765319
+    },
+    {
+      "timestamp": "2026-03-02T17:20:34.200425",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:34.200176",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 279.994581
+    },
+    {
+      "timestamp": "2026-03-02T17:20:38.476958",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:38.476724",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 284.271129
+    },
+    {
+      "timestamp": "2026-03-02T17:20:43.742977",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:43.742741",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 289.537146
+    },
+    {
+      "timestamp": "2026-03-02T17:20:46.651134",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:46.650912",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 292.445317
+    },
+    {
+      "timestamp": "2026-03-02T17:20:48.142752",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:48.142539",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 293.936944
+    },
+    {
+      "timestamp": "2026-03-02T17:20:54.982103",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:54.981873",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 300.776278
+    },
+    {
+      "timestamp": "2026-03-02T17:20:57.854025",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:20:57.853868",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 303.648273
+    },
+    {
+      "timestamp": "2026-03-02T17:21:02.735805",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:21:02.735581",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 308.529986
+    },
+    {
+      "timestamp": "2026-03-02T17:21:13.308692",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:21:13.308490",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 319.102895
+    },
+    {
+      "timestamp": "2026-03-02T17:21:19.189174",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:21:19.188977",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 324.983382
+    },
+    {
+      "timestamp": "2026-03-02T17:21:19.201457",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:21:19.200952",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 324.995357
+    },
+    {
+      "timestamp": "2026-03-02T17:22:01.193178",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:01.192987",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 366.987392
+    },
+    {
+      "timestamp": "2026-03-02T17:22:06.119591",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:06.119392",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 371.913797
+    },
+    {
+      "timestamp": "2026-03-02T17:22:07.469055",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:07.468865",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 373.26327
+    },
+    {
+      "timestamp": "2026-03-02T17:22:12.777544",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:12.777300",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 378.571705
+    },
+    {
+      "timestamp": "2026-03-02T17:22:17.944393",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:17.944114",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 383.738519
+    },
+    {
+      "timestamp": "2026-03-02T17:22:22.306101",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:22.305844",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 388.100249
+    },
+    {
+      "timestamp": "2026-03-02T17:22:25.129612",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:25.129426",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 390.923831
+    },
+    {
+      "timestamp": "2026-03-02T17:22:26.569391",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:26.569195",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 392.3636
+    },
+    {
+      "timestamp": "2026-03-02T17:22:32.852097",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:32.851834",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 398.646239
+    },
+    {
+      "timestamp": "2026-03-02T17:22:38.819820",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:38.819587",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 404.613992
+    },
+    {
+      "timestamp": "2026-03-02T17:22:50.398576",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:50.398400",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 416.192805
+    },
+    {
+      "timestamp": "2026-03-02T17:22:56.288607",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:56.288322",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 422.082727
+    },
+    {
+      "timestamp": "2026-03-02T17:22:56.300114",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:22:56.299846",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 422.094251
+    },
+    {
+      "timestamp": "2026-03-02T17:23:36.695435",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:23:36.695195",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 462.4896
+    },
+    {
+      "timestamp": "2026-03-02T17:23:40.992266",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:23:40.992095",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 466.7865
+    },
+    {
+      "timestamp": "2026-03-02T17:23:42.328231",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:23:42.328035",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 468.12244
+    },
+    {
+      "timestamp": "2026-03-02T17:23:58.748523",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:23:58.748329",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 484.542734
+    },
+    {
+      "timestamp": "2026-03-02T17:23:59.841629",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:23:59.841443",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 485.635848
+    },
+    {
+      "timestamp": "2026-03-02T17:24:03.762934",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:03.762662",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 489.557067
+    },
+    {
+      "timestamp": "2026-03-02T17:24:04.911758",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:04.911512",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 490.705917
+    },
+    {
+      "timestamp": "2026-03-02T17:24:08.318251",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:08.318027",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 494.112432
+    },
+    {
+      "timestamp": "2026-03-02T17:24:09.633520",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:09.633235",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 495.42764
+    },
+    {
+      "timestamp": "2026-03-02T17:24:14.544455",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:14.544269",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 500.338674
+    },
+    {
+      "timestamp": "2026-03-02T17:24:15.922678",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:15.922446",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 501.716851
+    },
+    {
+      "timestamp": "2026-03-02T17:24:21.761445",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:21.761272",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 507.555677
+    },
+    {
+      "timestamp": "2026-03-02T17:24:28.767036",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:28.766789",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 514.561194
+    },
+    {
+      "timestamp": "2026-03-02T17:24:33.768930",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:33.768691",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 519.563096
+    },
+    {
+      "timestamp": "2026-03-02T17:24:43.716768",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:43.716571",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 529.510976
+    },
+    {
+      "timestamp": "2026-03-02T17:24:49.582893",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:49.582665",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/PUT_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 535.37707
+    },
+    {
+      "timestamp": "2026-03-02T17:24:49.593764",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:24:49.593543",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/typefaces/FETCH_TYPEFACES",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 535.387948
+    },
+    {
+      "timestamp": "2026-03-02T17:25:17.539454",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:25:17.539250",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 563.333655
+    },
+    {
+      "timestamp": "2026-03-02T17:25:18.645388",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:25:18.645198",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 564.439603
+    },
+    {
+      "timestamp": "2026-03-02T17:25:20.038529",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:25:20.038238",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/lessons/UPDATE_LESSON_DEBOUNCE",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 565.832643
+    },
+    {
+      "timestamp": "2026-03-02T17:25:29.820721",
+      "script_action": {
+        "timestamp": "2026-03-02T17:15:54.205595",
+        "actor": "script",
+        "type": "navigate",
+        "target": "https://rise.articulate.com/authoring/fI7zDtX-AlTgV-F5UHfchFMXic1MLEjj",
+        "value": ""
+      },
+      "user_correction": {
+        "timestamp": "2026-03-02T17:25:29.820448",
+        "actor": "user",
+        "type": "api_call",
+        "target": "https://rise.articulate.com/api/rise-runtime/ducks/rise/locks/DEL_LOCK",
+        "method": "POST",
+        "value": ""
+      },
+      "time_gap_seconds": 575.614853
     }
   ],
   "learned_selectors": {},

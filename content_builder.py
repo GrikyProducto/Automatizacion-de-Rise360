@@ -1,20 +1,23 @@
 """
 content_builder.py — Orquestador de inserción de contenido en Rise 360
 
-Enfoque de Diseñador Gráfico Senior:
-  - Solo edita bloques de TEXTO (text, statement, quote, list, heading)
-  - NO toca elementos visuales (imágenes, divisores, banners, flashcards)
-  - Organiza contenido por subtemas (H3) para una jerarquía visual limpia
-  - Todo el texto se inserta VERBATIM del PDF, sin modificaciones
-
-Estructura del PDF esperada:
-  - Una sección grande (type="introduccion") con 4 H2 topics adentro
-  - Cada H2 = 1 tema = 1 lesson en Rise 360
-  - Dentro de cada H2, subtemas H3 que se mapean a bloques de texto
-  - Secciones separadas para Conclusión y Referencias
+Enfoque de Diseñador Gráfico Senior con criterio:
+  - Edita TODOS los bloques que tengan texto editable
+  - Mapea contenido POR TIPO de bloque:
+      headings → títulos de H3 / subtemas
+      flashcards → front=término, back=definición/explicación
+      statements/quotes → frases clave o impactantes
+      notes → información complementaria / tips
+      accordion → título=subtema, body=contenido expandible
+      text/paragraph → contenido de desarrollo regular
+  - Lee las instrucciones/placeholders existentes antes de reemplazar
+  - Divide el contenido en fragmentos cortos (~350 chars)
+  - Verifica UX/UI desplazándose por cada lección después de editarla
+  - Todo el texto se inserta VERBATIM del PDF
 """
 
 import json
+import re
 import time
 from typing import Callable, Optional
 from utils import logger, with_retry, take_screenshot, paste_large_text
@@ -22,18 +25,154 @@ from rise_automation import RiseAutomation
 import config
 
 
+# ── ContentPool: organiza el contenido por tipo para distribución ──────
+
+
+class ContentPool:
+    """
+    Organiza el contenido del PDF en 2 colas SIN duplicación:
+      - headings: títulos H3 y subtemas (para heading blocks, accordion titles,
+                  flashcard fronts, banner titles)
+      - content: párrafos adaptados al tamaño disponible (para text, statement,
+                 flashcard backs, accordion bodies, notes, quotes, lists)
+
+    El max_chunk se calcula adaptativamente para que todo el contenido
+    quepa en los editables disponibles de la plantilla.
+    """
+
+    def __init__(self, content_groups: list, max_chunk: int = 800):
+        self.max_chunk = max(200, min(1200, max_chunk))
+        self.headings: list[str] = []
+        self.content: list[str] = []
+
+        self._build(content_groups)
+
+    def _build(self, content_groups: list):
+        """Procesa los grupos de contenido en 2 colas sin duplicar."""
+        for group in content_groups:
+            title = group.get("title", "").strip()
+            text = group.get("text", "").strip()
+
+            # H3 title → cola de headings (min 5 chars)
+            if title and len(title) > 5:
+                self.headings.append(title)
+
+            if not text:
+                continue
+
+            # Split por párrafos
+            paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+
+            for para in paragraphs:
+                if para == title:
+                    continue
+                if len(para) <= self.max_chunk + 50:
+                    self.content.append(para)
+                else:
+                    for sub in self._split_long(para):
+                        self.content.append(sub)
+
+        logger.info(
+            f"  ContentPool: {len(self.headings)} headings, "
+            f"{len(self.content)} content chunks "
+            f"(max ~{self.max_chunk} chars)"
+        )
+
+    def _split_long(self, text: str) -> list[str]:
+        """Split text at sentence boundaries into ~max_chunk char chunks."""
+        sentences = re.split(r"(?<=[.!?;:])\s+", text)
+        chunks, current = [], ""
+        for s in sentences:
+            s = s.strip()
+            if not s:
+                continue
+            if current and len(current) + len(s) + 1 > self.max_chunk:
+                chunks.append(current)
+                current = s
+            else:
+                current = f"{current} {s}".strip() if current else s
+        if current:
+            chunks.append(current)
+
+        result = []
+        for chunk in chunks:
+            if len(chunk) > self.max_chunk * 1.5:
+                words = chunk.split()
+                sub = ""
+                for w in words:
+                    if sub and len(sub) + len(w) + 1 > self.max_chunk:
+                        result.append(sub)
+                        sub = w
+                    else:
+                        sub = f"{sub} {w}".strip() if sub else w
+                if sub:
+                    result.append(sub)
+            else:
+                result.append(chunk)
+        return result
+
+    # ── Métodos de consumo por tipo de bloque ─────────────────────────────
+
+    def get_for_heading(self) -> str:
+        """For heading blocks: H3 subtitle or truncated paragraph."""
+        if self.headings:
+            return self.headings.pop(0)
+        if self.content:
+            # Fallback: use first sentence of next paragraph (short)
+            para = self.content[0]
+            sentence = re.split(r"(?<=[.!?])\s+", para)[0]
+            return sentence[:120]
+        return ""
+
+    def get_for_paragraph(self) -> str:
+        """For text/paragraph blocks: regular content chunk."""
+        if self.content:
+            return self.content.pop(0)
+        return ""
+
+    def get_for_statement(self) -> str:
+        """For statement blocks: next content paragraph."""
+        return self.get_for_paragraph()
+
+    def get_for_quote(self) -> str:
+        """For quote/carousel blocks: next content paragraph."""
+        return self.get_for_paragraph()
+
+    def get_for_note(self) -> str:
+        """For note blocks: next content paragraph."""
+        return self.get_for_paragraph()
+
+    def get_for_flashcard(self, editable_index: int) -> str:
+        """Flashcard: even=front (heading), odd=back (content)."""
+        if editable_index % 2 == 0:
+            return self.get_for_heading()
+        return self.get_for_paragraph()
+
+    def get_for_accordion(self, editable_index: int) -> str:
+        """Accordion: even=panel title (heading), odd=panel body (content)."""
+        if editable_index % 2 == 0:
+            return self.get_for_heading()
+        return self.get_for_paragraph()
+
+    def get_for_list(self) -> str:
+        """For list blocks: next content paragraph."""
+        return self.get_for_paragraph()
+
+    def get_for_banner(self) -> str:
+        """For banner/mondrian: heading or short title."""
+        return self.get_for_heading()
+
+    def remaining_count(self) -> int:
+        return len(self.headings) + len(self.content)
+
+
+# ── ContentBuilder principal ──────────────────────────────────────────
+
+
 class ContentBuilder:
     """
-    Inserta el contenido del PDF en el curso duplicado de Rise 360.
-
-    Estrategia:
-    1. Extrae temas (H2) del PDF
-    2. Mapea cada tema a una lección de Rise
-    3. Dentro de cada lección, identifica solo bloques de TEXTO
-    4. Distribuye el contenido agrupado por subtemas (H3)
-    5. Deja intactos los elementos visuales (imágenes, divisores, etc.)
-
-    REGLA CRÍTICA: Todo el texto se inserta VERBATIM del PDF.
+    Inserta el contenido del PDF en el curso duplicado de Rise 360
+    con criterio de diseñador gráfico senior.
     """
 
     def __init__(
@@ -54,62 +193,62 @@ class ContentBuilder:
     # ── API pública ───────────────────────────────────────────────────────
 
     def build_course(self, content_json: dict):
-        """
-        Punto de entrada principal.
-        Extrae los temas H2 del PDF y los inserta en las lecciones de Rise.
-        """
+        """Entry point. Extrae temas, mapea a lecciones, inserta con criterio."""
         self._progress("Preparando contenido del curso...", 58)
 
-        # 1. Extraer temas del PDF (split por H2)
         topics = self._extract_topics(content_json)
         logger.info(f"Temas extraídos del PDF: {len(topics)}")
         for t in topics:
             logger.info(
                 f"  [{t['type']}] '{t['title'][:60]}' "
-                f"→ {len(t.get('content_groups', []))} grupos de contenido"
+                f"→ {len(t.get('content_groups', []))} grupos"
             )
 
-        # 2. Obtener lecciones disponibles en el outline del duplicado
         lessons = self.rise.get_lessons_in_outline()
         total_lessons = len(lessons)
-        logger.info(f"Lecciones en el curso duplicado: {total_lessons}")
+        logger.info(f"Lecciones en outline: {total_lessons}")
 
         if total_lessons == 0:
-            logger.error("No se encontraron lecciones en el outline")
+            logger.error("No se encontraron lecciones")
             return
 
-        # 3. Mapear temas a lecciones
         lesson_map = self._build_lesson_map(topics, total_lessons)
-        logger.info(f"Mapeo tema→lección: {len(lesson_map)} lecciones a procesar")
+        logger.info(f"Mapeo: {len(lesson_map)} lecciones a procesar")
 
-        # 4. Procesar cada lección
-        progress_per_lesson = 35 / max(len(lesson_map), 1)  # 58% → 93%
+        progress_per = 35 / max(len(lesson_map), 1)
 
         for lesson_idx, topic_data in lesson_map.items():
-            pct = int(58 + list(lesson_map.keys()).index(lesson_idx) * progress_per_lesson)
+            pct = int(
+                58 + list(lesson_map.keys()).index(lesson_idx) * progress_per
+            )
             self._progress(
                 f"Lección {lesson_idx + 1}/{total_lessons}: "
                 f"{topic_data['title'][:40]}...",
                 pct,
             )
 
+            # Rename lesson in outline
+            title = topic_data.get("title", "")
+            if title:
+                self.rise.rename_lesson(lesson_idx, title)
+                time.sleep(1)
+
+            # Edit lesson with type-aware content distribution
             self._insert_lesson_content(lesson_idx, topic_data)
 
-        # 5. Guardar
         self._progress("Guardando curso...", 95)
         self.rise.save_course()
 
-        # Reporte
         total = self._blocks_inserted + self._blocks_failed
         logger.info(
             f"Construcción completada. "
-            f"Bloques editados: {self._blocks_inserted}/{total}. "
+            f"Editables insertados: {self._blocks_inserted}/{total}. "
             f"Fallidos: {self._blocks_failed}"
         )
         if self._failed_log:
             logger.warning(
-                f"Bloques con errores:\n"
-                f"{json.dumps(self._failed_log, indent=2, ensure_ascii=False)}"
+                "Bloques con errores:\n"
+                + json.dumps(self._failed_log, indent=2, ensure_ascii=False)
             )
 
         self._progress("¡Curso completado exitosamente!", 100)
@@ -117,89 +256,83 @@ class ContentBuilder:
     # ── Extracción de temas del PDF ──────────────────────────────────────
 
     def _extract_topics(self, content_json: dict) -> list[dict]:
-        """
-        Extrae temas individuales del contenido del PDF.
-
-        El PDF tiene una sección grande (type "introduccion") que contiene
-        los 4 H2 topics. Los separa por H2 y agrupa sus subtemas H3.
-        También extrae Conclusión y Referencias como temas separados.
-        """
         topics = []
         sections = content_json.get("sections", [])
 
         for section in sections:
             blocks = section.get("blocks", [])
             h2_indices = [
-                i for i, b in enumerate(blocks)
-                if b.get("block_type") == "h2"
+                i for i, b in enumerate(blocks) if b.get("block_type") == "h2"
             ]
 
             if h2_indices:
-                # Sección con H2 topics — splitear
-                # Contenido ANTES del primer H2 (introducción general)
-                pre_h2 = self._filter_labels(blocks[:h2_indices[0]])
+                pre_h2 = self._filter_labels(blocks[: h2_indices[0]])
                 if pre_h2:
-                    intro_groups = self._group_by_h3(pre_h2)
-                    topics.append({
-                        "type": "intro",
-                        "title": "Introducción general",
-                        "content_groups": intro_groups,
-                    })
+                    topics.append(
+                        {
+                            "type": "intro",
+                            "title": "Introducción general",
+                            "content_groups": self._group_by_h3(pre_h2),
+                        }
+                    )
 
-                # Cada H2 topic
                 for idx, h2_pos in enumerate(h2_indices):
-                    end = h2_indices[idx + 1] if idx + 1 < len(h2_indices) else len(blocks)
+                    end = (
+                        h2_indices[idx + 1]
+                        if idx + 1 < len(h2_indices)
+                        else len(blocks)
+                    )
                     topic_blocks = self._filter_labels(blocks[h2_pos:end])
                     h2_text = blocks[h2_pos].get("text", f"Tema {idx + 1}")
-                    content_groups = self._group_by_h3(topic_blocks)
-                    topics.append({
-                        "type": "topic",
-                        "title": h2_text,
-                        "content_groups": content_groups,
-                    })
+                    topics.append(
+                        {
+                            "type": "topic",
+                            "title": h2_text,
+                            "content_groups": self._group_by_h3(topic_blocks),
+                        }
+                    )
 
             elif section.get("type") == "conclusion":
                 clean = self._filter_labels(blocks)
                 if clean:
-                    topics.append({
-                        "type": "conclusion",
-                        "title": section.get("heading", "Conclusión"),
-                        "content_groups": [
-                            {"title": "", "text": self._blocks_to_text(clean)}
-                        ],
-                    })
+                    topics.append(
+                        {
+                            "type": "conclusion",
+                            "title": section.get("heading", "Conclusión"),
+                            "content_groups": [
+                                {"title": "", "text": self._blocks_to_text(clean)}
+                            ],
+                        }
+                    )
 
             elif section.get("type") == "referencias" and len(blocks) > 2:
                 clean = self._filter_labels(blocks)
                 if clean:
-                    topics.append({
-                        "type": "references",
-                        "title": "Referencias",
-                        "content_groups": [
-                            {"title": "", "text": self._blocks_to_text(clean)}
-                        ],
-                    })
+                    topics.append(
+                        {
+                            "type": "references",
+                            "title": "Referencias",
+                            "content_groups": [
+                                {"title": "", "text": self._blocks_to_text(clean)}
+                            ],
+                        }
+                    )
 
         return topics
 
     def _filter_labels(self, blocks: list) -> list:
-        """
-        Filtra bloques que son etiquetas/metadatos del PDF (font_size ≤7,
-        texto UPPERCASE con underscores como PARAGRAPH, SUBTOPIC_TITLE, etc.)
-        """
-        return [
-            b for b in blocks
-            if not self._is_label_block(b)
-        ]
+        return [b for b in blocks if not self._is_label_block(b)]
 
     def _is_label_block(self, block: dict) -> bool:
-        """Detecta si un bloque es una etiqueta de metadatos del PDF."""
         fs = block.get("font_size", 0)
         text = block.get("text", "").strip()
         if fs <= 7 and text.isupper():
             if "_" in text or text in {
-                "PARAGRAPH", "REFERENCE_ITEM", "TOPIC_TITLE",
-                "SUBTOPIC_TITLE", "NUMBERED_LIST",
+                "PARAGRAPH",
+                "REFERENCE_ITEM",
+                "TOPIC_TITLE",
+                "SUBTOPIC_TITLE",
+                "NUMBERED_LIST",
             }:
                 return True
         return False
@@ -207,46 +340,33 @@ class ContentBuilder:
     # ── Agrupamiento por subtemas H3 ─────────────────────────────────────
 
     def _group_by_h3(self, blocks: list) -> list[dict]:
-        """
-        Agrupa bloques por subtemas H3 para organizar el contenido.
-        Cada H3 y sus párrafos siguientes forman un grupo.
-
-        Retorna lista de {"title": str, "text": str} donde:
-        - title: el texto del H3 (o vacío para contenido pre-H3)
-        - text: todo el contenido del grupo formateado
-        """
         if not blocks:
             return []
 
-        # Encontrar posiciones de H3 (font_size 13, con numeración X.Y.)
         h3_positions = []
         for i, b in enumerate(blocks):
             fs = b.get("font_size", 0)
             text = b.get("text", "")
             bt = b.get("block_type", "")
             if bt == "h2":
-                continue  # H2 es el título del topic, no un grupo
+                continue
             if fs >= 12 and any(text.startswith(f"{n}.") for n in range(1, 5)):
                 h3_positions.append(i)
 
         if not h3_positions:
-            # Sin H3: todo el contenido es un solo grupo
             text = self._blocks_to_text(blocks)
-            if text.strip():
-                return [{"title": "", "text": text}]
-            return []
+            return [{"title": "", "text": text}] if text.strip() else []
 
         groups = []
-
-        # Contenido ANTES del primer H3 (H2 title + intro)
-        pre_h3 = blocks[:h3_positions[0]]
+        pre_h3 = blocks[: h3_positions[0]]
         text = self._blocks_to_text(pre_h3)
         if text.strip():
             groups.append({"title": "", "text": text})
 
-        # Cada H3 subtema como un grupo separado
         for idx, h3_pos in enumerate(h3_positions):
-            end = h3_positions[idx + 1] if idx + 1 < len(h3_positions) else len(blocks)
+            end = (
+                h3_positions[idx + 1] if idx + 1 < len(h3_positions) else len(blocks)
+            )
             h3_blocks = blocks[h3_pos:end]
             h3_title = blocks[h3_pos].get("text", "")
             text = self._blocks_to_text(h3_blocks)
@@ -256,16 +376,6 @@ class ContentBuilder:
         return groups
 
     def _blocks_to_text(self, blocks: list) -> str:
-        """
-        Convierte bloques del PDF a texto formateado para Rise 360.
-
-        Reglas:
-        - Los labels (PARAGRAPH, etc.) actúan como separadores de párrafos
-        - Bloques consecutivos del mismo font_size se unen con espacio (mismo párrafo)
-        - H2/H3 van como línea propia
-        - Listas mantienen sus marcadores
-        - Se usa \\n\\n entre párrafos para buena lectura
-        """
         paragraphs = []
         current_parts = []
         last_real_fs = 0
@@ -275,9 +385,7 @@ class ContentBuilder:
             fs = b.get("font_size", 0)
             bt = b.get("block_type", "")
 
-            # Skip labels (ya deberían estar filtrados, pero por seguridad)
             if self._is_label_block(b):
-                # Flush current paragraph
                 if current_parts:
                     paragraphs.append(" ".join(current_parts))
                     current_parts = []
@@ -287,8 +395,9 @@ class ContentBuilder:
             if not text:
                 continue
 
-            # H2 y H3: línea propia
-            if bt == "h2" or (fs >= 12 and any(text.startswith(f"{n}.") for n in range(1, 5))):
+            if bt == "h2" or (
+                fs >= 12 and any(text.startswith(f"{n}.") for n in range(1, 5))
+            ):
                 if current_parts:
                     paragraphs.append(" ".join(current_parts))
                     current_parts = []
@@ -296,7 +405,6 @@ class ContentBuilder:
                 last_real_fs = fs
                 continue
 
-            # Lista: línea propia
             if bt == "lista_vinetas":
                 if current_parts:
                     paragraphs.append(" ".join(current_parts))
@@ -305,20 +413,14 @@ class ContentBuilder:
                 last_real_fs = fs
                 continue
 
-            # Texto normal: agrupar si es continuación del mismo párrafo
-            # (mismo font_size y sin label intermediario)
             if fs == last_real_fs and current_parts:
-                # Continuación del mismo párrafo
                 current_parts.append(text)
             else:
-                # Nuevo párrafo
                 if current_parts:
                     paragraphs.append(" ".join(current_parts))
                 current_parts = [text]
-
             last_real_fs = fs
 
-        # Flush último párrafo
         if current_parts:
             paragraphs.append(" ".join(current_parts))
 
@@ -327,21 +429,7 @@ class ContentBuilder:
     # ── Mapeo temas → lecciones ──────────────────────────────────────────
 
     def _build_lesson_map(self, topics: list, total_lessons: int) -> dict:
-        """
-        Mapea temas extraídos del PDF a lecciones de Rise 360.
-
-        Template tiene: Tema 1, Tema 2, Tema 3, Conclusiones, Referencias
-        PDF tiene: intro + 4 H2 topics + conclusión + referencias
-
-        Estrategia:
-        - Intro se fusiona con el primer topic
-        - Cada H2 topic → una lección
-        - Conclusión → penúltima lección
-        - Referencias → última lección
-        """
         lesson_map = {}
-
-        # Separar por tipo
         intro = None
         h2_topics = []
         conclusion = None
@@ -358,41 +446,33 @@ class ContentBuilder:
                 references = topic
 
         logger.info(
-            f"  Mapeo: {len(h2_topics)} temas H2, "
+            f"  Mapeo: {len(h2_topics)} H2, "
             f"intro={'sí' if intro else 'no'}, "
             f"conclusión={'sí' if conclusion else 'no'}, "
             f"referencias={'sí' if references else 'no'}"
         )
 
-        # Asignar H2 topics a lecciones (fusionar intro con topic 1)
         lesson_idx = 0
         for i, topic in enumerate(h2_topics):
             if lesson_idx >= total_lessons:
-                logger.warning(
-                    f"  No hay más lecciones disponibles para tema: '{topic['title'][:40]}'"
-                )
                 break
-
             entry = dict(topic)
-            # Fusionar intro con primer topic
             if i == 0 and intro:
-                intro_groups = intro.get("content_groups", [])
-                entry["content_groups"] = intro_groups + entry.get("content_groups", [])
+                entry["content_groups"] = (
+                    intro.get("content_groups", [])
+                    + entry.get("content_groups", [])
+                )
                 logger.info("  Intro fusionada con primer tema")
-
             lesson_map[lesson_idx] = entry
             lesson_idx += 1
 
-        # Conclusión
         if conclusion and lesson_idx < total_lessons:
             lesson_map[lesson_idx] = conclusion
             lesson_idx += 1
 
-        # Referencias
         if references and lesson_idx < total_lessons:
             lesson_map[lesson_idx] = references
         elif references and conclusion:
-            # Combinar referencias al final de la conclusión
             last_idx = lesson_idx - 1
             if last_idx in lesson_map:
                 lesson_map[last_idx]["content_groups"].extend(
@@ -412,14 +492,18 @@ class ContentBuilder:
 
     def _insert_lesson_content(self, lesson_idx: int, topic_data: dict):
         """
-        Abre una lección, identifica SOLO los bloques de texto,
-        y distribuye el contenido organizado por subtemas.
+        Abre una lección, hace pre-scan de editables, calcula tamaño
+        adaptativo de chunks, y distribuye contenido POR TIPO de bloque.
 
-        Enfoque de diseñador gráfico senior:
-        - Solo edita bloques de texto (text, statement, quote, list, heading)
-        - Deja intactos: imágenes, divisores, banners, flashcards
-        - Contenido organizado por subtemas para jerarquía visual clara
-        - Si no hay suficientes bloques de texto, agrega nuevos
+        NO agrega bloques nuevos — adapta el contenido a la plantilla existente.
+
+        Criterio de diseñador gráfico:
+        - Headings → títulos de subtemas (NO párrafos)
+        - Flashcards → front=término/pregunta, back=explicación
+        - Statements/Quotes → frases clave
+        - Notes → información complementaria
+        - Accordion → título=subtema, body=desarrollo
+        - Text → contenido de desarrollo regular
         """
         title = topic_data.get("title", "")
         content_groups = topic_data.get("content_groups", [])
@@ -433,104 +517,166 @@ class ContentBuilder:
             logger.info("  Sin contenido para esta lección")
             return
 
-        # 1. Abrir el editor de la lección
+        # 1. Open lesson editor
         if not self.rise.open_lesson_editor(lesson_idx):
             logger.warning(f"No se pudo abrir editor de lección {lesson_idx}")
             self._blocks_failed += len(content_groups)
             return
 
-        # 2. Identificar SOLO bloques de texto (ignorar imágenes, divisores, etc.)
-        text_blocks = self.rise.get_text_blocks_in_lesson()
-        logger.info(
-            f"  Bloques de texto disponibles: {len(text_blocks)}\n"
-            f"  Grupos de contenido a insertar: {len(content_groups)}"
+        # 2. PRE-SCAN: count total editables to calculate adaptive chunk size
+        block_info = self.rise.count_editables_in_lesson()
+        total_editables = sum(b["editables_count"] for b in block_info)
+
+        # Calculate total text length
+        total_text_chars = sum(
+            len(g.get("text", "")) for g in content_groups
         )
 
-        # 3. Distribuir contenido en los bloques de texto disponibles
-        items_ok = 0
-        items_fail = 0
+        # Adaptive chunk size: fit ALL content into available editables
+        # (subtract headings which are short and don't need chunking)
+        n_headings = sum(
+            1 for g in content_groups if g.get("title", "").strip()
+        )
+        paragraph_editables = max(total_editables - n_headings, 5)
+        adaptive_max = max(200, min(1200, total_text_chars // paragraph_editables))
 
-        for i, group in enumerate(content_groups):
-            group_text = group.get("text", "").strip()
-            group_title = group.get("title", "")
-            if not group_text:
-                continue
+        logger.info(
+            f"  Pre-scan: {total_editables} editables, "
+            f"{total_text_chars} chars de contenido\n"
+            f"  Chunk adaptativo: ~{adaptive_max} chars/editable"
+        )
 
-            if i < len(text_blocks):
-                # ── Editar bloque de texto existente ──
-                block = text_blocks[i]
-                block_idx = block["index"]  # Índice del wrapper en el DOM
-                logger.info(
-                    f"  [{i}] Editando bloque {block_idx} "
-                    f"(tipo: {block['type']}): '{group_title[:40] or group_text[:40]}...'"
+        # 3. Build ContentPool with adaptive chunk size
+        pool = ContentPool(content_groups, max_chunk=adaptive_max)
+
+        # 4. Define the type-aware callback
+        def get_texts_for_block(
+            block_type: str,
+            editables_count: int,
+            existing_texts: list[str],
+        ) -> list[str]:
+            """Returns content appropriate for the block type."""
+            texts = []
+
+            # Log existing template text for debugging
+            if existing_texts and existing_texts[0]:
+                logger.debug(
+                    f"    Template text: '{existing_texts[0][:80]}...'"
                 )
 
-                success = self.rise.edit_block_text(block_idx, group_text)
-                if success:
-                    self._blocks_inserted += 1
-                    items_ok += 1
-                else:
-                    self._blocks_failed += 1
-                    items_fail += 1
-                    self._failed_log.append({
-                        "lesson": lesson_idx,
-                        "block_index": block_idx,
-                        "text_preview": group_text[:100],
-                        "error": "edit_block_text retornó False",
-                    })
+            # ── Heading blocks: ALWAYS use subtopic title ──
+            if block_type in ("heading",):
+                texts.append(pool.get_for_heading())
+
+            # ── Statement blocks: key/impactful sentence ──
+            elif block_type in ("statement",):
+                for _ in range(editables_count):
+                    texts.append(pool.get_for_statement())
+
+            # ── Quote/carousel: notable sentence ──
+            elif block_type in ("quote", "quote_carousel"):
+                for _ in range(editables_count):
+                    texts.append(pool.get_for_quote())
+
+            # ── Note blocks: supplementary info ──
+            elif block_type in ("note",):
+                for _ in range(editables_count):
+                    texts.append(pool.get_for_note())
+
+            # ── Flashcard blocks: front=term, back=definition ──
+            elif block_type in ("flashcards",):
+                for i in range(editables_count):
+                    texts.append(pool.get_for_flashcard(i))
+
+            # ── Accordion blocks: title=heading, body=paragraph ──
+            elif block_type in ("accordion",):
+                for i in range(editables_count):
+                    texts.append(pool.get_for_accordion(i))
+
+            # ── List blocks ──
+            elif block_type in ("bulleted_list", "numbered_list"):
+                for _ in range(editables_count):
+                    texts.append(pool.get_for_list())
+
+            # ── Banner/mondrian: short title ──
+            elif block_type in ("banner", "mondrian"):
+                texts.append(pool.get_for_banner())
+                for _ in range(editables_count - 1):
+                    texts.append(pool.get_for_paragraph())
+
+            # ── Text and everything else: regular paragraphs ──
             else:
-                # ── Crear nuevo bloque de texto ──
-                logger.info(
-                    f"  [{i}] Agregando nuevo bloque de texto: "
-                    f"'{group_title[:40] or group_text[:40]}...'"
-                )
+                for _ in range(editables_count):
+                    texts.append(pool.get_for_paragraph())
 
-                added = self.rise.add_block("text")
-                if added:
-                    time.sleep(1)
-                    success = self.rise.insert_text(group_text, clear_first=True)
-                    if success:
-                        self._blocks_inserted += 1
-                        items_ok += 1
-                    else:
-                        self._blocks_failed += 1
-                        items_fail += 1
-                        self._failed_log.append({
-                            "lesson": lesson_idx,
-                            "block_index": "new",
-                            "text_preview": group_text[:100],
-                            "error": "insert_text en nuevo bloque falló",
-                        })
-                else:
-                    self._blocks_failed += 1
-                    items_fail += 1
-                    self._failed_log.append({
-                        "lesson": lesson_idx,
-                        "block_index": "new",
-                        "text_preview": group_text[:100],
-                        "error": "add_block falló",
-                    })
+            return [t for t in texts if t and t.strip()]
+
+        # 5. Scroll back to top before editing (pre-scan scrolled through)
+        try:
+            self.rise.page.keyboard.press("Control+Home")
+            time.sleep(1)
+        except Exception:
+            pass
+
+        # 6. EDIT PASS: click each block → discover editables → fill
+        items_ok = self.rise.scan_and_edit_all_blocks(get_texts_for_block)
+        self._blocks_inserted += items_ok
+
+        # 7. Log remaining content (NOT adding new blocks — preserving template design)
+        remaining_count = pool.remaining_count()
+        if remaining_count > 0:
+            logger.info(
+                f"  {remaining_count} fragmentos no cupieron en la plantilla "
+                f"(template preservado, no se agregan bloques nuevos)"
+            )
 
         logger.info(
             f"  Lección {lesson_idx} completada: "
-            f"{items_ok} exitosos, {items_fail} fallidos"
+            f"{items_ok} editables editados exitosamente"
         )
 
-        # 4. Volver al outline para la siguiente lección
+        # 6. UX/UI verification
+        self._verify_lesson_ux(lesson_idx, title)
+
+        # 7. Back to outline
         self.rise.go_back_to_outline()
         time.sleep(2)
+
+    # ── Verificación UX/UI ───────────────────────────────────────────────
+
+    def _verify_lesson_ux(self, lesson_idx: int, title: str = ""):
+        """Scroll through the lesson to verify visual presentation."""
+        logger.info(f"  Verificando UX/UI de lección {lesson_idx}...")
+        try:
+            page = self.rise.page
+            page.keyboard.press("Control+Home")
+            time.sleep(1)
+            take_screenshot(page, label=f"ux_L{lesson_idx}_top")
+
+            for _ in range(5):
+                page.keyboard.press("PageDown")
+                time.sleep(0.5)
+            take_screenshot(page, label=f"ux_L{lesson_idx}_mid")
+
+            page.keyboard.press("Control+End")
+            time.sleep(1)
+            take_screenshot(page, label=f"ux_L{lesson_idx}_bottom")
+
+            logger.info(
+                f"  Verificación visual lección {lesson_idx}: "
+                f"'{title[:40]}' — screenshots guardados"
+            )
+        except Exception as e:
+            logger.warning(f"  Error en verificación UX lección {lesson_idx}: {e}")
 
     # ── Utilidades ─────────────────────────────────────────────────────────
 
     def get_build_report(self) -> dict:
-        """Retorna un reporte del proceso de construcción."""
+        total = self._blocks_inserted + self._blocks_failed
         return {
             "blocks_inserted": self._blocks_inserted,
             "blocks_failed": self._blocks_failed,
-            "total": self._blocks_inserted + self._blocks_failed,
-            "success_rate": (
-                self._blocks_inserted / max(self._blocks_inserted + self._blocks_failed, 1)
-                * 100
-            ),
+            "total": total,
+            "success_rate": self._blocks_inserted / max(total, 1) * 100,
             "failed_details": self._failed_log,
         }

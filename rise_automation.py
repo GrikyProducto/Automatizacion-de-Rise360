@@ -45,12 +45,9 @@ EDITABLE_BLOCK_TYPES = {
     "bulleted_list", "numbered_list", "quote", "quote_carousel",
 }
 
-# Block types we must NEVER touch (visual/interactive elements)
-SKIP_BLOCK_TYPES = {
-    "banner", "image", "divider", "spacer", "flashcards",
-    "accordion", "video", "embed", "continue", "sorting",
-    "process", "mondrian", "unknown",
-}
+# Block types with NO editable text — always skip these
+# Everything else gets edited (flashcards, accordion, notes, statements, etc.)
+SKIP_BLOCK_TYPES = {"divider", "spacer", "continue"}
 
 
 class RiseAutomation:
@@ -957,6 +954,382 @@ class RiseAutomation:
         except Exception as e:
             logger.warning(f"Error volviendo al outline: {e}")
 
+    # ── Renombrar lección ──────────────────────────────────────────────────
+
+    def rename_lesson(self, lesson_index: int, new_name: str) -> bool:
+        """
+        Renames a lesson in the course outline.
+        Finds the n-th lesson container (same index as open_lesson_editor)
+        and clicks on its title to make it editable.
+        """
+        try:
+            edit_links = self.page.locator("a:has-text('Edit Content')")
+            count = edit_links.count()
+            if count == 0:
+                edit_links = self.page.locator("button:has-text('Edit Content')")
+                count = edit_links.count()
+
+            if lesson_index >= count:
+                logger.warning(
+                    f"rename_lesson: index {lesson_index} fuera de rango ({count})"
+                )
+                return False
+
+            link = edit_links.nth(lesson_index)
+            parent = link.locator(
+                "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
+            )
+            if parent.count() == 0:
+                logger.warning("rename_lesson: no se encontró contenedor de lección")
+                return False
+
+            container = parent.first
+            container.scroll_into_view_if_needed()
+            time.sleep(0.5)
+
+            # Strategy 1: Look for an existing input/textarea in the lesson container
+            for sel in ["input[type='text']", "textarea", "[contenteditable='true']"]:
+                try:
+                    el = container.locator(sel).first
+                    if el.is_visible(timeout=500) and el != link:
+                        el.click()
+                        time.sleep(0.3)
+                        el.fill("")
+                        el.fill(new_name)
+                        self.page.keyboard.press("Tab")
+                        time.sleep(0.5)
+                        logger.info(f"Lección {lesson_index} renombrada: '{new_name}'")
+                        return True
+                except Exception:
+                    continue
+
+            # Strategy 2: Click on the title text to activate inline editing
+            inner = container.inner_text()[:300]
+            lines = [l.strip() for l in inner.split("\n") if l.strip()]
+            title_text = None
+            for j, line in enumerate(lines):
+                if line == "Lesson" and j + 1 < len(lines):
+                    candidate = lines[j + 1]
+                    if candidate != "Edit Content":
+                        title_text = candidate
+                        break
+            if not title_text and len(lines) > 1:
+                for line in lines:
+                    if line not in ("Lesson", "Edit Content", ""):
+                        title_text = line
+                        break
+
+            if title_text:
+                try:
+                    title_loc = container.get_by_text(title_text, exact=True).first
+                    title_loc.click()
+                    time.sleep(0.8)
+
+                    # Check if an input appeared
+                    for sel in [
+                        "input[type='text']",
+                        "textarea",
+                        "[contenteditable='true']",
+                    ]:
+                        try:
+                            el = container.locator(sel).first
+                            if el.is_visible(timeout=1_000):
+                                self.page.keyboard.press("Control+a")
+                                time.sleep(0.1)
+                                self.page.keyboard.type(new_name)
+                                self.page.keyboard.press("Tab")
+                                time.sleep(0.5)
+                                logger.info(
+                                    f"Lección {lesson_index} renombrada: '{new_name}'"
+                                )
+                                return True
+                        except Exception:
+                            continue
+                except Exception:
+                    pass
+
+            logger.warning(f"No se pudo renombrar lección {lesson_index}")
+            return False
+        except Exception as e:
+            logger.warning(f"Error renombrando lección {lesson_index}: {e}")
+            return False
+
+    # ── Obtener TODOS los bloques editables ────────────────────────────────
+
+    def get_all_editable_blocks(self) -> list[dict]:
+        """
+        Returns ALL blocks that have editable text, including their editable count.
+        Skips only divider/spacer/continue (no text whatsoever).
+        Uses actual DOM check for [contenteditable='true'] within each wrapper.
+        """
+        all_blocks = self._catalog_blocks_in_editor()
+        wrappers = self.page.locator("[class*='block-wrapper']")
+        result = []
+
+        for block in all_blocks:
+            if block["type"] in SKIP_BLOCK_TYPES:
+                continue
+
+            try:
+                wrapper = wrappers.nth(block["index"])
+                editables = wrapper.locator("[contenteditable='true']")
+                editable_count = editables.count()
+                if editable_count > 0:
+                    block["editables_count"] = editable_count
+                    result.append(block)
+                    logger.debug(
+                        f"  Block {block['index']} [{block['type']}]: "
+                        f"{editable_count} editable(s)"
+                    )
+            except Exception:
+                pass
+
+        total_editables = sum(b.get("editables_count", 0) for b in result)
+        skipped = len(all_blocks) - len(result)
+        logger.info(
+            f"  Bloques con editables: {len(result)} "
+            f"({total_editables} editables totales), "
+            f"{skipped} bloques sin texto (omitidos)"
+        )
+        return result
+
+    def edit_block_all_editables(
+        self, wrapper_index: int, texts: list[str]
+    ) -> int:
+        """
+        Edit ALL editables within a block wrapper.
+        Returns the number of editables successfully edited.
+
+        Handles multi-editable blocks like flashcards (front/back),
+        accordion (title/body), labeled graphics, etc.
+        """
+        try:
+            wrapper = self.page.locator("[class*='block-wrapper']").nth(wrapper_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.3)
+            wrapper.click()
+            time.sleep(0.8)
+
+            editables = wrapper.locator("[contenteditable='true']")
+            count = editables.count()
+            edited = 0
+
+            for i in range(min(count, len(texts))):
+                text = texts[i].strip()
+                if not text:
+                    continue
+                try:
+                    ed = editables.nth(i)
+                    if not ed.is_visible(timeout=1_000):
+                        logger.debug(
+                            f"  Editable {i} en block {wrapper_index} no visible, saltando"
+                        )
+                        continue
+                    ed.click()
+                    time.sleep(0.2)
+                    self.page.keyboard.press("Control+a")
+                    time.sleep(0.1)
+                    self.page.keyboard.press("Delete")
+                    time.sleep(0.1)
+                    paste_large_text(self.page, text)
+                    time.sleep(0.3)
+                    edited += 1
+                except Exception as e:
+                    logger.debug(
+                        f"  Editable {i} en block {wrapper_index} falló: {e}"
+                    )
+                    try:
+                        self.page.keyboard.press("Escape")
+                    except Exception:
+                        pass
+
+            # Click outside to deselect
+            try:
+                self.page.keyboard.press("Escape")
+                time.sleep(0.3)
+            except Exception:
+                pass
+
+            logger.debug(
+                f"  Block {wrapper_index}: {edited}/{min(count, len(texts))} "
+                f"editables editados"
+            )
+            return edited
+        except Exception as e:
+            logger.warning(f"Error editando block {wrapper_index}: {e}")
+            take_screenshot(self.page, label=f"edit_all_fail_{wrapper_index}")
+            return 0
+
+    # ── Pre-scan: count editables ──────────────────────────────────────
+
+    def count_editables_in_lesson(self) -> list[dict]:
+        """
+        Quick pre-scan: click each block to activate it, count editables,
+        then move on. Does NOT edit anything.
+        Returns list of {index, type, editables_count} for blocks with editables.
+        """
+        all_blocks = self._catalog_blocks_in_editor()
+        wrappers = self.page.locator("[class*='block-wrapper']")
+        result = []
+
+        for block in all_blocks:
+            if block["type"] in SKIP_BLOCK_TYPES:
+                continue
+            try:
+                wrapper = wrappers.nth(block["index"])
+                wrapper.scroll_into_view_if_needed()
+                time.sleep(0.2)
+                wrapper.click()
+                time.sleep(0.5)
+
+                editables = wrapper.locator("[contenteditable='true']")
+                count = editables.count()
+                if count > 0:
+                    result.append({
+                        "index": block["index"],
+                        "type": block["type"],
+                        "editables_count": count,
+                    })
+
+                self.page.keyboard.press("Escape")
+                time.sleep(0.15)
+            except Exception:
+                pass
+
+        total = sum(b["editables_count"] for b in result)
+        logger.info(
+            f"  Pre-scan: {len(result)} bloques con editables, "
+            f"{total} editables totales"
+        )
+        return result
+
+    # ── Single-pass: activate + edit all blocks ──────────────────────────
+
+    def scan_and_edit_all_blocks(
+        self, get_texts_callback: Callable
+    ) -> int:
+        """
+        Single-pass: iterate all blocks, click to activate, discover editables,
+        read existing text, and fill with content from a type-aware callback.
+
+        Rise 360 only renders [contenteditable='true'] AFTER clicking a block.
+
+        Args:
+            get_texts_callback: function(block_type, editables_count, existing_texts)
+                                -> list[str] of replacement texts.
+                                Called for each block with editables.
+
+        Returns:
+            total_edited count
+        """
+        all_blocks = self._catalog_blocks_in_editor()
+        wrappers = self.page.locator("[class*='block-wrapper']")
+        total_edited = 0
+        blocks_with_editables = 0
+        blocks_skipped = 0
+
+        for block in all_blocks:
+            block_type = block["type"]
+            block_idx = block["index"]
+
+            if block_type in SKIP_BLOCK_TYPES:
+                blocks_skipped += 1
+                continue
+
+            try:
+                wrapper = wrappers.nth(block_idx)
+                wrapper.scroll_into_view_if_needed()
+                time.sleep(0.3)
+                wrapper.click()
+                time.sleep(0.8)
+
+                editables = wrapper.locator("[contenteditable='true']")
+                count = editables.count()
+
+                if count == 0:
+                    logger.debug(
+                        f"  Block {block_idx} [{block_type}]: 0 editables (skip)"
+                    )
+                    self.page.keyboard.press("Escape")
+                    time.sleep(0.2)
+                    continue
+
+                blocks_with_editables += 1
+
+                # Read existing text from each editable (for instruction detection)
+                existing_texts = []
+                for i in range(count):
+                    try:
+                        ed = editables.nth(i)
+                        if ed.is_visible(timeout=500):
+                            txt = ed.inner_text()[:200].strip()
+                            existing_texts.append(txt)
+                        else:
+                            existing_texts.append("")
+                    except Exception:
+                        existing_texts.append("")
+
+                # Ask callback for replacement texts based on type + existing
+                texts = get_texts_callback(block_type, count, existing_texts)
+                if not texts:
+                    self.page.keyboard.press("Escape")
+                    time.sleep(0.2)
+                    continue
+
+                edited_in_block = 0
+                for i in range(min(count, len(texts))):
+                    text = texts[i]
+                    if not text or not text.strip():
+                        continue
+                    try:
+                        ed = editables.nth(i)
+                        if not ed.is_visible(timeout=1_000):
+                            continue
+
+                        ed.click()
+                        time.sleep(0.2)
+                        self.page.keyboard.press("Control+a")
+                        time.sleep(0.1)
+                        self.page.keyboard.press("Delete")
+                        time.sleep(0.1)
+                        paste_large_text(self.page, text)
+                        time.sleep(0.3)
+
+                        total_edited += 1
+                        edited_in_block += 1
+                    except Exception as e:
+                        logger.debug(
+                            f"  Block {block_idx} editable {i} falló: {e}"
+                        )
+                        try:
+                            self.page.keyboard.press("Escape")
+                        except Exception:
+                            pass
+
+                logger.info(
+                    f"  [{block_type}:{block_idx}] "
+                    f"{edited_in_block}/{count} editables editados"
+                )
+
+                self.page.keyboard.press("Escape")
+                time.sleep(0.3)
+
+            except Exception as e:
+                logger.warning(
+                    f"  Error en block {block_idx} [{block_type}]: {e}"
+                )
+                try:
+                    self.page.keyboard.press("Escape")
+                except Exception:
+                    pass
+
+        logger.info(
+            f"  Scan completo: {blocks_with_editables} bloques con editables, "
+            f"{blocks_skipped} omitidos, "
+            f"{total_edited} editables editados"
+        )
+        return total_edited
+
     # ── Edición de contenido ──────────────────────────────────────────────
 
     @with_retry(max_attempts=3)
@@ -1038,21 +1411,26 @@ class RiseAutomation:
         return False
 
     def set_course_title(self, title: str) -> bool:
-        """Edita el titulo del curso en el outline."""
+        """Edita el titulo del curso en el outline (sin truncar)."""
         title_sels = [
             "textarea[placeholder='Course Title']",
-            "textarea",  # Confirmado: el outline tiene un textarea para el título
+            "textarea",
             ".authoring-lesson-header__title textarea",
-            "h1[contenteditable='true']",
         ]
         for sel in title_sels:
             try:
                 el = self.page.locator(sel).first
                 if el.is_visible(timeout=3_000):
                     el.click()
-                    self.page.keyboard.press("Control+a")
-                    self.page.keyboard.type(title)
-                    logger.info(f"Titulo del curso: '{title}'")
+                    time.sleep(0.3)
+                    # Use fill() instead of keyboard.type() to avoid truncation
+                    el.fill("")
+                    el.fill(title)
+                    time.sleep(0.5)
+                    # Confirm by pressing Tab
+                    self.page.keyboard.press("Tab")
+                    time.sleep(0.3)
+                    logger.info(f"Titulo del curso establecido: '{title}'")
                     return True
             except Exception:
                 pass
