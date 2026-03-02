@@ -45,11 +45,13 @@ class ContentBuilder:
         rise: RiseAutomation,
         learning_map: dict,
         progress_callback: Optional[Callable] = None,
+        template_structure: Optional[dict] = None,
     ):
         self.rise = rise
         self.learning_map = learning_map
         self._progress = progress_callback or (lambda msg, pct: None)
         self._mappings = learning_map.get("mappings", {})
+        self._template = template_structure  # Estructura analizada de la plantilla
         self._blocks_inserted = 0
         self._blocks_failed = 0
         self._failed_log: list[dict] = []
@@ -61,6 +63,10 @@ class ContentBuilder:
         """
         Punto de entrada principal.
         Itera sobre las secciones del JSON y construye el curso en Rise 360.
+
+        Usa la estructura de la plantilla como guía:
+        - Si la plantilla tiene bloques existentes en cada lección, edita esos bloques
+        - Si necesita más bloques, los agrega
 
         Args:
             content_json: Resultado de pdf_parser.parse_pdf()
@@ -75,23 +81,68 @@ class ContentBuilder:
         # Insertar el título del curso en el banner principal
         self._handle_titulo_block(title)
 
-        # Calcular incremento de progreso por sección
-        progress_per_section = 35 / max(total_sections, 1)  # Del 58% al 93%
+        # Obtener las lecciones disponibles en el outline del DUPLICADO
+        lessons = self.rise.get_lessons_in_outline()
+        total_lessons = len(lessons)
+        logger.info(f"Lecciones en el outline del duplicado: {total_lessons}")
 
-        for i, section in enumerate(sections):
+        # Info de la plantilla (si disponible)
+        template_lessons = []
+        if self._template:
+            template_lessons = self._template.get("lessons", [])
+            logger.info(
+                f"Plantilla de referencia: {len(template_lessons)} lecciones, "
+                f"{sum(len(l.get('blocks', [])) for l in template_lessons)} bloques"
+            )
+
+        # Filtrar secciones relevantes (omitir labels/preámbulos sin contenido real)
+        content_sections = self._filter_content_sections(sections)
+        total_content = len(content_sections)
+        logger.info(f"Secciones de contenido a insertar: {total_content}")
+
+        # Calcular incremento de progreso por sección
+        progress_per_section = 35 / max(total_content, 1)  # Del 58% al 93%
+
+        for i, section in enumerate(content_sections):
             section_type = section.get("type", "parrafo")
             section_heading = section.get("heading", "")
             section_blocks = section.get("blocks", [])
 
             pct = int(58 + i * progress_per_section)
             self._progress(
-                f"Insertando sección {i+1}/{total_sections}: {section_heading[:50]}",
+                f"Insertando sección {i+1}/{total_content}: {section_heading[:50]}",
                 pct,
             )
             logger.info(f"Procesando sección [{section_type}]: '{section_heading}'")
 
-            # Insertar la sección principal
-            self._insert_section(section_type, section_heading, section_blocks)
+            # Abrir el editor de la lección correspondiente (mapeo 1:1)
+            if i < total_lessons:
+                if not self.rise.open_lesson_editor(i):
+                    logger.warning(f"No se pudo abrir editor de lección {i}. Saltando sección.")
+                    continue
+            else:
+                logger.warning(
+                    f"No hay lección {i} en el outline ({total_lessons} disponibles). "
+                    "Saltando sección."
+                )
+                continue
+
+            # Obtener info de bloques de la plantilla para esta lección
+            template_blocks = []
+            if i < len(template_lessons):
+                template_blocks = template_lessons[i].get("blocks", [])
+                logger.info(
+                    f"  Plantilla lección {i}: {len(template_blocks)} bloques existentes"
+                )
+
+            # Insertar la sección, usando la estructura de la plantilla como guía
+            self._insert_section_with_template(
+                section_type, section_heading, section_blocks, template_blocks
+            )
+
+            # Volver al outline para la siguiente lección
+            self.rise.go_back_to_outline()
+            time.sleep(2)
 
         self._progress("Guardando curso...", 95)
         self.rise.save_course()
@@ -109,11 +160,186 @@ class ContentBuilder:
 
         self._progress("¡Curso completado exitosamente!", 100)
 
+    def _filter_content_sections(self, sections: list) -> list:
+        """
+        Filtra secciones que tienen contenido real para insertar.
+        Omite preámbulos con solo etiquetas (COURSE_TITLE, etc.) y bloques vacíos.
+        """
+        filtered = []
+        for section in sections:
+            blocks = section.get("blocks", [])
+            # Filtrar bloques que son etiquetas del PDF (font_size ~6.5, texto uppercase con _)
+            real_blocks = [
+                b for b in blocks
+                if not (
+                    b.get("font_size", 0) <= 7
+                    and b.get("text", "").strip().isupper()
+                    and "_" in b.get("text", "")
+                )
+            ]
+            if real_blocks or section.get("heading", "").strip():
+                # Actualizar la sección con solo los bloques reales
+                filtered_section = dict(section)
+                filtered_section["blocks"] = real_blocks
+                filtered.append(filtered_section)
+        return filtered
+
     # ── Inserción de secciones ─────────────────────────────────────────────
+
+    def _insert_section_with_template(
+        self,
+        section_type: str,
+        heading: str,
+        blocks: list,
+        template_blocks: list,
+    ):
+        """
+        Inserta una sección usando la estructura de la plantilla como guía.
+
+        Si la plantilla tiene bloques existentes en esta lección:
+        - Primero intenta editar los bloques existentes (click en cada uno y reemplazar texto)
+        - Si necesita más bloques de los que existen, agrega nuevos
+
+        Args:
+            section_type: Tipo de sección (h1, introduccion, etc.)
+            heading: Texto del encabezado (verbatim)
+            blocks: Lista de bloques del PDF
+            template_blocks: Bloques existentes en la plantilla (puede estar vacío)
+        """
+        has_template = len(template_blocks) > 0
+        if has_template:
+            logger.info(
+                f"  Usando plantilla como guía: {len(template_blocks)} bloques existentes"
+            )
+
+        # Recopilar todo el contenido a insertar en esta sección
+        content_items = []
+
+        # 1. El encabezado de la sección (si tiene)
+        if heading and heading.strip():
+            content_items.append({
+                "text": heading,
+                "type": "heading",
+                "handler": self._get_heading_handler(section_type),
+            })
+
+        # 2. Bloques internos
+        for block in blocks:
+            block_text = block.get("text", "").strip()
+            block_type = block.get("block_type", "parrafo")
+            if not block_text and block_type != "imagen":
+                continue
+            content_items.append({
+                "text": block_text,
+                "type": block_type,
+                "handler": BLOCK_HANDLERS.get(block_type, "_handle_paragraph"),
+            })
+
+        if not content_items:
+            logger.info("  Sin contenido para insertar en esta lección")
+            return
+
+        logger.info(f"  Contenido a insertar: {len(content_items)} ítems")
+
+        # Estrategia: si hay bloques en la plantilla, intentar editarlos directamente
+        # Si no hay o se acaban, agregar nuevos bloques
+        if has_template:
+            self._insert_using_existing_blocks(content_items, template_blocks)
+        else:
+            self._insert_creating_new_blocks(content_items)
+
+    def _get_heading_handler(self, section_type: str) -> str:
+        """Retorna el handler apropiado para el heading según el tipo de sección."""
+        if section_type == "h1":
+            return "_handle_h1_section"
+        elif section_type in ("introduccion", "conclusion"):
+            return "_handle_section_header_text"
+        elif section_type == "referencias":
+            return "_handle_references_header"
+        return "_handle_paragraph"
+
+    def _insert_using_existing_blocks(self, content_items: list, template_blocks: list):
+        """
+        Inserta contenido editando los bloques existentes de la plantilla.
+        Click en cada bloque editable → seleccionar todo → escribir texto nuevo.
+        Si hay más contenido que bloques existentes, agrega nuevos.
+        """
+        # Buscar todos los editables visibles en la lección actual
+        editable_sels = [
+            ".rise-tiptap[contenteditable='true']",
+            ".tiptap.ProseMirror[contenteditable='true']",
+            ".tiptap[contenteditable='true']",
+            ".ProseMirror[contenteditable='true']",
+            "[contenteditable='true']",
+        ]
+
+        editables = []
+        for sel in editable_sels:
+            try:
+                els = self.rise.page.locator(sel)
+                count = els.count()
+                if count > 0:
+                    for i in range(count):
+                        try:
+                            el = els.nth(i)
+                            if el.is_visible(timeout=500):
+                                editables.append(el)
+                        except Exception:
+                            pass
+                    if editables:
+                        break
+            except Exception:
+                pass
+
+        logger.info(f"  Bloques editables encontrados: {len(editables)}")
+
+        # Editar bloques existentes con contenido del PDF
+        items_inserted = 0
+        for i, item in enumerate(content_items):
+            if i < len(editables):
+                # Editar bloque existente
+                try:
+                    el = editables[i]
+                    el.scroll_into_view_if_needed()
+                    el.click()
+                    time.sleep(0.3)
+                    self.rise.page.keyboard.press("Control+a")
+                    time.sleep(0.1)
+                    self.rise.page.keyboard.press("Delete")
+                    time.sleep(0.1)
+                    self.rise.page.keyboard.type(item["text"])
+                    time.sleep(0.3)
+                    self._blocks_inserted += 1
+                    items_inserted += 1
+                    logger.debug(
+                        f"  Bloque {i} editado: '{item['text'][:50]}...'"
+                    )
+                except Exception as e:
+                    logger.warning(f"  Error editando bloque {i}: {e}")
+                    self._blocks_failed += 1
+                    self._failed_log.append({
+                        "handler": "edit_existing_block",
+                        "text_preview": item["text"][:100],
+                        "error": str(e),
+                    })
+            else:
+                # No hay más bloques existentes → agregar nuevos
+                handler = item.get("handler", "_handle_paragraph")
+                self._safe_insert(handler, item["text"], item.get("type", ""))
+
+        logger.info(f"  Ítems insertados en lección: {items_inserted}/{len(content_items)}")
+
+    def _insert_creating_new_blocks(self, content_items: list):
+        """
+        Inserta contenido creando bloques nuevos (sin plantilla existente).
+        """
+        for item in content_items:
+            handler = item.get("handler", "_handle_paragraph")
+            self._safe_insert(handler, item["text"], item.get("type", ""))
 
     def _insert_section(self, section_type: str, heading: str, blocks: list):
         """
-        Inserta una sección completa:
+        Inserta una sección completa (fallback sin plantilla).
         1. El encabezado de la sección (banner o texto)
         2. Todos los bloques internos
 
