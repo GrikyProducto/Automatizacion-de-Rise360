@@ -39,6 +39,19 @@ from utils import (
 )
 import config
 
+# Block types where we CAN safely edit text
+EDITABLE_BLOCK_TYPES = {
+    "text", "statement", "heading", "text_twocol",
+    "bulleted_list", "numbered_list", "quote", "quote_carousel",
+}
+
+# Block types we must NEVER touch (visual/interactive elements)
+SKIP_BLOCK_TYPES = {
+    "banner", "image", "divider", "spacer", "flashcards",
+    "accordion", "video", "embed", "continue", "sorting",
+    "process", "mondrian", "unknown",
+}
+
 
 class RiseAutomation:
     """
@@ -125,11 +138,15 @@ class RiseAutomation:
     def _wait_for_content_loaded(self, max_wait: int = 90):
         """
         Espera a que Rise 360 termine de cargar el contenido.
-        Rise muestra "Your content is loading." con un spinner que puede tardar 15-20s.
+        Verifica múltiples indicadores ya que el comportamiento varía:
+        - Outline: "Edit Content" links, textarea de título
+        - Lesson editor: block-wrapper elements
+        - Loading spinner: "Your content is loading"
         """
         logger.debug("Esperando carga del contenido...")
         start = time.time()
         while time.time() - start < max_wait:
+            # Si el spinner de carga está visible, seguir esperando
             try:
                 loading = self.page.locator("text='Your content is loading'")
                 if loading.is_visible(timeout=500):
@@ -141,16 +158,50 @@ class RiseAutomation:
             except Exception:
                 pass
 
-            # Check if real content appeared
+            # Indicador 1: "Edit Content" links (outline del curso)
             try:
-                btns = self.page.locator("button:visible")
-                if btns.count() > 3:
+                edit_links = self.page.locator("a:has-text('Edit Content')")
+                if edit_links.count() > 0:
                     elapsed = int(time.time() - start)
-                    logger.debug(f"Contenido cargado en {elapsed}s")
+                    logger.debug(f"Contenido cargado (Edit Content links) en {elapsed}s")
                     time.sleep(2)
                     return True
             except Exception:
                 pass
+
+            # Indicador 2: block-wrappers (editor de lección)
+            try:
+                blocks = self.page.locator("[class*='block-wrapper']")
+                if blocks.count() > 0:
+                    elapsed = int(time.time() - start)
+                    logger.debug(f"Contenido cargado (block-wrappers) en {elapsed}s")
+                    time.sleep(2)
+                    return True
+            except Exception:
+                pass
+
+            # Indicador 3: textarea de título (outline del curso)
+            try:
+                textarea = self.page.locator("textarea")
+                if textarea.count() > 0 and textarea.first.is_visible(timeout=500):
+                    elapsed = int(time.time() - start)
+                    logger.debug(f"Contenido cargado (textarea) en {elapsed}s")
+                    time.sleep(2)
+                    return True
+            except Exception:
+                pass
+
+            # Indicador 4: muchos botones visibles (fallback genérico)
+            try:
+                btns = self.page.locator("button:visible")
+                if btns.count() > 5:
+                    elapsed = int(time.time() - start)
+                    logger.debug(f"Contenido cargado ({btns.count()} botones) en {elapsed}s")
+                    time.sleep(2)
+                    return True
+            except Exception:
+                pass
+
             time.sleep(1)
 
         logger.warning(f"Timeout esperando carga ({max_wait}s)")
@@ -678,6 +729,87 @@ class RiseAutomation:
 
         take_screenshot(self.page, label="template_lesson_blocks")
         return blocks
+
+    def get_text_blocks_in_lesson(self) -> list[dict]:
+        """
+        Retorna solo los bloques de TEXTO editables en la lección actual.
+        Ignora: imágenes, divisores, banners, flashcards, etc.
+
+        Como diseñador gráfico senior: solo tocamos los textos,
+        el resto de elementos visuales quedan intactos.
+        """
+        all_blocks = self._catalog_blocks_in_editor()
+        text_blocks = [
+            b for b in all_blocks
+            if b["type"] in EDITABLE_BLOCK_TYPES
+        ]
+        skipped = len(all_blocks) - len(text_blocks)
+        logger.info(
+            f"  Bloques editables: {len(text_blocks)} texto, "
+            f"{skipped} visuales (intactos)"
+        )
+        return text_blocks
+
+    def edit_block_text(self, block_wrapper_index: int, text: str) -> bool:
+        """
+        Edita el texto de un bloque específico por su índice de wrapper.
+        Click en el wrapper → encuentra su editable → limpia → inserta texto.
+
+        IMPORTANTE: Solo usar para bloques de TEXTO. Los visuales no se tocan.
+        """
+        try:
+            wrappers = self.page.locator("[class*='block-wrapper']")
+            count = wrappers.count()
+            if block_wrapper_index >= count:
+                logger.warning(
+                    f"Block index {block_wrapper_index} fuera de rango ({count} bloques)"
+                )
+                return False
+
+            wrapper = wrappers.nth(block_wrapper_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.5)
+
+            # Click en el wrapper para seleccionar el bloque
+            wrapper.click()
+            time.sleep(0.5)
+
+            # Buscar el editable DENTRO de este wrapper específico
+            editable = wrapper.locator("[contenteditable='true']").first
+            try:
+                editable.wait_for(state="visible", timeout=3_000)
+            except Exception:
+                logger.warning(
+                    f"No se encontró editable en block wrapper {block_wrapper_index}"
+                )
+                return False
+
+            editable.click()
+            time.sleep(0.3)
+
+            # Seleccionar todo y reemplazar
+            self.page.keyboard.press("Control+a")
+            time.sleep(0.1)
+            self.page.keyboard.press("Delete")
+            time.sleep(0.1)
+
+            # Insertar nuevo texto
+            paste_large_text(self.page, text)
+            time.sleep(0.3)
+
+            # Click fuera para deseleccionar/confirmar
+            self.page.keyboard.press("Escape")
+            time.sleep(0.3)
+
+            logger.debug(
+                f"  Block {block_wrapper_index} editado ({len(text)} chars): "
+                f"'{text[:50]}...'"
+            )
+            return True
+        except Exception as e:
+            logger.warning(f"Error editando block {block_wrapper_index}: {e}")
+            take_screenshot(self.page, label=f"edit_block_fail_{block_wrapper_index}")
+            return False
 
     def _extract_block_type_from_class(self, css_class: str) -> str:
         """
