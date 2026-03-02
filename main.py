@@ -431,38 +431,8 @@ class RiseAutomatorApp(tk.Tk):
                 if not self._running:
                     return
 
-                # ── Fase 5: Análisis estructural de la plantilla ─────────
-                self._update("Analizando estructura de la plantilla...", 38)
-                self._log("Entrando a la plantilla para analizar su estructura...")
-
-                template_structure = None
-                try:
-                    template_structure = rise.analyze_template_structure(template_url)
-                    total_lessons = len(template_structure.get("lessons", []))
-                    total_blocks = sum(
-                        len(l.get("blocks", []))
-                        for l in template_structure.get("lessons", [])
-                    )
-                    self._log(
-                        f"✓ Plantilla analizada: "
-                        f"{total_lessons} lecciones, {total_blocks} bloques detectados"
-                    )
-                    for les in template_structure.get("lessons", []):
-                        self._log(
-                            f"  Lección {les['index']}: "
-                            f"'{les['title'][:50]}' → {len(les.get('blocks', []))} bloques"
-                        )
-                except Exception as e:
-                    self._log(f"⚠ Error analizando plantilla: {e}")
-                    logger.error(f"Error analizando plantilla: {e}", exc_info=True)
-
-                self._update("Análisis de plantilla completado", 45)
-
-                if not self._running:
-                    return
-
-                # ── Fase 6: Duplicar plantilla ─────────────────────────────
-                self._update("Duplicando plantilla de curso...", 48)
+                # ── Fase 5: Duplicar plantilla ────────────────────────────
+                self._update("Duplicando plantilla de curso...", 38)
                 self._log(f"Duplicando plantilla para: '{course_title}'")
 
                 try:
@@ -475,20 +445,25 @@ class RiseAutomatorApp(tk.Tk):
                     self._log("[!] Usando plantilla original como fallback")
                     rise.navigate_to_course_outline(template_url)
 
-                self._update("Plantilla lista para edición", 55)
+                self._update("Plantilla lista para edición", 50)
 
                 if not self._running:
                     return
 
-                # ── Fase 7: Insertar contenido ─────────────────────────────
-                self._update("Insertando contenido del PDF...", 58)
-                self._log(f"Iniciando inserción de {sections_count} secciones...")
+                # ── Fase 6: Insertar contenido ───────────────────────────
+                # El ContentBuilder ahora:
+                # 1. Extrae temas H2 del PDF
+                # 2. Mapea cada tema a una lección
+                # 3. Dentro de cada lección, identifica SOLO bloques de texto
+                # 4. Inserta contenido organizado por subtemas H3
+                # 5. Deja intactos los elementos visuales (imágenes, divisores, etc.)
+                self._update("Insertando contenido del PDF...", 55)
+                self._log("Analizando estructura del PDF por temas...")
 
                 builder = ContentBuilder(
                     rise=rise,
                     learning_map=learning_map,
                     progress_callback=self._update,
-                    template_structure=template_structure,
                 )
 
                 builder.build_course(content)

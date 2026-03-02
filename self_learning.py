@@ -144,18 +144,23 @@ class SelfLearning:
         method = request.method
 
         # Rise 360 usa su propia API REST — detectar operaciones de escritura
-        if any(api in url for api in ["/api/", "/authoring/", "/lesson/", "/block/"]):
+        # Filtrar analytics/telemetry para reducir ruido en los logs
+        IGNORE_URLS = ["datadoghq.com", "analytics", "/rum?", "lifecycle/refresh"]
+        if any(ignore in url for ignore in IGNORE_URLS):
+            return
+
+        if any(api in url for api in ["/api/rise-runtime/ducks/", "/lesson/", "/block/"]):
             if method in ("POST", "PUT", "PATCH", "DELETE"):
                 action = {
                     "timestamp": datetime.now().isoformat(),
                     "actor": "user",
                     "type": "api_call",
-                    "target": url.split("?")[0],  # Sin query params
+                    "target": url.split("?")[0],
                     "method": method,
                     "value": "",
                 }
                 self._user_actions.append(action)
-                logger.debug(f"User API call: {method} {url[:80]}")
+                logger.debug(f"User API call: {method} {url.split('?')[0][-60:]}")
 
                 # Detectar si el usuario está corrigiendo algo
                 self._detect_correction()
