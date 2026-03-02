@@ -409,9 +409,9 @@ class RiseAutomatorApp(tk.Tk):
                 self._log(f"Analizando PDF: {Path(pdf_path).name}")
                 content = parse_pdf(pdf_path)
 
-            course_title = content.get("title", "Curso Rise 360")
+            course_title = self._extract_course_name(content)
             sections_count = len(content.get("sections", []))
-            self._log(f"✓ PDF analizado: '{course_title}' — {sections_count} secciones")
+            self._log(f"PDF analizado: '{course_title}' -- {sections_count} secciones")
             self._update(f"PDF analizado: {sections_count} secciones encontradas", 20)
 
             if not self._running:
@@ -431,22 +431,32 @@ class RiseAutomatorApp(tk.Tk):
                 if not self._running:
                     return
 
-                # ── Fase 5: Análisis visual del curso de referencia ────────
-                self._update("Analizando curso de referencia (visual)...", 38)
-                self._log("Analizando diseño del curso de referencia...")
+                # ── Fase 5: Análisis estructural de la plantilla ─────────
+                self._update("Analizando estructura de la plantilla...", 38)
+                self._log("Entrando a la plantilla para analizar su estructura...")
 
+                template_structure = None
                 try:
-                    rise.navigate_to_course_outline(config.TEMPLATE_URL)
-                    reference_patterns = visual_learner.analyze_reference_course(rise.page)
-                    self._log(
-                        f"✓ Análisis visual completado: "
-                        f"{len(reference_patterns.get('detected_patterns', []))} patrones detectados"
+                    template_structure = rise.analyze_template_structure(template_url)
+                    total_lessons = len(template_structure.get("lessons", []))
+                    total_blocks = sum(
+                        len(l.get("blocks", []))
+                        for l in template_structure.get("lessons", [])
                     )
-                    visual_learner.save_learned_patterns(reference_patterns)
+                    self._log(
+                        f"✓ Plantilla analizada: "
+                        f"{total_lessons} lecciones, {total_blocks} bloques detectados"
+                    )
+                    for les in template_structure.get("lessons", []):
+                        self._log(
+                            f"  Lección {les['index']}: "
+                            f"'{les['title'][:50]}' → {len(les.get('blocks', []))} bloques"
+                        )
                 except Exception as e:
-                    self._log(f"⚠ Análisis visual parcial: {e}")
+                    self._log(f"⚠ Error analizando plantilla: {e}")
+                    logger.error(f"Error analizando plantilla: {e}", exc_info=True)
 
-                self._update("Análisis visual completado", 45)
+                self._update("Análisis de plantilla completado", 45)
 
                 if not self._running:
                     return
@@ -478,6 +488,7 @@ class RiseAutomatorApp(tk.Tk):
                     rise=rise,
                     learning_map=learning_map,
                     progress_callback=self._update,
+                    template_structure=template_structure,
                 )
 
                 builder.build_course(content)
@@ -523,6 +534,31 @@ class RiseAutomatorApp(tk.Tk):
         except Exception as e:
             logger.warning(f"No se pudo cargar learning_map.json: {e}")
             return {"mappings": {}, "corrections_history": [], "learned_selectors": {}}
+
+    def _extract_course_name(self, content: dict) -> str:
+        """
+        Extrae el nombre del curso desde la etiqueta COURSE_SUBTITLE del PDF.
+        Busca el bloque con texto "COURSE_SUBTITLE" (font_size 6.5, etiqueta)
+        y concatena los bloques siguientes que contienen el subtítulo real.
+        """
+        for section in content.get("sections", []):
+            blocks = section.get("blocks", [])
+            for i, block in enumerate(blocks):
+                if block.get("text", "").strip() == "COURSE_SUBTITLE":
+                    # Los bloques siguientes (font_size > 6.5) son el subtítulo real
+                    subtitle_parts = []
+                    for next_block in blocks[i + 1:]:
+                        next_text = next_block.get("text", "").strip()
+                        next_size = next_block.get("font_size", 0)
+                        # Si es otra etiqueta (font_size ~6.5) dejar de acumular
+                        if next_size <= 7 and next_text.isupper() and "_" in next_text:
+                            break
+                        if next_text:
+                            subtitle_parts.append(next_text)
+                    if subtitle_parts:
+                        return " ".join(subtitle_parts)
+        # Fallback: usar el título del documento
+        return content.get("title", "Curso Rise 360")
 
     # ── Comunicación thread → UI ──────────────────────────────────────────
 

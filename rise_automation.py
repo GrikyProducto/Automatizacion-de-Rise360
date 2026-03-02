@@ -1,19 +1,32 @@
 """
 rise_automation.py — Motor principal de automatización Playwright para Rise 360
-Basado en inspección real del DOM de Rise 360 (febrero 2026).
+Basado en inspección real del DOM de Rise 360 (marzo 2026).
 
 Selectores 100% confirmados por debug:
-  - Dashboard: /manage/all-content
-  - Search: input[placeholder='Search all content']
-  - Clear search: button[aria-label='Clear search']
-  - Card link: a[href*='/authoring/COURSE_ID']
-  - Card container: ancestor::li[1]
-  - Card menu btn: button[aria-label='Content menu button']
-  - Menu items: [role='menuitem'] -> Duplicate, Move, Share, Delete, etc.
-  - Duplicate modal: [role='dialog'] input[type='text'] + button Duplicate/Cancel
-  - Move dialog: [role='tree'] con carpetas, boton "Move"
-  - Editor: TipTap (.tiptap.ProseMirror.rise-tiptap), NO Quill
-  - Cookie popup: button.osano-cm-accept-all
+  Dashboard:
+    - URL: /manage/all-content
+    - Search: input[placeholder='Search all content']
+    - Clear search: button[aria-label='Clear search']
+    - Card link: a[href*='/authoring/COURSE_ID']
+    - Card container: ancestor::li[1]
+    - Card menu btn: button[aria-label='Content menu button']
+    - Menu items: [role='menuitem'] -> Duplicate, Move, Share, Delete, etc.
+    - Duplicate modal: [role='dialog'] input[type='text'] + button Duplicate/Cancel
+    - Move dialog: [role='tree'] con carpetas, boton "Move"
+  Course outline:
+    - Title: textarea (con input_value)
+    - "Edit Content": <a> links (NO <button>)
+    - Lesson container: div.course-outline-lesson
+    - Section header: div.course-outline-lesson--section
+  Lesson editor:
+    - Block containers: div[class*='block-wrapper']
+    - Block types from CSS: block-text, block-statement, block-flashcards,
+      block-image, block-divider, block-mondrian, block-list, block-quote
+    - Editable text: .tiptap.ProseMirror.rise-tiptap[contenteditable='true']
+    - Add block: button.block-create__button
+    - Block type label: block-controls__config inner text
+  Cookie popup: button.osano-cm-accept-all
+  Loading: "Your content is loading." (esperar hasta 90s)
 """
 
 import time
@@ -107,6 +120,42 @@ class RiseAutomation:
             except Exception:
                 pass
 
+    # ── Espera de carga de Rise 360 ────────────────────────────────────────
+
+    def _wait_for_content_loaded(self, max_wait: int = 90):
+        """
+        Espera a que Rise 360 termine de cargar el contenido.
+        Rise muestra "Your content is loading." con un spinner que puede tardar 15-20s.
+        """
+        logger.debug("Esperando carga del contenido...")
+        start = time.time()
+        while time.time() - start < max_wait:
+            try:
+                loading = self.page.locator("text='Your content is loading'")
+                if loading.is_visible(timeout=500):
+                    elapsed = int(time.time() - start)
+                    if elapsed % 10 == 0 and elapsed > 0:
+                        logger.debug(f"  Aún cargando... ({elapsed}s)")
+                    time.sleep(1)
+                    continue
+            except Exception:
+                pass
+
+            # Check if real content appeared
+            try:
+                btns = self.page.locator("button:visible")
+                if btns.count() > 3:
+                    elapsed = int(time.time() - start)
+                    logger.debug(f"Contenido cargado en {elapsed}s")
+                    time.sleep(2)
+                    return True
+            except Exception:
+                pass
+            time.sleep(1)
+
+        logger.warning(f"Timeout esperando carga ({max_wait}s)")
+        return False
+
     # ── Login ─────────────────────────────────────────────────────────────
 
     @with_retry(max_attempts=3)
@@ -160,10 +209,10 @@ class RiseAutomation:
         time.sleep(2)
 
     def navigate_to_course_outline(self, course_url: str):
-        """Navega al outline de un curso."""
+        """Navega al outline de un curso y espera carga completa."""
         logger.info(f"Navegando al curso: {course_url}")
         self.page.goto(course_url, wait_until="domcontentloaded")
-        time.sleep(6)
+        self._wait_for_content_loaded(max_wait=90)
         self.dismiss_cookies()
         time.sleep(2)
         take_screenshot(self.page, label="course_outline")
@@ -179,6 +228,16 @@ class RiseAutomation:
         search.fill(query)
         time.sleep(4)
         logger.debug(f"Busqueda realizada: '{query}'")
+
+    def _search_short(self, title: str):
+        """
+        Busca un curso usando solo las primeras 3-4 palabras del título.
+        Rise 360's search works best with partial queries.
+        """
+        words = title.split()
+        short_query = " ".join(words[:4]) if len(words) > 4 else title
+        self._search_in_dashboard(short_query)
+        logger.debug(f"Busqueda corta: '{short_query}' (original: '{title[:50]}')")
 
     def _clear_search(self):
         """Limpia el campo de busqueda."""
@@ -249,7 +308,7 @@ class RiseAutomation:
         1. Dashboard -> Buscar "PLANTILLA"
         2. Hover tarjeta -> Content menu button -> Duplicate
         3. Modal: llenar nombre -> click Duplicate
-        4. Buscar nuevo curso -> Menu -> Move -> Automatización
+        4. Buscar nuevo curso (primeras 3-4 palabras) -> Menu -> Move -> Automatización
         5. Abrir el curso duplicado
 
         IMPORTANTE: El template NUNCA se edita directamente.
@@ -286,20 +345,20 @@ class RiseAutomation:
         # 5. Modal "Duplicate Course"
         self._fill_duplicate_modal(new_title)
         logger.info("Esperando creacion del duplicado...")
-        time.sleep(8)
+        time.sleep(10)
         take_screenshot(self.page, label="after_duplicate")
 
-        # 6. Cerrar overlays y buscar el nuevo curso
+        # 6. Cerrar overlays y buscar el nuevo curso (primeras 3-4 palabras)
         self.page.keyboard.press("Escape")
         time.sleep(1)
         self._clear_search()
-        self._search_in_dashboard(new_title)
+        self._search_short(new_title)
 
         new_link = self.page.locator("a[href*='/authoring/']").first
         try:
-            new_link.wait_for(state="visible", timeout=8_000)
+            new_link.wait_for(state="visible", timeout=10_000)
         except Exception:
-            raise RuntimeError(f"No se encontro el curso duplicado: '{new_title}'")
+            raise RuntimeError(f"No se encontro el curso duplicado buscando: '{new_title[:40]}'")
 
         new_course_url = new_link.get_attribute("href") or ""
         new_course_id = self._extract_course_id(new_course_url)
@@ -308,12 +367,12 @@ class RiseAutomation:
         # 7. Mover a carpeta "Automatización"
         self._move_course_to_folder(new_course_id or "")
 
-        # 8. Abrir el curso duplicado
+        # 8. Abrir el curso duplicado y esperar carga completa
         if new_course_url and not new_course_url.startswith("http"):
             new_course_url = f"https://rise.articulate.com{new_course_url}"
 
         self.page.goto(new_course_url, wait_until="domcontentloaded")
-        time.sleep(6)
+        self._wait_for_content_loaded(max_wait=90)
         self.dismiss_cookies()
         time.sleep(2)
 
@@ -436,48 +495,301 @@ class RiseAutomation:
         self.page.keyboard.press("Escape")
         time.sleep(1)
 
-    # ── Navegación en el Course Outline ──────────────────────────────────
+    # ── Análisis de estructura de plantilla ──────────────────────────────
 
-    def get_lessons_in_outline(self) -> list[dict]:
-        """Retorna la lista de lecciones en el outline del curso."""
+    def analyze_template_structure(self, template_url: str) -> dict:
+        """
+        Entra al template, espera a que cargue completamente, y cataloga
+        la estructura: lecciones y bloques dentro de cada lección.
+
+        Usa selectores confirmados:
+        - "Edit Content" = <a> links (NO button)
+        - Block containers = div[class*='block-wrapper']
+        - Block type = extraído del CSS class (block-text, block-statement, etc.)
+        """
+        self._progress("Analizando estructura de la plantilla...", 38)
+        logger.info(f"Analizando plantilla: {template_url}")
+
+        # Navegar y esperar carga completa (puede tardar ~17s)
+        self.page.goto(template_url, wait_until="domcontentloaded")
+        self._wait_for_content_loaded(max_wait=90)
+        self.dismiss_cookies()
+        time.sleep(2)
+        take_screenshot(self.page, label="template_outline_loaded")
+
+        # Obtener título del curso
+        course_title = self._get_course_title_from_page()
+        logger.info(f"Título de la plantilla: '{course_title}'")
+
+        # Obtener lecciones del outline (usando <a> links)
+        lessons_data = self._get_outline_lessons_info()
+        logger.info(f"Lecciones encontradas en plantilla: {len(lessons_data)}")
+
+        # Para cada lección, abrir el editor y catalogar bloques
+        analyzed_lessons = []
+        for i, lesson_info in enumerate(lessons_data):
+            self._progress(
+                f"Analizando lección {i+1}/{len(lessons_data)}: {lesson_info.get('title', '')[:40]}",
+                38 + int(7 * (i / max(len(lessons_data), 1)))
+            )
+
+            if self.open_lesson_editor(i):
+                blocks = self._catalog_blocks_in_editor()
+                logger.info(f"  Lección {i}: '{lesson_info.get('title', '')}' -> {len(blocks)} bloques")
+
+                analyzed_lessons.append({
+                    "index": i,
+                    "title": lesson_info.get("title", f"Lección {i+1}"),
+                    "blocks": blocks,
+                })
+
+                self.go_back_to_outline()
+                time.sleep(2)
+            else:
+                logger.warning(f"No se pudo abrir lección {i} para análisis")
+                analyzed_lessons.append({
+                    "index": i,
+                    "title": lesson_info.get("title", f"Lección {i+1}"),
+                    "blocks": [],
+                })
+
+        template_structure = {
+            "url": template_url,
+            "title": course_title,
+            "lessons": analyzed_lessons,
+        }
+
+        logger.info(
+            f"Análisis completo: {len(analyzed_lessons)} lecciones, "
+            f"{sum(len(l['blocks']) for l in analyzed_lessons)} bloques totales"
+        )
+        self._progress("Análisis de plantilla completado", 45)
+        return template_structure
+
+    def _get_course_title_from_page(self) -> str:
+        """Obtiene el título del curso desde la página de outline."""
+        try:
+            textarea = self.page.locator("textarea").first
+            if textarea.is_visible(timeout=3_000):
+                val = textarea.input_value()
+                if val and val.strip():
+                    return val.strip()
+        except Exception:
+            pass
+        return ""
+
+    def _get_outline_lessons_info(self) -> list[dict]:
+        """
+        Obtiene información de las lecciones en el outline.
+        CONFIRMADO: "Edit Content" es un <a> link, NO un <button>.
+        """
         lessons = []
-        edit_btns = self.page.locator("button:has-text('Edit Content')").all()
-        for i, btn in enumerate(edit_btns):
+        edit_links = self.page.locator("a:has-text('Edit Content')")
+        count = edit_links.count()
+        logger.info(f"Links 'Edit Content' encontrados: {count}")
+
+        for i in range(count):
             try:
-                parent = btn.locator(
-                    "xpath=ancestor::li[1] | ancestor::tr[1] | "
-                    "ancestor::div[contains(@class,'lesson')][1]"
+                link = edit_links.nth(i)
+                href = link.get_attribute("href") or ""
+                # Get lesson title from the parent outline-lesson container
+                parent = link.locator(
+                    "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
                 )
                 title = ""
                 if parent.count() > 0:
-                    title_el = parent.first.locator(
-                        "[class*='title'], [class*='name'], h2, h3, span"
-                    ).first
-                    try:
-                        title = title_el.inner_text()[:80].strip()
-                    except Exception:
-                        pass
-                lessons.append({"index": i, "title": title, "edit_button": btn})
+                    full_text = parent.first.inner_text()[:200].strip()
+                    # Extract title from format: "Lesson\nTema X: Nombre\nEdit Content"
+                    lines = [l.strip() for l in full_text.split("\n") if l.strip()]
+                    # The title is usually the line after "Lesson"
+                    for j, line in enumerate(lines):
+                        if line == "Lesson" and j + 1 < len(lines):
+                            title = lines[j + 1]
+                            break
+                    if not title and len(lines) > 1:
+                        title = lines[0] if lines[0] != "Edit Content" else ""
+                lessons.append({"index": i, "title": title, "href": href})
+                logger.debug(f"  Lección {i}: '{title}' -> {href}")
             except Exception:
-                lessons.append({"index": i, "title": f"Leccion {i+1}", "edit_button": btn})
+                lessons.append({"index": i, "title": f"Lección {i+1}", "href": ""})
+
+        return lessons
+
+    def _catalog_blocks_in_editor(self) -> list[dict]:
+        """
+        Dentro del editor de una lección, cataloga bloques usando
+        el selector confirmado: div[class*='block-wrapper'].
+
+        Cada bloque tiene un class pattern como:
+          block-text, block-statement, block-flashcards, block-image,
+          block-divider, block-mondrian, block-list, block-quote
+        """
+        blocks = []
+        wait_for_react_idle(self.page, timeout_ms=5_000)
+        time.sleep(2)
+
+        # Selector principal confirmado por debug
+        block_wrappers = self.page.locator("[class*='block-wrapper']")
+        count = block_wrappers.count()
+        logger.debug(f"  block-wrapper encontrados: {count}")
+
+        for i in range(count):
+            try:
+                el = block_wrappers.nth(i)
+                if not el.is_visible(timeout=500):
+                    continue
+                cls = el.get_attribute("class") or ""
+                text_preview = ""
+                try:
+                    text_preview = el.inner_text()[:150].strip().replace("\n", " | ")
+                except Exception:
+                    pass
+
+                # Extraer tipo de bloque del CSS class
+                block_type = self._extract_block_type_from_class(cls)
+
+                blocks.append({
+                    "type": block_type,
+                    "text_preview": text_preview,
+                    "index": i,
+                    "css_class": cls[:120],
+                })
+            except Exception:
+                pass
+
+        # Si no encontró block-wrappers, usar editables como fallback
+        if not blocks:
+            editables = self.page.locator("[contenteditable='true']")
+            count = editables.count()
+            logger.debug(f"  Fallback editables: {count}")
+            for i in range(count):
+                try:
+                    el = editables.nth(i)
+                    if el.is_visible(timeout=500):
+                        text_preview = el.inner_text()[:150].strip().replace("\n", " | ")
+                        blocks.append({
+                            "type": "text",
+                            "text_preview": text_preview,
+                            "index": i,
+                            "css_class": "contenteditable",
+                        })
+                except Exception:
+                    pass
+
+        take_screenshot(self.page, label="template_lesson_blocks")
+        return blocks
+
+    def _extract_block_type_from_class(self, css_class: str) -> str:
+        """
+        Extrae el tipo de bloque del CSS class.
+        Patrones confirmados: block-text, block-statement, block-flashcards,
+        block-image, block-divider, block-mondrian, block-list, block-quote
+        """
+        # Buscar pattern block-{type} al inicio de una clase
+        match = re.search(r'block-(\w+)', css_class)
+        if match:
+            raw = match.group(1)
+            # Normalizar nombres conocidos
+            if raw == "mondrian":
+                return "banner"
+            if raw.startswith("statement"):
+                return "statement"
+            if raw.startswith("flashcard"):
+                return "flashcards"
+            if raw.startswith("text"):
+                # Distinguir heading de paragraph
+                if "heading" in css_class:
+                    return "heading"
+                if "twocol" in css_class:
+                    return "text_twocol"
+                return "text"
+            if raw.startswith("image"):
+                return "image"
+            if raw.startswith("divider"):
+                if "spacing" in css_class:
+                    return "spacer"
+                return "divider"
+            if raw.startswith("list"):
+                if "numbered" in css_class:
+                    return "numbered_list"
+                return "bulleted_list"
+            if raw.startswith("quote"):
+                if "carousel" in css_class:
+                    return "quote_carousel"
+                return "quote"
+            return raw
+        return "unknown"
+
+    # ── Navegación en el Course Outline ──────────────────────────────────
+
+    def get_lessons_in_outline(self) -> list[dict]:
+        """
+        Retorna la lista de lecciones en el outline del curso.
+        CONFIRMADO: "Edit Content" es un <a> link, NO un <button>.
+        """
+        lessons = []
+        # Primero intentar con <a> (confirmado)
+        edit_links = self.page.locator("a:has-text('Edit Content')")
+        count = edit_links.count()
+
+        if count == 0:
+            # Fallback: intentar con <button> por si el DOM cambió
+            edit_links = self.page.locator("button:has-text('Edit Content')")
+            count = edit_links.count()
+
+        for i in range(count):
+            try:
+                link = edit_links.nth(i)
+                parent = link.locator(
+                    "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
+                )
+                title = ""
+                if parent.count() > 0:
+                    full_text = parent.first.inner_text()[:200].strip()
+                    lines = [l.strip() for l in full_text.split("\n") if l.strip()]
+                    for j, line in enumerate(lines):
+                        if line == "Lesson" and j + 1 < len(lines):
+                            title = lines[j + 1]
+                            break
+                    if not title and len(lines) > 1:
+                        title = lines[0] if lines[0] != "Edit Content" else ""
+                lessons.append({"index": i, "title": title, "edit_element": link})
+            except Exception:
+                lessons.append({"index": i, "title": f"Leccion {i+1}", "edit_element": None})
+
         logger.info(f"Lecciones encontradas: {len(lessons)}")
         return lessons
 
     def open_lesson_editor(self, lesson_index: int = 0) -> bool:
-        """Abre el editor de bloques de una leccion."""
+        """
+        Abre el editor de bloques de una lección.
+        CONFIRMADO: "Edit Content" es un <a> link, NO un <button>.
+        """
         try:
-            edit_btns = self.page.locator("button:has-text('Edit Content')")
-            count = edit_btns.count()
-            logger.info(f"Botones 'Edit Content': {count}")
+            # Intentar con <a> primero (confirmado)
+            edit_links = self.page.locator("a:has-text('Edit Content')")
+            count = edit_links.count()
+
+            if count == 0:
+                # Fallback <button>
+                edit_links = self.page.locator("button:has-text('Edit Content')")
+                count = edit_links.count()
+
+            logger.info(f"Links 'Edit Content': {count}")
             if count == 0:
                 take_screenshot(self.page, label="no_edit_content")
                 return False
-            target = edit_btns.nth(min(lesson_index, count - 1))
+
+            target = edit_links.nth(min(lesson_index, count - 1))
             target.scroll_into_view_if_needed()
             target.click()
-            time.sleep(4)
+            time.sleep(2)
+
+            # Esperar carga del editor de lección
+            self._wait_for_content_loaded(max_wait=30)
             self.dismiss_cookies()
             time.sleep(2)
+
             take_screenshot(self.page, label=f"lesson_editor_{lesson_index}")
             logger.info(f"Editor de leccion {lesson_index} abierto")
             return True
@@ -488,24 +800,28 @@ class RiseAutomation:
     def go_back_to_outline(self):
         """Vuelve al outline del curso desde el editor."""
         try:
+            # In Rise 360, the course title link in the header goes back to outline
             back_sels = [
+                "a.app-header__menu-btn",  # Confirmado: link del logo/título en el header
                 "[class*='back-button']",
                 "[aria-label*='back' i]",
                 "a[href*='authoring']:not([href*='lesson'])",
-                "button:has-text('Course')",
             ]
             for sel in back_sels:
                 try:
                     btn = self.page.locator(sel).first
                     if btn.is_visible(timeout=1_500):
                         btn.click()
-                        time.sleep(3)
+                        time.sleep(2)
+                        self._wait_for_content_loaded(max_wait=30)
                         self.dismiss_cookies()
                         return
                 except Exception:
                     pass
+            # Fallback: browser back
             self.page.go_back()
-            time.sleep(3)
+            time.sleep(2)
+            self._wait_for_content_loaded(max_wait=30)
         except Exception as e:
             logger.warning(f"Error volviendo al outline: {e}")
 
@@ -593,8 +909,8 @@ class RiseAutomation:
         """Edita el titulo del curso en el outline."""
         title_sels = [
             "textarea[placeholder='Course Title']",
+            "textarea",  # Confirmado: el outline tiene un textarea para el título
             ".authoring-lesson-header__title textarea",
-            "textarea[maxlength='100']",
             "h1[contenteditable='true']",
         ]
         for sel in title_sels:
@@ -612,16 +928,16 @@ class RiseAutomation:
         return False
 
     def add_block(self, block_type: str) -> bool:
-        """Agrega un bloque en el editor de leccion activo."""
+        """
+        Agrega un bloque en el editor de leccion activo.
+        CONFIRMADO: El botón "+" es button.block-create__button
+        """
         logger.debug(f"Intentando agregar bloque: {block_type}")
         add_btns = [
+            "button.block-create__button",  # Confirmado por debug
+            "button[class*='block-create']",
             "button[aria-label*='Add block' i]",
             "button[aria-label*='Insert block' i]",
-            "button[class*='add-block']",
-            "button[class*='insert-block']",
-            "[data-testid*='add-block']",
-            "button:has-text('Add a block')",
-            "button:has-text('+')",
         ]
         for sel in add_btns:
             try:
@@ -641,17 +957,37 @@ class RiseAutomation:
         return False
 
     def _get_block_menu_label(self, block_type: str) -> str:
-        import json
-        try:
-            with open(config.LEARNING_MAP_PATH, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            return data.get("block_menu_labels", {}).get(
-                block_type, block_type.replace("_", " ").title()
-            )
-        except Exception:
-            return block_type.replace("_", " ").title()
+        """Mapea tipos internos a labels del menú de Rise 360."""
+        # Mapeo directo confirmado por debug (del menú Block Library)
+        BLOCK_LABELS = {
+            "text": "Text",
+            "paragraph": "Text",
+            "heading": "Text",
+            "text_twocol": "Text",
+            "list": "List",
+            "bulleted_list": "List",
+            "numbered_list": "List",
+            "image": "Image",
+            "video": "Video",
+            "flashcards": "Flashcards",
+            "statement": "Statement",
+            "quote": "Quote",
+            "quote_carousel": "Quote",
+            "divider": "Spacer",
+            "spacer": "Spacer",
+            "banner": "Image",
+            "section_banner": "Text",
+            "table": "Text",
+            "continue": "Continue",
+            "process": "Process",
+            "sorting": "Sorting",
+        }
+        return BLOCK_LABELS.get(block_type, block_type.replace("_", " ").title())
 
     def _select_block_type_from_menu(self, label: str) -> bool:
+        """Selecciona un tipo de bloque del menú desplegable."""
+        # El menú muestra: AI Block, AI Image, AI Audio, Text, List, Image, Video,
+        # Process, Flashcards, Sorting, Continue, Block Library
         for role in ["option", "menuitem", "listitem"]:
             try:
                 item = self.page.get_by_role(role, name=re.compile(label, re.IGNORECASE))
@@ -661,7 +997,7 @@ class RiseAutomation:
             except Exception:
                 pass
         try:
-            item = self.page.get_by_text(re.compile(label, re.IGNORECASE)).first
+            item = self.page.get_by_text(re.compile(f"^{label}$", re.IGNORECASE)).first
             if item.is_visible(timeout=1_500):
                 item.click()
                 return True
