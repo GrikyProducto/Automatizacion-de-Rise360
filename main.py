@@ -516,25 +516,41 @@ class RiseAutomatorApp(tk.Tk):
         Extrae el nombre del curso desde la etiqueta COURSE_SUBTITLE del PDF.
         Busca el bloque con texto "COURSE_SUBTITLE" (font_size 6.5, etiqueta)
         y concatena los bloques siguientes que contienen el subtítulo real.
+
+        Limpia el título: corta en el primer separador (: — ;) para evitar
+        títulos largos con subtítulos. Máximo 80 chars.
         """
+        raw_title = ""
         for section in content.get("sections", []):
             blocks = section.get("blocks", [])
             for i, block in enumerate(blocks):
                 if block.get("text", "").strip() == "COURSE_SUBTITLE":
-                    # Los bloques siguientes (font_size > 6.5) son el subtítulo real
                     subtitle_parts = []
                     for next_block in blocks[i + 1:]:
                         next_text = next_block.get("text", "").strip()
                         next_size = next_block.get("font_size", 0)
-                        # Si es otra etiqueta (font_size ~6.5) dejar de acumular
                         if next_size <= 7 and next_text.isupper() and "_" in next_text:
                             break
                         if next_text:
                             subtitle_parts.append(next_text)
                     if subtitle_parts:
-                        return " ".join(subtitle_parts)
-        # Fallback: usar el título del documento
-        return content.get("title", "Curso Rise 360")
+                        raw_title = " ".join(subtitle_parts)
+                        break
+
+        if not raw_title:
+            raw_title = content.get("title", "Curso Rise 360")
+
+        # Clean: cut at first separator to get just the main title
+        for sep in [":", " - ", " — ", " – ", "; "]:
+            if sep in raw_title:
+                raw_title = raw_title.split(sep)[0].strip()
+                break
+
+        # Max 80 chars, cut at word boundary
+        if len(raw_title) > 80:
+            raw_title = raw_title[:77].rsplit(" ", 1)[0]
+
+        return raw_title
 
     # ── Comunicación thread → UI ──────────────────────────────────────────
 

@@ -1,0 +1,3822 @@
+{
+  "test": "lesson_creation",
+  "baseline": {
+    "contenteditable": {
+      "count": 1,
+      "visible": 1,
+      "items": [
+        {
+          "tag": "DIV",
+          "class": "tiptap ProseMirror rise-tiptap",
+          "role": "textbox",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        }
+      ]
+    },
+    "modals": {
+      "count": 4,
+      "visible": 0,
+      "items": []
+    },
+    "panels": {
+      "count": 2,
+      "visible": 2,
+      "items": [
+        {
+          "tag": "DIV",
+          "class": "ui-side-panel course-sidebar",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "ui-side-panel--scrollable",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        }
+      ]
+    },
+    "inputs": {
+      "count": 2,
+      "visible": 2,
+      "items": [
+        {
+          "tag": "TEXTAREA",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "",
+          "value": "Gestión de la Cadena de Suministro en Entornos Competitivos: enfoque sistémico, flujos clave y estra"
+        },
+        {
+          "tag": "INPUT",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "text",
+          "value": ""
+        }
+      ]
+    },
+    "buttons_visible": {
+      "count": 21,
+      "visible": 20,
+      "items": [
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "Snapshots",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "Collaborate",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "Review",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "app-header__publish-button",
+          "role": "",
+          "aria_label": "",
+          "text": "Publish",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "AI Assistant",
+          "text": "AI Assistant",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "",
+          "role": "",
+          "aria_label": "",
+          "text": "Preview",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__delete",
+          "role": "",
+          "aria_label": "Remove section",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "menu__trigger menu__trigger--dots",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "menu__trigger menu__trigger--dots",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "menu__trigger menu__trigger--dots",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "menu__trigger menu__trigger--dots",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        }
+      ]
+    },
+    "menus": {
+      "count": 27,
+      "visible": 0,
+      "items": []
+    },
+    "flashcard_elements": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "block_wrappers": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "block_create": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "outline_lessons": {
+      "count": 91,
+      "visible": 17,
+      "items": [
+        {
+          "tag": "DIV",
+          "class": "course-outline",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN | Lesson | Tema 1: Nombre del tema | Edit Content | Lesson | Tema 2: Nombre del tema | Edit Content | L",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline__wrapper",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN | Lesson | Tema 1: Nombre del tema | Edit Content | Lesson | Tema 2: Nombre del tema | Edit Content | L",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson course-outline-lesson--section",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__add-above",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__add-above-whitespace",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "SPAN",
+          "class": "course-outline-lesson__add-above-button-icon",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__wrapper",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__title",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__title-entry",
+          "role": "",
+          "aria_label": "",
+          "text": "ACTIVACIÓN",
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__delete",
+          "role": "",
+          "aria_label": "Remove section",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson",
+          "role": "",
+          "aria_label": "",
+          "text": "Lesson | Tema 1: Nombre del tema | Edit Content",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__add-above",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__add-above-whitespace",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "SPAN",
+          "class": "course-outline-lesson__add-above-button-icon",
+          "role": "",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-outline-lesson__wrapper course-outline-lesson__wrapper--draggable",
+          "role": "",
+          "aria_label": "",
+          "text": "Lesson | Tema 1: Nombre del tema | Edit Content",
+          "type": ""
+        }
+      ]
+    },
+    "add_buttons": {
+      "count": 6,
+      "visible": 6,
+      "items": [
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "tag": "BUTTON",
+          "class": "course-outline-lesson__add-above-button",
+          "role": "",
+          "aria_label": "Insert new lesson",
+          "text": "",
+          "type": "button"
+        }
+      ]
+    },
+    "kebab_menus": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "settings_panels": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "tiptap_editors": {
+      "count": 1,
+      "visible": 1,
+      "items": [
+        {
+          "tag": "DIV",
+          "class": "tiptap ProseMirror rise-tiptap",
+          "role": "textbox",
+          "aria_label": "",
+          "text": "",
+          "type": ""
+        }
+      ]
+    },
+    "tabs": {
+      "count": 0,
+      "visible": 0,
+      "items": []
+    },
+    "popover": {
+      "count": 14,
+      "visible": 3,
+      "items": [
+        {
+          "tag": "DIV",
+          "class": "app-header__title-dropdowns",
+          "role": "",
+          "aria_label": "",
+          "text": "Gestión de la Cadena de Suministro en Entornos Competitivos: enfoque sistémico, flujos clave y estra",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "app-header__dropdowns",
+          "role": "",
+          "aria_label": "",
+          "text": "Snapshots",
+          "type": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "course-snapshots-dropdown",
+          "role": "",
+          "aria_label": "",
+          "text": "Snapshots",
+          "type": ""
+        }
+      ]
+    }
+  },
+  "captures": [
+    {
+      "capture": 1,
+      "timestamp": "18:48:15",
+      "changes": {
+        "outline_lessons": {
+          "before": "17/91",
+          "after": "0/0",
+          "delta_count": -91,
+          "delta_visible": -17
+        },
+        "settings_panels": {
+          "before": "0/0",
+          "after": "20/26",
+          "delta_count": 26,
+          "delta_visible": 20,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Flashcard grid",
+              "type": ""
+            }
+          ]
+        },
+        "block_wrappers": {
+          "before": "0/0",
+          "after": "20/26",
+          "delta_count": 26,
+          "delta_visible": 20,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "block-mondrian bg--legacy-background block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--b block-statement--b-custom-width-med block-statement--b-divider-off block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--note block-statement--note-custom-width-med block-statement--note-size-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            }
+          ]
+        },
+        "buttons_visible": {
+          "before": "20/21",
+          "after": "20/252",
+          "delta_count": 231,
+          "delta_visible": 0
+        },
+        "tiptap_editors": {
+          "before": "1/1",
+          "after": "20/45",
+          "delta_count": 44,
+          "delta_visible": 19,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "FRASE",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "FRONT CARD",
+              "type": ""
+            }
+          ]
+        },
+        "popover": {
+          "before": "3/14",
+          "after": "3/754",
+          "delta_count": 740,
+          "delta_visible": 0
+        },
+        "flashcard_elements": {
+          "before": "0/0",
+          "after": "18/47",
+          "delta_count": 47,
+          "delta_visible": 18,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "OL",
+              "class": "block-flashcards__wrapper",
+              "role": "list",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "LI",
+              "class": "flashcard flashcard--small",
+              "role": "listitem",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--front  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Anverso de la tarjeta",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small flashcard-side__content--front",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            }
+          ]
+        },
+        "menus": {
+          "before": "0/27",
+          "after": "20/27",
+          "delta_count": 0,
+          "delta_visible": 20,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Flashcard grid",
+              "type": ""
+            }
+          ]
+        },
+        "inputs": {
+          "before": "2/2",
+          "after": "3/3",
+          "delta_count": 1,
+          "delta_visible": 1
+        },
+        "block_create": {
+          "before": "0/0",
+          "after": "20/52",
+          "delta_count": 52,
+          "delta_visible": 20,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button block-create__button--first",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            }
+          ]
+        },
+        "add_buttons": {
+          "before": "6/6",
+          "after": "1/1",
+          "delta_count": -5,
+          "delta_visible": -5
+        },
+        "panels": {
+          "before": "2/2",
+          "after": "9/10",
+          "delta_count": 8,
+          "delta_visible": 7,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__container blocks-sidebar__container--library",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__header",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "H2",
+              "class": "blocks-sidebar__heading",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            }
+          ]
+        }
+      },
+      "full_snapshot": {
+        "contenteditable": {
+          "count": 1,
+          "visible": 1,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            }
+          ]
+        },
+        "modals": {
+          "count": 4,
+          "visible": 0,
+          "items": []
+        },
+        "panels": {
+          "count": 10,
+          "visible": 9,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "ui-side-panel course-sidebar",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "ui-side-panel--scrollable",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "secondary-sidebar",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "secondary-sidebar__container",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__container blocks-sidebar__container--library",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__header",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "H2",
+              "class": "blocks-sidebar__heading",
+              "role": "",
+              "aria_label": "",
+              "text": "Block Library",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__close",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            }
+          ]
+        },
+        "inputs": {
+          "count": 3,
+          "visible": 3,
+          "items": [
+            {
+              "tag": "TEXTAREA",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "",
+              "value": "Tema 1: Nombre del tema"
+            },
+            {
+              "tag": "INPUT",
+              "class": "blocks-accordion__title",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "text",
+              "value": "Lorem ipsum dolor sit amet"
+            },
+            {
+              "tag": "INPUT",
+              "class": "blocks-accordion__title",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "text",
+              "value": "Lorem ipsum dolor sit amet"
+            }
+          ]
+        },
+        "buttons_visible": {
+          "count": 252,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "Tema 1: Nombre del tema",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "AI Assistant",
+              "text": "AI Assistant",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "Preview",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button block-create__button--first",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-content",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-format",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-down",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-duplicate",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-remove",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-content",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-format",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-up",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-down",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-duplicate",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            }
+          ]
+        },
+        "menus": {
+          "count": 27,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Subheading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Numbered list",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Image & text",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Quote carousel",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Note",
+              "type": ""
+            }
+          ]
+        },
+        "flashcard_elements": {
+          "count": 47,
+          "visible": 18,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "OL",
+              "class": "block-flashcards__wrapper",
+              "role": "list",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "LI",
+              "class": "flashcard flashcard--small",
+              "role": "listitem",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--front  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Anverso de la tarjeta",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small flashcard-side__content--front",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip flashcard-side-flip--audio-expansion",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "flashcard-side-flip__btn flashcard-side-flip__btn--prefers-keyboard flashcard-side-flip__btn--round",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip__tooltip",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__description flashcard-side__description--short",
+              "role": "",
+              "aria_label": "",
+              "text": "Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--back  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Reverso de la tarjeta",
+              "text": "Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip flashcard-side-flip--audio-expansion",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "flashcard-side-flip__btn flashcard-side-flip__btn--prefers-keyboard flashcard-side-flip__btn--round",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip__tooltip",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__description flashcard-side__description--long",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "LI",
+              "class": "flashcard flashcard--small",
+              "role": "listitem",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--front  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Anverso de la tarjeta",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small flashcard-side__content--front",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo",
+              "type": ""
+            }
+          ]
+        },
+        "block_wrappers": {
+          "count": 26,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-mondrian bg--legacy-background block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--b block-statement--b-custom-width-med block-statement--b-divider-off block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--note block-statement--note-custom-width-med block-statement--note-size-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | Subtítulo |  | Haz clic para voltear |  | Lorem ipsum dolor sit amet, consectetur adi",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-med block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-mondrian block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.4. Caso práctico: la cadena de suministro de Cencosud",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.6. En la práctica: sostenibilidad y digitalización",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-list block-list--numbered block-list--numbered-custom-width-med block-list--numbered-bullet-padding-med block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1 |  | Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, ope",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-med block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-image block-image--text-aside block-image--small block-image--reverse block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-quote block-quote--carousel block-quote--carousel-custom-width-lg block-quote--carousel-quote-padding-sm block-quote--carousel-avatar-size-med block-wrapper bg bg--card-white bg--range-light bg-",
+              "role": "",
+              "aria_label": "",
+              "text": "1 de 3 |  | Definición de la cadena de suministros |  | Según lo citado por (Pacheco, 2024) la cadena de sum",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--note block-statement--note-custom-width-med block-statement--note-size-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas,",
+              "type": ""
+            }
+          ]
+        },
+        "block_create": {
+          "count": 52,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button block-create__button--first",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            }
+          ]
+        },
+        "outline_lessons": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "add_buttons": {
+          "count": 1,
+          "visible": 1,
+          "items": [
+            {
+              "tag": "BUTTON",
+              "class": "button button--outline",
+              "role": "",
+              "aria_label": "",
+              "text": "ADD",
+              "type": "button"
+            }
+          ]
+        },
+        "kebab_menus": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "settings_panels": {
+          "count": 26,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Subheading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Numbered list",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Image & text",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Quote carousel",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Note",
+              "type": ""
+            }
+          ]
+        },
+        "tiptap_editors": {
+          "count": 45,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "FRASE",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "FRONT CARD",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "Our Mission",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.4. Caso práctico: la cadena de suministro de Cencosud",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.6. En la práctica: sostenibilidad y digitalización",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, operad",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "De hecho, autores como Chopra y Meindl, Ballou, Heizer, Render, Chase, Jacobs y Aquilano coinciden e",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "una geografía extensa y segmentada que impone retos logísticos de cobertura; una economía abierta y",
+              "type": ""
+            }
+          ]
+        },
+        "tabs": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "popover": {
+          "count": 754,
+          "visible": 3,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "app-header__title-dropdowns",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI ES EL NOMBRE DEL TEMA",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "lesson-author-dropdown__author",
+              "role": "",
+              "aria_label": "",
+              "text": "Author Hidden",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "capture": 2,
+      "timestamp": "18:48:52",
+      "changes": {
+        "contenteditable": {
+          "before": "1/1",
+          "after": "8/8",
+          "delta_count": 7,
+          "delta_visible": 7,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            }
+          ]
+        },
+        "buttons_visible": {
+          "before": "20/252",
+          "after": "20/268",
+          "delta_count": 16,
+          "delta_visible": 0
+        },
+        "tiptap_editors": {
+          "before": "20/45",
+          "after": "20/39",
+          "delta_count": -6,
+          "delta_visible": 0
+        },
+        "menus": {
+          "before": "20/27",
+          "after": "20/33",
+          "delta_count": 6,
+          "delta_visible": 0
+        },
+        "modals": {
+          "before": "0/4",
+          "after": "6/13",
+          "delta_count": 9,
+          "delta_visible": 6,
+          "new_items": [
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            }
+          ]
+        },
+        "add_buttons": {
+          "before": "1/1",
+          "after": "0/0",
+          "delta_count": -1,
+          "delta_visible": -1
+        },
+        "panels": {
+          "before": "9/10",
+          "after": "10/10",
+          "delta_count": 0,
+          "delta_visible": 1,
+          "new_items": [
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar blocks-sidebar--open",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid | Card 1 Front | Text |  | FRONT CARD |  | Audio | Record or upload audio, or create AI audio.",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__container blocks-sidebar__container--edit",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid | Card 1 Front | Text |  | FRONT CARD |  | Audio | Record or upload audio, or create AI audio.",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__header",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "H2",
+              "class": "blocks-sidebar__heading",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid",
+              "type": ""
+            }
+          ]
+        }
+      },
+      "full_snapshot": {
+        "contenteditable": {
+          "count": 8,
+          "visible": 8,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.4. Caso práctico: la cadena de suministro de Cencosud",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.6. En la práctica: sostenibilidad y digitalización",
+              "type": ""
+            }
+          ]
+        },
+        "modals": {
+          "count": 13,
+          "visible": 6,
+          "items": [
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-audio-manager__modal-trigger block-audio-manager__modal-trigger--iconSize-medium",
+              "role": "",
+              "aria_label": "Open audio modal",
+              "text": "",
+              "type": "button"
+            }
+          ]
+        },
+        "panels": {
+          "count": 10,
+          "visible": 10,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "ui-side-panel course-sidebar",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "ui-side-panel--scrollable",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "secondary-sidebar secondary-sidebar--open",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "secondary-sidebar__container",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar blocks-sidebar--open",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid | Card 1 Front | Text |  | FRONT CARD |  | Audio | Record or upload audio, or create AI audio.",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__container blocks-sidebar__container--edit",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid | Card 1 Front | Text |  | FRONT CARD |  | Audio | Record or upload audio, or create AI audio.",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__header",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "H2",
+              "class": "blocks-sidebar__heading",
+              "role": "",
+              "aria_label": "",
+              "text": "Edit Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__close",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "blocks-sidebar__overlay blocks-sidebar__overlay--active",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            }
+          ]
+        },
+        "inputs": {
+          "count": 3,
+          "visible": 3,
+          "items": [
+            {
+              "tag": "TEXTAREA",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "",
+              "value": "AQUI ES EL NOMBRE DEL TEMA"
+            },
+            {
+              "tag": "INPUT",
+              "class": "blocks-accordion__title",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "text",
+              "value": "Lorem ipsum dolor sit amet"
+            },
+            {
+              "tag": "INPUT",
+              "class": "blocks-accordion__title",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "text",
+              "value": "Lorem ipsum dolor sit amet"
+            }
+          ]
+        },
+        "buttons_visible": {
+          "count": 268,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI ES EL NOMBRE DEL TEMA",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "AI Assistant",
+              "text": "AI Assistant",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "",
+              "role": "",
+              "aria_label": "",
+              "text": "Preview",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button block-create__button--first",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-content",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-format",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-down",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-duplicate",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-remove",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-content",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-format",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-style",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-up",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-move-down",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-controls__btn-icon block-controls__btn-icon--type-duplicate",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            }
+          ]
+        },
+        "menus": {
+          "count": 33,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Subheading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Numbered list",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Image & text",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Quote carousel",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Note",
+              "type": ""
+            }
+          ]
+        },
+        "flashcard_elements": {
+          "count": 47,
+          "visible": 18,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | FRONT CARD |  | Haz clic para voltear |  | AQUI HAY UN TEXTO |  | Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "OL",
+              "class": "block-flashcards__wrapper",
+              "role": "list",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | FRONT CARD |  | Haz clic para voltear |  | AQUI HAY UN TEXTO |  | Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "LI",
+              "class": "flashcard flashcard--small",
+              "role": "listitem",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | FRONT CARD |  | Haz clic para voltear |  | AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--front  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Anverso de la tarjeta",
+              "text": "Haz clic para voltear |  | FRONT CARD",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small flashcard-side__content--front",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | FRONT CARD",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip flashcard-side-flip--audio-expansion",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "flashcard-side-flip__btn flashcard-side-flip__btn--prefers-keyboard flashcard-side-flip__btn--round",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip__tooltip",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__description flashcard-side__description--short",
+              "role": "",
+              "aria_label": "",
+              "text": "FRONT CARD",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--back  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Reverso de la tarjeta",
+              "text": "Haz clic para voltear |  | AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip flashcard-side-flip--audio-expansion",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "flashcard-side-flip__btn flashcard-side-flip__btn--prefers-keyboard flashcard-side-flip__btn--round",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side-flip__tooltip",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__description flashcard-side__description--short",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "LI",
+              "class": "flashcard flashcard--small",
+              "role": "listitem",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | SEGUNDO FRONT |  | Haz clic para voltear |  | AQUI HAY OTRO TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side flashcard-side--front  block-card bg--range-light block-card--white",
+              "role": "group",
+              "aria_label": "Anverso de la tarjeta",
+              "text": "Haz clic para voltear |  | SEGUNDO FRONT",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "flashcard-side__content flashcard-side__content--small flashcard-side__content--front",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | SEGUNDO FRONT",
+              "type": ""
+            }
+          ]
+        },
+        "block_wrappers": {
+          "count": 26,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-mondrian bg--legacy-background block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--b block-statement--b-custom-width-med block-statement--b-divider-off block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--note block-statement--note-custom-width-med block-statement--note-size-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-flashcards block-flashcard--column block-wrapper bg bg--card-white bg--range-light bg--type-image",
+              "role": "",
+              "aria_label": "",
+              "text": "Haz clic para voltear |  | FRONT CARD |  | Haz clic para voltear |  | AQUI HAY UN TEXTO |  | Haz clic para voltear",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-med block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-mondrian block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.4. Caso práctico: la cadena de suministro de Cencosud",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1.6. En la práctica: sostenibilidad y digitalización",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-list block-list--numbered block-list--numbered-custom-width-med block-list--numbered-bullet-padding-med block-wrapper bg bg--range-dark bg--type-accent bg--contrast-light",
+              "role": "",
+              "aria_label": "",
+              "text": "1 |  | Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, ope",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-divider block-divider--authoring block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--heading-custom-width block-text--heading-custom-width-text-med block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-text block-text--onecol-custom-width block-text--onecol-custom-width-text-lg block-text--heading-custom-text-padding-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-image block-image--text-aside block-image--small block-image--reverse block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estra",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-quote block-quote--carousel block-quote--carousel-custom-width-lg block-quote--carousel-quote-padding-sm block-quote--carousel-avatar-size-med block-wrapper bg bg--card-white bg--range-light bg-",
+              "role": "",
+              "aria_label": "",
+              "text": "1 de 3 |  | Definición de la cadena de suministros |  | Según lo citado por (Pacheco, 2024) la cadena de sum",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-statement block-statement--note block-statement--note-custom-width-med block-statement--note-size-sm block-wrapper bg bg--range-light bg--type-light",
+              "role": "",
+              "aria_label": "",
+              "text": "Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas,",
+              "type": ""
+            }
+          ]
+        },
+        "block_create": {
+          "count": 52,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button block-create__button--first",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            },
+            {
+              "tag": "DIV",
+              "class": "block-create",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": ""
+            },
+            {
+              "tag": "BUTTON",
+              "class": "block-create__button",
+              "role": "",
+              "aria_label": "",
+              "text": "+",
+              "type": "button"
+            }
+          ]
+        },
+        "outline_lessons": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "add_buttons": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "kebab_menus": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "settings_panels": {
+          "count": 26,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Statement B",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Note",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Flashcard grid",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Custom Block",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Subheading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Numbered list",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Divider",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Heading",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Paragraph",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Image & text",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Quote carousel",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "block-controls__config",
+              "role": "",
+              "aria_label": "",
+              "text": "Note",
+              "type": ""
+            }
+          ]
+        },
+        "tiptap_editors": {
+          "count": 39,
+          "visible": 20,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "FRASE",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En el entorno competitivo actual, marcado por la globalización, la transformación digital y el compo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.1. Concepto general",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Ch",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "FRONT CARD",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI HAY UN TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "SEGUNDO FRONT",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI HAY OTRO TEXTO",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Subtítulo",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.2. Evolución y alcance",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.3. Flujos en la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "Our Mission",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror content",
+              "role": "",
+              "aria_label": "",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate arcu nec risus condimentum,",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.4. Caso práctico: la cadena de suministro de Cencosud",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.5. Ejemplo visual: mapa conceptual de la cadena de suministro",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "tiptap ProseMirror rise-tiptap",
+              "role": "textbox",
+              "aria_label": "",
+              "text": "1.6. En la práctica: sostenibilidad y digitalización",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, operad",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "De hecho, autores como Chopra y Meindl, Ballou, Heizer, Render, Chase, Jacobs y Aquilano coinciden e",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "fr-view rise-tiptap",
+              "role": "",
+              "aria_label": "",
+              "text": "una geografía extensa y segmentada que impone retos logísticos de cobertura; una economía abierta y",
+              "type": ""
+            }
+          ]
+        },
+        "tabs": {
+          "count": 0,
+          "visible": 0,
+          "items": []
+        },
+        "popover": {
+          "count": 754,
+          "visible": 3,
+          "items": [
+            {
+              "tag": "DIV",
+              "class": "app-header__title-dropdowns",
+              "role": "",
+              "aria_label": "",
+              "text": "AQUI ES EL NOMBRE DEL TEMA",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "lesson-author-dropdown__author",
+              "role": "",
+              "aria_label": "",
+              "text": "Author Hidden",
+              "type": ""
+            },
+            {
+              "tag": "DIV",
+              "class": "preview-dropdown-button skip-dropdown",
+              "role": "menu",
+              "aria_label": "Preview Dropdown",
+              "text": "Custom Block",
+              "type": ""
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "total_captures": 2
+}
