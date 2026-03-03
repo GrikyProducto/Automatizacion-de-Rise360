@@ -400,21 +400,25 @@ class ContentBuilder:
 
         progress_per = 30 / max(len(lesson_map), 1)
 
+        # PASS 1: Rename ALL lessons first (while on the outline)
+        self._progress("Renombrando lecciones...", 63)
+        for lesson_idx, topic_data in lesson_map.items():
+            title = topic_data.get("title", "")
+            if title:
+                self.rise.rename_lesson(lesson_idx, title)
+                time.sleep(0.5)
+        logger.info("Todas las lecciones renombradas")
+
+        # PASS 2: Edit content per lesson
         for lesson_idx, topic_data in lesson_map.items():
             pct = int(
-                62 + list(lesson_map.keys()).index(lesson_idx) * progress_per
+                65 + list(lesson_map.keys()).index(lesson_idx) * progress_per
             )
             self._progress(
                 f"Lección {lesson_idx + 1}/{total_lessons}: "
                 f"{topic_data['title'][:40]}...",
                 pct,
             )
-
-            # Rename lesson in outline
-            title = topic_data.get("title", "")
-            if title:
-                self.rise.rename_lesson(lesson_idx, title)
-                time.sleep(1)
 
             # Edit lesson with layout planner
             self._execute_lesson_plan(lesson_idx, topic_data)
@@ -441,23 +445,23 @@ class ContentBuilder:
     def _extract_topics(self, content_json: dict) -> list[dict]:
         topics = []
         sections = content_json.get("sections", [])
+        intro_blocks = []  # Accumulate pre-H2 blocks across sections
 
         for section in sections:
             blocks = section.get("blocks", [])
+
+            # Pre-process: merge consecutive H2 blocks that form numbered headings
+            # e.g., "3.1." + "¿Qué es?" → single H2 "3.1. ¿Qué es?"
+            blocks = self._merge_consecutive_h2s(blocks)
+
             h2_indices = [
                 i for i, b in enumerate(blocks) if b.get("block_type") == "h2"
             ]
 
             if h2_indices:
+                # Accumulate pre-H2 blocks into intro
                 pre_h2 = self._filter_labels(blocks[: h2_indices[0]])
-                if pre_h2:
-                    topics.append(
-                        {
-                            "type": "intro",
-                            "title": "Introducción general",
-                            "content_groups": self._group_by_h3(pre_h2),
-                        }
-                    )
+                intro_blocks.extend(pre_h2)
 
                 for idx, h2_pos in enumerate(h2_indices):
                     end = (
@@ -501,7 +505,73 @@ class ContentBuilder:
                         }
                     )
 
+            elif section.get("type") in ("introduccion", "preambulo", "h1"):
+                # Sections without H2s: accumulate as intro content
+                clean = self._filter_labels(blocks)
+                intro_blocks.extend(clean)
+
+        # Insert single intro topic at the beginning if we have intro blocks
+        if intro_blocks:
+            topics.insert(
+                0,
+                {
+                    "type": "intro",
+                    "title": "Introducción general",
+                    "content_groups": self._group_by_h3(intro_blocks),
+                },
+            )
+
         return topics
+
+    def _merge_consecutive_h2s(self, blocks: list) -> list:
+        """
+        Merge consecutive H2 blocks that form a single heading.
+        Patterns merged:
+        - "3.1." + "Título real" → "3.1. Título real"
+        - "." or "" (artifacts) → removed
+        - "Contenido" alone (table of contents) → kept as-is
+        """
+        if not blocks:
+            return blocks
+
+        merged = []
+        i = 0
+        while i < len(blocks):
+            b = blocks[i]
+            bt = b.get("block_type", "")
+            text = b.get("text", "").strip()
+
+            if bt == "h2":
+                # Filter out pure artifacts: ".", empty, single char
+                if len(text) <= 1:
+                    i += 1
+                    continue
+
+                # Check if this is a numbered prefix like "3.1.", "4.2.", etc.
+                is_number_prefix = bool(
+                    re.match(r"^\d+\.\d*\.?$", text)
+                )
+
+                if is_number_prefix and i + 1 < len(blocks):
+                    next_b = blocks[i + 1]
+                    next_bt = next_b.get("block_type", "")
+                    next_text = next_b.get("text", "").strip()
+
+                    if next_bt == "h2" and next_text:
+                        # Merge: "3.1." + "Title" → "3.1. Title"
+                        combined = dict(b)
+                        sep = " " if text.endswith(".") else ". "
+                        combined["text"] = text + sep + next_text
+                        merged.append(combined)
+                        i += 2
+                        continue
+
+                merged.append(b)
+            else:
+                merged.append(b)
+            i += 1
+
+        return merged
 
     def _filter_labels(self, blocks: list) -> list:
         return [b for b in blocks if not self._is_label_block(b)]
@@ -763,6 +833,9 @@ class ContentBuilder:
         content_idx = 0
         total_edited = 0
 
+        # Dismiss overlay ONCE before starting edit loop (not per block)
+        self.rise.dismiss_sidebar_overlay()
+
         for block in all_blocks:
             block_type = block["type"]
             block_idx = block["index"]
@@ -774,19 +847,34 @@ class ContentBuilder:
             if block_type == "flashcards":
                 continue
 
+            # Skip if no more content to insert
+            if content_idx >= len(content_queue):
+                break
+
             try:
                 wrapper = wrappers.nth(block_idx)
                 wrapper.scroll_into_view_if_needed()
+                time.sleep(0.2)
+
+                # Force click directly (skip actionability check for speed)
+                try:
+                    wrapper.click(timeout=2_000)
+                except Exception:
+                    try:
+                        wrapper.click(force=True)
+                    except Exception:
+                        logger.debug(
+                            f"  Block {block_idx} click failed, skipping"
+                        )
+                        continue
                 time.sleep(0.3)
-                wrapper.click()
-                time.sleep(0.8)
 
                 editables = wrapper.locator("[contenteditable='true']")
                 count = editables.count()
 
                 if count == 0:
                     self.rise.page.keyboard.press("Escape")
-                    time.sleep(0.2)
+                    time.sleep(0.1)
                     continue
 
                 edited_in_block = 0
@@ -796,16 +884,16 @@ class ContentBuilder:
                     text = content_queue[content_idx]
                     try:
                         ed = editables.nth(i)
-                        if not ed.is_visible(timeout=1_000):
+                        if not ed.is_visible(timeout=500):
                             continue
                         ed.click()
-                        time.sleep(0.2)
+                        time.sleep(0.1)
                         self.rise.page.keyboard.press("Control+a")
-                        time.sleep(0.1)
+                        time.sleep(0.05)
                         self.rise.page.keyboard.press("Delete")
-                        time.sleep(0.1)
+                        time.sleep(0.05)
                         paste_large_text(self.rise.page, text)
-                        time.sleep(0.3)
+                        time.sleep(0.2)
                         total_edited += 1
                         edited_in_block += 1
                         content_idx += 1
@@ -825,7 +913,7 @@ class ContentBuilder:
                     )
 
                 self.rise.page.keyboard.press("Escape")
-                time.sleep(0.3)
+                time.sleep(0.2)
 
             except Exception as e:
                 logger.warning(
@@ -833,6 +921,7 @@ class ContentBuilder:
                 )
                 try:
                     self.rise.page.keyboard.press("Escape")
+                    self.rise.dismiss_sidebar_overlay()
                 except Exception:
                     pass
 
