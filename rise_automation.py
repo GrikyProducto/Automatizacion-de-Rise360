@@ -673,37 +673,56 @@ class RiseAutomation:
           block-divider, block-mondrian, block-list, block-quote
         """
         blocks = []
-        wait_for_react_idle(self.page, timeout_ms=5_000)
-        time.sleep(2)
+        time.sleep(1)  # Brief wait for DOM stability
 
         # Selector principal confirmado por debug
         block_wrappers = self.page.locator("[class*='block-wrapper']")
         count = block_wrappers.count()
         logger.debug(f"  block-wrapper encontrados: {count}")
 
-        for i in range(count):
-            try:
-                el = block_wrappers.nth(i)
-                if not el.is_visible(timeout=500):
+        # Use JavaScript for fast bulk cataloging instead of per-element queries
+        try:
+            js_blocks = self.page.evaluate("""() => {
+                const wrappers = document.querySelectorAll("[class*='block-wrapper']");
+                return Array.from(wrappers).map((el, i) => ({
+                    type: el.className || '',
+                    text: (el.textContent || '').trim().slice(0, 150).replace(/\\n/g, ' | '),
+                    index: i,
+                    visible: el.getBoundingClientRect().height > 0,
+                }));
+            }""")
+            for jb in js_blocks:
+                if not jb["visible"]:
                     continue
-                cls = el.get_attribute("class") or ""
-                text_preview = ""
-                try:
-                    text_preview = el.inner_text()[:150].strip().replace("\n", " | ")
-                except Exception:
-                    pass
-
-                # Extraer tipo de bloque del CSS class
-                block_type = self._extract_block_type_from_class(cls)
-
+                block_type = self._extract_block_type_from_class(jb["type"])
                 blocks.append({
                     "type": block_type,
-                    "text_preview": text_preview,
-                    "index": i,
-                    "css_class": cls[:120],
+                    "text_preview": jb["text"][:150],
+                    "index": jb["index"],
+                    "css_class": jb["type"][:120],
                 })
-            except Exception:
-                pass
+        except Exception:
+            # Fallback to per-element approach
+            for i in range(count):
+                try:
+                    el = block_wrappers.nth(i)
+                    if not el.is_visible(timeout=300):
+                        continue
+                    cls = el.get_attribute("class") or ""
+                    text_preview = ""
+                    try:
+                        text_preview = el.inner_text()[:150].strip().replace("\n", " | ")
+                    except Exception:
+                        pass
+                    block_type = self._extract_block_type_from_class(cls)
+                    blocks.append({
+                        "type": block_type,
+                        "text_preview": text_preview,
+                        "index": i,
+                        "css_class": cls[:120],
+                    })
+                except Exception:
+                    pass
 
         # Si no encontró block-wrappers, usar editables como fallback
         if not blocks:
@@ -959,15 +978,12 @@ class RiseAutomation:
     def rename_lesson(self, lesson_index: int, new_name: str) -> bool:
         """
         Renames a lesson in the course outline.
-        Finds the n-th lesson container (same index as open_lesson_editor)
-        and clicks on its title to make it editable.
+        Debug data confirmed: lesson titles use .course-outline-lesson__title-entry
+        which is a DIV that becomes editable on click/dblclick.
         """
         try:
             edit_links = self.page.locator("a:has-text('Edit Content')")
             count = edit_links.count()
-            if count == 0:
-                edit_links = self.page.locator("button:has-text('Edit Content')")
-                count = edit_links.count()
 
             if lesson_index >= count:
                 logger.warning(
@@ -980,73 +996,135 @@ class RiseAutomation:
                 "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
             )
             if parent.count() == 0:
-                logger.warning("rename_lesson: no se encontró contenedor de lección")
                 return False
 
             container = parent.first
             container.scroll_into_view_if_needed()
-            time.sleep(0.5)
+            time.sleep(0.3)
 
-            # Strategy 1: Look for an existing input/textarea in the lesson container
-            for sel in ["input[type='text']", "textarea", "[contenteditable='true']"]:
-                try:
-                    el = container.locator(sel).first
-                    if el.is_visible(timeout=500) and el != link:
-                        el.click()
-                        time.sleep(0.3)
-                        el.fill("")
-                        el.fill(new_name)
-                        self.page.keyboard.press("Tab")
-                        time.sleep(0.5)
-                        logger.info(f"Lección {lesson_index} renombrada: '{new_name}'")
-                        return True
-                except Exception:
-                    continue
+            # Strategy 1: Use __title-entry (confirmed from debug DOM capture)
+            try:
+                title_entry = container.locator(
+                    ".course-outline-lesson__title-entry"
+                )
+                if title_entry.count() > 0 and title_entry.first.is_visible(timeout=1_000):
+                    logger.debug(f"  Found __title-entry, clicking...")
+                    title_entry.first.click()
+                    time.sleep(0.5)
+                    # Check if editable mode activated
+                    for sel in [
+                        "input:visible", "textarea:visible",
+                        "[contenteditable='true']:visible",
+                    ]:
+                        el = container.locator(sel).first
+                        if el.count() > 0 and el.is_visible(timeout=1_000):
+                            self.page.keyboard.press("Control+a")
+                            time.sleep(0.1)
+                            self.page.keyboard.type(new_name, delay=10)
+                            self.page.keyboard.press("Tab")
+                            time.sleep(0.5)
+                            logger.info(
+                                f"Lección {lesson_index} renombrada: "
+                                f"'{new_name[:40]}'"
+                            )
+                            return True
+                    # Try double-click if single didn't activate edit mode
+                    title_entry.first.dblclick()
+                    time.sleep(0.5)
+                    for sel in [
+                        "input:visible", "textarea:visible",
+                        "[contenteditable='true']:visible",
+                    ]:
+                        el = container.locator(sel).first
+                        if el.count() > 0 and el.is_visible(timeout=1_000):
+                            self.page.keyboard.press("Control+a")
+                            time.sleep(0.1)
+                            self.page.keyboard.type(new_name, delay=10)
+                            self.page.keyboard.press("Tab")
+                            time.sleep(0.5)
+                            logger.info(
+                                f"Lección {lesson_index} renombrada via dblclick: "
+                                f"'{new_name[:40]}'"
+                            )
+                            return True
+            except Exception as e:
+                logger.debug(f"  __title-entry approach failed: {e}")
 
-            # Strategy 2: Click on the title text to activate inline editing
-            inner = container.inner_text()[:300]
-            lines = [l.strip() for l in inner.split("\n") if l.strip()]
-            title_text = None
-            for j, line in enumerate(lines):
-                if line == "Lesson" and j + 1 < len(lines):
-                    candidate = lines[j + 1]
-                    if candidate != "Edit Content":
-                        title_text = candidate
-                        break
-            if not title_text and len(lines) > 1:
+            # Strategy 2: JavaScript approach — find and manipulate title element
+            try:
+                renamed = self.page.evaluate("""(args) => {
+                    const [idx, newName] = args;
+                    const editLinks = document.querySelectorAll("a");
+                    const ecLinks = [];
+                    for (const a of editLinks) {
+                        if (a.textContent.trim() === 'Edit Content') ecLinks.push(a);
+                    }
+                    if (idx >= ecLinks.length) return false;
+                    const link = ecLinks[idx];
+                    // Find parent lesson container
+                    let container = link.closest('.course-outline-lesson');
+                    if (!container) return false;
+                    // Find title entry
+                    const entry = container.querySelector('.course-outline-lesson__title-entry');
+                    if (entry) {
+                        // Try direct text replacement if it's a simple div
+                        entry.textContent = newName;
+                        // Dispatch input event to trigger React state update
+                        entry.dispatchEvent(new Event('input', {bubbles: true}));
+                        entry.dispatchEvent(new Event('change', {bubbles: true}));
+                        entry.dispatchEvent(new Event('blur', {bubbles: true}));
+                        return true;
+                    }
+                    return false;
+                }""", [lesson_index, new_name])
+
+                if renamed:
+                    time.sleep(1)
+                    logger.info(
+                        f"Lección {lesson_index} renombrada via JS: "
+                        f"'{new_name[:40]}'"
+                    )
+                    return True
+            except Exception as e:
+                logger.debug(f"  JS rename failed: {e}")
+
+            # Strategy 3: Find title text and click on it
+            try:
+                inner = container.inner_text()[:300]
+                lines = [l.strip() for l in inner.split("\n") if l.strip()]
+                title_text = None
                 for line in lines:
                     if line not in ("Lesson", "Edit Content", ""):
                         title_text = line
                         break
 
-            if title_text:
-                try:
-                    title_loc = container.get_by_text(title_text, exact=True).first
-                    title_loc.click()
-                    time.sleep(0.8)
-
-                    # Check if an input appeared
+                if title_text:
+                    title_loc = container.get_by_text(
+                        title_text, exact=True
+                    ).first
+                    title_loc.dblclick()
+                    time.sleep(0.5)
                     for sel in [
-                        "input[type='text']",
-                        "textarea",
-                        "[contenteditable='true']",
+                        "input:visible", "textarea:visible",
+                        "[contenteditable='true']:visible",
                     ]:
                         try:
                             el = container.locator(sel).first
                             if el.is_visible(timeout=1_000):
                                 self.page.keyboard.press("Control+a")
                                 time.sleep(0.1)
-                                self.page.keyboard.type(new_name)
+                                self.page.keyboard.type(new_name, delay=10)
                                 self.page.keyboard.press("Tab")
                                 time.sleep(0.5)
                                 logger.info(
-                                    f"Lección {lesson_index} renombrada: '{new_name}'"
+                                    f"Lección {lesson_index} renombrada via text: "
+                                    f"'{new_name[:40]}'"
                                 )
                                 return True
                         except Exception:
                             continue
-                except Exception:
-                    pass
+            except Exception:
+                pass
 
             logger.warning(f"No se pudo renombrar lección {lesson_index}")
             return False
@@ -1164,37 +1242,80 @@ class RiseAutomation:
 
     def count_editables_in_lesson(self) -> list[dict]:
         """
-        Quick pre-scan: click each block to activate it, count editables,
-        then move on. Does NOT edit anything.
-        Returns list of {index, type, editables_count} for blocks with editables.
+        Quick pre-scan: count editables per block using JavaScript (fast).
+        Rise 360 renders some editables only after click, so we use
+        a hybrid approach: JS scan first, then click-scan for blocks
+        that report 0 editables but are editable types.
         """
         all_blocks = self._catalog_blocks_in_editor()
         wrappers = self.page.locator("[class*='block-wrapper']")
         result = []
 
+        # Estimated editables per block type (for blocks that need click)
+        EDITABLE_ESTIMATES = {
+            "heading": 1, "statement": 1, "text": 1, "paragraph": 1,
+            "image": 2, "numbered_list": 3, "bulleted_list": 3,
+            "quote_carousel": 6, "flashcards": 0, "quote": 2,
+            "sorting": 4, "process": 4, "accordion": 4,
+        }
+
+        # Fast: try JS scan for visible editables
+        try:
+            js_result = self.page.evaluate("""() => {
+                const wrappers = document.querySelectorAll("[class*='block-wrapper']");
+                return Array.from(wrappers).map((w, i) => {
+                    const eds = w.querySelectorAll("[contenteditable='true']");
+                    return {index: i, count: eds.length};
+                });
+            }""")
+            js_map = {r["index"]: r["count"] for r in js_result}
+        except Exception:
+            js_map = {}
+
         for block in all_blocks:
             if block["type"] in SKIP_BLOCK_TYPES:
                 continue
-            try:
-                wrapper = wrappers.nth(block["index"])
-                wrapper.scroll_into_view_if_needed()
-                time.sleep(0.2)
-                wrapper.click()
-                time.sleep(0.5)
+            idx = block["index"]
+            js_count = js_map.get(idx, 0)
 
-                editables = wrapper.locator("[contenteditable='true']")
-                count = editables.count()
-                if count > 0:
-                    result.append({
-                        "index": block["index"],
-                        "type": block["type"],
-                        "editables_count": count,
-                    })
-
-                self.page.keyboard.press("Escape")
-                time.sleep(0.15)
-            except Exception:
-                pass
+            if js_count > 0:
+                result.append({
+                    "index": idx,
+                    "type": block["type"],
+                    "editables_count": js_count,
+                })
+            else:
+                # JS found 0 editables — use estimated count or quick click
+                est = EDITABLE_ESTIMATES.get(block["type"], 1)
+                if est > 0:
+                    # Try a quick click to reveal hidden editables
+                    try:
+                        wrapper = wrappers.nth(idx)
+                        wrapper.scroll_into_view_if_needed()
+                        wrapper.click(timeout=2_000)
+                        time.sleep(0.3)
+                        editables = wrapper.locator("[contenteditable='true']")
+                        count = editables.count()
+                        if count > 0:
+                            result.append({
+                                "index": idx,
+                                "type": block["type"],
+                                "editables_count": count,
+                            })
+                        else:
+                            result.append({
+                                "index": idx,
+                                "type": block["type"],
+                                "editables_count": est,
+                            })
+                        self.page.keyboard.press("Escape")
+                        time.sleep(0.1)
+                    except Exception:
+                        result.append({
+                            "index": idx,
+                            "type": block["type"],
+                            "editables_count": est,
+                        })
 
         total = sum(b["editables_count"] for b in result)
         logger.info(
@@ -1444,19 +1565,17 @@ class RiseAutomation:
         """
         logger.debug(f"Intentando agregar bloque: {block_type}")
         add_btns = [
-            "button.block-create__button",  # Confirmado por debug
+            "button.block-create__button",
             "button[class*='block-create']",
-            "button[aria-label*='Add block' i]",
-            "button[aria-label*='Insert block' i]",
         ]
         for sel in add_btns:
             try:
                 btn = self.page.locator(sel).last
                 if btn.is_visible(timeout=1_500):
-                    btn.click()
-                    time.sleep(0.5)
-                    label = self._get_block_menu_label(block_type)
-                    if self._select_block_type_from_menu(label):
+                    btn.click(force=True)
+                    time.sleep(0.8)
+                    category, _sub = self._get_block_category_and_type(block_type)
+                    if self._select_block_from_library(category):
                         time.sleep(1)
                         wait_for_react_idle(self.page, timeout_ms=2_000)
                         logger.debug(f"Bloque '{block_type}' agregado")
@@ -1466,184 +1585,208 @@ class RiseAutomation:
         logger.warning("No se pudo encontrar el boton de agregar bloque")
         return False
 
-    def _get_block_menu_label(self, block_type: str) -> str:
-        """Mapea tipos internos a labels del menú de Rise 360."""
-        # Mapeo directo confirmado por debug (del menú Block Library)
-        BLOCK_LABELS = {
-            "text": "Text",
-            "paragraph": "Text",
-            "heading": "Text",
-            "text_twocol": "Text",
-            "list": "List",
-            "bulleted_list": "List",
-            "numbered_list": "List",
-            "image": "Image",
-            "video": "Video",
-            "flashcards": "Flashcards",
-            "statement": "Statement",
-            "quote": "Quote",
-            "quote_carousel": "Quote",
-            "divider": "Spacer",
-            "spacer": "Spacer",
-            "banner": "Image",
-            "section_banner": "Text",
-            "table": "Text",
-            "continue": "Continue",
-            "process": "Process",
-            "sorting": "Sorting",
-        }
-        return BLOCK_LABELS.get(block_type, block_type.replace("_", " ").title())
+    def _get_block_category_and_type(self, block_type: str) -> tuple[str, str]:
+        """Mapea tipos internos a (categoría sidebar, sub-tipo).
 
-    def _select_block_type_from_menu(self, label: str) -> bool:
-        """Selecciona un tipo de bloque del menú desplegable."""
-        # El menú muestra: AI Block, AI Image, AI Audio, Text, List, Image, Video,
-        # Process, Flashcards, Sorting, Continue, Block Library
-        for role in ["option", "menuitem", "listitem"]:
-            try:
-                item = self.page.get_by_role(role, name=re.compile(label, re.IGNORECASE))
-                if item.first.is_visible(timeout=2_000):
-                    item.first.click()
-                    return True
-            except Exception:
-                pass
+        Block Library sidebar categories (confirmed by diagnostic):
+        Text, Statement, Quote, List, Image, Gallery, Multimedia,
+        Interactive, Knowledge Check, Chart, Divider, Code, Custom Block
+
+        Sub-types within each category (from preview-dropdown-button):
+        Text → Paragraph, Heading, Subheading, Note, Table
+        Statement → Statement B, Statement (variants)
+        Quote → Quote carousel
+        List → Numbered list, Bulleted list
+        Image → Image & text, Image centered
+        Interactive → Flashcard grid, Accordion, Labeled graphic, Sorting, Process
+        Divider → Divider, Continue
+        """
+        CATEGORY_MAP = {
+            "text": ("Text", ""),
+            "paragraph": ("Text", ""),
+            "heading": ("Text", ""),
+            "subheading": ("Text", ""),
+            "note": ("Text", ""),
+            "text_twocol": ("Text", ""),
+            "table": ("Text", ""),
+            "statement": ("Statement", ""),
+            "list": ("List", ""),
+            "bulleted_list": ("List", ""),
+            "numbered_list": ("List", ""),
+            "image": ("Image", ""),
+            "video": ("Multimedia", ""),
+            "flashcards": ("Interactive", ""),
+            "quote": ("Quote", ""),
+            "quote_carousel": ("Quote", ""),
+            "divider": ("Divider", ""),
+            "spacer": ("Divider", ""),
+            "banner": ("Image", ""),
+            "section_banner": ("Text", ""),
+            "continue": ("Divider", ""),
+            "process": ("Interactive", ""),
+            "sorting": ("Interactive", ""),
+        }
+        return CATEGORY_MAP.get(
+            block_type, (block_type.replace("_", " ").title(), "")
+        )
+
+    def _select_block_from_library(self, category: str) -> bool:
+        """Selecciona un bloque del Block Library sidebar.
+
+        Diagnostic confirmó el flujo:
+        1. "+" abre sidebar con categorías (button.block-wizard__link)
+        2. Click en categoría → agrega bloque por defecto de esa categoría
+
+        Las categorías son: Text, Statement, Quote, List, Image, Gallery,
+        Multimedia, Interactive, Knowledge Check, Chart, Divider, Code, Custom Block
+        """
+        # Try 1: Click category button in sidebar (block-wizard__link)
         try:
-            item = self.page.get_by_text(re.compile(f"^{label}$", re.IGNORECASE)).first
-            if item.is_visible(timeout=1_500):
-                item.click()
+            sidebar = self.page.locator(".blocks-sidebar")
+            if sidebar.first.is_visible(timeout=3_000):
+                cat_btn = sidebar.locator(
+                    f"button.block-wizard__link:has-text('{category}')"
+                )
+                if cat_btn.count() > 0 and cat_btn.first.is_visible(timeout=2_000):
+                    cat_btn.first.click()
+                    time.sleep(1)
+                    # Close sidebar after selection
+                    self.dismiss_sidebar_overlay()
+                    logger.debug(f"Block added via category '{category}'")
+                    return True
+        except Exception:
+            pass
+
+        # Try 2: Click category in the wizard items (li.block-wizard__item)
+        try:
+            item = self.page.locator(
+                f"li.block-wizard__item:has-text('{category}')"
+            )
+            if item.count() > 0 and item.first.is_visible(timeout=1_500):
+                item.first.click()
+                time.sleep(1)
+                self.dismiss_sidebar_overlay()
+                logger.debug(f"Block added via wizard item '{category}'")
                 return True
         except Exception:
             pass
+
+        # Try 3: Global text search as last resort
+        try:
+            item = self.page.get_by_text(
+                re.compile(f"^{category}$", re.IGNORECASE)
+            ).first
+            if item.is_visible(timeout=1_500):
+                item.click()
+                time.sleep(1)
+                self.dismiss_sidebar_overlay()
+                return True
+        except Exception:
+            pass
+
         return False
 
     # ── Gestión de lecciones en el outline ──────────────────────────────
 
-    def duplicate_lesson(self, source_index: int) -> bool:
+    def duplicate_lesson(self, source_index: int = 0) -> bool:
         """
-        Duplica una lección específica en el outline usando el menú contextual.
-        Cada lección en el outline tiene un botón de opciones (kebab/three-dots).
-
-        Args:
-            source_index: Índice de la lección a duplicar (0-based)
-
-        Returns:
-            True si se duplicó exitosamente
+        Duplica una lección existente usando el menú kebab.
+        Diagnostic confirmó: hover → button.menu__trigger--dots → [role='menuitem'] "Duplicate"
+        Duplicar preserva colores, logos, bloques y estructura del template.
         """
-        logger.info(f"Duplicando lección {source_index}...")
         try:
-            # Find lesson containers
             edit_links = self.page.locator("a:has-text('Edit Content')")
-            count = edit_links.count()
-            if source_index >= count:
-                logger.warning(f"duplicate_lesson: index {source_index} fuera de rango ({count})")
+            before_count = edit_links.count()
+            if source_index >= before_count:
+                logger.warning(f"duplicate_lesson: índice {source_index} fuera de rango ({before_count})")
                 return False
 
+            logger.info(f"Duplicando lección {source_index} (total actual: {before_count})...")
+
+            # Find the lesson container
             link = edit_links.nth(source_index)
             parent = link.locator(
                 "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
             )
             if parent.count() == 0:
-                logger.warning("duplicate_lesson: no se encontró contenedor de lección")
+                logger.warning("  No se encontró contenedor de lección")
                 return False
 
             container = parent.first
             container.scroll_into_view_if_needed()
             time.sleep(0.3)
+
+            # Step 1: Hover to reveal kebab button
             container.hover()
-            time.sleep(0.5)
+            time.sleep(1)
 
-            # Look for kebab/options menu button within the lesson container
-            kebab_sels = [
-                "button[aria-label*='option' i]",
-                "button[aria-label*='menu' i]",
-                "button[aria-label*='more' i]",
-                "button[class*='kebab']",
-                "button[class*='more-options']",
-                "button[class*='outline-lesson'] button",
-            ]
+            # Step 2: Click kebab button (three dots)
+            kebab = container.locator("button.menu__trigger--dots")
+            if kebab.count() == 0 or not kebab.first.is_visible(timeout=2_000):
+                # Fallback: try page-level visible dots buttons
+                kebab = self.page.locator("button.menu__trigger--dots:visible")
+                if kebab.count() == 0:
+                    logger.warning("  Kebab button no encontrado")
+                    return False
 
-            kebab_clicked = False
-            for sel in kebab_sels:
-                try:
-                    btn = container.locator(sel).first
-                    if btn.is_visible(timeout=1_500):
-                        btn.click()
-                        time.sleep(0.8)
-                        kebab_clicked = True
-                        logger.debug(f"Kebab menu opened via: {sel}")
-                        break
-                except Exception:
-                    continue
+            kebab.first.click()
+            time.sleep(1)
 
-            if not kebab_clicked:
-                # Fallback: try all visible buttons in the container that might be the kebab
-                buttons = container.locator("button:visible")
-                for i in range(buttons.count()):
-                    try:
-                        btn = buttons.nth(i)
-                        text = btn.inner_text().strip()
-                        aria = btn.get_attribute("aria-label") or ""
-                        # Skip "Edit Content" and other known buttons
-                        if text in ("Edit Content", "") or "edit" in aria.lower():
-                            continue
-                        btn.click()
-                        time.sleep(0.8)
-                        # Check if a menu appeared
-                        menu = self.page.locator("[role='menu'], [role='menuitem']")
-                        if menu.count() > 0:
-                            kebab_clicked = True
-                            logger.debug(f"Kebab found via fallback button {i}")
-                            break
-                    except Exception:
-                        continue
+            # Step 3: Click "Duplicate" from menu
+            menu_items = self.page.locator("[role='menuitem']:visible")
+            duplicate_btn = None
+            for i in range(menu_items.count()):
+                text = menu_items.nth(i).inner_text().strip().lower()
+                if text in ("duplicate", "duplicar"):
+                    duplicate_btn = menu_items.nth(i)
+                    break
 
-            if not kebab_clicked:
-                logger.warning("duplicate_lesson: no se pudo abrir menú kebab")
-                return False
+            if not duplicate_btn:
+                # Fallback: try text-based search
+                duplicate_btn = self.page.locator(
+                    "[role='menuitem']:has-text('Duplicate')"
+                ).first
+                if duplicate_btn.count() == 0:
+                    logger.warning("  Opción 'Duplicate' no encontrada en menú")
+                    self.page.keyboard.press("Escape")
+                    return False
 
-            # Select "Duplicate" from the context menu
-            dup_clicked = False
-            for label in ["Duplicate", "Duplicar"]:
-                try:
-                    item = self.page.locator(f"[role='menuitem']:has-text('{label}')").first
-                    if item.is_visible(timeout=2_000):
-                        item.click()
-                        dup_clicked = True
-                        break
-                except Exception:
-                    pass
-
-            if not dup_clicked:
-                # Try text-based search
-                try:
-                    item = self.page.get_by_text("Duplicate", exact=True).first
-                    if item.is_visible(timeout=1_500):
-                        item.click()
-                        dup_clicked = True
-                except Exception:
-                    pass
-
-            if not dup_clicked:
-                self.page.keyboard.press("Escape")
-                logger.warning("duplicate_lesson: opción 'Duplicate' no encontrada")
-                return False
-
-            # Wait for the new lesson to appear
+            duplicate_btn.click()
             time.sleep(3)
-            new_count = self.page.locator("a:has-text('Edit Content')").count()
-            logger.info(
-                f"Lección {source_index} duplicada. "
-                f"Lecciones: {count} → {new_count}"
-            )
-            return new_count > count
+
+            # Step 4: Verify duplication
+            after_count = self.page.locator("a:has-text('Edit Content')").count()
+            if after_count > before_count:
+                logger.info(
+                    f"Lección duplicada exitosamente: {before_count} → {after_count}"
+                )
+                return True
+            else:
+                # Wait a bit more — duplication might take time
+                time.sleep(3)
+                after_count = self.page.locator("a:has-text('Edit Content')").count()
+                if after_count > before_count:
+                    logger.info(
+                        f"Lección duplicada (después de espera): "
+                        f"{before_count} → {after_count}"
+                    )
+                    return True
+
+            logger.warning(f"  Duplicación no incrementó conteo ({after_count})")
+            return False
 
         except Exception as e:
-            logger.warning(f"Error duplicando lección {source_index}: {e}")
+            logger.warning(f"Error duplicando lección: {e}")
+            try:
+                self.page.keyboard.press("Escape")
+            except Exception:
+                pass
             return False
 
     def ensure_lesson_count(self, target_count: int) -> bool:
         """
         Asegura que el outline tenga al menos target_count lecciones.
-        Si faltan, duplica la última lección de contenido.
+        DUPLICA lecciones existentes (preserva colores, logos y bloques del template).
 
         Args:
             target_count: Número mínimo de lecciones requerido
@@ -1657,24 +1800,28 @@ class RiseAutomation:
         if current >= target_count:
             return True
 
-        # Duplicate the last content lesson (not the first/intro)
-        source_idx = max(0, current - 1)
+        # Duplicate lessons from the first "Tema" lesson (index 0)
+        # to preserve template structure, colors, and logos
         attempts = 0
-        max_attempts = target_count - current + 3  # safety margin
+        max_attempts = (target_count - current) * 2 + 3
 
         while current < target_count and attempts < max_attempts:
             attempts += 1
+            needed = target_count - current
             logger.info(
-                f"  Duplicando lección {source_idx} "
-                f"(intento {attempts}, {current}/{target_count})"
+                f"  Duplicando lección (intento {attempts}, "
+                f"faltan {needed})"
             )
-            if self.duplicate_lesson(source_idx):
-                current = self.page.locator("a:has-text('Edit Content')").count()
+            # Duplicate the first content lesson (index 0)
+            if self.duplicate_lesson(source_index=0):
+                current = self.page.locator(
+                    "a:has-text('Edit Content')"
+                ).count()
                 time.sleep(1)
             else:
-                logger.warning(f"  Fallo en duplicación, intento {attempts}")
-                # Try duplicating a different source
-                source_idx = max(0, source_idx - 1)
+                logger.warning(f"  Fallo duplicando lección, intento {attempts}")
+                if attempts >= max_attempts // 2:
+                    break
 
         final = self.page.locator("a:has-text('Edit Content')").count()
         success = final >= target_count
@@ -1683,6 +1830,49 @@ class RiseAutomation:
             f"({'OK' if success else 'FALLO'})"
         )
         return success
+
+    # ── Sidebar overlay dismissal ──────────────────────────────────────
+
+    def dismiss_sidebar_overlay(self) -> bool:
+        """
+        Cierra cualquier sidebar overlay activo que bloquee clicks.
+        Phase 0 confirmó: .blocks-sidebar__overlay--active es el overlay.
+        """
+        try:
+            overlay = self.page.locator(
+                ".blocks-sidebar__overlay--active"
+            )
+            if overlay.count() > 0 and overlay.first.is_visible(timeout=500):
+                overlay.first.click(force=True)
+                time.sleep(0.5)
+                logger.debug("Sidebar overlay dismissed via click")
+                return True
+        except Exception:
+            pass
+
+        # Fallback: try closing via Escape
+        try:
+            sidebar = self.page.locator(".blocks-sidebar--open")
+            if sidebar.count() > 0 and sidebar.first.is_visible(timeout=500):
+                self.page.keyboard.press("Escape")
+                time.sleep(0.5)
+                logger.debug("Sidebar closed via Escape")
+                return True
+        except Exception:
+            pass
+
+        # Fallback: try clicking the close button
+        try:
+            close_btn = self.page.locator(".blocks-sidebar__close")
+            if close_btn.count() > 0 and close_btn.first.is_visible(timeout=500):
+                close_btn.first.click()
+                time.sleep(0.5)
+                logger.debug("Sidebar closed via close button")
+                return True
+        except Exception:
+            pass
+
+        return False
 
     # ── Agregar bloques en posición específica ─────────────────────────
 
@@ -1707,6 +1897,9 @@ class RiseAutomation:
         logger.debug(f"add_block_at_position: after={after_index}, type={block_type}")
 
         try:
+            # Dismiss any open sidebar overlay first
+            self.dismiss_sidebar_overlay()
+
             create_buttons = self.page.locator("button.block-create__button")
             btn_count = create_buttons.count()
 
@@ -1741,23 +1934,32 @@ class RiseAutomation:
             btn.click(force=True)
             time.sleep(0.8)
 
-            # Select block type from the menu
-            label = self._get_block_menu_label(block_type)
-            if self._select_block_type_from_menu(label):
-                time.sleep(1.5)
+            # Select block type from sidebar category
+            category, _sub = self._get_block_category_and_type(block_type)
+            if self._select_block_from_library(category):
+                time.sleep(1)
                 wait_for_react_idle(self.page, timeout_ms=3_000)
-                logger.info(f"Bloque '{block_type}' agregado después de bloque {after_index}")
+                logger.info(
+                    f"Bloque '{block_type}' (cat: {category}) "
+                    f"agregado después de bloque {after_index}"
+                )
                 return True
             else:
-                # Menu might not have appeared or type not found
+                # Close sidebar if it stayed open
                 self.page.keyboard.press("Escape")
-                logger.warning(f"No se pudo seleccionar tipo '{label}' del menú")
+                time.sleep(0.3)
+                self.dismiss_sidebar_overlay()
+                logger.warning(
+                    f"No se pudo seleccionar categoría '{category}' del sidebar"
+                )
                 return False
 
         except Exception as e:
             logger.warning(f"Error en add_block_at_position: {e}")
             try:
                 self.page.keyboard.press("Escape")
+                time.sleep(0.3)
+                self.dismiss_sidebar_overlay()
             except Exception:
                 pass
             return False
