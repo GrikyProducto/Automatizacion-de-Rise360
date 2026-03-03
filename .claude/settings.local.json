@@ -23,7 +23,8 @@
       "Bash(python -m py_compile config.py utils.py pdf_parser.py rise_automation.py content_builder.py main.py)",
       "Bash(python -m py_compile config.py utils.py pdf_parser.py visual_learner.py rise_automation.py content_builder.py self_learning.py main.py)",
       "Bash(python -c \"import config; print\\(''RISE_DASHBOARD_URL ='', config.RISE_DASHBOARD_URL\\)\")",
-      "Bash(python debug_duplicate_flow.py)"
+      "Bash(python debug_duplicate_flow.py)",
+      "Bash(python3:*)"
     ]
   }
 }

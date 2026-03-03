@@ -1515,6 +1515,389 @@ class RiseAutomation:
             pass
         return False
 
+    # ── Gestión de lecciones en el outline ──────────────────────────────
+
+    def duplicate_lesson(self, source_index: int) -> bool:
+        """
+        Duplica una lección específica en el outline usando el menú contextual.
+        Cada lección en el outline tiene un botón de opciones (kebab/three-dots).
+
+        Args:
+            source_index: Índice de la lección a duplicar (0-based)
+
+        Returns:
+            True si se duplicó exitosamente
+        """
+        logger.info(f"Duplicando lección {source_index}...")
+        try:
+            # Find lesson containers
+            edit_links = self.page.locator("a:has-text('Edit Content')")
+            count = edit_links.count()
+            if source_index >= count:
+                logger.warning(f"duplicate_lesson: index {source_index} fuera de rango ({count})")
+                return False
+
+            link = edit_links.nth(source_index)
+            parent = link.locator(
+                "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
+            )
+            if parent.count() == 0:
+                logger.warning("duplicate_lesson: no se encontró contenedor de lección")
+                return False
+
+            container = parent.first
+            container.scroll_into_view_if_needed()
+            time.sleep(0.3)
+            container.hover()
+            time.sleep(0.5)
+
+            # Look for kebab/options menu button within the lesson container
+            kebab_sels = [
+                "button[aria-label*='option' i]",
+                "button[aria-label*='menu' i]",
+                "button[aria-label*='more' i]",
+                "button[class*='kebab']",
+                "button[class*='more-options']",
+                "button[class*='outline-lesson'] button",
+            ]
+
+            kebab_clicked = False
+            for sel in kebab_sels:
+                try:
+                    btn = container.locator(sel).first
+                    if btn.is_visible(timeout=1_500):
+                        btn.click()
+                        time.sleep(0.8)
+                        kebab_clicked = True
+                        logger.debug(f"Kebab menu opened via: {sel}")
+                        break
+                except Exception:
+                    continue
+
+            if not kebab_clicked:
+                # Fallback: try all visible buttons in the container that might be the kebab
+                buttons = container.locator("button:visible")
+                for i in range(buttons.count()):
+                    try:
+                        btn = buttons.nth(i)
+                        text = btn.inner_text().strip()
+                        aria = btn.get_attribute("aria-label") or ""
+                        # Skip "Edit Content" and other known buttons
+                        if text in ("Edit Content", "") or "edit" in aria.lower():
+                            continue
+                        btn.click()
+                        time.sleep(0.8)
+                        # Check if a menu appeared
+                        menu = self.page.locator("[role='menu'], [role='menuitem']")
+                        if menu.count() > 0:
+                            kebab_clicked = True
+                            logger.debug(f"Kebab found via fallback button {i}")
+                            break
+                    except Exception:
+                        continue
+
+            if not kebab_clicked:
+                logger.warning("duplicate_lesson: no se pudo abrir menú kebab")
+                return False
+
+            # Select "Duplicate" from the context menu
+            dup_clicked = False
+            for label in ["Duplicate", "Duplicar"]:
+                try:
+                    item = self.page.locator(f"[role='menuitem']:has-text('{label}')").first
+                    if item.is_visible(timeout=2_000):
+                        item.click()
+                        dup_clicked = True
+                        break
+                except Exception:
+                    pass
+
+            if not dup_clicked:
+                # Try text-based search
+                try:
+                    item = self.page.get_by_text("Duplicate", exact=True).first
+                    if item.is_visible(timeout=1_500):
+                        item.click()
+                        dup_clicked = True
+                except Exception:
+                    pass
+
+            if not dup_clicked:
+                self.page.keyboard.press("Escape")
+                logger.warning("duplicate_lesson: opción 'Duplicate' no encontrada")
+                return False
+
+            # Wait for the new lesson to appear
+            time.sleep(3)
+            new_count = self.page.locator("a:has-text('Edit Content')").count()
+            logger.info(
+                f"Lección {source_index} duplicada. "
+                f"Lecciones: {count} → {new_count}"
+            )
+            return new_count > count
+
+        except Exception as e:
+            logger.warning(f"Error duplicando lección {source_index}: {e}")
+            return False
+
+    def ensure_lesson_count(self, target_count: int) -> bool:
+        """
+        Asegura que el outline tenga al menos target_count lecciones.
+        Si faltan, duplica la última lección de contenido.
+
+        Args:
+            target_count: Número mínimo de lecciones requerido
+
+        Returns:
+            True si se alcanzó el target
+        """
+        current = self.page.locator("a:has-text('Edit Content')").count()
+        logger.info(f"ensure_lesson_count: actual={current}, target={target_count}")
+
+        if current >= target_count:
+            return True
+
+        # Duplicate the last content lesson (not the first/intro)
+        source_idx = max(0, current - 1)
+        attempts = 0
+        max_attempts = target_count - current + 3  # safety margin
+
+        while current < target_count and attempts < max_attempts:
+            attempts += 1
+            logger.info(
+                f"  Duplicando lección {source_idx} "
+                f"(intento {attempts}, {current}/{target_count})"
+            )
+            if self.duplicate_lesson(source_idx):
+                current = self.page.locator("a:has-text('Edit Content')").count()
+                time.sleep(1)
+            else:
+                logger.warning(f"  Fallo en duplicación, intento {attempts}")
+                # Try duplicating a different source
+                source_idx = max(0, source_idx - 1)
+
+        final = self.page.locator("a:has-text('Edit Content')").count()
+        success = final >= target_count
+        logger.info(
+            f"ensure_lesson_count: resultado {final}/{target_count} "
+            f"({'OK' if success else 'FALLO'})"
+        )
+        return success
+
+    # ── Agregar bloques en posición específica ─────────────────────────
+
+    def add_block_at_position(self, after_index: int, block_type: str) -> bool:
+        """
+        Agrega un bloque DESPUÉS del bloque con índice after_index.
+        Usa el botón "+" (block-create__button) que aparece entre bloques.
+
+        El mecanismo descubierto en Phase 0:
+        - Entre cada par de bloques hay un div.block-create
+        - Dentro: button.block-create__button con texto "+"
+        - Al hacer click: aparece menú de tipos de bloque
+        - Seleccionar tipo → nuevo bloque aparece
+
+        Args:
+            after_index: Índice del bloque después del cual insertar (-1 para inicio)
+            block_type: Tipo de bloque a agregar ("text", "statement", etc.)
+
+        Returns:
+            True si se agregó exitosamente
+        """
+        logger.debug(f"add_block_at_position: after={after_index}, type={block_type}")
+
+        try:
+            create_buttons = self.page.locator("button.block-create__button")
+            btn_count = create_buttons.count()
+
+            if btn_count == 0:
+                logger.warning("No se encontraron botones block-create")
+                return False
+
+            # The "+" buttons are positioned between blocks:
+            # btn[0] = before first block (block-create__button--first)
+            # btn[1] = after block 0
+            # btn[2] = after block 1
+            # ...
+            # So to insert after block N, we click btn[N+1]
+            target_btn_idx = after_index + 1
+            if target_btn_idx >= btn_count:
+                target_btn_idx = btn_count - 1  # Last position
+
+            btn = create_buttons.nth(target_btn_idx)
+            btn.scroll_into_view_if_needed()
+            time.sleep(0.3)
+
+            # The "+" buttons may be hidden until hover
+            # Try hover on the gap area first
+            try:
+                parent = btn.locator("xpath=ancestor::div[contains(@class,'block-create')][1]")
+                if parent.count() > 0:
+                    parent.first.hover()
+                    time.sleep(0.5)
+            except Exception:
+                pass
+
+            btn.click(force=True)
+            time.sleep(0.8)
+
+            # Select block type from the menu
+            label = self._get_block_menu_label(block_type)
+            if self._select_block_type_from_menu(label):
+                time.sleep(1.5)
+                wait_for_react_idle(self.page, timeout_ms=3_000)
+                logger.info(f"Bloque '{block_type}' agregado después de bloque {after_index}")
+                return True
+            else:
+                # Menu might not have appeared or type not found
+                self.page.keyboard.press("Escape")
+                logger.warning(f"No se pudo seleccionar tipo '{label}' del menú")
+                return False
+
+        except Exception as e:
+            logger.warning(f"Error en add_block_at_position: {e}")
+            try:
+                self.page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return False
+
+    def add_multiple_blocks(self, after_index: int, block_type: str, count: int) -> int:
+        """
+        Agrega múltiples bloques del mismo tipo, uno tras otro.
+        Los índices se recalculan automáticamente después de cada inserción.
+
+        Returns:
+            Número de bloques agregados exitosamente
+        """
+        added = 0
+        for i in range(count):
+            # Each new block shifts indices by 1
+            current_pos = after_index + added
+            if self.add_block_at_position(current_pos, block_type):
+                added += 1
+                time.sleep(0.5)
+            else:
+                logger.warning(f"add_multiple_blocks: falló en bloque {i+1}/{count}")
+                break
+        logger.info(f"add_multiple_blocks: {added}/{count} bloques '{block_type}' agregados")
+        return added
+
+    # ── Edición de flashcards via sidebar ──────────────────────────────
+
+    def edit_flashcard_sidebar(
+        self, block_index: int, cards: list[dict]
+    ) -> int:
+        """
+        Edita flashcards usando el sidebar panel descubierto en Phase 0.
+
+        Mecanismo:
+        1. Click en el bloque flashcard → abre sidebar 'blocks-sidebar--open'
+        2. Sidebar contiene editables TipTap para cada card (front + back)
+        3. Editar cada editable con Ctrl+A → type
+        4. Cerrar sidebar
+
+        Args:
+            block_index: Índice del bloque flashcard en el editor
+            cards: Lista de {front: str, back: str} para cada tarjeta
+
+        Returns:
+            Número de cards editadas exitosamente
+        """
+        logger.info(f"Editando flashcards en bloque {block_index}...")
+        try:
+            wrappers = self.page.locator("[class*='block-wrapper']")
+            if block_index >= wrappers.count():
+                logger.warning(f"edit_flashcard_sidebar: index {block_index} fuera de rango")
+                return 0
+
+            wrapper = wrappers.nth(block_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.3)
+            wrapper.click()
+            time.sleep(1)
+
+            # Wait for sidebar to open
+            sidebar = self.page.locator(".blocks-sidebar.blocks-sidebar--open")
+            try:
+                sidebar.wait_for(state="visible", timeout=5_000)
+            except Exception:
+                logger.warning("edit_flashcard_sidebar: sidebar no se abrió")
+                return 0
+
+            logger.debug("Sidebar de flashcards abierto")
+
+            # Find all editables within the sidebar
+            sidebar_editables = sidebar.locator(
+                ".tiptap.ProseMirror.rise-tiptap[contenteditable='true'], "
+                "[contenteditable='true']"
+            )
+            ed_count = sidebar_editables.count()
+            logger.debug(f"  Editables en sidebar: {ed_count}")
+
+            # Flashcard structure: pairs of editables (front, back)
+            # Some cards may have: title-editable, subtitle-editable per side
+            edited_cards = 0
+            ed_idx = 0
+
+            for card in cards:
+                front = card.get("front", "").strip()
+                back = card.get("back", "").strip()
+
+                if ed_idx >= ed_count:
+                    break
+
+                # Edit front
+                if front and ed_idx < ed_count:
+                    try:
+                        ed = sidebar_editables.nth(ed_idx)
+                        if ed.is_visible(timeout=1_000):
+                            ed.click()
+                            time.sleep(0.2)
+                            self.page.keyboard.press("Control+a")
+                            time.sleep(0.1)
+                            self.page.keyboard.press("Delete")
+                            time.sleep(0.1)
+                            paste_large_text(self.page, front)
+                            time.sleep(0.3)
+                    except Exception as e:
+                        logger.debug(f"  Error editando front de card {edited_cards}: {e}")
+                    ed_idx += 1
+
+                # Edit back
+                if back and ed_idx < ed_count:
+                    try:
+                        ed = sidebar_editables.nth(ed_idx)
+                        if ed.is_visible(timeout=1_000):
+                            ed.click()
+                            time.sleep(0.2)
+                            self.page.keyboard.press("Control+a")
+                            time.sleep(0.1)
+                            self.page.keyboard.press("Delete")
+                            time.sleep(0.1)
+                            paste_large_text(self.page, back)
+                            time.sleep(0.3)
+                    except Exception as e:
+                        logger.debug(f"  Error editando back de card {edited_cards}: {e}")
+                    ed_idx += 1
+
+                edited_cards += 1
+
+            # Close sidebar
+            self.page.keyboard.press("Escape")
+            time.sleep(0.5)
+
+            logger.info(f"  Flashcards editadas: {edited_cards}/{len(cards)}")
+            return edited_cards
+
+        except Exception as e:
+            logger.warning(f"Error en edit_flashcard_sidebar: {e}")
+            try:
+                self.page.keyboard.press("Escape")
+            except Exception:
+                pass
+            return 0
+
     # ── Guardado ──────────────────────────────────────────────────────────
 
     def save_course(self):

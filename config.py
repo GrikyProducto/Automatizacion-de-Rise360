@@ -69,6 +69,19 @@ FONT_SIZE_H2 = 14                  # >= 14pt → Subtemas
 FONT_SIZE_H3 = 11                  # >= 11pt + bold → subsección menor
 # < FONT_SIZE_H3 → párrafo normal
 
+# ── Instrucciones UX para bloques interactivos ──────────────────────────
+# Se insertan ANTES de cada bloque interactivo como statement block
+UX_INSTRUCTIONS = {
+    "flashcards": "Da clic en cada tarjeta para ver su información al reverso",
+    "accordion": "Despliega cada sección para ver su contenido",
+    "sorting": "Arrastra y ordena los elementos según corresponda",
+    "process": "Navega por cada paso del proceso",
+    "embed": "Revisa la siguiente cápsula interactiva",
+    "labeled": "Haz clic en cada punto para ver la información",
+    "quote_carousel": "Navega por cada una de las frases destacadas",
+    "tabs": "Selecciona cada pestaña para explorar el contenido",
+}
+
 # ── Texto de progreso UI ──────────────────────────────────────────────────
 PROGRESS_STEPS = {
     "init":           (0,  "Iniciando sistema..."),
