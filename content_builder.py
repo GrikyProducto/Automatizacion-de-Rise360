@@ -402,6 +402,7 @@ class ContentBuilder:
         self._blocks_inserted = 0
         self._blocks_failed = 0
         self._failed_log: list[dict] = []
+        self._course_url = ""  # URL of the duplicated course (set in build_course)
 
     # ── IA Designer (lazy load) ─────────────────────────────────────────
 
@@ -423,6 +424,42 @@ class ContentBuilder:
             )
             return None
 
+    # ── Utilidades de navegación ────────────────────────────────────────
+
+    def _ensure_on_outline(self):
+        """Verify we're on the course outline. If not, navigate to saved URL."""
+        try:
+            edit_links = self.rise.page.locator("a:has-text('Edit Content')")
+            if edit_links.count() > 0:
+                return  # Already on outline
+        except Exception:
+            pass
+
+        # Not on outline — navigate directly to saved course URL
+        logger.info("  No estamos en el outline — navegando de vuelta...")
+        try:
+            if self._course_url:
+                self.rise.page.goto(
+                    self._course_url, wait_until="domcontentloaded"
+                )
+                self.rise._wait_for_content_loaded(max_wait=30)
+                self.rise.dismiss_cookies()
+                time.sleep(1)
+            else:
+                # Fallback: try go_back_to_outline
+                self.rise.go_back_to_outline()
+                time.sleep(1)
+
+            # Verify we're back
+            edit_links = self.rise.page.locator("a:has-text('Edit Content')")
+            if edit_links.count() > 0:
+                logger.info("  Outline recuperado exitosamente")
+                return
+
+            logger.warning("  No se pudo recuperar el outline")
+        except Exception as e:
+            logger.warning(f"  Error recuperando outline: {e}")
+
     # ── API pública ───────────────────────────────────────────────────────
 
     def _extract_course_title(self, content_json: dict) -> str:
@@ -432,6 +469,12 @@ class ContentBuilder:
         2. Si no hay, toma los primeros bloques Bold del preámbulo
         3. Aplica limpieza: corta en primer separador (: — ;), max 80 chars
         """
+        # Metadata markers to skip (common in structured PDFs)
+        METADATA_MARKERS = {
+            "COURSE_TITLE", "COURSE_SUBTITLE", "SECTION_INTRO",
+            "TABLE_OF_CONTENTS", "Contenido",
+        }
+
         sections = content_json.get("sections", [])
 
         # Strategy 1: Look for explicit "titulo" blocks
@@ -439,11 +482,11 @@ class ContentBuilder:
             for b in section.get("blocks", []):
                 if b.get("block_type") == "titulo":
                     raw = b.get("text", "").strip()
-                    if raw and len(raw) > 5:
+                    if raw and len(raw) > 5 and raw not in METADATA_MARKERS:
                         return self._clean_course_title(raw)
 
         # Strategy 2: First bold blocks from preámbulo (before any H2)
-        for section in sections[:2]:
+        for section in sections[:3]:
             blocks = section.get("blocks", [])
             title_parts = []
             for b in blocks:
@@ -453,6 +496,9 @@ class ContentBuilder:
                 # Stop at first heading or TOC marker
                 if bt in ("h2", "h1") or text.lower() in ("contenido", "índice", "indice"):
                     break
+                # Skip metadata markers
+                if text in METADATA_MARKERS:
+                    continue
                 if "Bold" in font and text and len(text) > 5:
                     title_parts.append(text)
                 elif title_parts:
@@ -478,11 +524,20 @@ class ContentBuilder:
         """Entry point. Extrae temas, escala lecciones, inserta con criterio."""
         self._progress("Preparando contenido del curso...", 58)
 
+        # Save current course URL for navigation safety
+        self._course_url = self.rise.page.url.split("?")[0].split("#")[0]
+        if "/lesson/" in self._course_url:
+            self._course_url = self._course_url.split("/lesson/")[0]
+        logger.info(f"URL del curso: {self._course_url}")
+
         # Set course title from PDF content (not filename)
         course_title = self._extract_course_title(content_json)
         logger.info(f"Título del curso: '{course_title}'")
         self.rise.set_course_title(course_title)
         time.sleep(1)
+
+        # Ensure we're back on the outline after title edit
+        self._ensure_on_outline()
 
         topics = self._extract_topics(content_json)
         logger.info(f"Temas extraídos del PDF: {len(topics)}")
@@ -530,7 +585,9 @@ class ContentBuilder:
         progress_per = 30 / max(len(lesson_map), 1)
 
         # PASS 1: Rename ALL lessons first (while on the outline)
-        # Format: "Tema N: NOMBRE" for H2 topics; intro/conclusion/references keep their name
+        # Ensure we're on the outline with Edit Content links visible
+        self._ensure_on_outline()
+
         self._progress("Renombrando lecciones...", 63)
         tema_counter = 0
         for lesson_idx, topic_data in lesson_map.items():
@@ -542,13 +599,17 @@ class ContentBuilder:
                 tema_counter += 1
                 formatted_title = f"Tema {tema_counter}: {title}"
             else:
-                # intro, conclusion, references: keep original name
                 formatted_title = title
             self.rise.rename_lesson(lesson_idx, formatted_title)
             time.sleep(0.5)
+            # Ensure we're still on the outline after each rename
+            self._ensure_on_outline()
         logger.info("Todas las lecciones renombradas")
 
         # PASS 2: Edit content per lesson
+        # Ensure we're on outline before starting content editing
+        self._ensure_on_outline()
+
         for lesson_idx, topic_data in lesson_map.items():
             pct = int(
                 65 + list(lesson_map.keys()).index(lesson_idx) * progress_per
@@ -1221,10 +1282,13 @@ class ContentBuilder:
 
     def _execute_lesson_plan(self, lesson_idx: int, topic_data: dict):
         """
-        Abre una lección, genera plan con IA, ejecuta:
-        1. EDIT actions: cambiar tipo vía lápiz si necesario + llenar contenido
-        2. ADD actions: agregar bloque con tipo específico + llenar contenido
-        3. FLASHCARD actions: editar vía sidebar
+        Abre una lección, genera plan con IA, ejecuta linealmente:
+        - Para cada acción del plan, en orden:
+          KEEP: skip
+          EDIT: cambiar tipo vía lápiz si difiere → llenar contenido
+          ADD: agregar bloque con tipo específico → llenar contenido
+          ADD_UX: agregar statement → llenar con texto UX
+          FLASHCARD: editar vía sidebar
         """
         title = topic_data.get("title", "")
         content_groups = topic_data.get("content_groups", [])
@@ -1264,6 +1328,13 @@ class ContentBuilder:
         # Build index map of existing blocks for quick lookup
         existing_type_map = {b["index"]: b["type"] for b in existing_blocks}
 
+        # Log plan summary
+        action_counts = {}
+        for a in plan:
+            act = a.get("action", "?")
+            action_counts[act] = action_counts.get(act, 0) + 1
+        logger.info(f"  Plan: {action_counts}")
+
         # 4. Scroll to top before processing
         try:
             self.rise.page.keyboard.press("Control+Home")
@@ -1274,119 +1345,91 @@ class ContentBuilder:
         self.rise.dismiss_sidebar_overlay()
 
         total_edited = 0
-        add_queue = []  # collect ADD actions to batch-process
+        changeable_types = {
+            "text", "heading", "statement", "quote",
+            "bulleted_list", "numbered_list", "note",
+        }
 
-        # ── Phase 1: Process EDIT actions (change type + fill) ──────────
-        edit_actions = [a for a in plan if a["action"] == "EDIT"]
-        for action in edit_actions:
-            target_idx = action.get("target_index", -1)
-            desired_type = action.get("block_type", "text")
-            texts = action.get("texts", [])
+        # ── Execute plan linearly, action by action ─────────────────────
+        for action in plan:
+            act = action.get("action", "")
 
-            if target_idx < 0:
-                # No valid target — demote to ADD
-                add_queue.append(action)
+            if act == "KEEP":
                 continue
 
-            current_type = existing_type_map.get(target_idx, "unknown")
-
-            # Change block type via pencil icon if needed
-            if current_type != desired_type and desired_type not in SKIP_BLOCK_TYPES:
-                # Only change type for simple editable blocks
-                changeable = {
-                    "text", "heading", "statement", "quote",
-                    "bulleted_list", "numbered_list", "note",
-                }
-                if desired_type in changeable:
-                    changed = self.rise.change_block_type(target_idx, desired_type)
-                    if changed:
-                        logger.info(
-                            f"  [{target_idx}] Tipo cambiado: "
-                            f"{current_type} → {desired_type}"
-                        )
-                    else:
-                        logger.debug(
-                            f"  [{target_idx}] No se pudo cambiar tipo, "
-                            f"editando como {current_type}"
-                        )
-
-            # Fill editables with content
-            edited = self._fill_block_content(target_idx, texts)
-            total_edited += edited
-
-        # ── Phase 2: Process ADD_UX actions ─────────────────────────────
-        ux_actions = [a for a in plan if a["action"] == "ADD_UX"]
-        for action in ux_actions:
-            texts = action.get("texts", [])
-            if not texts:
-                continue
-            # Find safe insertion point
-            insertion_idx = self._find_safe_insertion_point(existing_blocks)
-            if self.rise.add_block_at_position(insertion_idx, "statement"):
-                time.sleep(0.3)
-                # Fill the newly added block (it should be right after insertion)
-                # Re-catalog to find it
-                new_blocks = self.rise._catalog_blocks_in_editor()
-                # Find a statement block near our insertion point
-                for nb in new_blocks:
-                    if nb["type"] == "statement" and nb["index"] >= insertion_idx:
-                        self._fill_block_content(nb["index"], texts)
-                        total_edited += 1
-                        break
-
-        # ── Phase 3: Process ADD actions ────────────────────────────────
-        # Collect remaining ADDs from plan + demoted EDITs
-        for a in plan:
-            if a["action"] == "ADD":
-                add_queue.append(a)
-
-        if add_queue:
-            logger.info(f"  Agregando {len(add_queue)} bloques nuevos...")
-            insertion_idx = self._find_safe_insertion_point(existing_blocks)
-
-            for action in add_queue:
+            elif act == "EDIT":
+                target_idx = action.get("target_index", -1)
                 desired_type = action.get("block_type", "text")
                 texts = action.get("texts", [])
 
-                if self.rise.add_block_at_position(insertion_idx, desired_type):
+                if target_idx < 0 or not texts:
+                    continue
+
+                current_type = existing_type_map.get(target_idx, "unknown")
+
+                # Change block type via pencil icon if needed
+                if (current_type != desired_type
+                        and desired_type in changeable_types
+                        and current_type in changeable_types):
+                    changed = self.rise.change_block_type(
+                        target_idx, desired_type
+                    )
+                    if changed:
+                        logger.info(
+                            f"  ✎ [{target_idx}] {current_type} → {desired_type}"
+                        )
+
+                # Fill editables with content
+                edited = self._fill_block_content(target_idx, texts)
+                total_edited += edited
+
+            elif act in ("ADD", "ADD_UX"):
+                desired_type = action.get("block_type", "text")
+                texts = action.get("texts", [])
+                if not texts:
+                    continue
+
+                # Find safe insertion point
+                insertion_idx = self._find_safe_insertion_point(
+                    existing_blocks
+                )
+                if self.rise.add_block_at_position(
+                    insertion_idx, desired_type
+                ):
                     time.sleep(0.3)
                     # Re-catalog to find the new block
                     new_blocks = self.rise._catalog_blocks_in_editor()
-                    # The new block should be near the insertion index
-                    # Find first block of desired_type near insertion_idx
-                    filled = False
                     for nb in new_blocks:
-                        if nb["index"] >= insertion_idx and nb["type"] != "continue":
-                            edited = self._fill_block_content(nb["index"], texts)
+                        if (nb["index"] >= insertion_idx
+                                and nb["type"] != "continue"):
+                            edited = self._fill_block_content(
+                                nb["index"], texts
+                            )
                             total_edited += edited
-                            filled = True
-                            insertion_idx = nb["index"] + 1
                             break
-                    if not filled and texts:
-                        logger.warning(
-                            f"  No se encontró bloque recién agregado "
-                            f"para '{texts[0][:30]}...'"
-                        )
 
-        # ── Phase 4: Handle flashcard blocks via sidebar ────────────────
-        flashcard_actions = [a for a in plan if a["action"] == "FLASHCARD"]
-        for action in flashcard_actions:
-            cards = action.get("cards", [])
-            target_idx = action.get("target_index", -1)
-            if cards and target_idx >= 0:
-                edited = self.rise.edit_flashcard_sidebar(target_idx, cards)
-                total_edited += edited
-                logger.info(f"  Flashcards editadas: {edited} cards")
-            elif cards:
-                # Find first flashcard block
-                all_blocks = self.rise._catalog_blocks_in_editor()
-                fc = [b for b in all_blocks if b["type"] == "flashcards"]
-                if fc:
+            elif act == "FLASHCARD":
+                cards = action.get("cards", [])
+                target_idx = action.get("target_index", -1)
+                if not cards:
+                    continue
+                if target_idx >= 0:
                     edited = self.rise.edit_flashcard_sidebar(
-                        fc[0]["index"], cards
+                        target_idx, cards
                     )
-                    total_edited += edited
-                    logger.info(f"  Flashcards editadas: {edited} cards")
+                else:
+                    # Find first flashcard block
+                    all_blocks = self.rise._catalog_blocks_in_editor()
+                    fc = [b for b in all_blocks if b["type"] == "flashcards"]
+                    if fc:
+                        edited = self.rise.edit_flashcard_sidebar(
+                            fc[0]["index"], cards
+                        )
+                    else:
+                        edited = 0
+                total_edited += edited
+                if edited > 0:
+                    logger.info(f"  Flashcards: {edited} cards")
 
         self._blocks_inserted += total_edited
 

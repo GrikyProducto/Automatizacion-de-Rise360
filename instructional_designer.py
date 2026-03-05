@@ -55,9 +55,17 @@ Tu trabajo: dado el contenido parseado de UNA lección del curso y los bloques e
 El sistema puede CAMBIAR el tipo de cualquier bloque existente usando el ícono de lápiz (config).
 Esto es MUY RÁPIDO (~2 segundos) vs agregar un bloque nuevo (~15-30 segundos).
 
-Por lo tanto: PRIORIZA reutilizar bloques existentes cambiando su tipo.
-Si un bloque existente es "text" pero necesitas un "heading" → usa EDIT con block_type "heading".
-El sistema automáticamente cambiará el tipo antes de insertar el contenido.
+ESTRATEGIA OBLIGATORIA:
+1. Toma los primeros N bloques editables existentes (text, heading, statement, quote, list, etc.)
+2. Para cada pieza de contenido, CAMBIA el tipo del bloque existente al tipo ideal usando EDIT con block_type diferente al actual.
+3. SOLO usa ADD cuando el contenido excede la cantidad de bloques editables existentes.
+
+Ejemplo: si hay 10 bloques "text" y necesitas 3 headings + 5 texts + 2 statements:
+→ EDIT block 0 con block_type="heading" (el lápiz cambiará text→heading)
+→ EDIT block 1 con block_type="text"
+→ EDIT block 2 con block_type="heading"
+→ etc.
+NO crear bloques nuevos si ya hay suficientes bloques editables existentes.
 
 ## GUÍA DE BLOQUES RISE 360:
 - "text": Párrafos explicativos largos (>200 caracteres). El más versátil.

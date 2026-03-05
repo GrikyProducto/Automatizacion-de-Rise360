@@ -1080,12 +1080,17 @@ class RiseAutomation:
             self.page.keyboard.type(new_name, delay=10)
             time.sleep(0.3)
 
-            # BLUR to save: click on a neutral area
+            # BLUR to save: press Enter then click neutral area
+            self.page.keyboard.press("Enter")
+            time.sleep(0.3)
+            # Wait for outline to stabilize
             try:
-                self.page.mouse.click(10, 10)
+                self.page.locator("a:has-text('Edit Content')").first.wait_for(
+                    state="visible", timeout=3_000
+                )
             except Exception:
-                self.page.keyboard.press("Escape")
-            time.sleep(0.5)
+                pass
+            time.sleep(0.3)
 
             # Verify the title was saved
             try:
@@ -1554,8 +1559,12 @@ class RiseAutomation:
                         el.fill("")
                         el.fill(title)
                         time.sleep(0.5)
-                        self.page.keyboard.press("Tab")
-                        time.sleep(0.3)
+                        # Blur by clicking a neutral area (NOT Tab — Tab navigates away)
+                        try:
+                            self.page.mouse.click(960, 400)
+                        except Exception:
+                            self.page.keyboard.press("Escape")
+                        time.sleep(0.5)
                         logger.info(f"Titulo del curso establecido: '{title}'")
                         return True
                 except Exception:
