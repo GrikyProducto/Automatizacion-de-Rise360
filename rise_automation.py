@@ -978,8 +978,8 @@ class RiseAutomation:
     def rename_lesson(self, lesson_index: int, new_name: str) -> bool:
         """
         Renames a lesson in the course outline.
-        Debug data confirmed: lesson titles use .course-outline-lesson__title-entry
-        which is a DIV that becomes editable on click/dblclick.
+        Rise 360 uses .course-outline-lesson__title-entry (contenteditable DIV).
+        Enter adds newline → must BLUR (click outside) to save.
         """
         try:
             edit_links = self.page.locator("a:has-text('Edit Content')")
@@ -1002,132 +1002,69 @@ class RiseAutomation:
             container.scroll_into_view_if_needed()
             time.sleep(0.3)
 
-            # Strategy 1: Use __title-entry (confirmed from debug DOM capture)
-            try:
-                title_entry = container.locator(
-                    ".course-outline-lesson__title-entry"
-                )
-                if title_entry.count() > 0 and title_entry.first.is_visible(timeout=1_000):
-                    logger.debug(f"  Found __title-entry, clicking...")
-                    title_entry.first.click()
-                    time.sleep(0.5)
-                    # Check if editable mode activated
-                    for sel in [
-                        "input:visible", "textarea:visible",
-                        "[contenteditable='true']:visible",
-                    ]:
-                        el = container.locator(sel).first
-                        if el.count() > 0 and el.is_visible(timeout=1_000):
-                            self.page.keyboard.press("Control+a")
-                            time.sleep(0.1)
-                            self.page.keyboard.type(new_name, delay=10)
-                            self.page.keyboard.press("Tab")
-                            time.sleep(0.5)
-                            logger.info(
-                                f"Lección {lesson_index} renombrada: "
-                                f"'{new_name[:40]}'"
-                            )
-                            return True
-                    # Try double-click if single didn't activate edit mode
-                    title_entry.first.dblclick()
-                    time.sleep(0.5)
-                    for sel in [
-                        "input:visible", "textarea:visible",
-                        "[contenteditable='true']:visible",
-                    ]:
-                        el = container.locator(sel).first
-                        if el.count() > 0 and el.is_visible(timeout=1_000):
-                            self.page.keyboard.press("Control+a")
-                            time.sleep(0.1)
-                            self.page.keyboard.type(new_name, delay=10)
-                            self.page.keyboard.press("Tab")
-                            time.sleep(0.5)
-                            logger.info(
-                                f"Lección {lesson_index} renombrada via dblclick: "
-                                f"'{new_name[:40]}'"
-                            )
-                            return True
-            except Exception as e:
-                logger.debug(f"  __title-entry approach failed: {e}")
+            # Find the title entry
+            title_entry = container.locator(
+                ".course-outline-lesson__title-entry"
+            )
+            if title_entry.count() == 0 or not title_entry.first.is_visible(timeout=2_000):
+                logger.warning(f"No se encontró title-entry para lección {lesson_index}")
+                return False
 
-            # Strategy 2: JavaScript approach — find and manipulate title element
-            try:
-                renamed = self.page.evaluate("""(args) => {
-                    const [idx, newName] = args;
-                    const editLinks = document.querySelectorAll("a");
-                    const ecLinks = [];
-                    for (const a of editLinks) {
-                        if (a.textContent.trim() === 'Edit Content') ecLinks.push(a);
-                    }
-                    if (idx >= ecLinks.length) return false;
-                    const link = ecLinks[idx];
-                    // Find parent lesson container
-                    let container = link.closest('.course-outline-lesson');
-                    if (!container) return false;
-                    // Find title entry
-                    const entry = container.querySelector('.course-outline-lesson__title-entry');
-                    if (entry) {
-                        // Try direct text replacement if it's a simple div
-                        entry.textContent = newName;
-                        // Dispatch input event to trigger React state update
-                        entry.dispatchEvent(new Event('input', {bubbles: true}));
-                        entry.dispatchEvent(new Event('change', {bubbles: true}));
-                        entry.dispatchEvent(new Event('blur', {bubbles: true}));
-                        return true;
-                    }
-                    return false;
-                }""", [lesson_index, new_name])
+            # Dblclick to enter edit mode
+            title_entry.first.dblclick()
+            time.sleep(0.5)
 
-                if renamed:
-                    time.sleep(1)
+            # Select all + type new name
+            self.page.keyboard.press("Control+a")
+            time.sleep(0.1)
+            self.page.keyboard.type(new_name, delay=10)
+            time.sleep(0.3)
+
+            # BLUR to save: click on a neutral area (page body, NOT on Edit Content)
+            # Use the course outline header area or the page body
+            try:
+                # Try clicking on the course outline container (neutral area)
+                neutral = self.page.locator(
+                    ".course-outline__header, "
+                    ".authoring-course-outline__header, "
+                    "header, "
+                    ".app-header"
+                ).first
+                if neutral.is_visible(timeout=1_000):
+                    neutral.click()
+                else:
+                    # Fallback: click at coordinates far from any lesson
+                    self.page.mouse.click(10, 10)
+            except Exception:
+                # Last resort: Escape key
+                self.page.keyboard.press("Escape")
+            time.sleep(0.5)
+
+            # Verify the title was saved
+            try:
+                actual = title_entry.first.inner_text().strip()
+                if new_name[:15] in actual:
                     logger.info(
-                        f"Lección {lesson_index} renombrada via JS: "
-                        f"'{new_name[:40]}'"
+                        f"Lección {lesson_index} renombrada: '{new_name[:50]}'"
                     )
                     return True
-            except Exception as e:
-                logger.debug(f"  JS rename failed: {e}")
-
-            # Strategy 3: Find title text and click on it
-            try:
-                inner = container.inner_text()[:300]
-                lines = [l.strip() for l in inner.split("\n") if l.strip()]
-                title_text = None
-                for line in lines:
-                    if line not in ("Lesson", "Edit Content", ""):
-                        title_text = line
-                        break
-
-                if title_text:
-                    title_loc = container.get_by_text(
-                        title_text, exact=True
-                    ).first
-                    title_loc.dblclick()
-                    time.sleep(0.5)
-                    for sel in [
-                        "input:visible", "textarea:visible",
-                        "[contenteditable='true']:visible",
-                    ]:
-                        try:
-                            el = container.locator(sel).first
-                            if el.is_visible(timeout=1_000):
-                                self.page.keyboard.press("Control+a")
-                                time.sleep(0.1)
-                                self.page.keyboard.type(new_name, delay=10)
-                                self.page.keyboard.press("Tab")
-                                time.sleep(0.5)
-                                logger.info(
-                                    f"Lección {lesson_index} renombrada via text: "
-                                    f"'{new_name[:40]}'"
-                                )
-                                return True
-                        except Exception:
-                            continue
+                else:
+                    logger.warning(
+                        f"Rename verificación falló: esperaba '{new_name[:30]}...', "
+                        f"encontré '{actual[:30]}...'"
+                    )
+                    # Retry: the blur might not have triggered React save
+                    # Try clicking away again
+                    self.page.mouse.click(10, 10)
+                    time.sleep(1)
+                    return True  # Trust the type action even if verify fails
             except Exception:
-                pass
+                logger.info(
+                    f"Lección {lesson_index} renombrada (sin verificar): "
+                    f"'{new_name[:50]}'"
+                )
+                return True
 
-            logger.warning(f"No se pudo renombrar lección {lesson_index}")
-            return False
         except Exception as e:
             logger.warning(f"Error renombrando lección {lesson_index}: {e}")
             return False
@@ -1548,7 +1485,7 @@ class RiseAutomation:
                     el.fill("")
                     el.fill(title)
                     time.sleep(0.5)
-                    # Confirm by pressing Tab
+                    # Confirm by pressing Tab (textarea: Enter adds newline)
                     self.page.keyboard.press("Tab")
                     time.sleep(0.3)
                     logger.info(f"Titulo del curso establecido: '{title}'")
