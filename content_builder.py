@@ -39,6 +39,8 @@ class ContentLayoutPlanner:
 
     # Max chars per heading/text block (patrón humano: 100-700 chars)
     CHUNK_SIZE = 500
+    # Max content items per lesson (prevents browser crashes with huge lessons)
+    MAX_ITEMS_PER_LESSON = 25
 
     def plan_lesson(
         self,
@@ -216,6 +218,14 @@ class ContentLayoutPlanner:
                 else:
                     for chunk in self._split_at_sentences(para):
                         items.append({"type": "paragraph", "text": chunk})
+
+        # Cap to prevent browser crashes with very long lessons
+        if len(items) > self.MAX_ITEMS_PER_LESSON:
+            logger.warning(
+                f"  Truncando contenido: {len(items)} → "
+                f"{self.MAX_ITEMS_PER_LESSON} items (max por lección)"
+            )
+            items = items[:self.MAX_ITEMS_PER_LESSON]
 
         logger.info(
             f"  Contenido aplanado: {len(items)} items "
@@ -440,96 +450,409 @@ class ContentBuilder:
 
         self._progress("¡Curso completado exitosamente!", 100)
 
-    # ── Extracción de temas del PDF ──────────────────────────────────────
+    # ── Extracción de temas del PDF (con criterio de diseño instruccional) ──
 
     def _extract_topics(self, content_json: dict) -> list[dict]:
-        topics = []
+        """
+        Análisis pedagógico del PDF → estructura de lecciones.
+
+        Enfoque UNIFICADO que funciona con CUALQUIER PDF:
+        1. Recopila TODOS los bloques de contenido (omite TOC, metadata)
+        2. Detecta límites de tema por DOS estrategias:
+           a) H2 por font-size (PDFs bien estructurados)
+           b) Patrón implícito N. + título bold (PDFs sin estructura de fuentes)
+        3. Subtemas (N.N.) NO son límites de tema — quedan dentro de su tema
+        4. Limpia numeración mecánica del PDF
+        5. Agrupa por bloques conceptuales, no por numeración
+        """
         sections = content_json.get("sections", [])
-        intro_blocks = []  # Accumulate pre-H2 blocks across sections
+
+        # ── Phase 1: Separar bloques de contenido de secciones especiales ──
+        all_blocks = []
+        conclusion_blocks = []
+        reference_blocks = []
 
         for section in sections:
             blocks = section.get("blocks", [])
+            stype = section.get("type", "")
 
-            # Pre-process: merge consecutive H2 blocks that form numbered headings
-            # e.g., "3.1." + "¿Qué es?" → single H2 "3.1. ¿Qué es?"
-            blocks = self._merge_consecutive_h2s(blocks)
+            # SKIP: Tabla de contenido
+            if self._is_table_of_contents(section):
+                logger.debug(
+                    f"  Omitiendo tabla de contenido: "
+                    f"'{section.get('heading', '')[:40]}'"
+                )
+                continue
 
-            h2_indices = [
-                i for i, b in enumerate(blocks) if b.get("block_type") == "h2"
-            ]
+            # SKIP: Metadata sections (portada, placeholders vacíos)
+            if self._is_metadata_section(section):
+                logger.debug(
+                    f"  Omitiendo metadata: "
+                    f"'{section.get('heading', '')[:40]}'"
+                )
+                continue
 
-            if h2_indices:
-                # Accumulate pre-H2 blocks into intro
-                pre_h2 = self._filter_labels(blocks[: h2_indices[0]])
-                intro_blocks.extend(pre_h2)
-
-                for idx, h2_pos in enumerate(h2_indices):
-                    end = (
-                        h2_indices[idx + 1]
-                        if idx + 1 < len(h2_indices)
-                        else len(blocks)
-                    )
-                    topic_blocks = self._filter_labels(blocks[h2_pos:end])
-                    h2_text = blocks[h2_pos].get("text", f"Tema {idx + 1}")
-                    topics.append(
-                        {
-                            "type": "topic",
-                            "title": h2_text,
-                            "content_groups": self._group_by_h3(topic_blocks),
-                        }
-                    )
-
-            elif section.get("type") == "conclusion":
+            # Conclusiones → aparte
+            if stype == "conclusion":
                 clean = self._filter_labels(blocks)
                 if clean:
-                    topics.append(
-                        {
-                            "type": "conclusion",
-                            "title": section.get("heading", "Conclusión"),
-                            "content_groups": [
-                                {"title": "", "text": self._blocks_to_text(clean)}
-                            ],
-                        }
-                    )
+                    conclusion_blocks = clean
+                continue
 
-            elif section.get("type") == "referencias" and len(blocks) > 2:
+            # Referencias → aparte
+            if stype == "referencias":
                 clean = self._filter_labels(blocks)
-                if clean:
-                    topics.append(
-                        {
-                            "type": "references",
-                            "title": "Referencias",
-                            "content_groups": [
-                                {"title": "", "text": self._blocks_to_text(clean)}
-                            ],
-                        }
-                    )
+                if clean and len(blocks) > 2:
+                    reference_blocks = clean
+                continue
 
-            elif section.get("type") in ("introduccion", "preambulo", "h1"):
-                # Sections without H2s: accumulate as intro content
-                clean = self._filter_labels(blocks)
-                intro_blocks.extend(clean)
+            # Todo lo demás → acumular para análisis unificado
+            all_blocks.extend(blocks)
 
-        # Insert single intro topic at the beginning if we have intro blocks
-        if intro_blocks:
-            topics.insert(
-                0,
-                {
-                    "type": "intro",
-                    "title": "Introducción general",
-                    "content_groups": self._group_by_h3(intro_blocks),
-                },
+        if not all_blocks:
+            topics = []
+        else:
+            # ── Phase 2: Pre-procesar bloques ──
+            all_blocks = self._merge_consecutive_h2s(all_blocks)
+            all_blocks = self._merge_numbered_headings(all_blocks)
+
+            # ── Phase 3: Detectar límites de tema (TOPIC level) ──
+            topic_boundaries = self._find_topic_boundaries(all_blocks)
+
+            # ── Phase 4: Construir temas ──
+            topics = self._build_topics_from_boundaries(
+                all_blocks, topic_boundaries
             )
 
+        # ── Phase 5: Agregar conclusiones y referencias ──
+        if conclusion_blocks:
+            topics.append({
+                "type": "conclusion",
+                "title": "Conclusiones",
+                "content_groups": [
+                    {"title": "", "text": self._blocks_to_text(conclusion_blocks)}
+                ],
+            })
+
+        if reference_blocks:
+            topics.append({
+                "type": "references",
+                "title": "Referencias",
+                "content_groups": [
+                    {"title": "", "text": self._blocks_to_text(reference_blocks)}
+                ],
+            })
+
         return topics
+
+    def _find_topic_boundaries(self, blocks: list) -> list[dict]:
+        """
+        Detecta límites de TEMA (no subtemas) usando dos estrategias.
+
+        Funciona con CUALQUIER PDF:
+        - Strategy 1: H2 por font-size que NO sea subtema (sin patrón N.N.)
+        - Strategy 2: Patrón implícito: bloque standalone N. + siguiente bold
+          (para PDFs donde todo el texto tiene la misma fuente)
+
+        Subtemas (N.N.) se detectan luego en _group_by_subtopic.
+        """
+        boundaries = []
+
+        for i, b in enumerate(blocks):
+            text = b.get("text", "").strip()
+            bt = b.get("block_type", "")
+            font = b.get("metadata", {}).get("font", "")
+
+            if not text or self._is_label_block(b):
+                continue
+
+            # ── Strategy 1: H2 por font-size (PDFs estructurados) ──
+            if bt == "h2":
+                # Skip artefactos (punto solo, texto muy corto)
+                if len(text) <= 2 or re.match(r"^\.+$", text):
+                    continue
+
+                # Skip subtemas N.N. — NO son límites de tema
+                if re.match(r"^\d+\.\d+", text):
+                    continue
+
+                # Skip metadata-like headings
+                if text.lower() in (
+                    "contenido", "tabla de contenido", "índice",
+                    "indice", "table of contents",
+                ):
+                    continue
+
+                boundaries.append({
+                    "index": i,
+                    "title": text,
+                    "source": "h2_font",
+                })
+                continue
+
+            # ── Strategy 2: Implícito N. + bold title (PDFs planos) ──
+            # Case A: Standalone "N." followed by bold title (separate blocks)
+            if re.match(r"^\d+\.$", text):
+                if i + 1 >= len(blocks):
+                    continue
+
+                next_b = blocks[i + 1]
+                next_font = next_b.get("metadata", {}).get("font", "")
+                next_text = next_b.get("text", "").strip()
+
+                # El siguiente bloque debe ser bold, con título real
+                # (no puntos de paginación, no muy corto)
+                if ("Bold" in next_font
+                        and len(next_text) > 5
+                        and "..." not in next_text
+                        and not re.match(r"^\.+\s*\d*$", next_text)):
+
+                    boundaries.append({
+                        "index": i,
+                        "title": f"{text} {next_text}",
+                        "source": "implicit",
+                    })
+                continue
+
+            # Case B: Merged "N. Title" (after _merge_numbered_headings)
+            # Matches "3. Mapa conceptual..." but NOT "3.1. Subtema..."
+            m = re.match(r"^(\d+)\.\s+([A-Za-z\u00C0-\u024F\u00BF\u00A1].{4,})", text)
+            if m and not re.match(r"^\d+\.\d+", text):
+                if "Bold" in font:
+                    boundaries.append({
+                        "index": i,
+                        "title": text,
+                        "source": "implicit_merged",
+                    })
+
+        implicit_count = sum(
+            1 for b in boundaries if b["source"] in ("implicit", "implicit_merged")
+        )
+        logger.info(
+            f"  Límites de tema detectados: {len(boundaries)} "
+            f"(H2: {sum(1 for b in boundaries if b['source'] == 'h2_font')}, "
+            f"implícitos: {implicit_count})"
+        )
+        for b in boundaries:
+            logger.debug(
+                f"    [{b['index']}] ({b['source']}) "
+                f"'{self._clean_topic_title(b['title'])[:60]}'"
+            )
+
+        return boundaries
+
+    def _build_topics_from_boundaries(
+        self, blocks: list, boundaries: list[dict]
+    ) -> list[dict]:
+        """
+        Construye la lista de temas a partir de los límites detectados.
+
+        - Antes del primer límite → Introducción
+        - Cada límite → un tema con su contenido hasta el siguiente límite
+        """
+        topics = []
+
+        if not boundaries:
+            # Sin límites → todo es introducción
+            clean = self._filter_labels(blocks)
+            if clean:
+                text = self._blocks_to_text(clean)
+                if text.strip() and len(text.strip()) > 50:
+                    topics.append({
+                        "type": "intro",
+                        "title": "Introducción",
+                        "content_groups": self._group_by_subtopic(clean),
+                    })
+            return topics
+
+        # Intro: todo antes del primer límite de tema
+        first_pos = boundaries[0]["index"]
+        intro_blocks = self._filter_labels(blocks[:first_pos])
+        if intro_blocks:
+            text = self._blocks_to_text(intro_blocks)
+            if text.strip() and len(text.strip()) > 50:
+                topics.append({
+                    "type": "intro",
+                    "title": "Introducción",
+                    "content_groups": self._group_by_subtopic(intro_blocks),
+                })
+
+        # Cada límite → un tema
+        for idx, boundary in enumerate(boundaries):
+            start = boundary["index"]
+            end = (
+                boundaries[idx + 1]["index"]
+                if idx + 1 < len(boundaries)
+                else len(blocks)
+            )
+
+            topic_blocks = self._filter_labels(blocks[start:end])
+            clean_title = self._clean_topic_title(boundary["title"])
+
+            content_groups = self._group_by_subtopic(topic_blocks)
+            if content_groups:
+                topics.append({
+                    "type": "topic",
+                    "title": clean_title,
+                    "content_groups": content_groups,
+                })
+
+        return topics
+
+    # ── Detección inteligente de secciones a omitir ────────────────────────
+
+    def _is_table_of_contents(self, section: dict) -> bool:
+        """
+        Detecta si una sección es una tabla de contenido (índice del PDF).
+
+        Funciona con CUALQUIER PDF detectando:
+        - Números standalone ("1.", "1.1.", "2.3.1.")
+        - Patrones de puntos/dots (".............. 4")
+        - Líneas cortas + prefijos numerados ("1. Definición...")
+        """
+        blocks = section.get("blocks", [])
+        if len(blocks) < 5:
+            return False
+
+        real_blocks = [
+            b for b in blocks
+            if b.get("text", "").strip()
+            and not self._is_label_block(b)
+        ]
+        if len(real_blocks) < 5:
+            return False
+
+        toc_indicators = 0
+        short_count = 0
+
+        for b in real_blocks:
+            text = b.get("text", "").strip()
+            if len(text) < 80:
+                short_count += 1
+
+            # Standalone number: "1.", "1.1.", "2.3.1."
+            if re.match(r"^\d+(\.\d+)*\.?\s*$", text):
+                toc_indicators += 1
+            # Dots pattern (with optional page number): ".............. 4"
+            elif re.match(r"^\.{5,}", text):
+                toc_indicators += 1
+            # Number prefix + title: "1. Definición...", "1.1. Concepto..."
+            elif re.match(r"^\d+(\.\d+)*\.?\s+\S", text):
+                toc_indicators += 1
+
+        short_ratio = short_count / len(real_blocks)
+        toc_ratio = toc_indicators / len(real_blocks)
+
+        # Dots patterns are a strong TOC signal (page references)
+        dots_count = sum(
+            1 for b in real_blocks
+            if re.match(r"^\.{3,}", b.get("text", "").strip())
+        )
+        has_dots = dots_count >= 3
+
+        if has_dots:
+            # With dots: moderate thresholds
+            return short_ratio > 0.6 and toc_ratio > 0.3
+        else:
+            # Without dots: much stricter — needs overwhelming evidence
+            return short_ratio > 0.8 and toc_ratio > 0.6
+
+    def _is_metadata_section(self, section: dict) -> bool:
+        """Detecta secciones de metadata (portada, placeholders)."""
+        blocks = section.get("blocks", [])
+        if not blocks:
+            return True
+
+        real_texts = [
+            b.get("text", "").strip()
+            for b in blocks
+            if b.get("text", "").strip()
+            and not self._is_label_block(b)
+        ]
+
+        # If all real text is metadata markers
+        metadata_markers = {
+            "COURSE_TITLE", "COURSE_SUBTITLE", "SECTION_INTRO",
+            "Contenido", "TABLE_OF_CONTENTS",
+        }
+        if all(t in metadata_markers or len(t) < 5 for t in real_texts):
+            return True
+
+        return False
+
+    def _clean_topic_title(self, title: str) -> str:
+        """
+        Limpia títulos eliminando numeración mecánica del PDF.
+        "1. Definición de la cadena..." → "Definición de la cadena..."
+        "3.1. ¿Qué es un mapa?" → "¿Qué es un mapa?"
+        """
+        # Strip leading numbering: N., N.N., N.N.N.
+        cleaned = re.sub(r"^\d+(\.\d+)*\.?\s*", "", title).strip()
+        # Capitalize first letter if needed
+        if cleaned and cleaned[0].islower():
+            cleaned = cleaned[0].upper() + cleaned[1:]
+        return cleaned if cleaned else title
+
+    def _merge_numbered_headings(self, blocks: list) -> list:
+        """
+        Merge consecutive bold blocks where the first is a number prefix
+        (N., N.N., N.N.N.) and the second is the actual title text.
+
+        Handles PDFs where the parser splits "1.1." and "Concepto general"
+        into separate blocks even though they form one heading.
+        """
+        if not blocks:
+            return blocks
+
+        merged = []
+        i = 0
+        while i < len(blocks):
+            b = blocks[i]
+            text = b.get("text", "").strip()
+            font = b.get("metadata", {}).get("font", "")
+            bt = b.get("block_type", "")
+
+            # Skip H2 blocks — they're handled by _merge_consecutive_h2s
+            if bt == "h2":
+                merged.append(b)
+                i += 1
+                continue
+
+            # Check if this is a standalone number prefix (bold)
+            if (re.match(r"^\d+(\.\d+)*\.?$", text)
+                    and "Bold" in font
+                    and i + 1 < len(blocks)):
+
+                next_b = blocks[i + 1]
+                next_bt = next_b.get("block_type", "")
+                next_text = next_b.get("text", "").strip()
+
+                # Next block must have real title text (not another number,
+                # not dots pattern). Font can be bold OR light — some PDFs
+                # use bold numbers with light/regular titles.
+                if (next_bt != "h2"
+                        and next_text
+                        and len(next_text) > 2
+                        and not re.match(r"^\d+(\.\d+)*\.?$", next_text)
+                        and not re.match(r"^\.{3,}", next_text)):
+                    # Merge: number + title
+                    combined = dict(b)
+                    sep = " " if text.endswith(".") else ". "
+                    combined["text"] = text + sep + next_text
+                    merged.append(combined)
+                    i += 2
+                    continue
+
+            merged.append(b)
+            i += 1
+
+        return merged
 
     def _merge_consecutive_h2s(self, blocks: list) -> list:
         """
         Merge consecutive H2 blocks that form a single heading.
-        Patterns merged:
-        - "3.1." + "Título real" → "3.1. Título real"
-        - "." or "" (artifacts) → removed
-        - "Contenido" alone (table of contents) → kept as-is
+        "3.1." + "Título real" → "3.1. Título real"
+        Artifacts (empty, single char) → removed.
         """
         if not blocks:
             return blocks
@@ -542,12 +865,10 @@ class ContentBuilder:
             text = b.get("text", "").strip()
 
             if bt == "h2":
-                # Filter out pure artifacts: ".", empty, single char
                 if len(text) <= 1:
                     i += 1
                     continue
 
-                # Check if this is a numbered prefix like "3.1.", "4.2.", etc.
                 is_number_prefix = bool(
                     re.match(r"^\d+\.\d*\.?$", text)
                 )
@@ -558,7 +879,6 @@ class ContentBuilder:
                     next_text = next_b.get("text", "").strip()
 
                     if next_bt == "h2" and next_text:
-                        # Merge: "3.1." + "Title" → "3.1. Title"
                         combined = dict(b)
                         sep = " " if text.endswith(".") else ". "
                         combined["text"] = text + sep + next_text
@@ -590,21 +910,41 @@ class ContentBuilder:
                 return True
         return False
 
-    # ── Agrupamiento por subtemas H3 ─────────────────────────────────────
+    # ── Agrupamiento por subtemas ────────────────────────────────────────
 
-    def _group_by_h3(self, blocks: list) -> list[dict]:
+    def _group_by_subtopic(self, blocks: list) -> list[dict]:
+        """
+        Agrupa bloques por subtemas (detectados por bold + patrón N.N.).
+        Limpia numeración de subtítulos para presentación limpia.
+
+        Funciona con CUALQUIER PDF: detecta subtemas por:
+        - Bold + patrón N.N. (genérico)
+        - Font-size H2/H3 + patrón N.N. (PDFs con jerarquía de fuentes)
+        """
         if not blocks:
             return []
+
+        # Pre-process: merge "1.1." + "Title" into single block
+        blocks = self._merge_numbered_headings(blocks)
 
         h3_positions = []
         for i, b in enumerate(blocks):
             fs = b.get("font_size", 0)
-            text = b.get("text", "")
+            text = b.get("text", "").strip()
             bt = b.get("block_type", "")
-            if bt == "h2":
+            font = b.get("metadata", {}).get("font", "")
+
+            # Skip the topic-level heading (first block, typically H2 or N. title)
+            if i == 0 and (bt == "h2" or re.match(r"^\d+\.\s+\S", text)):
                 continue
-            if fs >= 12 and any(text.startswith(f"{n}.") for n in range(1, 5)):
-                h3_positions.append(i)
+
+            # Detect subtopic headings by numbered pattern
+            if re.match(r"^\d+\.\d+", text):
+                # Must be either: bold font, or larger font, or H2/H3
+                is_bold = "Bold" in font or (b.get("font_flags", 0) & 1)
+                is_heading = bt in ("h2", "h3")
+                if is_bold or is_heading or fs >= 12:
+                    h3_positions.append(i)
 
         if not h3_positions:
             text = self._blocks_to_text(blocks)
@@ -618,15 +958,22 @@ class ContentBuilder:
 
         for idx, h3_pos in enumerate(h3_positions):
             end = (
-                h3_positions[idx + 1] if idx + 1 < len(h3_positions) else len(blocks)
+                h3_positions[idx + 1]
+                if idx + 1 < len(h3_positions)
+                else len(blocks)
             )
             h3_blocks = blocks[h3_pos:end]
-            h3_title = blocks[h3_pos].get("text", "")
+            raw_title = blocks[h3_pos].get("text", "")
+            # Clean numbering from subtopic title
+            clean_title = self._clean_topic_title(raw_title)
             text = self._blocks_to_text(h3_blocks)
             if text.strip():
-                groups.append({"title": h3_title, "text": text})
+                groups.append({"title": clean_title, "text": text})
 
         return groups
+
+    # Keep backward compatibility
+    _group_by_h3 = _group_by_subtopic
 
     def _blocks_to_text(self, blocks: list) -> str:
         paragraphs = []
@@ -648,13 +995,15 @@ class ContentBuilder:
             if not text:
                 continue
 
-            if bt == "h2" or (
-                fs >= 12 and any(text.startswith(f"{n}.") for n in range(1, 5))
-            ):
+            # Headings and subtopic titles: clean numbering
+            is_subtopic = fs >= 12 and re.match(r"^\d+\.\d+", text)
+            if bt == "h2" or is_subtopic:
                 if current_parts:
                     paragraphs.append(" ".join(current_parts))
                     current_parts = []
-                paragraphs.append(text)
+                # Clean numbering from heading text
+                clean_heading = self._clean_topic_title(text)
+                paragraphs.append(clean_heading)
                 last_real_fs = fs
                 continue
 
