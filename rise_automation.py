@@ -673,7 +673,7 @@ class RiseAutomation:
           block-divider, block-mondrian, block-list, block-quote
         """
         blocks = []
-        time.sleep(1)  # Brief wait for DOM stability
+        time.sleep(0.5)  # Brief wait for DOM stability
 
         # Selector principal confirmado por debug
         block_wrappers = self.page.locator("[class*='block-wrapper']")
@@ -931,12 +931,12 @@ class RiseAutomation:
             target = edit_links.nth(min(lesson_index, count - 1))
             target.scroll_into_view_if_needed()
             target.click()
-            time.sleep(2)
+            time.sleep(1)
 
             # Esperar carga del editor de lección
             self._wait_for_content_loaded(max_wait=30)
             self.dismiss_cookies()
-            time.sleep(2)
+            time.sleep(0.5)
 
             take_screenshot(self.page, label=f"lesson_editor_{lesson_index}")
             logger.info(f"Editor de leccion {lesson_index} abierto")
@@ -960,7 +960,7 @@ class RiseAutomation:
                     btn = self.page.locator(sel).first
                     if btn.is_visible(timeout=1_500):
                         btn.click()
-                        time.sleep(2)
+                        time.sleep(1)
                         self._wait_for_content_loaded(max_wait=30)
                         self.dismiss_cookies()
                         return
@@ -968,7 +968,7 @@ class RiseAutomation:
                     pass
             # Fallback: browser back
             self.page.go_back()
-            time.sleep(2)
+            time.sleep(1)
             self._wait_for_content_loaded(max_wait=30)
         except Exception as e:
             logger.warning(f"Error volviendo al outline: {e}")
@@ -978,8 +978,8 @@ class RiseAutomation:
     def rename_lesson(self, lesson_index: int, new_name: str) -> bool:
         """
         Renames a lesson in the course outline.
-        Rise 360 uses .course-outline-lesson__title-entry (contenteditable DIV).
-        Enter adds newline → must BLUR (click outside) to save.
+        Uses JavaScript to find and click the title element directly,
+        with multiple selector fallbacks for Rise 360's DOM structure.
         """
         try:
             edit_links = self.page.locator("a:has-text('Edit Content')")
@@ -991,28 +991,88 @@ class RiseAutomation:
                 )
                 return False
 
-            link = edit_links.nth(lesson_index)
-            parent = link.locator(
-                "xpath=ancestor::div[contains(@class,'course-outline-lesson')][1]"
-            )
-            if parent.count() == 0:
+            # Use JavaScript to find the lesson title element
+            # Rise 360 lesson titles can be various elements — try multiple selectors
+            title_clicked = self.page.evaluate("""(lessonIdx) => {
+                // Find all lesson containers
+                const lessons = document.querySelectorAll(
+                    '.course-outline-lesson, [class*="course-outline-lesson"]'
+                );
+                // Filter to only actual lessons (not sections)
+                const realLessons = Array.from(lessons).filter(el => {
+                    const cls = String(el.className || '');
+                    return !cls.includes('--section') && el.querySelector('a');
+                });
+                if (lessonIdx >= realLessons.length) return false;
+                const lesson = realLessons[lessonIdx];
+
+                // Try multiple selectors for the title element
+                const selectors = [
+                    '.course-outline-lesson__title-entry',
+                    '[class*="title-entry"]',
+                    '[class*="lesson-title"]',
+                    '[class*="title"] div',
+                    '[contenteditable]',
+                ];
+                for (const sel of selectors) {
+                    const el = lesson.querySelector(sel);
+                    if (el) {
+                        el.click();
+                        return 'found:' + sel;
+                    }
+                }
+
+                // Last resort: click the text node directly (not the Edit Content link)
+                const allText = lesson.querySelectorAll('div, span, p');
+                for (const el of allText) {
+                    const text = el.textContent.trim();
+                    if (text && text !== 'Edit Content' && text !== 'Lesson'
+                        && !text.includes('Edit Content')
+                        && el.offsetHeight > 0 && el.offsetWidth > 0) {
+                        el.click();
+                        return 'text:' + text.slice(0, 30);
+                    }
+                }
+                return false;
+            }""", lesson_index)
+
+            if not title_clicked:
+                logger.warning(
+                    f"No se encontró título para lección {lesson_index}"
+                )
                 return False
 
-            container = parent.first
-            container.scroll_into_view_if_needed()
-            time.sleep(0.3)
-
-            # Find the title entry
-            title_entry = container.locator(
-                ".course-outline-lesson__title-entry"
-            )
-            if title_entry.count() == 0 or not title_entry.first.is_visible(timeout=2_000):
-                logger.warning(f"No se encontró title-entry para lección {lesson_index}")
-                return False
-
-            # Dblclick to enter edit mode
-            title_entry.first.dblclick()
+            logger.debug(f"  Title click result: {title_clicked}")
             time.sleep(0.5)
+
+            # After clicking, check if a contenteditable appeared
+            # (Rise may need a double-click to enter edit mode)
+            editable = self.page.locator(
+                "[contenteditable='true']:visible"
+            ).first
+            try:
+                editable.wait_for(state="visible", timeout=2_000)
+            except Exception:
+                # Try double-click via JS on the same element
+                self.page.evaluate("""(lessonIdx) => {
+                    const lessons = document.querySelectorAll(
+                        '.course-outline-lesson, [class*="course-outline-lesson"]'
+                    );
+                    const realLessons = Array.from(lessons).filter(el => {
+                        const cls = String(el.className || '');
+                        return !cls.includes('--section') && el.querySelector('a');
+                    });
+                    if (lessonIdx >= realLessons.length) return;
+                    const lesson = realLessons[lessonIdx];
+                    const title = lesson.querySelector(
+                        '[class*="title-entry"], [class*="title"] div, [class*="lesson-title"]'
+                    );
+                    if (title) {
+                        const evt = new MouseEvent('dblclick', {bubbles: true});
+                        title.dispatchEvent(evt);
+                    }
+                }""", lesson_index)
+                time.sleep(0.5)
 
             # Select all + type new name
             self.page.keyboard.press("Control+a")
@@ -1020,23 +1080,10 @@ class RiseAutomation:
             self.page.keyboard.type(new_name, delay=10)
             time.sleep(0.3)
 
-            # BLUR to save: click on a neutral area (page body, NOT on Edit Content)
-            # Use the course outline header area or the page body
+            # BLUR to save: click on a neutral area
             try:
-                # Try clicking on the course outline container (neutral area)
-                neutral = self.page.locator(
-                    ".course-outline__header, "
-                    ".authoring-course-outline__header, "
-                    "header, "
-                    ".app-header"
-                ).first
-                if neutral.is_visible(timeout=1_000):
-                    neutral.click()
-                else:
-                    # Fallback: click at coordinates far from any lesson
-                    self.page.mouse.click(10, 10)
+                self.page.mouse.click(10, 10)
             except Exception:
-                # Last resort: Escape key
                 self.page.keyboard.press("Escape")
             time.sleep(0.5)
 
@@ -1469,29 +1516,71 @@ class RiseAutomation:
         return False
 
     def set_course_title(self, title: str) -> bool:
-        """Edita el titulo del curso en el outline (sin truncar)."""
-        title_sels = [
-            "textarea[placeholder='Course Title']",
-            "textarea",
-            ".authoring-lesson-header__title textarea",
-        ]
-        for sel in title_sels:
-            try:
-                el = self.page.locator(sel).first
-                if el.is_visible(timeout=3_000):
-                    el.click()
-                    time.sleep(0.3)
-                    # Use fill() instead of keyboard.type() to avoid truncation
-                    el.fill("")
-                    el.fill(title)
-                    time.sleep(0.5)
-                    # Confirm by pressing Tab (textarea: Enter adds newline)
-                    self.page.keyboard.press("Tab")
-                    time.sleep(0.3)
-                    logger.info(f"Titulo del curso establecido: '{title}'")
-                    return True
-            except Exception:
-                pass
+        """
+        Edita el titulo del curso en el outline.
+        Rise 360 shows the title as a large heading that becomes a
+        textarea on click. Must click the heading first to reveal textarea.
+        """
+        try:
+            # Step 1: Click on the course title heading to activate editing
+            # The title is a large heading in the course outline
+            heading_sels = [
+                "h1",  # Most likely the big title
+                "[class*='course-title']",
+                "[class*='authoring-course'] h1",
+                "[class*='authoring-course'] h2",
+            ]
+            for sel in heading_sels:
+                try:
+                    el = self.page.locator(sel).first
+                    if el.is_visible(timeout=1_000):
+                        el.click()
+                        time.sleep(0.5)
+                        break
+                except Exception:
+                    continue
+
+            # Step 2: Now find the textarea (should appear after click)
+            textarea_sels = [
+                "textarea[placeholder='Course Title']",
+                "textarea",
+            ]
+            for sel in textarea_sels:
+                try:
+                    el = self.page.locator(sel).first
+                    if el.is_visible(timeout=3_000):
+                        el.click()
+                        time.sleep(0.3)
+                        el.fill("")
+                        el.fill(title)
+                        time.sleep(0.5)
+                        self.page.keyboard.press("Tab")
+                        time.sleep(0.3)
+                        logger.info(f"Titulo del curso establecido: '{title}'")
+                        return True
+                except Exception:
+                    pass
+
+            # Step 3: Fallback — try using JS to find and modify
+            result = self.page.evaluate("""(title) => {
+                const ta = document.querySelector('textarea');
+                if (ta) {
+                    ta.focus();
+                    ta.value = title;
+                    ta.dispatchEvent(new Event('input', {bubbles: true}));
+                    ta.dispatchEvent(new Event('change', {bubbles: true}));
+                    ta.blur();
+                    return true;
+                }
+                return false;
+            }""", title)
+            if result:
+                logger.info(f"Titulo del curso establecido via JS: '{title}'")
+                return True
+
+        except Exception as e:
+            logger.warning(f"Error estableciendo titulo: {e}")
+
         logger.warning("No se pudo establecer el titulo del curso")
         return False
 
@@ -1522,6 +1611,98 @@ class RiseAutomation:
         logger.warning("No se pudo encontrar el boton de agregar bloque")
         return False
 
+    def change_block_type(self, block_index: int, new_type: str) -> bool:
+        """
+        Changes the type of an existing block using the pencil/config icon.
+        This is MUCH faster than adding a new block (~2s vs ~30s).
+
+        Flow: click block → click pencil icon (block-controls__config) →
+              select new type from dropdown → done.
+        """
+        try:
+            wrappers = self.page.locator("[class*='block-wrapper']")
+            if block_index >= wrappers.count():
+                return False
+
+            wrapper = wrappers.nth(block_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.15)
+
+            # Click to select the block
+            wrapper.click(timeout=2_000)
+            time.sleep(0.2)
+
+            # Find and click the config/pencil icon
+            config_btn = wrapper.locator(
+                ".block-controls__config, "
+                "[class*='block-controls'] button, "
+                "button[class*='config']"
+            )
+            if config_btn.count() == 0:
+                # Try finding it in the block controls area above the block
+                config_btn = self.page.locator(
+                    ".block-controls__config"
+                )
+
+            if config_btn.count() > 0 and config_btn.first.is_visible(timeout=1_500):
+                config_btn.first.click()
+                time.sleep(0.3)
+
+                # Now select the desired type from the dropdown/menu
+                # Rise shows block type options as clickable items
+                type_label = self._get_block_type_label(new_type)
+                type_option = self.page.locator(
+                    f"button:has-text('{type_label}'), "
+                    f"[role='menuitem']:has-text('{type_label}'), "
+                    f"[role='option']:has-text('{type_label}'), "
+                    f"li:has-text('{type_label}'), "
+                    f"a:has-text('{type_label}')"
+                ).first
+
+                if type_option.is_visible(timeout=2_000):
+                    type_option.click()
+                    time.sleep(0.2)
+                    logger.debug(
+                        f"  Block {block_index} type changed to '{new_type}'"
+                    )
+                    return True
+                else:
+                    # Close menu
+                    self.page.keyboard.press("Escape")
+                    time.sleep(0.2)
+
+        except Exception as e:
+            logger.debug(f"  change_block_type failed for {block_index}: {e}")
+            try:
+                self.page.keyboard.press("Escape")
+            except Exception:
+                pass
+
+        return False
+
+    def _get_block_type_label(self, block_type: str) -> str:
+        """Maps internal block type to the label shown in the UI dropdown."""
+        LABEL_MAP = {
+            "text": "Paragraph",
+            "paragraph": "Paragraph",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "note": "Note",
+            "table": "Table",
+            "statement": "Statement",
+            "bulleted_list": "Bulleted list",
+            "numbered_list": "Numbered list",
+            "quote": "Quote",
+            "quote_carousel": "Quote carousel",
+            "flashcards": "Flashcard grid",
+            "accordion": "Accordion",
+            "tabs": "Tabs",
+            "process": "Process",
+            "sorting": "Sorting",
+            "labeled": "Labeled graphic",
+        }
+        return LABEL_MAP.get(block_type, block_type.replace("_", " ").title())
+
     def _get_block_category_and_type(self, block_type: str) -> tuple[str, str]:
         """Mapea tipos internos a (categoría sidebar, sub-tipo).
 
@@ -1539,85 +1720,96 @@ class RiseAutomation:
         Divider → Divider, Continue
         """
         CATEGORY_MAP = {
-            "text": ("Text", ""),
-            "paragraph": ("Text", ""),
-            "heading": ("Text", ""),
-            "subheading": ("Text", ""),
-            "note": ("Text", ""),
+            "text": ("Text", "Paragraph"),
+            "paragraph": ("Text", "Paragraph"),
+            "heading": ("Text", "Heading"),
+            "subheading": ("Text", "Subheading"),
+            "note": ("Text", "Note"),
             "text_twocol": ("Text", ""),
-            "table": ("Text", ""),
-            "statement": ("Statement", ""),
-            "list": ("List", ""),
-            "bulleted_list": ("List", ""),
-            "numbered_list": ("List", ""),
+            "table": ("Text", "Table"),
+            "statement": ("Statement", "Statement"),
+            "list": ("List", "Bulleted list"),
+            "bulleted_list": ("List", "Bulleted list"),
+            "numbered_list": ("List", "Numbered list"),
             "image": ("Image", ""),
             "video": ("Multimedia", ""),
-            "flashcards": ("Interactive", ""),
-            "quote": ("Quote", ""),
-            "quote_carousel": ("Quote", ""),
-            "divider": ("Divider", ""),
+            "flashcards": ("Interactive", "Flashcard grid"),
+            "quote": ("Quote", "Quote"),
+            "quote_carousel": ("Quote", "Quote carousel"),
+            "divider": ("Divider", "Divider"),
             "spacer": ("Divider", ""),
             "banner": ("Image", ""),
             "section_banner": ("Text", ""),
-            "continue": ("Divider", ""),
-            "process": ("Interactive", ""),
-            "sorting": ("Interactive", ""),
+            "continue": ("Divider", "Continue"),
+            "process": ("Interactive", "Process"),
+            "sorting": ("Interactive", "Sorting"),
+            "accordion": ("Interactive", "Accordion"),
+            "tabs": ("Interactive", "Tabs"),
+            "labeled": ("Interactive", "Labeled graphic"),
         }
         return CATEGORY_MAP.get(
             block_type, (block_type.replace("_", " ").title(), "")
         )
 
-    def _select_block_from_library(self, category: str) -> bool:
+    def _select_block_from_library(
+        self, category: str, sub_type: str = ""
+    ) -> bool:
         """Selecciona un bloque del Block Library sidebar.
 
-        Diagnostic confirmó el flujo:
+        Flow completo:
         1. "+" abre sidebar con categorías (button.block-wizard__link)
-        2. Click en categoría → agrega bloque por defecto de esa categoría
+        2. Click en categoría → muestra sub-tipos
+        3. Click en sub-tipo específico → agrega el bloque
 
-        Las categorías son: Text, Statement, Quote, List, Image, Gallery,
-        Multimedia, Interactive, Knowledge Check, Chart, Divider, Code, Custom Block
+        Si sub_type está vacío, selecciona el default de la categoría.
         """
-        # Try 1: Click category button in sidebar (block-wizard__link)
         try:
             sidebar = self.page.locator(".blocks-sidebar")
-            if sidebar.first.is_visible(timeout=3_000):
-                cat_btn = sidebar.locator(
-                    f"button.block-wizard__link:has-text('{category}')"
-                )
-                if cat_btn.count() > 0 and cat_btn.first.is_visible(timeout=2_000):
-                    cat_btn.first.click()
-                    time.sleep(1)
-                    # Close sidebar after selection
-                    self.dismiss_sidebar_overlay()
-                    logger.debug(f"Block added via category '{category}'")
-                    return True
-        except Exception:
-            pass
+            if not sidebar.first.is_visible(timeout=3_000):
+                return False
 
-        # Try 2: Click category in the wizard items (li.block-wizard__item)
-        try:
-            item = self.page.locator(
-                f"li.block-wizard__item:has-text('{category}')"
+            # Step 1: Click the category button
+            cat_btn = sidebar.locator(
+                f"button.block-wizard__link:has-text('{category}')"
             )
-            if item.count() > 0 and item.first.is_visible(timeout=1_500):
-                item.first.click()
-                time.sleep(1)
-                self.dismiss_sidebar_overlay()
-                logger.debug(f"Block added via wizard item '{category}'")
-                return True
-        except Exception:
-            pass
+            if cat_btn.count() == 0:
+                cat_btn = sidebar.locator(
+                    f"li.block-wizard__item:has-text('{category}')"
+                )
+            if cat_btn.count() == 0 or not cat_btn.first.is_visible(timeout=2_000):
+                return False
 
-        # Try 3: Global text search as last resort
-        try:
-            item = self.page.get_by_text(
-                re.compile(f"^{category}$", re.IGNORECASE)
-            ).first
-            if item.is_visible(timeout=1_500):
-                item.click()
-                time.sleep(1)
-                self.dismiss_sidebar_overlay()
-                return True
+            cat_btn.first.click()
+            time.sleep(0.3)
+
+            # Step 2: If sub_type specified, click the specific block type
+            if sub_type:
+                time.sleep(0.2)
+                # Look for sub-type button/preview in the sidebar
+                sub_btn = sidebar.locator(
+                    f"button:has-text('{sub_type}'), "
+                    f"[class*='preview']:has-text('{sub_type}'), "
+                    f"[class*='block-type']:has-text('{sub_type}'), "
+                    f"li:has-text('{sub_type}'), "
+                    f"a:has-text('{sub_type}')"
+                ).first
+                try:
+                    if sub_btn.is_visible(timeout=1_500):
+                        sub_btn.click()
+                        time.sleep(0.3)
+                        logger.debug(
+                            f"Block added: {category} → {sub_type}"
+                        )
+                except Exception:
+                    logger.debug(
+                        f"Sub-type '{sub_type}' not found, "
+                        f"using category default"
+                    )
+
+            self.dismiss_sidebar_overlay()
+            logger.debug(f"Block added via category '{category}'")
+            return True
+
         except Exception:
             pass
 
@@ -1856,7 +2048,7 @@ class RiseAutomation:
 
             btn = create_buttons.nth(target_btn_idx)
             btn.scroll_into_view_if_needed()
-            time.sleep(0.3)
+            time.sleep(0.2)
 
             # The "+" buttons may be hidden until hover
             # Try hover on the gap area first
@@ -1864,20 +2056,20 @@ class RiseAutomation:
                 parent = btn.locator("xpath=ancestor::div[contains(@class,'block-create')][1]")
                 if parent.count() > 0:
                     parent.first.hover()
-                    time.sleep(0.5)
+                    time.sleep(0.3)
             except Exception:
                 pass
 
             btn.click(force=True)
-            time.sleep(0.8)
+            time.sleep(0.5)
 
-            # Select block type from sidebar category
-            category, _sub = self._get_block_category_and_type(block_type)
-            if self._select_block_from_library(category):
-                time.sleep(1)
+            # Select block type from sidebar category + sub-type
+            category, sub_type = self._get_block_category_and_type(block_type)
+            if self._select_block_from_library(category, sub_type):
+                time.sleep(0.3)
                 wait_for_react_idle(self.page, timeout_ms=3_000)
                 logger.info(
-                    f"Bloque '{block_type}' (cat: {category}) "
+                    f"Bloque '{block_type}' ({category}/{sub_type}) "
                     f"agregado después de bloque {after_index}"
                 )
                 return True

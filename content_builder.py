@@ -398,9 +398,30 @@ class ContentBuilder:
         self._progress = progress_callback or (lambda msg, pct: None)
         self._template = template_structure
         self._planner = ContentLayoutPlanner()
+        self._ai_designer = self._load_ai_designer()
         self._blocks_inserted = 0
         self._blocks_failed = 0
         self._failed_log: list[dict] = []
+
+    # ── IA Designer (lazy load) ─────────────────────────────────────────
+
+    def _load_ai_designer(self):
+        """Carga InstructionalDesigner si Groq está habilitado."""
+        try:
+            from instructional_designer import InstructionalDesigner
+            if not config.GROQ_ENABLED:
+                return None
+            designer = InstructionalDesigner()
+            logger.info(
+                "Diseñador instruccional IA cargado (Groq/Llama 3.3-70B)"
+            )
+            return designer
+        except Exception as e:
+            logger.info(
+                f"AI designer no disponible: {e} — "
+                f"usando planner por reglas"
+            )
+            return None
 
     # ── API pública ───────────────────────────────────────────────────────
 
@@ -1200,8 +1221,10 @@ class ContentBuilder:
 
     def _execute_lesson_plan(self, lesson_idx: int, topic_data: dict):
         """
-        Abre una lección, genera plan con ContentLayoutPlanner,
-        ejecuta: primero ADDs, luego EDITs, luego flashcards.
+        Abre una lección, genera plan con IA, ejecuta:
+        1. EDIT actions: cambiar tipo vía lápiz si necesario + llenar contenido
+        2. ADD actions: agregar bloque con tipo específico + llenar contenido
+        3. FLASHCARD actions: editar vía sidebar
         """
         title = topic_data.get("title", "")
         content_groups = topic_data.get("content_groups", [])
@@ -1221,237 +1244,279 @@ class ContentBuilder:
             self._blocks_failed += len(content_groups)
             return
 
-        # 2. Pre-scan: get existing blocks with editable counts
+        # 2. Pre-scan existing blocks
         existing_blocks = self.rise.count_editables_in_lesson()
-        total_editables = sum(b["editables_count"] for b in existing_blocks)
         logger.info(
             f"  Bloques existentes: {len(existing_blocks)}, "
-            f"{total_editables} editables"
+            f"{sum(b['editables_count'] for b in existing_blocks)} editables"
         )
 
-        # 3. Generate plan
-        plan = self._planner.plan_lesson(content_groups, existing_blocks)
-
-        # 4. Count how many ADD actions we need
-        add_count = sum(1 for a in plan if a["action"] == "ADD")
-        ux_count = sum(1 for a in plan if a["action"] == "ADD_UX")
-
-        # 5. Add new blocks if needed
-        if add_count > 0:
-            logger.info(f"  Agregando {add_count} bloques nuevos...")
-            # Find insertion point BEFORE trailing visual blocks
-            # (image, banner, quote_carousel at the end → can't add after them,
-            # the "+" button before "Continue" doesn't work)
-            trailing_visual = {
-                "image", "banner", "mondrian", "quote_carousel", "embed",
-            }
-            insertion_idx = -1
-            found_content = False
-            for i in range(len(existing_blocks) - 1, -1, -1):
-                bt = existing_blocks[i]["type"]
-                if bt in SKIP_BLOCK_TYPES:
-                    continue
-                if bt in trailing_visual and not found_content:
-                    continue  # Skip trailing visual blocks
-                insertion_idx = existing_blocks[i]["index"]
-                found_content = True
-                break
-            # Fallback: if all blocks are visual, insert before first one
-            if insertion_idx == -1 and existing_blocks:
-                for block in existing_blocks:
-                    if block["type"] not in SKIP_BLOCK_TYPES:
-                        insertion_idx = max(block["index"] - 1, 0)
-                        break
-
-            added = self.rise.add_multiple_blocks(
-                insertion_idx, "text", add_count
+        # 3. Generate plan (IA si disponible, sino reglas)
+        if self._ai_designer is not None:
+            plan = self._ai_designer.plan_lesson_with_ai(
+                content_groups, existing_blocks,
+                lesson_title=title,
+                lesson_type=topic_data.get("type", "topic"),
             )
-            logger.info(f"  Bloques agregados: {added}/{add_count}")
-            time.sleep(1)
+        else:
+            plan = self._planner.plan_lesson(content_groups, existing_blocks)
 
-        # 6. Add UX instruction blocks
-        if ux_count > 0:
-            logger.info(f"  Agregando {ux_count} instrucciones UX...")
-            for action in plan:
-                if action["action"] == "ADD_UX":
-                    before_idx = action.get("before_index", 0)
-                    # Add statement block before the interactive block
-                    if self.rise.add_block_at_position(
-                        before_idx - 1, "statement"
-                    ):
-                        time.sleep(0.5)
+        # Build index map of existing blocks for quick lookup
+        existing_type_map = {b["index"]: b["type"] for b in existing_blocks}
 
-        # 7. Scroll back to top before editing
+        # 4. Scroll to top before processing
         try:
             self.rise.page.keyboard.press("Control+Home")
-            time.sleep(1)
+            time.sleep(0.5)
         except Exception:
             pass
 
-        # 8. Re-scan blocks after additions (indices may have changed)
-        all_blocks = self.rise._catalog_blocks_in_editor()
-        wrappers = self.rise.page.locator("[class*='block-wrapper']")
-
-        # 9. Build flat content queue from plan
-        content_queue = []
-        for action in plan:
-            if action["action"] in ("EDIT", "ADD"):
-                for text in action.get("texts", []):
-                    if text and text.strip():
-                        content_queue.append(text)
-            elif action["action"] == "ADD_UX":
-                for text in action.get("texts", []):
-                    if text and text.strip():
-                        content_queue.append(text)
-
-        # 10. Single-pass edit: iterate all blocks, fill with content
-        content_idx = 0
-        total_edited = 0
-
-        # Dismiss overlay ONCE before starting edit loop (not per block)
         self.rise.dismiss_sidebar_overlay()
 
-        for block in all_blocks:
-            block_type = block["type"]
-            block_idx = block["index"]
+        total_edited = 0
+        add_queue = []  # collect ADD actions to batch-process
 
-            if block_type in SKIP_BLOCK_TYPES:
+        # ── Phase 1: Process EDIT actions (change type + fill) ──────────
+        edit_actions = [a for a in plan if a["action"] == "EDIT"]
+        for action in edit_actions:
+            target_idx = action.get("target_index", -1)
+            desired_type = action.get("block_type", "text")
+            texts = action.get("texts", [])
+
+            if target_idx < 0:
+                # No valid target — demote to ADD
+                add_queue.append(action)
                 continue
 
-            # Skip flashcard blocks (handled separately via sidebar)
-            if block_type == "flashcards":
-                continue
+            current_type = existing_type_map.get(target_idx, "unknown")
 
-            # Skip if no more content to insert
-            if content_idx >= len(content_queue):
-                break
-
-            try:
-                wrapper = wrappers.nth(block_idx)
-                wrapper.scroll_into_view_if_needed()
-                time.sleep(0.2)
-
-                # Force click directly (skip actionability check for speed)
-                try:
-                    wrapper.click(timeout=2_000)
-                except Exception:
-                    try:
-                        wrapper.click(force=True)
-                    except Exception:
-                        logger.debug(
-                            f"  Block {block_idx} click failed, skipping"
-                        )
-                        continue
-                time.sleep(0.3)
-
-                # Special handling for carousel/interactive blocks with slides
-                if block_type in ("quote_carousel", "accordion", "tabs"):
-                    edited_in_block = self._edit_interactive_block(
-                        wrapper, block_type, block_idx,
-                        content_queue, content_idx
-                    )
-                    content_idx += edited_in_block
-                    total_edited += edited_in_block
-                    if edited_in_block > 0:
+            # Change block type via pencil icon if needed
+            if current_type != desired_type and desired_type not in SKIP_BLOCK_TYPES:
+                # Only change type for simple editable blocks
+                changeable = {
+                    "text", "heading", "statement", "quote",
+                    "bulleted_list", "numbered_list", "note",
+                }
+                if desired_type in changeable:
+                    changed = self.rise.change_block_type(target_idx, desired_type)
+                    if changed:
                         logger.info(
-                            f"  [{block_type}:{block_idx}] "
-                            f"{edited_in_block} editables (interactive)"
+                            f"  [{target_idx}] Tipo cambiado: "
+                            f"{current_type} → {desired_type}"
                         )
-                    self.rise.page.keyboard.press("Escape")
-                    time.sleep(0.2)
-                    continue
-
-                editables = wrapper.locator("[contenteditable='true']")
-                count = editables.count()
-
-                if count == 0:
-                    self.rise.page.keyboard.press("Escape")
-                    time.sleep(0.1)
-                    continue
-
-                edited_in_block = 0
-                for i in range(count):
-                    if content_idx >= len(content_queue):
-                        break
-                    text = content_queue[content_idx]
-                    try:
-                        ed = editables.nth(i)
-                        if not ed.is_visible(timeout=500):
-                            continue
-                        ed.click()
-                        time.sleep(0.1)
-                        self.rise.page.keyboard.press("Control+a")
-                        time.sleep(0.05)
-                        self.rise.page.keyboard.press("Delete")
-                        time.sleep(0.05)
-                        paste_large_text(self.rise.page, text)
-                        time.sleep(0.2)
-                        total_edited += 1
-                        edited_in_block += 1
-                        content_idx += 1
-                    except Exception as e:
+                    else:
                         logger.debug(
-                            f"  Block {block_idx} editable {i} falló: {e}"
+                            f"  [{target_idx}] No se pudo cambiar tipo, "
+                            f"editando como {current_type}"
                         )
-                        try:
-                            self.rise.page.keyboard.press("Escape")
-                        except Exception:
-                            pass
 
-                if edited_in_block > 0:
-                    logger.info(
-                        f"  [{block_type}:{block_idx}] "
-                        f"{edited_in_block}/{count} editables"
-                    )
+            # Fill editables with content
+            edited = self._fill_block_content(target_idx, texts)
+            total_edited += edited
 
-                self.rise.page.keyboard.press("Escape")
-                time.sleep(0.2)
+        # ── Phase 2: Process ADD_UX actions ─────────────────────────────
+        ux_actions = [a for a in plan if a["action"] == "ADD_UX"]
+        for action in ux_actions:
+            texts = action.get("texts", [])
+            if not texts:
+                continue
+            # Find safe insertion point
+            insertion_idx = self._find_safe_insertion_point(existing_blocks)
+            if self.rise.add_block_at_position(insertion_idx, "statement"):
+                time.sleep(0.3)
+                # Fill the newly added block (it should be right after insertion)
+                # Re-catalog to find it
+                new_blocks = self.rise._catalog_blocks_in_editor()
+                # Find a statement block near our insertion point
+                for nb in new_blocks:
+                    if nb["type"] == "statement" and nb["index"] >= insertion_idx:
+                        self._fill_block_content(nb["index"], texts)
+                        total_edited += 1
+                        break
 
-            except Exception as e:
-                logger.warning(
-                    f"  Error en block {block_idx} [{block_type}]: {e}"
-                )
-                try:
-                    self.rise.page.keyboard.press("Escape")
-                    self.rise.dismiss_sidebar_overlay()
-                except Exception:
-                    pass
+        # ── Phase 3: Process ADD actions ────────────────────────────────
+        # Collect remaining ADDs from plan + demoted EDITs
+        for a in plan:
+            if a["action"] == "ADD":
+                add_queue.append(a)
 
-        self._blocks_inserted += total_edited
+        if add_queue:
+            logger.info(f"  Agregando {len(add_queue)} bloques nuevos...")
+            insertion_idx = self._find_safe_insertion_point(existing_blocks)
 
-        # 11. Handle flashcard blocks via sidebar
+            for action in add_queue:
+                desired_type = action.get("block_type", "text")
+                texts = action.get("texts", [])
+
+                if self.rise.add_block_at_position(insertion_idx, desired_type):
+                    time.sleep(0.3)
+                    # Re-catalog to find the new block
+                    new_blocks = self.rise._catalog_blocks_in_editor()
+                    # The new block should be near the insertion index
+                    # Find first block of desired_type near insertion_idx
+                    filled = False
+                    for nb in new_blocks:
+                        if nb["index"] >= insertion_idx and nb["type"] != "continue":
+                            edited = self._fill_block_content(nb["index"], texts)
+                            total_edited += edited
+                            filled = True
+                            insertion_idx = nb["index"] + 1
+                            break
+                    if not filled and texts:
+                        logger.warning(
+                            f"  No se encontró bloque recién agregado "
+                            f"para '{texts[0][:30]}...'"
+                        )
+
+        # ── Phase 4: Handle flashcard blocks via sidebar ────────────────
         flashcard_actions = [a for a in plan if a["action"] == "FLASHCARD"]
         for action in flashcard_actions:
             cards = action.get("cards", [])
-            if cards:
-                # Re-find the flashcard block index after additions
-                fc_blocks = [
-                    b for b in all_blocks if b["type"] == "flashcards"
-                ]
-                if fc_blocks:
-                    fc_idx = fc_blocks[0]["index"]
-                    edited = self.rise.edit_flashcard_sidebar(fc_idx, cards)
-                    self._blocks_inserted += edited
+            target_idx = action.get("target_index", -1)
+            if cards and target_idx >= 0:
+                edited = self.rise.edit_flashcard_sidebar(target_idx, cards)
+                total_edited += edited
+                logger.info(f"  Flashcards editadas: {edited} cards")
+            elif cards:
+                # Find first flashcard block
+                all_blocks = self.rise._catalog_blocks_in_editor()
+                fc = [b for b in all_blocks if b["type"] == "flashcards"]
+                if fc:
+                    edited = self.rise.edit_flashcard_sidebar(
+                        fc[0]["index"], cards
+                    )
+                    total_edited += edited
                     logger.info(f"  Flashcards editadas: {edited} cards")
 
-        # 12. Log stats
-        remaining = len(content_queue) - content_idx
-        if remaining > 0:
-            logger.info(
-                f"  {remaining} fragmentos de contenido no insertados"
-            )
+        self._blocks_inserted += total_edited
 
         logger.info(
             f"  Lección {lesson_idx} completada: "
             f"{total_edited} editables editados"
         )
 
-        # 13. UX/UI verification
-        self._verify_lesson_ux(lesson_idx, title)
-
-        # 14. Back to outline
+        # Back to outline
         self.rise.go_back_to_outline()
-        time.sleep(2)
+        time.sleep(1)
+
+    def _find_safe_insertion_point(self, existing_blocks: list[dict]) -> int:
+        """Find a safe block index for inserting new blocks (avoid Continue)."""
+        safe_text_types = {
+            "text", "statement", "heading", "quote",
+            "bulleted_list", "numbered_list",
+        }
+        safe_indices = [
+            b["index"] for b in existing_blocks
+            if b["type"] in safe_text_types
+        ]
+        if safe_indices:
+            mid = len(safe_indices) // 2
+            return safe_indices[mid]
+        elif existing_blocks:
+            for block in existing_blocks:
+                if block["type"] not in SKIP_BLOCK_TYPES:
+                    return block["index"]
+        return 0
+
+    def _fill_block_content(
+        self, block_idx: int, texts: list[str]
+    ) -> int:
+        """Fill a block's editables with the given texts. Returns count edited."""
+        if not texts:
+            return 0
+
+        wrappers = self.rise.page.locator("[class*='block-wrapper']")
+        if block_idx >= wrappers.count():
+            return 0
+
+        try:
+            wrapper = wrappers.nth(block_idx)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.15)
+
+            try:
+                wrapper.click(timeout=2_000)
+            except Exception:
+                try:
+                    wrapper.click(force=True)
+                except Exception:
+                    return 0
+            time.sleep(0.2)
+
+            # Check block type for interactive handling
+            cls = ""
+            try:
+                cls = wrapper.get_attribute("class") or ""
+            except Exception:
+                pass
+
+            block_type = self.rise._extract_block_type_from_class(cls)
+
+            if block_type in ("quote_carousel", "accordion", "tabs"):
+                edited = self._edit_interactive_block(
+                    wrapper, block_type, block_idx, texts, 0
+                )
+                try:
+                    self.rise.page.keyboard.press("Escape")
+                except Exception:
+                    pass
+                if edited > 0:
+                    logger.info(
+                        f"  [{block_type}:{block_idx}] "
+                        f"{edited} editables (interactive)"
+                    )
+                return edited
+
+            editables = wrapper.locator("[contenteditable='true']")
+            count = editables.count()
+
+            if count == 0:
+                self.rise.page.keyboard.press("Escape")
+                return 0
+
+            edited = 0
+            for i in range(min(count, len(texts))):
+                text = texts[i] if i < len(texts) else ""
+                if not text or not text.strip():
+                    continue
+                try:
+                    ed = editables.nth(i)
+                    if not ed.is_visible(timeout=500):
+                        continue
+                    ed.click()
+                    time.sleep(0.05)
+                    self.rise.page.keyboard.press("Control+a")
+                    self.rise.page.keyboard.press("Delete")
+                    time.sleep(0.05)
+                    paste_large_text(self.rise.page, text)
+                    time.sleep(0.15)
+                    edited += 1
+                except Exception as e:
+                    logger.debug(
+                        f"  Block {block_idx} editable {i} falló: {e}"
+                    )
+                    try:
+                        self.rise.page.keyboard.press("Escape")
+                    except Exception:
+                        pass
+
+            if edited > 0:
+                logger.info(
+                    f"  [{block_type}:{block_idx}] {edited}/{count} editables"
+                )
+
+            self.rise.page.keyboard.press("Escape")
+            time.sleep(0.1)
+            return edited
+
+        except Exception as e:
+            logger.warning(f"  Error en block {block_idx}: {e}")
+            try:
+                self.rise.page.keyboard.press("Escape")
+                self.rise.dismiss_sidebar_overlay()
+            except Exception:
+                pass
+            return 0
 
     # ── Interactive Block Editing ──────────────────────────────────────────
 

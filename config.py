@@ -16,6 +16,14 @@ RISE_DASHBOARD_URL = "https://rise.articulate.com/manage/all-content"
 TEMPLATE_URL = "https://rise.articulate.com/authoring/3mktt-_LKSTVtVKb8QC-i3D0EHSD-n-v"
 REFERENCE_COURSE_TITLE = "Gestión de la Cadena de Suministro en Entornos Competitivos"
 
+# ── IA / Groq ──────────────────────────────────────────────────────────────
+GROQ_API_KEY = "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"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_ENABLED = True
+GROQ_MAX_TOKENS = 4096
+GROQ_TEMPERATURE = 0.2
+GROQ_TIMEOUT_SEC = 45
+
 # ── Rutas del proyecto ─────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.resolve()
 DATA_DIR = BASE_DIR / "data"
@@ -38,7 +46,7 @@ RETRY_DELAY_MS = 1_500
 
 # ── Configuración del navegador ───────────────────────────────────────────
 BROWSER_HEADLESS = False           # Visible para supervisión del usuario
-BROWSER_SLOW_MO = 50               # ms entre acciones — más estable en React SPAs
+BROWSER_SLOW_MO = 30               # ms entre acciones — reducido para velocidad
 BROWSER_VIEWPORT = {"width": 1920, "height": 1080}
 BROWSER_LOCALE = "es-419"          # Español latinoamericano
 BROWSER_TIMEZONE = "America/Bogota"

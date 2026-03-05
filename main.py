@@ -24,6 +24,7 @@ REQUIRED_PACKAGES = [
     "Pillow",
     "pyautogui",
     "pyperclip",
+    "groq",
 ]
 
 
