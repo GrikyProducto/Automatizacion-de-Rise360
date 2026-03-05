@@ -28,7 +28,8 @@
       "Bash(python -c \"import content_builder; import rise_automation; print\\(''OK''\\)\")",
       "Bash(python -u main.py)",
       "Bash(python -u debug_selectors.py)",
-      "Bash(python -c \"import content_builder; import rise_automation; print\\(''All imports OK''\\)\")"
+      "Bash(python -c \"import content_builder; import rise_automation; print\\(''All imports OK''\\)\")",
+      "Bash(tasklist)"
     ]
   }
 }

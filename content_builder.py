@@ -39,8 +39,8 @@ class ContentLayoutPlanner:
 
     # Max chars per heading/text block (patrón humano: 100-700 chars)
     CHUNK_SIZE = 500
-    # Max content items per lesson (prevents browser crashes with huge lessons)
-    MAX_ITEMS_PER_LESSON = 25
+    # Max content items per lesson (soft cap — warns but doesn't truncate)
+    MAX_ITEMS_PER_LESSON = 60
 
     def plan_lesson(
         self,
@@ -180,6 +180,7 @@ class ContentLayoutPlanner:
 
         Patrón humano: usa heading blocks tanto para títulos como párrafos.
         Chunking: ~500 chars por bloque.
+        Merge: párrafos cortos consecutivos se fusionan hasta CHUNK_SIZE.
         """
         items = []
 
@@ -219,13 +220,16 @@ class ContentLayoutPlanner:
                     for chunk in self._split_at_sentences(para):
                         items.append({"type": "paragraph", "text": chunk})
 
-        # Cap to prevent browser crashes with very long lessons
+        # Merge consecutive short paragraphs into larger chunks
+        # This prevents micro-blocks (60 chars each) from inflating item count
+        items = self._merge_short_paragraphs(items)
+
+        # Warn but do NOT truncate — all content must be preserved
         if len(items) > self.MAX_ITEMS_PER_LESSON:
             logger.warning(
-                f"  Truncando contenido: {len(items)} → "
-                f"{self.MAX_ITEMS_PER_LESSON} items (max por lección)"
+                f"  Lección grande: {len(items)} items "
+                f"(recomendado max {self.MAX_ITEMS_PER_LESSON})"
             )
-            items = items[:self.MAX_ITEMS_PER_LESSON]
 
         logger.info(
             f"  Contenido aplanado: {len(items)} items "
@@ -235,6 +239,45 @@ class ContentLayoutPlanner:
             f"{sum(1 for i in items if i['type'] == 'list')} lists)"
         )
         return items
+
+    def _merge_short_paragraphs(self, items: list[dict]) -> list[dict]:
+        """
+        Merge consecutive short paragraph items into larger chunks
+        (up to CHUNK_SIZE). Headings, tables, and lists are never merged.
+
+        This prevents PDF micro-blocks (~60 chars each) from creating
+        dozens of tiny items per lesson.
+        """
+        merged = []
+        buffer_text = ""
+
+        for item in items:
+            # Only merge paragraphs — headings, tables, lists stay separate
+            if item["type"] != "paragraph":
+                # Flush buffer before non-paragraph
+                if buffer_text:
+                    merged.append({"type": "paragraph", "text": buffer_text})
+                    buffer_text = ""
+                merged.append(item)
+                continue
+
+            text = item["text"]
+
+            if not buffer_text:
+                buffer_text = text
+            elif len(buffer_text) + len(text) + 2 <= self.CHUNK_SIZE:
+                # Merge: fits within chunk size
+                buffer_text = buffer_text + "\n\n" + text
+            else:
+                # Flush current buffer, start new one
+                merged.append({"type": "paragraph", "text": buffer_text})
+                buffer_text = text
+
+        # Flush remaining buffer
+        if buffer_text:
+            merged.append({"type": "paragraph", "text": buffer_text})
+
+        return merged
 
     def _split_at_sentences(self, text: str) -> list[str]:
         """Split text at sentence boundaries into ~CHUNK_SIZE char chunks."""
@@ -361,9 +404,64 @@ class ContentBuilder:
 
     # ── API pública ───────────────────────────────────────────────────────
 
+    def _extract_course_title(self, content_json: dict) -> str:
+        """
+        Extrae el título real del curso del PDF como lo haría un humano:
+        1. Busca bloques con block_type "titulo" (font_size >= 24pt)
+        2. Si no hay, toma los primeros bloques Bold del preámbulo
+        3. Aplica limpieza: corta en primer separador (: — ;), max 80 chars
+        """
+        sections = content_json.get("sections", [])
+
+        # Strategy 1: Look for explicit "titulo" blocks
+        for section in sections[:2]:
+            for b in section.get("blocks", []):
+                if b.get("block_type") == "titulo":
+                    raw = b.get("text", "").strip()
+                    if raw and len(raw) > 5:
+                        return self._clean_course_title(raw)
+
+        # Strategy 2: First bold blocks from preámbulo (before any H2)
+        for section in sections[:2]:
+            blocks = section.get("blocks", [])
+            title_parts = []
+            for b in blocks:
+                text = b.get("text", "").strip()
+                font = b.get("metadata", {}).get("font", "")
+                bt = b.get("block_type", "")
+                # Stop at first heading or TOC marker
+                if bt in ("h2", "h1") or text.lower() in ("contenido", "índice", "indice"):
+                    break
+                if "Bold" in font and text and len(text) > 5:
+                    title_parts.append(text)
+                elif title_parts:
+                    break  # Stop collecting after first non-bold block
+            if title_parts:
+                raw = " ".join(title_parts)
+                return self._clean_course_title(raw)
+
+        # Fallback: parser title (may be filename)
+        return content_json.get("title", "Curso")
+
+    def _clean_course_title(self, raw_title: str) -> str:
+        """Clean course title: cut at first separator, max 80 chars."""
+        for sep in [':', ' - ', ' — ', ' – ', '; ']:
+            if sep in raw_title:
+                raw_title = raw_title.split(sep)[0].strip()
+                break
+        if len(raw_title) > 80:
+            raw_title = raw_title[:77].rsplit(' ', 1)[0]
+        return raw_title
+
     def build_course(self, content_json: dict):
         """Entry point. Extrae temas, escala lecciones, inserta con criterio."""
         self._progress("Preparando contenido del curso...", 58)
+
+        # Set course title from PDF content (not filename)
+        course_title = self._extract_course_title(content_json)
+        logger.info(f"Título del curso: '{course_title}'")
+        self.rise.set_course_title(course_title)
+        time.sleep(1)
 
         topics = self._extract_topics(content_json)
         logger.info(f"Temas extraídos del PDF: {len(topics)}")
@@ -411,12 +509,22 @@ class ContentBuilder:
         progress_per = 30 / max(len(lesson_map), 1)
 
         # PASS 1: Rename ALL lessons first (while on the outline)
+        # Format: "Tema N: NOMBRE" for H2 topics; intro/conclusion/references keep their name
         self._progress("Renombrando lecciones...", 63)
+        tema_counter = 0
         for lesson_idx, topic_data in lesson_map.items():
             title = topic_data.get("title", "")
-            if title:
-                self.rise.rename_lesson(lesson_idx, title)
-                time.sleep(0.5)
+            if not title:
+                continue
+            topic_type = topic_data.get("type", "topic")
+            if topic_type == "topic":
+                tema_counter += 1
+                formatted_title = f"Tema {tema_counter}: {title}"
+            else:
+                # intro, conclusion, references: keep original name
+                formatted_title = title
+            self.rise.rename_lesson(lesson_idx, formatted_title)
+            time.sleep(0.5)
         logger.info("Todas las lecciones renombradas")
 
         # PASS 2: Edit content per lesson
@@ -1131,14 +1239,32 @@ class ContentBuilder:
         # 5. Add new blocks if needed
         if add_count > 0:
             logger.info(f"  Agregando {add_count} bloques nuevos...")
-            # Find last editable block index as insertion point
-            last_editable_idx = -1
-            for block in existing_blocks:
-                if block["type"] not in SKIP_BLOCK_TYPES:
-                    last_editable_idx = block["index"]
+            # Find insertion point BEFORE trailing visual blocks
+            # (image, banner, quote_carousel at the end → can't add after them,
+            # the "+" button before "Continue" doesn't work)
+            trailing_visual = {
+                "image", "banner", "mondrian", "quote_carousel", "embed",
+            }
+            insertion_idx = -1
+            found_content = False
+            for i in range(len(existing_blocks) - 1, -1, -1):
+                bt = existing_blocks[i]["type"]
+                if bt in SKIP_BLOCK_TYPES:
+                    continue
+                if bt in trailing_visual and not found_content:
+                    continue  # Skip trailing visual blocks
+                insertion_idx = existing_blocks[i]["index"]
+                found_content = True
+                break
+            # Fallback: if all blocks are visual, insert before first one
+            if insertion_idx == -1 and existing_blocks:
+                for block in existing_blocks:
+                    if block["type"] not in SKIP_BLOCK_TYPES:
+                        insertion_idx = max(block["index"] - 1, 0)
+                        break
 
             added = self.rise.add_multiple_blocks(
-                last_editable_idx, "text", add_count
+                insertion_idx, "text", add_count
             )
             logger.info(f"  Bloques agregados: {added}/{add_count}")
             time.sleep(1)
@@ -1217,6 +1343,23 @@ class ContentBuilder:
                         )
                         continue
                 time.sleep(0.3)
+
+                # Special handling for carousel/interactive blocks with slides
+                if block_type in ("quote_carousel", "accordion", "tabs"):
+                    edited_in_block = self._edit_interactive_block(
+                        wrapper, block_type, block_idx,
+                        content_queue, content_idx
+                    )
+                    content_idx += edited_in_block
+                    total_edited += edited_in_block
+                    if edited_in_block > 0:
+                        logger.info(
+                            f"  [{block_type}:{block_idx}] "
+                            f"{edited_in_block} editables (interactive)"
+                        )
+                    self.rise.page.keyboard.press("Escape")
+                    time.sleep(0.2)
+                    continue
 
                 editables = wrapper.locator("[contenteditable='true']")
                 count = editables.count()
@@ -1309,6 +1452,214 @@ class ContentBuilder:
         # 14. Back to outline
         self.rise.go_back_to_outline()
         time.sleep(2)
+
+    # ── Interactive Block Editing ──────────────────────────────────────────
+
+    def _edit_interactive_block(
+        self,
+        wrapper,
+        block_type: str,
+        block_idx: int,
+        content_queue: list[str],
+        content_idx: int,
+    ) -> int:
+        """
+        Edit interactive blocks that hide editables behind UI interactions.
+        Returns the number of content items consumed from content_queue.
+
+        Handles:
+        - quote_carousel: navigate slides via next arrow, edit visible editables per slide
+        - accordion: expand each panel, edit title + body
+        - tabs: click each tab, edit visible editables
+        """
+        page = self.rise.page
+        edited = 0
+
+        try:
+            if block_type == "quote_carousel":
+                edited = self._edit_carousel(wrapper, page, content_queue, content_idx)
+            elif block_type == "accordion":
+                edited = self._edit_accordion(wrapper, page, content_queue, content_idx)
+            elif block_type == "tabs":
+                edited = self._edit_tabs(wrapper, page, content_queue, content_idx)
+        except Exception as e:
+            logger.warning(f"  Error editando {block_type} block {block_idx}: {e}")
+            try:
+                page.keyboard.press("Escape")
+            except Exception:
+                pass
+
+        return edited
+
+    def _edit_carousel(self, wrapper, page, content_queue, content_idx) -> int:
+        """Navigate carousel slides and edit visible editables on each."""
+        edited = 0
+        max_slides = 10  # safety limit
+
+        for slide_num in range(max_slides):
+            if content_idx + edited >= len(content_queue):
+                break
+
+            # Find visible editables on current slide
+            editables = wrapper.locator("[contenteditable='true']:visible")
+            time.sleep(0.3)
+            count = editables.count()
+
+            for i in range(count):
+                if content_idx + edited >= len(content_queue):
+                    break
+                try:
+                    ed = editables.nth(i)
+                    if not ed.is_visible(timeout=500):
+                        continue
+                    ed.click()
+                    time.sleep(0.1)
+                    page.keyboard.press("Control+a")
+                    time.sleep(0.05)
+                    page.keyboard.press("Delete")
+                    time.sleep(0.05)
+                    paste_large_text(page, content_queue[content_idx + edited])
+                    time.sleep(0.2)
+                    edited += 1
+                except Exception as e:
+                    logger.debug(f"    Carousel editable {i} failed: {e}")
+
+            # Try to navigate to next slide
+            next_btn = wrapper.locator(
+                "button[class*='next'], "
+                "button[class*='arrow-right'], "
+                "button[aria-label*='next' i], "
+                "button[aria-label*='Next' i], "
+                "[class*='carousel'] button:last-child"
+            )
+            if next_btn.count() > 0:
+                try:
+                    next_btn.first.click()
+                    time.sleep(0.5)
+                except Exception:
+                    break  # No more slides
+            else:
+                break  # No next button found
+
+        return edited
+
+    def _edit_accordion(self, wrapper, page, content_queue, content_idx) -> int:
+        """Expand each accordion panel and edit its editables."""
+        edited = 0
+
+        # Find accordion items/panels
+        panels = wrapper.locator(
+            "[class*='accordion-item'], "
+            "[class*='accordion__item'], "
+            "[class*='accordion'] > div"
+        )
+        panel_count = panels.count()
+
+        if panel_count == 0:
+            # Fallback: try direct children that look like panels
+            panels = wrapper.locator("[class*='block-accordion'] > div > div")
+            panel_count = panels.count()
+
+        for i in range(panel_count):
+            if content_idx + edited >= len(content_queue):
+                break
+
+            panel = panels.nth(i)
+            try:
+                # Click the panel header/trigger to expand it
+                trigger = panel.locator(
+                    "button, "
+                    "[class*='trigger'], "
+                    "[class*='header'], "
+                    "[class*='title'], "
+                    "[role='button']"
+                ).first
+                trigger.scroll_into_view_if_needed()
+                trigger.click()
+                time.sleep(0.5)
+
+                # Now find visible editables inside the expanded panel
+                editables = panel.locator("[contenteditable='true']:visible")
+                ed_count = editables.count()
+
+                for j in range(ed_count):
+                    if content_idx + edited >= len(content_queue):
+                        break
+                    try:
+                        ed = editables.nth(j)
+                        if not ed.is_visible(timeout=500):
+                            continue
+                        ed.click()
+                        time.sleep(0.1)
+                        page.keyboard.press("Control+a")
+                        time.sleep(0.05)
+                        page.keyboard.press("Delete")
+                        time.sleep(0.05)
+                        paste_large_text(page, content_queue[content_idx + edited])
+                        time.sleep(0.2)
+                        edited += 1
+                    except Exception as e:
+                        logger.debug(f"    Accordion panel {i} editable {j} failed: {e}")
+            except Exception as e:
+                logger.debug(f"    Accordion panel {i} expand failed: {e}")
+
+        return edited
+
+    def _edit_tabs(self, wrapper, page, content_queue, content_idx) -> int:
+        """Click each tab and edit visible editables in its content area."""
+        edited = 0
+
+        # Find tab buttons
+        tab_buttons = wrapper.locator(
+            "[role='tab'], "
+            "[class*='tab-button'], "
+            "[class*='tabs__tab'], "
+            "[class*='tab-label'], "
+            "button[class*='tab']"
+        )
+        tab_count = tab_buttons.count()
+
+        if tab_count == 0:
+            # Fallback: try nav links inside tabs
+            tab_buttons = wrapper.locator("[class*='tabs'] nav button, [class*='tabs'] nav a")
+            tab_count = tab_buttons.count()
+
+        for i in range(tab_count):
+            if content_idx + edited >= len(content_queue):
+                break
+
+            try:
+                tab = tab_buttons.nth(i)
+                tab.scroll_into_view_if_needed()
+                tab.click()
+                time.sleep(0.5)
+
+                # Edit visible editables in the active tab content
+                editables = wrapper.locator("[contenteditable='true']:visible")
+                ed_count = editables.count()
+
+                for j in range(ed_count):
+                    if content_idx + edited >= len(content_queue):
+                        break
+                    try:
+                        ed = editables.nth(j)
+                        if not ed.is_visible(timeout=500):
+                            continue
+                        ed.click()
+                        time.sleep(0.1)
+                        page.keyboard.press("Control+a")
+                        time.sleep(0.05)
+                        page.keyboard.press("Delete")
+                        time.sleep(0.05)
+                        paste_large_text(page, content_queue[content_idx + edited])
+                        time.sleep(0.2)
+                        edited += 1
+                    except Exception as e:
+                        logger.debug(f"    Tab {i} editable {j} failed: {e}")
+            except Exception as e:
+                logger.debug(f"    Tab {i} click failed: {e}")
+
+        return edited
 
     # ── Verificación UX/UI ───────────────────────────────────────────────
 
