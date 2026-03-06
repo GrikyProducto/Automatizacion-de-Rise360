@@ -12,9 +12,17 @@ PASSWORD = "GrikyRise2026!"
 
 # ── URLs ──────────────────────────────────────────────────────────────────
 RISE_BASE_URL = "https://rise.articulate.com"
-RISE_DASHBOARD_URL = "https://rise.articulate.com/home"
+RISE_DASHBOARD_URL = "https://rise.articulate.com/manage/all-content"
 TEMPLATE_URL = "https://rise.articulate.com/authoring/3mktt-_LKSTVtVKb8QC-i3D0EHSD-n-v"
 REFERENCE_COURSE_TITLE = "Gestión de la Cadena de Suministro en Entornos Competitivos"
+
+# ── IA / Groq ──────────────────────────────────────────────────────────────
+GROQ_API_KEY = "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"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_ENABLED = True
+GROQ_MAX_TOKENS = 4096
+GROQ_TEMPERATURE = 0.2
+GROQ_TIMEOUT_SEC = 45
 
 # ── Rutas del proyecto ─────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.resolve()
@@ -38,7 +46,7 @@ RETRY_DELAY_MS = 1_500
 
 # ── Configuración del navegador ───────────────────────────────────────────
 BROWSER_HEADLESS = False           # Visible para supervisión del usuario
-BROWSER_SLOW_MO = 50               # ms entre acciones — más estable en React SPAs
+BROWSER_SLOW_MO = 30               # ms entre acciones — reducido para velocidad
 BROWSER_VIEWPORT = {"width": 1920, "height": 1080}
 BROWSER_LOCALE = "es-419"          # Español latinoamericano
 BROWSER_TIMEZONE = "America/Bogota"
@@ -68,6 +76,19 @@ FONT_SIZE_H1 = 18                  # >= 18pt → Tema 1, Tema 2...
 FONT_SIZE_H2 = 14                  # >= 14pt → Subtemas
 FONT_SIZE_H3 = 11                  # >= 11pt + bold → subsección menor
 # < FONT_SIZE_H3 → párrafo normal
+
+# ── Instrucciones UX para bloques interactivos ──────────────────────────
+# Se insertan ANTES de cada bloque interactivo como statement block
+UX_INSTRUCTIONS = {
+    "flashcards": "Da clic en cada tarjeta para ver su información al reverso",
+    "accordion": "Despliega cada sección para ver su contenido",
+    "sorting": "Arrastra y ordena los elementos según corresponda",
+    "process": "Navega por cada paso del proceso",
+    "embed": "Revisa la siguiente cápsula interactiva",
+    "labeled": "Haz clic en cada punto para ver la información",
+    "quote_carousel": "Navega por cada una de las frases destacadas",
+    "tabs": "Selecciona cada pestaña para explorar el contenido",
+}
 
 # ── Texto de progreso UI ──────────────────────────────────────────────────
 PROGRESS_STEPS = {

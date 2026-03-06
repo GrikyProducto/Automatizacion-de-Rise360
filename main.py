@@ -14,11 +14,17 @@ import subprocess
 import sys
 import os
 
+# Forzar UTF-8 en stdout para evitar errores con caracteres especiales en Windows
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 REQUIRED_PACKAGES = [
     "opencv-python",
     "pytesseract",
     "Pillow",
     "pyautogui",
+    "pyperclip",
+    "groq",
 ]
 
 
@@ -41,16 +47,16 @@ def auto_install_packages():
     print(f"Instalando dependencias faltantes: {', '.join(missing)}")
     for pkg in missing:
         try:
-            print(f"  → pip install {pkg}")
+            print(f"  >> pip install {pkg}")
             subprocess.check_call(
                 [sys.executable, "-m", "pip", "install", pkg, "--quiet"],
                 timeout=120,
             )
-            print(f"  ✓ {pkg} instalado")
+            print(f"  [OK] {pkg} instalado")
         except subprocess.CalledProcessError as e:
-            print(f"  ✗ Error instalando {pkg}: {e}")
+            print(f"  [ERROR] instalando {pkg}: {e}")
         except subprocess.TimeoutExpired:
-            print(f"  ✗ Timeout instalando {pkg}")
+            print(f"  [TIMEOUT] instalando {pkg}")
 
 
 def auto_install_playwright():
@@ -405,9 +411,9 @@ class RiseAutomatorApp(tk.Tk):
                 self._log(f"Analizando PDF: {Path(pdf_path).name}")
                 content = parse_pdf(pdf_path)
 
-            course_title = content.get("title", "Curso Rise 360")
+            course_title = self._extract_course_name(content)
             sections_count = len(content.get("sections", []))
-            self._log(f"✓ PDF analizado: '{course_title}' — {sections_count} secciones")
+            self._log(f"PDF analizado: '{course_title}' -- {sections_count} secciones")
             self._update(f"PDF analizado: {sections_count} secciones encontradas", 20)
 
             if not self._running:
@@ -427,28 +433,8 @@ class RiseAutomatorApp(tk.Tk):
                 if not self._running:
                     return
 
-                # ── Fase 5: Análisis visual del curso de referencia ────────
-                self._update("Analizando curso de referencia (visual)...", 38)
-                self._log("Analizando diseño del curso de referencia...")
-
-                try:
-                    rise.navigate_to_course_editor(config.TEMPLATE_URL)
-                    reference_patterns = visual_learner.analyze_reference_course(rise.page)
-                    self._log(
-                        f"✓ Análisis visual completado: "
-                        f"{len(reference_patterns.get('detected_patterns', []))} patrones detectados"
-                    )
-                    visual_learner.save_learned_patterns(reference_patterns)
-                except Exception as e:
-                    self._log(f"⚠ Análisis visual parcial: {e}")
-
-                self._update("Análisis visual completado", 45)
-
-                if not self._running:
-                    return
-
-                # ── Fase 6: Duplicar plantilla ─────────────────────────────
-                self._update("Duplicando plantilla de curso...", 48)
+                # ── Fase 5: Duplicar plantilla ────────────────────────────
+                self._update("Duplicando plantilla de curso...", 38)
                 self._log(f"Duplicando plantilla para: '{course_title}'")
 
                 try:
@@ -458,17 +444,23 @@ class RiseAutomatorApp(tk.Tk):
                 except Exception as e:
                     self._log(f"✗ Error duplicando plantilla: {e}")
                     # Fallback: usar la URL de template directamente para testing
-                    self._log("⚠ Usando plantilla original como fallback")
-                    rise.navigate_to_course_editor(template_url)
+                    self._log("[!] Usando plantilla original como fallback")
+                    rise.navigate_to_course_outline(template_url)
 
-                self._update("Plantilla lista para edición", 55)
+                self._update("Plantilla lista para edición", 50)
 
                 if not self._running:
                     return
 
-                # ── Fase 7: Insertar contenido ─────────────────────────────
-                self._update("Insertando contenido del PDF...", 58)
-                self._log(f"Iniciando inserción de {sections_count} secciones...")
+                # ── Fase 6: Insertar contenido ───────────────────────────
+                # El ContentBuilder ahora:
+                # 1. Extrae temas H2 del PDF
+                # 2. Mapea cada tema a una lección
+                # 3. Dentro de cada lección, identifica SOLO bloques de texto
+                # 4. Inserta contenido organizado por subtemas H3
+                # 5. Deja intactos los elementos visuales (imágenes, divisores, etc.)
+                self._update("Insertando contenido del PDF...", 55)
+                self._log("Analizando estructura del PDF por temas...")
 
                 builder = ContentBuilder(
                     rise=rise,
@@ -519,6 +511,47 @@ class RiseAutomatorApp(tk.Tk):
         except Exception as e:
             logger.warning(f"No se pudo cargar learning_map.json: {e}")
             return {"mappings": {}, "corrections_history": [], "learned_selectors": {}}
+
+    def _extract_course_name(self, content: dict) -> str:
+        """
+        Extrae el nombre del curso desde la etiqueta COURSE_SUBTITLE del PDF.
+        Busca el bloque con texto "COURSE_SUBTITLE" (font_size 6.5, etiqueta)
+        y concatena los bloques siguientes que contienen el subtítulo real.
+
+        Limpia el título: corta en el primer separador (: — ;) para evitar
+        títulos largos con subtítulos. Máximo 80 chars.
+        """
+        raw_title = ""
+        for section in content.get("sections", []):
+            blocks = section.get("blocks", [])
+            for i, block in enumerate(blocks):
+                if block.get("text", "").strip() == "COURSE_SUBTITLE":
+                    subtitle_parts = []
+                    for next_block in blocks[i + 1:]:
+                        next_text = next_block.get("text", "").strip()
+                        next_size = next_block.get("font_size", 0)
+                        if next_size <= 7 and next_text.isupper() and "_" in next_text:
+                            break
+                        if next_text:
+                            subtitle_parts.append(next_text)
+                    if subtitle_parts:
+                        raw_title = " ".join(subtitle_parts)
+                        break
+
+        if not raw_title:
+            raw_title = content.get("title", "Curso Rise 360")
+
+        # Clean: cut at first separator to get just the main title
+        for sep in [":", " - ", " — ", " – ", "; "]:
+            if sep in raw_title:
+                raw_title = raw_title.split(sep)[0].strip()
+                break
+
+        # Max 80 chars, cut at word boundary
+        if len(raw_title) > 80:
+            raw_title = raw_title[:77].rsplit(" ", 1)[0]
+
+        return raw_title
 
     # ── Comunicación thread → UI ──────────────────────────────────────────
 

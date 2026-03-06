@@ -1,0 +1,1271 @@
+================================================================================
+COMPARACION EXHAUSTIVA: CURSO SCRIPT vs CURSO HUMANO
+================================================================================
+
+TITULO SCRIPT: Gestión de la Cadena de Suministro en Entornos Competitivos: enfoque sistémico, flujos clave y estra
+TITULO HUMANO: Gestión de la Cadena de Suministro en Entornos Competitivos
+  -> DIFERENTES
+
+LECCIONES SCRIPT: 5
+LECCIONES HUMANO: 9
+
+NOMBRES DE LECCIONES:
+  [OK] Leccion 0:
+    SCRIPT: ''
+    HUMANO: ''
+  [OK] Leccion 1:
+    SCRIPT: ''
+    HUMANO: ''
+  [OK] Leccion 2:
+    SCRIPT: ''
+    HUMANO: ''
+  [OK] Leccion 3:
+    SCRIPT: ''
+    HUMANO: ''
+  [OK] Leccion 4:
+    SCRIPT: ''
+    HUMANO: ''
+  [DIFF] Leccion 5:
+    SCRIPT: '(N/A)'
+    HUMANO: ''
+  [DIFF] Leccion 6:
+    SCRIPT: '(N/A)'
+    HUMANO: ''
+  [DIFF] Leccion 7:
+    SCRIPT: '(N/A)'
+    HUMANO: ''
+  [DIFF] Leccion 8:
+    SCRIPT: '(N/A)'
+    HUMANO: ''
+
+
+======================================================================
+LECCION 0
+  Script: ''
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 26
+  Bloques HUMANO: 9
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [banner] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: 'En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin'
+           ...(644 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'En el entorno competitivo actual, marcado por la globalización, la transformación digital y el comportamiento cada vez más impredecible de los mercados, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible, sin'
+           ...(358 chars total)
+  >>> DIFF TIPO: statement vs heading
+  >>> DIFF ed[0]: uno es substring del otro
+      S(644): 'En el entorno competitivo actual, marcado por la globalización, la transformació...'
+      H(358): 'En el entorno competitivo actual, marcado por la globalización, la transformació...'
+
+  --- Bloque 2 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.1. Concepto general'
+  HUMANO [text_twocol] (2 editables):
+    ed[0]: 'Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente está íntimamente ligado a la rapidez con la que lo recibe, a la disponibilidad en el canal elegido, al nivel de servicio recibido y al compromiso ético y ambiental demostrado a lo largo de toda la cadena. En este contex'
+           ...(552 chars total)
+    ed[1]: 'Más que una simple evolución de la logística tradicional, el SCM representa un enfoque integral que articula decisiones operativas, tácticas y estratégicas, abarcando desde la gestión de proveedores y la planificación de la demanda hasta la entrega final y la logística inversa. Su alcance no se limi'
+           ...(535 chars total)
+  >>> DIFF TIPO: heading vs text_twocol
+  >>> DIFF #EDITABLES: 1 vs 2
+  >>> DIFF ed[0]: contenido diferente
+      S(21): '1.1. Concepto general...'
+      H(552): 'Ya no basta con ofrecer un buen producto; el valor real percibido por el cliente...'
+
+  --- Bloque 3 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: 'En este contexto, la gestión de la cadena de suministros, conocida internacionalmente como Supply Chain Management (SCM), se ha consolidado como una disciplina clave para garantizar la competitividad y la viabilidad de las organizaciones en el mediano y largo plazo. Más que una simple evolución de l'
+           ...(802 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Comprender cómo fluyen estos elementos entre los distintos actores proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total y'
+           ...(324 chars total)
+  >>> DIFF TIPO: statement vs heading
+  >>> DIFF ed[0]: contenido diferente
+      S(802): 'En este contexto, la gestión de la cadena de suministros, conocida internacional...'
+      H(324): 'Comprender cómo fluyen estos elementos entre los distintos actores proveedores, ...'
+
+  --- Bloque 4 ---
+  SCRIPT [flashcards] (0 editables):
+  HUMANO [banner] (0 editables):
+  >>> DIFF TIPO: flashcards vs banner
+
+  --- Bloque 5 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.2. Evolución y alcance'
+  HUMANO [flashcards] (0 editables):
+  >>> DIFF TIPO: heading vs flashcards
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 6 ---
+  SCRIPT [divider] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Esta unidad abordará cuatro dimensiones fundamentales:  |  | La definición de la cadena de suministros, su evolución conceptual y su funcionamiento a través de flujos clave.  |  | La estrategia de la cadena de suministros, entendida como el diseño intencional de operaciones para generar ventajas com'
+           ...(432 chars total)
+  >>> DIFF TIPO: divider vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 7 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.3. Flujos en la cadena de suministro'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Dichas perspectivas permitirán comprender la importancia de la logística integrada, de las decisiones basadas en datos, de la colaboración interorganizacional y del enfoque ético en la creación de redes de valor.'
+  >>> DIFF ed[0]: contenido diferente
+      S(38): '1.3. Flujos en la cadena de suministro...'
+      H(212): 'Dichas perspectivas permitirán comprender la importancia de la logística integra...'
+
+  --- Bloque 8 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [wrapper] (0 editables):
+  >>> DIFF TIPO: banner vs wrapper
+
+  --- Bloque 9 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.4. Caso práctico: la cadena de suministro de Cencosud'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 10 ---
+  SCRIPT [divider] (0 editables):
+  HUMANO: (bloque no existe)
+
+  --- Bloque 11 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.5. Ejemplo visual: mapa conceptual de la cadena de suministro'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 12 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '1.6. En la práctica: sostenibilidad y digitalización'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 13 ---
+  SCRIPT [numbered_list] (3 editables):
+    ed[0]: 'Comprender cómo fluyen estos elementos entre los distintos actores —proveedores, fabricantes, operadores logísticos, distribuidores, minoristas y clientes— permite visualizar la cadena de suministro como un sistema vivo, donde las interdependencias requieren coordinación constante, visibilidad total'
+           ...(789 chars total)
+    ed[1]: 'De hecho, autores como Chopra y Meindl, Ballou, Heizer, Render, Chase, Jacobs y Aquilano coinciden en señalar que una cadena de suministro eficiente y flexible es uno de los pilares fundamentales para alcanzar niveles superiores de productividad, rentabilidad y diferenciación. El foco de la cadena m'
+           ...(826 chars total)
+    ed[2]: 'una geografía extensa y segmentada que impone retos logísticos de cobertura; una economía abierta y orientada al comercio exterior; una creciente digitalización del consumo, que transforma los patrones tradicionales de abastecimiento; y una presión internacional por cumplir estándares de sostenibili'
+           ...(747 chars total)
+  HUMANO: (bloque no existe)
+
+  --- Bloque 14 ---
+  SCRIPT [divider] (0 editables):
+  HUMANO: (bloque no existe)
+
+  --- Bloque 15 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: 'Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 16 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: 'Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más q'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 17 ---
+  SCRIPT [image] (2 editables):
+    ed[0]: 'Comprender, diseñar y optimizar cadenas de suministro con una visión sistémica, colaborativa y estratégica es, hoy más que nunca, una competencia esencial para liderar procesos organizacionales en entornos volátiles, inciertos y altamente exigentes. Esta unidad abordará cuatro dimensiones fundamenta'
+           ...(686 chars total)
+    ed[1]: 'Dichas perspectivas permitirán comprender la importancia de la logística integrada, de las decisiones basadas en datos, de la colaboración interorganizacional y del enfoque ético en la creación de redes de valor.'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 18 ---
+  SCRIPT [quote_carousel] (6 editables):
+    ed[0]: 'Definición de la cadena de suministros'
+    ed[1]: 'Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de for'
+           ...(784 chars total)
+    ed[2]: ''
+    ed[3]: ''
+    ed[4]: ''
+    ed[5]: ''
+  HUMANO: (bloque no existe)
+
+  --- Bloque 19 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: 'Empresas como Mercado Libre o Blue Express utilizan algoritmos de predicción, microbodegas urbanas, integración con servicios de última milla y atención postventa personalizada. La gestión se ha vuelto más compleja, pero también más estratégica.'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 20 ---
+  SCRIPT [labeled] (0 editables):
+  HUMANO: (bloque no existe)
+
+  --- Bloque 21 ---
+  SCRIPT [divider] (0 editables):
+  HUMANO: (bloque no existe)
+
+  --- Bloque 22 ---
+  SCRIPT [wrapper] (2 editables):
+    ed[0]: ''
+    ed[1]: ''
+  HUMANO: (bloque no existe)
+
+  --- Bloque 23 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '•  Flujo de información: Es el sistema nervioso de la cadena.'
+  HUMANO: (bloque no existe)
+
+  --- Bloque 24 ---
+  SCRIPT [image] (1 editables):
+    ed[0]: '•  Flujo de información: Es el sistema nervioso de la cadena. Sin información precisa, actualizada y compartida, se producen distorsiones como el efecto látigo, donde una pequeña variación en la demanda genera una ola de sobreproducción o desabastecimiento. Este flujo debe ser digital, trazable, y e'
+           ...(314 chars total)
+  HUMANO: (bloque no existe)
+
+  --- Bloque 25 ---
+  SCRIPT [wrapper] (0 editables):
+  HUMANO: (bloque no existe)
+
+======================================================================
+LECCION 1
+  Script: ''
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 13
+  Bloques HUMANO: 33
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [banner] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: 'Estrategia de la cadena de suministros'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse como una red dinámica de organizaciones, procesos, personas, recursos e infraestructuras que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final de for'
+           ...(575 chars total)
+  >>> DIFF TIPO: statement vs heading
+  >>> DIFF ed[0]: contenido diferente
+      S(38): 'Estrategia de la cadena de suministros...'
+      H(575): 'Según lo citado por (Pacheco, 2024) la cadena de suministro puede entenderse com...'
+
+  --- Bloque 2 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '2.1. Alineación estratégica'
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Da clic en cada tarjeta para ver su información al reverso'
+  >>> DIFF TIPO: heading vs statement
+  >>> DIFF ed[0]: contenido diferente
+      S(27): '2.1. Alineación estratégica...'
+      H(58): 'Da clic en cada tarjeta para ver su información al reverso...'
+
+  --- Bloque 3 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [flashcards] (0 editables):
+  >>> DIFF TIPO: banner vs flashcards
+
+  --- Bloque 4 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '2.2. Enfoques estratégicos'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Un caso representativo en Chile es el del sector agroexportador, en particular el de la fruta fresca. Una cereza cosechada en diciembre debe estar en menos de una semana en China. Esto exige coordinación entre productores, frigoríficos, operadores logísticos, aduanas, navieras y canales de distribuc'
+           ...(433 chars total)
+  >>> DIFF ed[0]: contenido diferente
+      S(26): '2.2. Enfoques estratégicos...'
+      H(433): 'Un caso representativo en Chile es el del sector agroexportador, en particular e...'
+
+  --- Bloque 5 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '2.3. Casos comparativos'
+  HUMANO [divider] (0 editables):
+  >>> DIFF TIPO: heading vs divider
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 6 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '2.4. Resiliencia y gestión del riesgo'
+  HUMANO [heading] (1 editables):
+    ed[0]: '1.2 Evolución y alcance'
+  >>> DIFF ed[0]: contenido diferente
+      S(37): '2.4. Resiliencia y gestión del riesgo...'
+      H(23): '1.2 Evolución y alcance...'
+
+  --- Bloque 7 ---
+  SCRIPT [quote_carousel] (4 editables):
+    ed[0]: 'Toda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prior'
+           ...(1183 chars total)
+    ed[1]: 'Cadenas como Líder estructuran su red logística bajo un paradigma de eficiencia, con centros de distribución regionales que consolidan grandes volúmenes y optimizan costos mediante escalas de operación. En cambio, empresas como Falabella o Ripley, que se han orientado hacia modelos omnicanal, diseña'
+           ...(1039 chars total)
+    ed[2]: ''
+    ed[3]: ''
+  HUMANO [banner] (0 editables):
+  >>> DIFF TIPO: quote_carousel vs banner
+  >>> DIFF #EDITABLES: 4 vs 0
+
+  --- Bloque 8 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '2.5. Tecnología, digitalización e inteligencia artificial'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Durante los años 80 y 90, la introducción de sistemas de información integrados, como los ERP (Enterprise Resource Planning), permitió por primera vez consolidar datos de compras, producción, inventario, finanzas y distribución en una misma plataforma. Esto dio origen a las primeras experiencias de '
+           ...(408 chars total)
+  >>> DIFF ed[0]: contenido diferente
+      S(57): '2.5. Tecnología, digitalización e inteligencia artificial...'
+      H(408): 'Durante los años 80 y 90, la introducción de sistemas de información integrados,...'
+
+  --- Bloque 9 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: '•  Estrategia de eficiencia: Se orienta a la reducción de costos mediante la estandarización, la planificación detallada y la optimización de recursos. Es ideal en mercados donde la demanda es estable y el precio es un factor decisivo. Las operaciones se diseñan para evitar desperdicios, minimizar i'
+           ...(474 chars total)
+  HUMANO [divider] (0 editables):
+  >>> DIFF TIPO: statement vs divider
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 10 ---
+  SCRIPT [flashcards] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Este avance técnico coincidió con un cambio cultural: las empresas comenzaron a comprender que competir en un mercado global no dependía solo de la calidad del producto, sino también de la eficiencia de su cadena de suministro. Se pasó de competir entre empresas, a competir entre cadenas. Hoy, en mu'
+           ...(385 chars total)
+  >>> DIFF TIPO: flashcards vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 11 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: '•  Estrategia de respuesta: Prioriza la agilidad, la flexibilidad y la velocidad. Es aplicable en contextos de alta volatilidad o cuando los consumidores valoran más la personalización y la rapidez que el precio. Este enfoque requiere mantener cierta capacidad ociosa, operar con inventarios intermed'
+           ...(501 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Chase, Jacobs y Aquilano enfatizan que una cadena moderna debe ser una red dinámica, colaborativa y apoyada por tecnologías de información avanzadas. La analítica de datos, los sistemas de trazabilidad, la visibilidad en tiempo real y la inteligencia artificial permiten predecir la demanda, optimiza'
+           ...(745 chars total)
+  >>> DIFF TIPO: statement vs heading
+  >>> DIFF ed[0]: contenido diferente
+      S(501): '•  Estrategia de respuesta: Prioriza la agilidad, la flexibilidad y la velocidad...'
+      H(745): 'Chase, Jacobs y Aquilano enfatizan que una cadena moderna debe ser una red dinám...'
+
+  --- Bloque 12 ---
+  SCRIPT [wrapper] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: '1.3 Flujos en la cadena de suministro'
+  >>> DIFF TIPO: wrapper vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 13 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Una cadena de suministro opera mediante la gestión coordinada de varios flujos fundamentales, todos ellos interdependientes:'
+
+  --- Bloque 14 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [numbered_list] (4 editables):
+    ed[0]: 'Flujo de materiales: Incluye el movimiento físico de bienes desde el origen hasta el cliente. Abarca desde materias primas hasta productos terminados, incluyendo almacenamiento, transformación, embalaje y distribución. En CCU, este flujo parte con insumos como agua, malta y lúpulo, sigue con la elab'
+           ...(406 chars total)
+    ed[1]: 'Flujo de información: Es el sistema nervioso de la cadena. Sin información precisa, actualizada y compartida, se producen distorsiones como el efecto látigo, donde una pequeña variación en la demanda genera una ola de sobreproducción o desabastecimiento. Este flujo debe ser digital, trazable, y en t'
+           ...(311 chars total)
+    ed[2]: 'Flujo financiero: Comprende pagos, cobros, financiamiento y reembolsos. Una cadena eficiente requiere un sistema financiero alineado, que permita reducir plazos de pago, gestionar liquidez y disminuir el riesgo comercial. En el retail chileno, los sistemas de facturación electrónica han mejorado drá'
+           ...(355 chars total)
+    ed[3]: 'Flujo inverso o logística reversa: Incluye devoluciones, reciclaje, reparación, reusó o disposición final. Su importancia ha crecido por razones ambientales, regulatorias y reputacionales. Walmart Chile, por ejemplo, ha desarrollado un modelo para recuperar pallets y embalajes, integrando criterios '
+           ...(331 chars total)
+
+  --- Bloque 15 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Cada uno de estos flujos debe ser gestionado en coherencia, ya que cualquier desequilibrio repercute en la eficiencia total del sistema.'
+
+  --- Bloque 16 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Tabla 1 Tipología de flujos en la cadena de suministros y su impacto operativo'
+
+  --- Bloque 17 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [text] (1 editables):
+    ed[0]: 'Tipo de flujo |  | 	 |  | Descripción funcional |  | 	 |  | Impacto en la gestión estratégica |  | 	 |  | Ejemplo aplicado en Chile |  |  |  |  | Flujo de materiales |  | 	 |  | Movimiento físico de materias primas, productos en proceso y productos terminados |  | 	 |  | Determina niveles de inventa'
+           ...(972 chars total)
+
+  --- Bloque 18 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [divider] (0 editables):
+
+  --- Bloque 19 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '1.4 Caso práctico: la cadena de suministro de Cencosud'
+
+  --- Bloque 20 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Analizar el funcionamiento logístico de una empresa como Cencosud permite comprender la aplicación concreta de los principios teóricos de la cadena de suministros en una operación compleja y altamente sincronizada. Esta compañía, una de las más grandes del retail en América Latina, administra marcas'
+           ...(457 chars total)
+
+  --- Bloque 21 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (2 editables):
+    ed[0]: 'La cadena de suministro de Cencosud se basa en una integración tecnológica avanzada, donde destacan sistemas como el Warehouse Management System (WMS) para la administración de bodegas, y el Transportation Management System (TMS) para la optimización de rutas y control de entregas. Estas plataformas'
+           ...(461 chars total)
+    ed[1]: ''
+
+  --- Bloque 22 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [quote_carousel] (4 editables):
+    ed[0]: 'En su centro de distribución en Santiago, la empresa emplea inteligencia artificial para calcular rutas de despacho considerando variables como distancia, tipo de carga, nivel de urgencia y zonas de alta demanda. Este enfoque ha reducido los tiempos de entrega, mejorado la precisión de stock y dismi'
+           ...(358 chars total)
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+
+  --- Bloque 23 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '1.5 Ejemplo visual: mapa conceptual de la cadena de suministro'
+
+  --- Bloque 24 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Una forma eficaz de comprender la estructura y funcionamiento de la cadena de suministros es a través de mapas conceptuales. Estas representaciones gráficas permiten visualizar las relaciones entre actores, los tipos de flujos y las interacciones clave del sistema.  |  | En un modelo circular o en f'
+           ...(426 chars total)
+
+  --- Bloque 25 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (2 editables):
+    ed[0]: ''
+    ed[1]: 'Figura Ciclo de distribución de productos'
+
+  --- Bloque 26 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (1 editables):
+    ed[0]: 'Nota. La imagen representa el ciclo de distribución de productos dentro de la cadena de suministros, mostrando la secuencia integrada entre proveedores, fabricantes, centros de distribución, minoristas y clientes finales, así como el flujo continuo que articula la generación y entrega de valor. Elab'
+           ...(345 chars total)
+
+  --- Bloque 27 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'A lo largo de esta secuencia se superponen los flujos materiales (de entrada y salida), flujos de información (bidireccionales), flujos financieros (transaccionales) y flujos reversos (logística inversa). Cada eslabón puede ser optimizado o convertirse en un cuello de botella, y su desempeño afecta '
+           ...(319 chars total)
+
+  --- Bloque 28 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Al construir este tipo de mapa en el contexto chileno, se puede utilizar como ejemplo la cadena de exportación de salmón desde Puerto Montt a Japón, integrando procesos como cultivo, procesamiento, certificación sanitaria, transporte terrestre y aéreo, y distribución en destino. Los estudiantes pued'
+           ...(610 chars total)
+
+  --- Bloque 29 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '1.6 En la práctica: sostenibilidad y digitalización'
+
+  --- Bloque 30 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (3 editables):
+    ed[0]: ''
+    ed[1]: ''
+    ed[2]: ''
+
+  --- Bloque 31 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'ENAP ha integrado sistemas de monitoreo satelital para optimizar el uso de combustible en su flota, reduciendo emisiones y mejorando seguridad. Estas innovaciones no solo generan ahorro, sino que elevan la capacidad de reacción ante eventos inesperados.'
+
+  --- Bloque 32 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 2
+  Script: ''
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 11
+  Bloques HUMANO: 34
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [banner] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.1. ¿Qué es un mapa conceptual?'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Toda decisión logística es, en última instancia, una decisión estratégica. No se trata únicamente de definir rutas, administrar inventarios o programar entregas. Cada acción operativa en la cadena de suministro debe responder a los lineamientos más amplios del modelo de negocio, reflejando las prior'
+           ...(539 chars total)
+  >>> DIFF ed[0]: contenido diferente
+      S(32): '3.1. ¿Qué es un mapa conceptual?...'
+      H(539): 'Toda decisión logística es, en última instancia, una decisión estratégica. No se...'
+
+  --- Bloque 2 ---
+  SCRIPT [image] (2 editables):
+    ed[0]: 'Mapa conceptual de la cadena de suministros'
+    ed[1]: 'Un mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos '
+           ...(1050 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Diseñar una cadena de suministro alineada implica comprender qué es lo que la empresa promete a sus clientes y cómo puede cumplirlo sistemáticamente. Si una organización basa su estrategia en el liderazgo en costos, su cadena debe maximizar la eficiencia, eliminar actividades sin valor, operar con a'
+           ...(546 chars total)
+  >>> DIFF TIPO: image vs heading
+  >>> DIFF #EDITABLES: 2 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(43): 'Mapa conceptual de la cadena de suministros...'
+      H(546): 'Diseñar una cadena de suministro alineada implica comprender qué es lo que la em...'
+
+  --- Bloque 3 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.2. Elementos del mapa conceptual logístico'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'En el caso chileno, esta distinción se observa con claridad entre distintos formatos del retail. Cadenas como Líder estructuran su red logística bajo un paradigma de eficiencia, con centros de distribución regionales que consolidan grandes volúmenes y optimizan costos mediante escalas de operación. '
+           ...(578 chars total)
+  >>> DIFF ed[0]: contenido diferente
+      S(44): '3.2. Elementos del mapa conceptual logístico...'
+      H(578): 'En el caso chileno, esta distinción se observa con claridad entre distintos form...'
+
+  --- Bloque 4 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.3. Ejemplo de construcción del mapa conceptual'
+  HUMANO [quote_carousel] (4 editables):
+    ed[0]: 'La alineación estratégica también debe considerar factores estructurales, como la ubicación geográfica de los centros de distribución, el grado de automatización de los procesos, las políticas de stock y reposición, la red de proveedores, el nivel de integración con socios logísticos, y el tipo de t'
+           ...(556 chars total)
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+  >>> DIFF TIPO: heading vs quote_carousel
+  >>> DIFF #EDITABLES: 1 vs 4
+  >>> DIFF ed[0]: contenido diferente
+      S(48): '3.3. Ejemplo de construcción del mapa conceptual...'
+      H(556): 'La alineación estratégica también debe considerar factores estructurales, como l...'
+
+  --- Bloque 5 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.4. Caso práctico: Carozzi S.A.'
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.1. Enfoques estratégicos'
+  >>> DIFF ed[0]: contenido diferente
+      S(32): '3.4. Caso práctico: Carozzi S.A....'
+      H(26): '2.1. Enfoques estratégicos...'
+
+  --- Bloque 6 ---
+  SCRIPT [image] (2 editables):
+    ed[0]: 'proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el producto final. Todos estos elementos están conectados por flujos constantes de materiales, infor'
+           ...(471 chars total)
+    ed[1]: 'Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial comprender que este sistema no opera de manera lineal ni aislada. Por el contrario, se trata de una red compleja y dinámica de interacciones que involucran múltiples actores, flujos, procesos y tecnologías. Por esta razó'
+           ...(650 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Los enfoques estratégicos de la cadena de suministros reflejan diferentes maneras de competir en el mercado. No existe una receta única: el enfoque adecuado dependerá del tipo de producto, del comportamiento de la demanda, del segmento de clientes, del entorno competitivo y de las capacidades intern'
+           ...(383 chars total)
+  >>> DIFF TIPO: image vs heading
+  >>> DIFF #EDITABLES: 2 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(471): 'proveedores que abastecen insumos, plantas que transforman materias primas, oper...'
+      H(383): 'Los enfoques estratégicos de la cadena de suministros reflejan diferentes manera...'
+
+  --- Bloque 7 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.5. Estructura general de la cadena de suministros de Carozzi'
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Da clic en cada tarjeta para ver su información al reverso'
+  >>> DIFF TIPO: heading vs statement
+  >>> DIFF ed[0]: contenido diferente
+      S(62): '3.5. Estructura general de la cadena de suministros de Carozzi...'
+      H(58): 'Da clic en cada tarjeta para ver su información al reverso...'
+
+  --- Bloque 8 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '3.6. En la práctica: el mapa conceptual como herramienta de mejora'
+  HUMANO [flashcards] (0 editables):
+  >>> DIFF TIPO: heading vs flashcards
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 9 ---
+  SCRIPT [flashcards] (0 editables):
+  HUMANO [statement] (1 editables):
+    ed[0]: 'La elección del enfoque debe realizarse con conciencia estratégica y mantenerse actualizada frente a cambios del entorno. En tiempos de crisis o transformaciones tecnológicas, muchas empresas deben migrar de un modelo a otro, ajustando capacidades, cultura organizacional y tecnologías.'
+  >>> DIFF TIPO: flashcards vs statement
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 10 ---
+  SCRIPT [wrapper] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Tabla 2 Enfoques estratégicos de la cadena de suministros'
+  >>> DIFF TIPO: wrapper vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 11 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [text] (1 editables):
+    ed[0]: 'Estrategia |  | 	 |  | Características operativas principales |  | 	 |  | Contexto de aplicación |  | 	 |  | Ejemplo empresarial |  |  |  |  | Estrategia de eficiencia |  | 	 |  | Alta estandarización, economías de escala, reducción de costos |  | 	 |  | Demanda estable y alta sensibilidad al precio'
+           ...(716 chars total)
+
+  --- Bloque 12 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.3. Casos comparativos'
+
+  --- Bloque 13 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Los casos de empresas líderes en logística muestran que la estrategia de la cadena de suministros es un factor decisivo de competitividad y no un mero componente operacional. A continuación, se describen tres modelos con impacto regional y global:'
+
+  --- Bloque 14 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [quote_carousel] (6 editables):
+    ed[0]: 'Amazon: Su ventaja competitiva radica en la capacidad de anticipar la demanda y controlar casi todas las fases del proceso. Ha invertido en automatización, inteligencia artificial, robótica, redes propias de distribución y análisis predictivo. Su estrategia no se limita a despachar rápido: está dise'
+           ...(520 chars total)
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+    ed[4]: ''
+    ed[5]: ''
+
+  --- Bloque 15 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Estos casos demuestran que la cadena de suministros puede ser mucho más que un centro de costos: puede convertirse en una palanca de diferenciación, fidelización y liderazgo de mercado.'
+
+  --- Bloque 16 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.4. Resiliencia y gestión del riesgo'
+
+  --- Bloque 17 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La pandemia, los conflictos internacionales, las crisis energéticas y los eventos climáticos extremos han expuesto la fragilidad de muchas cadenas de suministro. En este escenario, la resiliencia ha emergido como una capacidad estratégica clave: no basta con ser eficiente, hay que ser capaz de resis'
+           ...(702 chars total)
+
+  --- Bloque 18 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [bulleted_list] (5 editables):
+    ed[0]: 'Diversificación de proveedores: evitar dependencia de un solo origen.'
+    ed[1]: 'Contratos flexibles: permitir ajustes de volumen o condiciones sin penalizaciones.'
+    ed[2]: 'Monitoreo en tiempo real: detectar interrupciones antes de que escalen.'
+    ed[3]: 'Redes colaborativas: compartir inventarios, capacidades o información con aliados.'
+    ed[4]: 'Gestión de escenarios: simular crisis y planificar respuestas.'
+
+  --- Bloque 19 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'En Chile, la distribución nacional de vacunas durante la pandemia fue una operación logística de alta complejidad. Involucró transporte en frío extremo, coordinación entre instituciones públicas y privadas, trazabilidad absoluta y cobertura territorial sin precedentes. La experiencia dejó capacidade'
+           ...(525 chars total)
+
+  --- Bloque 20 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.5. Tecnología, digitalización e inteligencia artificial'
+
+  --- Bloque 21 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El desarrollo tecnológico ha redefinido la cadena de suministro. Las herramientas de inteligencia artificial, big data, analítica avanzada, machine learning e Internet de las Cosas (IoT) permiten a las organizaciones pasar de la gestión reactiva a la gestión predictiva e inteligente.  |  | Estas tec'
+           ...(314 chars total)
+
+  --- Bloque 22 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [bulleted_list] (5 editables):
+    ed[0]: 'Predecir demanda con mayor precisión.'
+    ed[1]: 'Automatizar compras y reposiciones.'
+    ed[2]: 'Detectar fallas o anomalías antes de que se materialicen.'
+    ed[3]: 'Optimizar rutas en tiempo real.'
+    ed[4]: 'Simular escenarios y evaluar decisiones antes de implementarlas.'
+
+  --- Bloque 23 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Un ejemplo local es Sodimac Chile, que ha desarrollado modelos de reposición predictiva basados en análisis climático, eventos regionales y patrones históricos de venta. Esto ha reducido quiebres de stock, mejorado la rotación y aumentado la satisfacción del cliente.  |  | Las empresas que incorpora'
+           ...(477 chars total)
+
+  --- Bloque 24 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.6 Nearshoring y sostenibilidad global'
+
+  --- Bloque 25 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El nearshoring se ha consolidado como estrategia para reducir la dependencia de cadenas globales largas, costosas y frágiles. Tras la pandemia, muchas empresas reubicaron operaciones productivas y logísticas más cerca de sus mercados principales. Esto permite mejorar tiempos de entrega, reducir cost'
+           ...(389 chars total)
+
+  --- Bloque 26 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Chile, gracias a su infraestructura, acuerdos comerciales y estabilidad institucional, se proyecta como un hub logístico en el Cono Sur. Zonas como Iquique, San Antonio y la Región Metropolitana ofrecen ventajas comparativas para establecer centros de distribución regionales.'
+
+  --- Bloque 27 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Paralelamente, la sostenibilidad se ha vuelto una exigencia ineludible. No solo por razones éticas o regulatorias, sino por presión de consumidores y mercados. Las empresas deben medir su huella de carbono, minimizar impactos, garantizar condiciones laborales y demostrar transparencia en toda su cad'
+           ...(512 chars total)
+
+  --- Bloque 28 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El nearshoring y la sostenibilidad convergen en un nuevo modelo de cadena corta, limpia, trazable y competitiva.'
+
+  --- Bloque 29 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '2.7. Responsabilidad social y desempeño ético'
+
+  --- Bloque 30 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La cadena de suministros ya no puede evaluarse solo por métricas financieras o logísticas. Su legitimidad social depende del cumplimiento de principios de justicia, ética y responsabilidad.  |  | Esto incluye:'
+
+  --- Bloque 31 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [bulleted_list] (5 editables):
+    ed[0]: 'Condiciones laborales dignas.'
+    ed[1]: 'Trazabilidad social de productos.'
+    ed[2]: 'Relación respetuosa con comunidades.'
+    ed[3]: 'Diversidad e inclusión en proveedores.'
+    ed[4]: 'Cumplimiento de estándares internacionales.'
+
+  --- Bloque 32 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La certificación como Empresa B en Chile refleja este enfoque integral. Empresas como Algramo, Karun o Triciclos han logrado demostrar que es posible integrar rentabilidad, propósito e impacto social.  |  | Las cadenas éticas construyen reputación, atraen talento, reducen riesgos y abren nuevas opor'
+           ...(371 chars total)
+
+  --- Bloque 33 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 3
+  Script: ''
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 11
+  Bloques HUMANO: 32
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '4.1. Concepto de logística integral'
+  HUMANO [banner] (0 editables):
+  >>> DIFF TIPO: heading vs banner
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 1 ---
+  SCRIPT [quote] (2 editables):
+    ed[0]: 'Definición de logística integral'
+    ed[1]: 'La logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no co'
+           ...(879 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Un mapa conceptual es una herramienta de construcción y representación del conocimiento que permite visualizar relaciones entre ideas clave dentro de un determinado campo. Esta técnica, originalmente desarrollada por Joseph Novak y D. Gowin, se basa en la organización jerárquica de conceptos unidos '
+           ...(555 chars total)
+  >>> DIFF TIPO: quote vs heading
+  >>> DIFF #EDITABLES: 2 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(32): 'Definición de logística integral...'
+      H(555): 'Un mapa conceptual es una herramienta de construcción y representación del conoc...'
+
+  --- Bloque 2 ---
+  SCRIPT [image] (2 editables):
+    ed[0]: 'Como señalan Ballou (2004) y Heizer & Render (2008), este enfoque implica la integración de todos los subsistemas logísticos bajo una misma lógica de gestión, articulando áreas internas y externas de la organización en función de objetivos estratégicos comunes.'
+    ed[1]: 'La logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos de operar de forma aislada, deben coordinarse mediante sistemas '
+           ...(725 chars total)
+  HUMANO [image] (2 editables):
+    ed[0]: ''
+    ed[1]: 'En el contexto de la logística y la gestión de la cadena de suministros, los mapas conceptuales permiten observar la lógica interna que articula procesos, actores, flujos e infraestructuras. Son una herramienta de pensamiento visual que facilita el entendimiento sistémico de un conjunto de operacion'
+           ...(400 chars total)
+  >>> DIFF ed[0]: SCRIPT tiene texto, HUMANO vacio
+  >>> DIFF ed[1]: contenido diferente
+      S(725): 'La logística integral se estructura sobre una serie de componentes funcionales i...'
+      H(400): 'En el contexto de la logística y la gestión de la cadena de suministros, los map...'
+
+  --- Bloque 3 ---
+  SCRIPT [text_twocol] (2 editables):
+    ed[0]: 'Aprovisionamiento'
+    ed[1]: 'El aprovisionamiento, también conocido como gestión de compras o abastecimiento, es el primer eslabón de la logística integral. Consiste en la planificación, selección, adquisición y recepción de materias primas, insumos, productos semi-elaborados o bienes terminados necesarios para la operación. Es'
+           ...(480 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La cadena de suministros, por su propia naturaleza, involucra múltiples niveles de interacción: proveedores que abastecen insumos, plantas que transforman materias primas, operadores logísticos que movilizan mercancías, centros de distribución que optimizan inventarios y minoristas que entregan el p'
+           ...(567 chars total)
+  >>> DIFF TIPO: text_twocol vs heading
+  >>> DIFF #EDITABLES: 2 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(17): 'Aprovisionamiento...'
+      H(567): 'La cadena de suministros, por su propia naturaleza, involucra múltiples niveles ...'
+
+  --- Bloque 4 ---
+  SCRIPT [quote_carousel] (4 editables):
+    ed[0]: 'Producción'
+    ed[1]: 'La producción representa el conjunto de procesos mediante los cuales los insumos adquiridos son transformados en productos terminados, listos para ser distribuidos al mercado. En el enfoque integral, la gestión de la producción no puede entenderse de manera aislada, sino como una fase interconectada'
+           ...(376 chars total)
+    ed[2]: ''
+    ed[3]: ''
+  HUMANO [heading] (1 editables):
+    ed[0]: '3.2 Elementos del mapa conceptual logístico'
+  >>> DIFF TIPO: quote_carousel vs heading
+  >>> DIFF #EDITABLES: 4 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(10): 'Producción...'
+      H(43): '3.2 Elementos del mapa conceptual logístico...'
+
+  --- Bloque 5 ---
+  SCRIPT [image] (2 editables):
+    ed[0]: 'Servicio al cliente y logística inversa'
+    ed[1]: 'El servicio al cliente constituye una función clave en la cadena de suministros, ya que representa el punto de contacto entre la operación logística y la percepción del consumidor. Incluye actividades como la entrega puntual, la atención de reclamos, el seguimiento de pedidos, la postventa y la pers'
+           ...(529 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial comprender que este sistema no opera de manera lineal ni aislada. Por el contrario, se trata de una red compleja y dinámica de interacciones que involucran múltiples actores, flujos, procesos y tecnologías. Por esta razó'
+           ...(652 chars total)
+  >>> DIFF TIPO: image vs heading
+  >>> DIFF #EDITABLES: 2 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(39): 'Servicio al cliente y logística inversa...'
+      H(652): 'Al diseñar un mapa conceptual enfocado en la cadena de suministros, es esencial ...'
+
+  --- Bloque 6 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '4.2. Componentes esenciales de la logística integral'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Eslabones o actores logísticos  |  | Los eslabones representan las entidades organizativas o unidades funcionales que participan en la cadena de suministros. Estos actores pueden ser internos como áreas de compras, producción o distribución o externos, como proveedores, operadores logísticos, agente'
+           ...(484 chars total)
+  >>> DIFF ed[0]: contenido diferente
+      S(52): '4.2. Componentes esenciales de la logística integral...'
+      H(484): 'Eslabones o actores logísticos 
+
+Los eslabones representan las entidades organiz...'
+
+  --- Bloque 7 ---
+  SCRIPT [banner] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Flujos principales  |  | Un mapa conceptual logístico debe representar explícitamente los distintos tipos de flujos que permiten la operación continua de la cadena de suministros. Estos flujos no son únicamente físicos, sino también informacionales y financieros. Se clasifican en:'
+  >>> DIFF TIPO: banner vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 8 ---
+  SCRIPT [heading] (1 editables):
+    ed[0]: '4.3. Diferencias entre logística tradicional e integral'
+  HUMANO [flashcards] (0 editables):
+  >>> DIFF TIPO: heading vs flashcards
+  >>> DIFF #EDITABLES: 1 vs 0
+
+  --- Bloque 9 ---
+  SCRIPT [statement] (1 editables):
+    ed[0]: 'Sistemas de información y soporte tecnológico'
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Figura 2 Flujos logísticos en la cadena de suministros'
+  >>> DIFF TIPO: statement vs heading
+  >>> DIFF ed[0]: contenido diferente
+      S(45): 'Sistemas de información y soporte tecnológico...'
+      H(54): 'Figura 2 Flujos logísticos en la cadena de suministros...'
+
+  --- Bloque 10 ---
+  SCRIPT [wrapper] (0 editables):
+  HUMANO [image] (1 editables):
+    ed[0]: 'Nota. La imagen muestra los cuatro flujos logísticos clave material, información, financiero y reverso que estructuran la cadena de suministros. Elaboración propia con base en ​(Guasch, 2011)​.'
+  >>> DIFF TIPO: wrapper vs image
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 11 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Procesos logísticos fundamentales'
+
+  --- Bloque 12 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Cada eslabón de la cadena ejecuta procesos específicos que deben integrarse de forma coherente. Estos procesos incluyen, entre otros:  |  | Aprovisionamiento y compras  |  | Planificación de la demanda  |  | Producción o transformación  |  | Almacenamiento y manejo de inventario  |  | Transporte y d'
+           ...(595 chars total)
+
+  --- Bloque 13 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Tecnologías y soportes estratégicos'
+
+  --- Bloque 14 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'En la actualidad, la cadena de suministros depende fuertemente de sistemas de información y tecnologías de soporte. Por ello, el mapa conceptual debe reflejar las herramientas digitales que sustentan cada proceso, tales como:  |  | Sistemas ERP (Enterprise Resource Planning), que integran todas las '
+           ...(631 chars total)
+
+  --- Bloque 15 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Entorno y contexto logístico'
+
+  --- Bloque 16 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El mapa conceptual debe incorporar variables contextuales que influyen directa o indirectamente en la cadena de suministros. Entre ellas se encuentran:  |  | La infraestructura vial, portuaria y ferroviaria.  |  | Las normativas aduaneras o sanitarias.  |  | Los tratados de libre comercio.  |  | La '
+           ...(381 chars total)
+
+  --- Bloque 17 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'En el caso de Chile, por ejemplo, la logística de productos frescos debe considerar tanto las restricciones estacionales como los tiempos de tránsito hacia los principales mercados internacionales. Incluir estas variables en el mapa permite una comprensión más realista de los desafíos logísticos y f'
+           ...(341 chars total)
+
+  --- Bloque 18 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '3.3 Ejemplo de construcción del mapa conceptual'
+
+  --- Bloque 19 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (2 editables):
+    ed[0]: 'La construcción de un mapa conceptual de la cadena de suministros debe responder a principios de claridad, jerarquía y funcionalidad. Su propósito no es solo representar gráficamente una red de conceptos, sino también modelar una estructura logística real o hipotética que permita su análisis, compre'
+           ...(525 chars total)
+    ed[1]: ''
+
+  --- Bloque 20 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'A continuación, se detallan los pasos recomendados para construir un mapa conceptual efectivo aplicado a la cadena de suministros, considerando tanto el componente académico como su aplicabilidad en contextos reales:'
+
+  --- Bloque 21 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [flashcards] (0 editables):
+
+  --- Bloque 22 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Figura 3 Esquema de flujos en la cadena de suministros'
+
+  --- Bloque 23 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (1 editables):
+    ed[0]: 'Nota. La imagen representa la interacción entre proveedores, fabricantes, distribuidores y minoristas, destacando los flujos de materiales, información, recursos financieros y procesos reversos que conectan y coordinan la red logística. Elaboración propia con base en ​(Sánchez-Suárez, 2024)​.'
+
+  --- Bloque 24 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '3.4 Caso práctico: Carozzi S.A.'
+
+  --- Bloque 25 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [banner] (0 editables):
+
+  --- Bloque 26 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '3.5 Estructura general de la cadena de suministros de Carozzi'
+
+  --- Bloque 27 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'A continuación, se detallan los principales eslabones que componen esta red, cada uno de los cuales podría representarse como un nodo en el mapa conceptual:'
+
+  --- Bloque 28 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (5 editables):
+    ed[0]: ''
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+    ed[4]: ''
+
+  --- Bloque 29 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '3.6 En la práctica: el mapa conceptual como herramienta de mejora'
+
+  --- Bloque 30 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El mapa conceptual aplicado a la cadena de suministros trasciende su uso como herramienta de aprendizaje o recurso visual. En contextos profesionales, se consolida como un instrumento estratégico de diagnóstico, comunicación y rediseño logístico. Su capacidad para representar de manera clara y sinté'
+           ...(514 chars total)
+
+  --- Bloque 31 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 4
+  Script: ''
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 4
+  Bloques HUMANO: 21
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT [spacer] (0 editables):
+  HUMANO [banner] (0 editables):
+  >>> DIFF TIPO: spacer vs banner
+
+  --- Bloque 1 ---
+  SCRIPT [numbered_list] (3 editables):
+    ed[0]: 'Conclusión general'
+    ed[1]: 'La primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la '
+           ...(1132 chars total)
+    ed[2]: 'El ejercicio de construir un mapa conceptual no constituye únicamente una actividad académica, sino un entrenamiento riguroso del pensamiento sistémico. Al representar gráficamente proveedores, procesos productivos, plataformas tecnológicas, flujos financieros, canales de distribución y clientes fin'
+           ...(1182 chars total)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La logística integral constituye un enfoque moderno y sistémico de la gestión logística, que busca superar las limitaciones de la visión fragmentada tradicional para ofrecer una coordinación total de los procesos que conforman la cadena de suministros. Esta perspectiva considera a la logística no co'
+           ...(552 chars total)
+  >>> DIFF TIPO: numbered_list vs heading
+  >>> DIFF #EDITABLES: 3 vs 1
+  >>> DIFF ed[0]: contenido diferente
+      S(18): 'Conclusión general...'
+      H(552): 'La logística integral constituye un enfoque moderno y sistémico de la gestión lo...'
+
+  --- Bloque 2 ---
+  SCRIPT [spacer] (0 editables):
+  HUMANO [image] (2 editables):
+    ed[0]: ''
+    ed[1]: 'En términos académicos y operativos, se entiende por logística integral el conjunto coordinado de actividades que permite planificar, ejecutar y controlar eficientemente el flujo de bienes, servicios e información desde el punto de origen hasta el cliente final, de forma tal que se generen niveles s'
+           ...(590 chars total)
+  >>> DIFF TIPO: spacer vs image
+  >>> DIFF #EDITABLES: 0 vs 2
+
+  --- Bloque 3 ---
+  SCRIPT [wrapper] (0 editables):
+  HUMANO [heading] (1 editables):
+    ed[0]: '4.2 Componentes esenciales de la logística integral'
+  >>> DIFF TIPO: wrapper vs heading
+  >>> DIFF #EDITABLES: 0 vs 1
+
+  --- Bloque 4 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La logística integral se estructura sobre una serie de componentes funcionales interdependientes que permiten ejecutar de manera coherente y eficiente los procesos logísticos dentro de la cadena de suministros. Estos componentes, lejos de operar de forma aislada, deben coordinarse mediante sistemas '
+           ...(727 chars total)
+
+  --- Bloque 5 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [flashcards] (0 editables):
+
+  --- Bloque 6 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '4.3 Diferencias entre logística tradicional e integral'
+
+  --- Bloque 7 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'El paso desde un enfoque de logística tradicional hacia una logística integral representa uno de los cambios más significativos en la evolución de las operaciones empresariales modernas. Esta transformación no implica únicamente la incorporación de nuevas tecnologías o metodologías, sino un cambio p'
+           ...(620 chars total)
+
+  --- Bloque 8 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Tabla 3 Comparación estructural entre logística tradicional y logística integral'
+
+  --- Bloque 9 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [text] (1 editables):
+    ed[0]: 'Aspecto |  | 	 |  | Logística Tradicional |  | 	 |  | Logística Integral |  |  |  |  | Enfoque de gestión |  | 	 |  | Fragmentado, centrado en áreas funcionales específicas como transporte o almacenamiento. |  | 	 |  | Sistémico y transversal. Todas las funciones logísticas se coordinan bajo una est'
+           ...(1940 chars total)
+
+  --- Bloque 10 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '4.4 Caso práctico: CCU (Compañía de Cervecerías Unidas)'
+
+  --- Bloque 11 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La Compañía de Cervecerías Unidas (CCU) constituye un caso paradigmático en el contexto chileno para ilustrar la implementación efectiva de una logística integral como componente estratégico dentro de la gestión de operaciones. Esta empresa, con más de un siglo de historia y presencia en varios país'
+           ...(1050 chars total)
+
+  --- Bloque 12 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: '4.5 La logística integral en la era digital'
+
+  --- Bloque 13 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (2 editables):
+    ed[0]: 'La transformación digital ha reconfigurado profundamente la forma en que las organizaciones diseñan, ejecuta y optimizan sus operaciones logísticas. En este contexto, la logística integral ya no puede concebirse sin el uso intensivo de tecnologías digitales que  permiten integrar flujos de trabajo, '
+           ...(682 chars total)
+    ed[1]: ''
+
+  --- Bloque 14 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Bajo este enfoque, la logística deja de ser una función reactiva y operativa, para convertirse en un proceso predictivo, proactivo y estratégico, que actúa con base en datos en tiempo real, análisis de comportamiento del consumidor y coordinación avanzada entre múltiples actores. Este cambio no solo'
+           ...(499 chars total)
+
+  --- Bloque 15 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Principales tecnologías aplicadas a la logística integral'
+
+  --- Bloque 16 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Da clic en cada tarjeta para ver su información al reverso'
+
+  --- Bloque 17 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [flashcards] (0 editables):
+
+  --- Bloque 18 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'Tabla 4 Tecnologías habilitadoras de la logística integral 4.0'
+
+  --- Bloque 19 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [text] (1 editables):
+    ed[0]: 'Tecnología |  | 	 |  | Aplicación logística principal |  | 	 |  | Beneficio estratégico generado |  | 	 |  | Caso ilustrativo |  |  |  |  | Big Data y analítica avanzada |  | 	 |  | Predicción de demanda y optimización de inventarios |  | 	 |  | Mejora en precisión, reducción de quiebres de stock | '
+           ...(832 chars total)
+
+  --- Bloque 20 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 5
+  Script: '(N/A)'
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 0
+  Bloques HUMANO: 11
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La primera semana del curso ha permitido comprender que la cadena de suministros constituye hoy un eje estratégico que articula la totalidad del sistema empresarial y que exige una comprensión profunda tanto conceptual como operativa. Lejos de limitarse a una secuencia de actividades logísticas, la '
+           ...(655 chars total)
+
+  --- Bloque 1 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [quote] (2 editables):
+    ed[0]: 'Entender la cadena de suministros bajo esta lógica implica reconocer que cada decisión adoptada en compras, producción, almacenamiento, transporte o servicio al cliente genera efectos acumulativos que impactan en la competitividad, la rentabilidad y la sostenibilidad organizacional.'
+    ed[1]: ''
+
+  --- Bloque 2 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [image] (2 editables):
+    ed[0]: 'En este marco, la incorporación del mapa conceptual como herramienta de análisis fortalece la capacidad de estructurar y representar la complejidad logística de manera ordenada y jerarquizada. El ejercicio de construir un mapa conceptual no constituye únicamente una actividad académica, sino un entr'
+           ...(594 chars total)
+    ed[1]: ''
+
+  --- Bloque 3 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [text_twocol] (2 editables):
+    ed[0]: 'Una manifestación clara de este potencial se encuentra en situaciones empresariales donde la red logística presenta fallas recurrentes en tiempos de entrega; al diagramar los nodos y relaciones, emergen cuellos de botella, duplicidades operativas o fallas de coordinación que permanecían ocultas en u'
+           ...(318 chars total)
+    ed[1]: 'Esta capacidad de representación estructurada favorece diagnósticos más precisos y decisiones fundamentadas.'
+
+  --- Bloque 4 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [quote_carousel] (4 editables):
+    ed[0]: 'Esto se observa en equipos que planifican la apertura de un nuevo centro de distribución y requieren evaluar variables como ubicación geográfica, costos de transporte, tiempos de abastecimiento y niveles de inventario; al visualizar el sistema completo, se minimizan decisiones aisladas y se fortalec'
+           ...(328 chars total)
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+
+  --- Bloque 5 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La herramienta se convierte así en un puente entre el conocimiento teórico y la práctica organizacional, consolidando competencias analíticas aplicables a contextos reales.'
+
+  --- Bloque 6 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [banner] (0 editables):
+
+  --- Bloque 7 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (1 editables):
+    ed[0]: 'La integración entre pensamiento sistémico, herramientas de representación y coordinación operativa adquiere mayor relevancia en un contexto global caracterizado por disrupciones, volatilidad de mercados, exigencias regulatorias crecientes y aceleración tecnológica. La digitalización logística, expr'
+           ...(516 chars total)
+
+  --- Bloque 8 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'La tecnología amplifica resultados cuando se inserta en un modelo lógico coherente; de lo contrario, amplifica ineficiencias. Esto se aprecia en organizaciones que implementan sistemas de gestión de transporte con monitoreo satelital y logran optimizar rutas, disminuir tiempos de entrega y mejorar l'
+           ...(393 chars total)
+
+  --- Bloque 9 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [quote_carousel] (4 editables):
+    ed[0]: 'En consecuencia, la conclusión de esta primera semana consolida una idea central: la excelencia en la cadena de suministros constituye un factor determinante para la supervivencia y el liderazgo empresarial. Diseñar, gestionar y evolucionar la red logística con criterio sistémico permite agregar val'
+           ...(406 chars total)
+    ed[1]: ''
+    ed[2]: ''
+    ed[3]: ''
+
+  --- Bloque 10 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 6
+  Script: '(N/A)'
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 0
+  Bloques HUMANO: 3
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [embed] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [heading] (2 editables):
+    ed[0]: ''
+    ed[1]: 'Esta semana exploraremos los conceptos fundamentales de la cadena de suministros y su estrategia, y para ayudarte a visualizar cómo estos principios operan en la práctica real, te invitamos a ver este TEDx de Mick Mountz. En esta charla, Mountz uno de los pioneros en soluciones robóticas aplicadas a'
+           ...(2910 chars total)
+
+  --- Bloque 2 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 7
+  Script: '(N/A)'
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 0
+  Bloques HUMANO: 5
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [spacer] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [numbered_list] (9 editables):
+    ed[0]: '​​​Ballou, R. H. (2004). Business Logistics/Supply Chain Management (5th ed.). Pearson Prentice Hall.'
+    ed[1]: '​Cerofolini, A. (2 de 01 de 2024). El derecho a un medio ambiente limpio, saludable y sostenible y los litigios estratégicos. ¿Qué repercusiones tiene para las empresas? Revista Española de Empresas y Derechos Humanos. Universidad de Bolonia: https://revistas.colex.es/index.php/empresasyderechoshuma'
+           ...(323 chars total)
+    ed[2]: '​Chase, R. B., Jacobs, F. R., & Aquilano, N. J. (2019). Operations and Supply Chain Management (15th ed.). McGraw-Hill.'
+    ed[3]: '​Chopra, S., & Meindl, P. (2015). Administración de la cadena de suministro: Estrategia, planeación y operación (5ª ed.). México: Pearson Prentice Hall.'
+    ed[4]: '​Heizer, J., & Render, B. (2008). Operations Management (8th ed.). Pearson Education.'
+    ed[5]: '​Gorbaneff, Y., & Cancino, A. (2009). Mapa conceptual para el aprendizaje basado en problemas. https://www.icesi.edu.co/revistas/index.php/estudios_gerenciales/article/view/299/297'
+    ed[6]: '​Guasch, J. L. (Nov de 2011). La logística como motor d e la competitividad en A mérica Latina y el Caribe . Banco Interamericano de Desarrollo : https://publications.iadb.org/es/publications/spanish/viewer/La-log%C3%ADstica-como-motor-de-la-competitividad-en-Am%C3%A9rica-Latina-y-el-Caribe.pdf'
+    ed[7]: '​Pacheco, R. A. (2024). Capacidad de respuesta de la cadena de suministros, Definición del concepto y marco para mejorar la gestión . Universitat Polutecnica de Catalunya, ETSEIB: https://www.tesisenred.net/handle/10803/693422#page=1'
+    ed[8]: 'Sánchez-Suárez, Y. A.-N.-N.-S.-G.-B. (2024). Tendencias de las investigaciones sobre logística integral y cadenas de suministro enfocadas al logro de la calidad de los procesos. Revista Gestión y Desarrollo Libre, 9(18), 1-20. . https://revistas.unilibre.edu.co/index.php/gestion_libre/article/view/1'
+           ...(310 chars total)
+
+  --- Bloque 2 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [error] (0 editables):
+
+  --- Bloque 3 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [spacer] (0 editables):
+
+  --- Bloque 4 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+======================================================================
+LECCION 8
+  Script: '(N/A)'
+  Humano: ''
+======================================================================
+  Bloques SCRIPT: 0
+  Bloques HUMANO: 4
+  >>> DIFF: diferente cantidad de bloques!
+
+  --- Bloque 0 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [spacer] (0 editables):
+
+  --- Bloque 1 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [statement] (1 editables):
+    ed[0]: 'Revisa la siguiente cápsula interactiva'
+
+  --- Bloque 2 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+  --- Bloque 3 ---
+  SCRIPT: (bloque no existe)
+  HUMANO [wrapper] (0 editables):
+
+
+================================================================================
+TOTAL DIFERENCIAS ENCONTRADAS: 96
+================================================================================
