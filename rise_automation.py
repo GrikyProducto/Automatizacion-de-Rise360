@@ -914,7 +914,16 @@ class RiseAutomation:
         CONFIRMADO: "Edit Content" es un <a> link, NO un <button>.
         """
         try:
-            # Intentar con <a> primero (confirmado)
+            # Wait for outline to be loaded (Edit Content links visible)
+            edit_links = self.page.locator("a:has-text('Edit Content')")
+            try:
+                edit_links.first.wait_for(state="visible", timeout=10_000)
+            except Exception:
+                # Maybe we're still in a lesson editor, try going back
+                logger.debug("Edit Content no visible, intentando volver al outline")
+                self.go_back_to_outline()
+                time.sleep(2)
+
             edit_links = self.page.locator("a:has-text('Edit Content')")
             count = edit_links.count()
 
@@ -946,30 +955,87 @@ class RiseAutomation:
             return False
 
     def go_back_to_outline(self):
-        """Vuelve al outline del curso desde el editor."""
+        """Vuelve al outline del curso desde el editor de lección.
+
+        IMPORTANT: Must verify we're on the outline (Edit Content visible)
+        before returning. Uses course_url stored during duplication.
+        """
         try:
-            # In Rise 360, the course title link in the header goes back to outline
+            # Close any open sidebar first
+            self._close_edit_sidebar()
+
+            # Primary strategy: direct URL navigation (most reliable)
+            # Use stored course URL or derive from current URL
+            outline_url = getattr(self, "course_url", None)
+            if not outline_url:
+                current_url = self.page.url
+                if "/authoring/" in current_url:
+                    base = current_url.split("/authoring/")[0]
+                    cid = current_url.split("/authoring/")[1].split("/")[0]
+                    outline_url = f"{base}/authoring/{cid}"
+
+            if outline_url:
+                logger.debug(
+                    f"Navegando directamente al outline: {outline_url}"
+                )
+                self.page.goto(
+                    outline_url, wait_until="domcontentloaded"
+                )
+                time.sleep(2)
+                # Wait specifically for Edit Content links (NOT block-wrappers)
+                try:
+                    self.page.locator(
+                        "a:has-text('Edit Content')"
+                    ).first.wait_for(state="visible", timeout=30_000)
+                    logger.debug("Outline cargado (Edit Content visible)")
+                    time.sleep(1)
+                    return
+                except Exception:
+                    logger.warning(
+                        "Edit Content no visible tras navegar al outline"
+                    )
+
+            # Fallback: click back button selectors
             back_sels = [
-                "a.app-header__menu-btn",  # Confirmado: link del logo/título en el header
-                "[class*='back-button']",
+                "a.app-header__menu-btn",
+                ".app-header__back-btn",
+                "a[class*='back']",
                 "[aria-label*='back' i]",
-                "a[href*='authoring']:not([href*='lesson'])",
             ]
             for sel in back_sels:
                 try:
                     btn = self.page.locator(sel).first
-                    if btn.is_visible(timeout=1_500):
+                    if btn.is_visible(timeout=1_000):
                         btn.click()
                         time.sleep(1)
-                        self._wait_for_content_loaded(max_wait=30)
-                        self.dismiss_cookies()
-                        return
+                        try:
+                            self.page.locator(
+                                "a:has-text('Edit Content')"
+                            ).first.wait_for(
+                                state="visible", timeout=15_000
+                            )
+                            logger.debug(
+                                "Volvió al outline via back button"
+                            )
+                            return
+                        except Exception:
+                            pass
                 except Exception:
-                    pass
-            # Fallback: browser back
+                    continue
+
+            # Last resort: browser back
             self.page.go_back()
-            time.sleep(1)
-            self._wait_for_content_loaded(max_wait=30)
+            time.sleep(2)
+            try:
+                self.page.locator(
+                    "a:has-text('Edit Content')"
+                ).first.wait_for(state="visible", timeout=15_000)
+                logger.debug("Volvió al outline via browser back")
+            except Exception:
+                logger.warning(
+                    "No se pudo volver al outline (todas las "
+                    "estrategias fallaron)"
+                )
         except Exception as e:
             logger.warning(f"Error volviendo al outline: {e}")
 
@@ -977,145 +1043,54 @@ class RiseAutomation:
 
     def rename_lesson(self, lesson_index: int, new_name: str) -> bool:
         """
-        Renames a lesson in the course outline.
-        Uses JavaScript to find and click the title element directly,
-        with multiple selector fallbacks for Rise 360's DOM structure.
+        Renames a lesson in the course outline using JS to set title directly.
+        FAST: no navigation, no Escape, no clicking outside — stays on outline.
         """
         try:
-            edit_links = self.page.locator("a:has-text('Edit Content')")
-            count = edit_links.count()
+            title_entries = self.page.locator(
+                ".course-outline-lesson__title-entry"
+            )
+            title_count = title_entries.count()
 
-            if lesson_index >= count:
+            if title_count == 0:
+                title_entries = self.page.locator(
+                    "[class*='title-entry']"
+                )
+                title_count = title_entries.count()
+
+            if lesson_index >= title_count:
                 logger.warning(
-                    f"rename_lesson: index {lesson_index} fuera de rango ({count})"
+                    f"rename_lesson: index {lesson_index} fuera de rango "
+                    f"({title_count} títulos encontrados)"
                 )
                 return False
 
-            # Use JavaScript to find the lesson title element
-            # Rise 360 lesson titles can be various elements — try multiple selectors
-            title_clicked = self.page.evaluate("""(lessonIdx) => {
-                // Find all lesson containers
-                const lessons = document.querySelectorAll(
-                    '.course-outline-lesson, [class*="course-outline-lesson"]'
-                );
-                // Filter to only actual lessons (not sections)
-                const realLessons = Array.from(lessons).filter(el => {
-                    const cls = String(el.className || '');
-                    return !cls.includes('--section') && el.querySelector('a');
-                });
-                if (lessonIdx >= realLessons.length) return false;
-                const lesson = realLessons[lessonIdx];
+            title = title_entries.nth(lesson_index)
+            title.scroll_into_view_if_needed()
+            time.sleep(0.2)
 
-                // Try multiple selectors for the title element
-                const selectors = [
-                    '.course-outline-lesson__title-entry',
-                    '[class*="title-entry"]',
-                    '[class*="lesson-title"]',
-                    '[class*="title"] div',
-                    '[contenteditable]',
-                ];
-                for (const sel of selectors) {
-                    const el = lesson.querySelector(sel);
-                    if (el) {
-                        el.click();
-                        return 'found:' + sel;
-                    }
-                }
+            # Double-click to enter edit mode
+            title.dblclick()
+            time.sleep(0.4)
 
-                // Last resort: click the text node directly (not the Edit Content link)
-                const allText = lesson.querySelectorAll('div, span, p');
-                for (const el of allText) {
-                    const text = el.textContent.trim();
-                    if (text && text !== 'Edit Content' && text !== 'Lesson'
-                        && !text.includes('Edit Content')
-                        && el.offsetHeight > 0 && el.offsetWidth > 0) {
-                        el.click();
-                        return 'text:' + text.slice(0, 30);
-                    }
-                }
-                return false;
-            }""", lesson_index)
-
-            if not title_clicked:
-                logger.warning(
-                    f"No se encontró título para lección {lesson_index}"
-                )
-                return False
-
-            logger.debug(f"  Title click result: {title_clicked}")
-            time.sleep(0.5)
-
-            # After clicking, check if a contenteditable appeared
-            # (Rise may need a double-click to enter edit mode)
-            editable = self.page.locator(
-                "[contenteditable='true']:visible"
-            ).first
-            try:
-                editable.wait_for(state="visible", timeout=2_000)
-            except Exception:
-                # Try double-click via JS on the same element
-                self.page.evaluate("""(lessonIdx) => {
-                    const lessons = document.querySelectorAll(
-                        '.course-outline-lesson, [class*="course-outline-lesson"]'
-                    );
-                    const realLessons = Array.from(lessons).filter(el => {
-                        const cls = String(el.className || '');
-                        return !cls.includes('--section') && el.querySelector('a');
-                    });
-                    if (lessonIdx >= realLessons.length) return;
-                    const lesson = realLessons[lessonIdx];
-                    const title = lesson.querySelector(
-                        '[class*="title-entry"], [class*="title"] div, [class*="lesson-title"]'
-                    );
-                    if (title) {
-                        const evt = new MouseEvent('dblclick', {bubbles: true});
-                        title.dispatchEvent(evt);
-                    }
-                }""", lesson_index)
-                time.sleep(0.5)
-
-            # Select all + type new name
+            # Select all and type new name
             self.page.keyboard.press("Control+a")
-            time.sleep(0.1)
-            self.page.keyboard.type(new_name, delay=10)
+            time.sleep(0.05)
+            self.page.keyboard.type(new_name, delay=8)
+            time.sleep(0.2)
+
+            # Blur via Tab (moves focus to next element, NOT away from page)
+            # Then immediately click on the outline container to stay on page
+            self.page.evaluate("""() => {
+                const active = document.activeElement;
+                if (active) active.blur();
+            }""")
             time.sleep(0.3)
 
-            # BLUR to save: press Enter then click neutral area
-            self.page.keyboard.press("Enter")
-            time.sleep(0.3)
-            # Wait for outline to stabilize
-            try:
-                self.page.locator("a:has-text('Edit Content')").first.wait_for(
-                    state="visible", timeout=3_000
-                )
-            except Exception:
-                pass
-            time.sleep(0.3)
-
-            # Verify the title was saved
-            try:
-                actual = title_entry.first.inner_text().strip()
-                if new_name[:15] in actual:
-                    logger.info(
-                        f"Lección {lesson_index} renombrada: '{new_name[:50]}'"
-                    )
-                    return True
-                else:
-                    logger.warning(
-                        f"Rename verificación falló: esperaba '{new_name[:30]}...', "
-                        f"encontré '{actual[:30]}...'"
-                    )
-                    # Retry: the blur might not have triggered React save
-                    # Try clicking away again
-                    self.page.mouse.click(10, 10)
-                    time.sleep(1)
-                    return True  # Trust the type action even if verify fails
-            except Exception:
-                logger.info(
-                    f"Lección {lesson_index} renombrada (sin verificar): "
-                    f"'{new_name[:50]}'"
-                )
-                return True
+            logger.info(
+                f"Lección {lesson_index} renombrada: '{new_name[:50]}'"
+            )
+            return True
 
         except Exception as e:
             logger.warning(f"Error renombrando lección {lesson_index}: {e}")
@@ -1620,13 +1595,80 @@ class RiseAutomation:
         logger.warning("No se pudo encontrar el boton de agregar bloque")
         return False
 
+    def activate_block_pencil(self, block_index: int) -> bool:
+        """
+        Activates a block for editing by clicking its pencil icon.
+        Works for ALL block types: text, heading, accordion, tabs, etc.
+        Does NOT change block type — just activates it for editing.
+        """
+        try:
+            wrappers = self.page.locator("[class*='block-wrapper']")
+            if block_index >= wrappers.count():
+                return False
+
+            wrapper = wrappers.nth(block_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.15)
+
+            # Click to select the block (shows controls)
+            wrapper.click(timeout=2_000)
+            time.sleep(0.3)
+
+            # Find and click the pencil icon
+            pencil = wrapper.locator(
+                ".block-controls__config, "
+                "[class*='block-controls'] button[class*='config'], "
+                "button[class*='config']"
+            )
+            if pencil.count() > 0 and pencil.first.is_visible(timeout=1_500):
+                pencil.first.click()
+                time.sleep(0.3)
+                logger.debug(f"  Pencil activated for block {block_index}")
+                return True
+
+            # Fallback: try page-level visible pencil
+            page_pencil = self.page.locator(
+                ".block-controls__config:visible"
+            )
+            if page_pencil.count() > 0:
+                page_pencil.first.click()
+                time.sleep(0.3)
+                logger.debug(
+                    f"  Pencil activated (page-level) for block {block_index}"
+                )
+                return True
+
+            # Fallback: hover to reveal controls
+            wrapper.hover()
+            time.sleep(0.5)
+            pencil = self.page.locator(
+                ".block-controls__config:visible"
+            )
+            if pencil.count() > 0:
+                pencil.first.click()
+                time.sleep(0.3)
+                logger.debug(
+                    f"  Pencil activated (hover) for block {block_index}"
+                )
+                return True
+
+            logger.debug(f"  Pencil not found for block {block_index}")
+            return False
+
+        except Exception as e:
+            logger.debug(f"  activate_block_pencil failed: {e}")
+            return False
+
     def change_block_type(self, block_index: int, new_type: str) -> bool:
         """
-        Changes the type of an existing block using the pencil/config icon.
-        This is MUCH faster than adding a new block (~2s vs ~30s).
+        Changes the type of an existing block using the type dropdown.
 
-        Flow: click block → click pencil icon (block-controls__config) →
-              select new type from dropdown → done.
+        DOM structure:
+          .block-controls__config
+            .preview-dropdown-button  ← click this to open type dropdown
+            .block-controls__dropdown ← hidden dropdown with type options
+
+        Flow: click block → click preview-dropdown-button → select type.
         """
         try:
             wrappers = self.page.locator("[class*='block-wrapper']")
@@ -1639,46 +1681,75 @@ class RiseAutomation:
 
             # Click to select the block
             wrapper.click(timeout=2_000)
-            time.sleep(0.2)
+            time.sleep(0.3)
 
-            # Find and click the config/pencil icon
-            config_btn = wrapper.locator(
-                ".block-controls__config, "
-                "[class*='block-controls'] button, "
-                "button[class*='config']"
-            )
-            if config_btn.count() == 0:
-                # Try finding it in the block controls area above the block
-                config_btn = self.page.locator(
-                    ".block-controls__config"
+            # Click the preview-dropdown-button to open type dropdown
+            # Use JS to find the one closest to this block
+            dropdown_opened = self.page.evaluate("""(blockIdx) => {
+                const wrappers = document.querySelectorAll(
+                    "[class*='block-wrapper']"
+                );
+                const w = wrappers[blockIdx];
+                if (!w) return false;
+                const wRect = w.getBoundingClientRect();
+
+                // Find all preview-dropdown-buttons (block type labels)
+                const btns = document.querySelectorAll(
+                    '.preview-dropdown-button:not(.skip-dropdown)'
+                );
+
+                let best = null;
+                let bestDist = 999999;
+                for (const btn of btns) {
+                    if (btn.offsetParent === null) continue;
+                    const bRect = btn.getBoundingClientRect();
+                    const dist = Math.abs(bRect.top - wRect.top);
+                    if (dist < bestDist && dist < 200) {
+                        bestDist = dist;
+                        best = btn;
+                    }
+                }
+
+                if (best) {
+                    best.click();
+                    return true;
+                }
+                return false;
+            }""", block_index)
+
+            if not dropdown_opened:
+                logger.debug(
+                    f"  change_block_type: dropdown button not found "
+                    f"for block {block_index}"
                 )
+                return False
 
-            if config_btn.count() > 0 and config_btn.first.is_visible(timeout=1_500):
-                config_btn.first.click()
-                time.sleep(0.3)
+            time.sleep(0.4)
 
-                # Now select the desired type from the dropdown/menu
-                # Rise shows block type options as clickable items
-                type_label = self._get_block_type_label(new_type)
-                type_option = self.page.locator(
-                    f"button:has-text('{type_label}'), "
-                    f"[role='menuitem']:has-text('{type_label}'), "
-                    f"[role='option']:has-text('{type_label}'), "
-                    f"li:has-text('{type_label}'), "
-                    f"a:has-text('{type_label}')"
-                ).first
+            # Now select the desired type from the dropdown
+            type_label = self._get_block_type_label(new_type)
+            type_option = self.page.locator(
+                f".block-controls__dropdown :text-is('{type_label}'), "
+                f".preview-dropdown :text-is('{type_label}'), "
+                f"button:has-text('{type_label}'), "
+                f"[role='menuitem']:has-text('{type_label}'), "
+                f"[role='option']:has-text('{type_label}')"
+            ).first
 
+            try:
                 if type_option.is_visible(timeout=2_000):
                     type_option.click()
-                    time.sleep(0.2)
+                    time.sleep(0.3)
                     logger.debug(
                         f"  Block {block_index} type changed to '{new_type}'"
                     )
                     return True
-                else:
-                    # Close menu
-                    self.page.keyboard.press("Escape")
-                    time.sleep(0.2)
+            except Exception:
+                pass
+
+            # Close dropdown
+            self.page.keyboard.press("Escape")
+            time.sleep(0.2)
 
         except Exception as e:
             logger.debug(f"  change_block_type failed for {block_index}: {e}")
@@ -1765,17 +1836,23 @@ class RiseAutomation:
     ) -> bool:
         """Selecciona un bloque del Block Library sidebar.
 
-        Flow completo:
-        1. "+" abre sidebar con categorías (button.block-wizard__link)
-        2. Click en categoría → muestra sub-tipos
-        3. Click en sub-tipo específico → agrega el bloque
+        Flow:
+        1. "+" opens sidebar with categories (button.block-wizard__link)
+        2. Click category → shows block type previews
+        3. Click preview → INSERTS the block
 
-        Si sub_type está vacío, selecciona el default de la categoría.
+        Multiple strategies for clicking the correct preview element
+        after category selection.
         """
         try:
             sidebar = self.page.locator(".blocks-sidebar")
             if not sidebar.first.is_visible(timeout=3_000):
                 return False
+
+            # Count wrappers BEFORE to verify insertion later
+            wrappers_before = self.page.locator(
+                "[class*='block-wrapper']"
+            ).count()
 
             # Step 1: Click the category button
             cat_btn = sidebar.locator(
@@ -1785,42 +1862,316 @@ class RiseAutomation:
                 cat_btn = sidebar.locator(
                     f"li.block-wizard__item:has-text('{category}')"
                 )
-            if cat_btn.count() == 0 or not cat_btn.first.is_visible(timeout=2_000):
+            if cat_btn.count() == 0 or not cat_btn.first.is_visible(
+                timeout=2_000
+            ):
+                logger.warning(
+                    f"  Categoría '{category}' no encontrada en sidebar"
+                )
                 return False
 
             cat_btn.first.click()
-            time.sleep(0.3)
+            time.sleep(1.5)
 
-            # Step 2: If sub_type specified, click the specific block type
-            if sub_type:
-                time.sleep(0.2)
-                # Look for sub-type button/preview in the sidebar
-                sub_btn = sidebar.locator(
-                    f"button:has-text('{sub_type}'), "
-                    f"[class*='preview']:has-text('{sub_type}'), "
-                    f"[class*='block-type']:has-text('{sub_type}'), "
-                    f"li:has-text('{sub_type}'), "
-                    f"a:has-text('{sub_type}')"
-                ).first
-                try:
-                    if sub_btn.is_visible(timeout=1_500):
-                        sub_btn.click()
-                        time.sleep(0.3)
-                        logger.debug(
-                            f"Block added: {category} → {sub_type}"
-                        )
-                except Exception:
-                    logger.debug(
-                        f"Sub-type '{sub_type}' not found, "
-                        f"using category default"
-                    )
+            # Check if category click auto-inserted a block
+            wrappers_now = self.page.locator(
+                "[class*='block-wrapper']"
+            ).count()
+            if wrappers_now > wrappers_before:
+                self.dismiss_sidebar_overlay()
+                logger.debug(
+                    f"  Block auto-inserted by category click: "
+                    f"{category} ({wrappers_before} → {wrappers_now})"
+                )
+                return True
 
-            self.dismiss_sidebar_overlay()
-            logger.debug(f"Block added via category '{category}'")
-            return True
+            # Step 2: Find and click the block preview
+            # Dump sidebar DOM for diagnostics, then try strategies
+            dom_info = self.page.evaluate("""() => {
+                const sidebar = document.querySelector('.blocks-sidebar');
+                if (!sidebar) return {error: 'no sidebar'};
 
-        except Exception:
-            pass
+                // Get all block-wizard items (category list + preview items)
+                const wizardItems = sidebar.querySelectorAll(
+                    '.block-wizard__item'
+                );
+                const links = sidebar.querySelectorAll(
+                    '.block-wizard__link'
+                );
+                // Get any preview-specific elements
+                const previews = sidebar.querySelectorAll(
+                    '[class*="block-preview"], [class*="block-wizard__preview"],'
+                    + '[class*="preview-block"], [class*="block-type"],'
+                    + '[class*="block-wizard__type"]'
+                );
+                // Get all visible buttons NOT in category list
+                const buttons = [];
+                sidebar.querySelectorAll('button, [role="button"]')
+                    .forEach(b => {
+                        if (b.offsetParent === null) return;
+                        if (b.classList.contains('block-wizard__link'))
+                            return;
+                        if (b.closest('.block-wizard__link')) return;
+                        if (b.classList.contains('blocks-sidebar__close'))
+                            return;
+                        buttons.push({
+                            tag: b.tagName,
+                            cls: (b.className||'').toString().slice(0, 100),
+                            text: (b.textContent||'').trim().slice(0, 60),
+                            aria: b.getAttribute('aria-label') || '',
+                            role: b.getAttribute('role') || '',
+                        });
+                    });
+                // Get all clickable LI items
+                const liItems = [];
+                sidebar.querySelectorAll('li').forEach(li => {
+                    if (li.offsetParent === null) return;
+                    if (li.classList.contains('block-wizard__item')
+                        && li.querySelector('.block-wizard__link'))
+                        return;  // category item, skip
+                    const text = (li.textContent||'').trim();
+                    if (text.length > 0 && text.length < 100) {
+                        liItems.push({
+                            cls: (li.className||'').toString().slice(0,100),
+                            text: text.slice(0, 60),
+                        });
+                    }
+                });
+
+                return {
+                    wizardItems: wizardItems.length,
+                    links: links.length,
+                    previews: previews.length,
+                    buttons: buttons.slice(0, 15),
+                    liItems: liItems.slice(0, 15),
+                    sidebarClasses: sidebar.className.toString().slice(0,200),
+                    innerHtml: sidebar.innerHTML.slice(0, 500),
+                };
+            }""")
+            logger.debug(
+                f"  Block library DOM after category '{category}': "
+                f"items={dom_info.get('wizardItems')}, "
+                f"links={dom_info.get('links')}, "
+                f"previews={dom_info.get('previews')}, "
+                f"buttons={dom_info.get('buttons', [])[:5]}, "
+                f"liItems={dom_info.get('liItems', [])[:5]}"
+            )
+
+            # Strategy A: Look for preview-specific elements
+            preview_sel = (
+                "[class*='block-preview'], "
+                "[class*='block-wizard__preview'], "
+                "[class*='preview-block'], "
+                "[class*='block-type'], "
+                "[class*='block-wizard__type']"
+            )
+            previews = sidebar.locator(preview_sel)
+            if previews.count() > 0:
+                # Try to match sub_type by text
+                for i in range(previews.count()):
+                    try:
+                        txt = previews.nth(i).text_content(timeout=500)
+                        if sub_type.lower() in (txt or "").lower():
+                            previews.nth(i).click()
+                            logger.debug(
+                                f"  Strategy A: clicked preview "
+                                f"matching '{sub_type}'"
+                            )
+                            time.sleep(1.0)
+                            break
+                    except Exception:
+                        continue
+                else:
+                    # Click first visible preview
+                    for i in range(previews.count()):
+                        try:
+                            if previews.nth(i).is_visible(timeout=500):
+                                previews.nth(i).click()
+                                logger.debug(
+                                    f"  Strategy A: clicked first "
+                                    f"visible preview"
+                                )
+                                time.sleep(1.0)
+                                break
+                        except Exception:
+                            continue
+
+                wrappers_now = self.page.locator(
+                    "[class*='block-wrapper']"
+                ).count()
+                if wrappers_now > wrappers_before:
+                    self.dismiss_sidebar_overlay()
+                    return True
+
+            # Strategy B: Look for LI items that are NOT category links
+            # (block type list items within expanded category)
+            non_cat_items = self.page.evaluate("""(args) => {
+                const sidebar = document.querySelector('.blocks-sidebar');
+                if (!sidebar) return {clicked: false, debug: 'no sidebar'};
+
+                // Find LI items that do NOT contain a block-wizard__link
+                const allLi = sidebar.querySelectorAll('li');
+                const typeLis = [];
+                for (const li of allLi) {
+                    if (li.offsetParent === null) continue;
+                    if (li.querySelector('.block-wizard__link')) continue;
+                    if (li.closest('.block-wizard__link')) continue;
+                    const text = (li.textContent || '').trim();
+                    if (text.length > 0) {
+                        typeLis.push({el: li, text: text.slice(0, 60)});
+                    }
+                }
+
+                if (typeLis.length === 0) {
+                    return {clicked: false, debug: 'no type LIs', count: 0};
+                }
+
+                // Try to match sub_type
+                const subLower = (args.sub || '').toLowerCase();
+                for (const item of typeLis) {
+                    if (subLower && item.text.toLowerCase().includes(
+                        subLower
+                    )) {
+                        item.el.click();
+                        return {
+                            clicked: true,
+                            debug: 'li-match: ' + item.text,
+                            count: typeLis.length,
+                        };
+                    }
+                }
+
+                // Click first non-category LI (default block type)
+                typeLis[0].el.click();
+                return {
+                    clicked: true,
+                    debug: 'li-first: ' + typeLis[0].text,
+                    count: typeLis.length,
+                };
+            }""", {"sub": sub_type})
+
+            if non_cat_items and non_cat_items.get("clicked"):
+                logger.debug(
+                    f"  Strategy B: {non_cat_items.get('debug')}"
+                )
+                time.sleep(1.0)
+
+                wrappers_now = self.page.locator(
+                    "[class*='block-wrapper']"
+                ).count()
+                if wrappers_now > wrappers_before:
+                    self.dismiss_sidebar_overlay()
+                    return True
+
+            # Strategy C: Use JS to find visible clickable elements
+            # EXCLUDING category buttons and "Custom Block" items
+            clicked = self.page.evaluate("""(args) => {
+                const sidebar = document.querySelector('.blocks-sidebar');
+                if (!sidebar) return {clicked: false, debug: 'no sidebar'};
+
+                const allEls = sidebar.querySelectorAll('*');
+                const candidates = [];
+                for (const el of allEls) {
+                    if (el.offsetHeight === 0 || el.offsetWidth === 0)
+                        continue;
+                    if (el.classList.contains('block-wizard__link'))
+                        continue;
+                    if (el.closest('.block-wizard__link')) continue;
+                    if (el.classList.contains('blocks-sidebar__overlay'))
+                        continue;
+                    if (el.classList.contains('blocks-sidebar__close'))
+                        continue;
+
+                    const style = window.getComputedStyle(el);
+                    const isClickable = (
+                        style.cursor === 'pointer' ||
+                        el.tagName === 'BUTTON' ||
+                        el.getAttribute('role') === 'button'
+                    );
+                    if (!isClickable) continue;
+
+                    const text = (el.textContent || '').trim();
+                    // Skip "Custom Block" items to avoid false match
+                    if (text.toLowerCase().includes('custom block'))
+                        continue;
+                    // Skip very long or empty text (navigation noise)
+                    if (text.length === 0 || text.length > 80) continue;
+
+                    candidates.push({
+                        el: el,
+                        text: text.slice(0, 60),
+                        tag: el.tagName,
+                        cls: (el.className||'').toString().slice(0, 80),
+                    });
+                }
+
+                if (candidates.length === 0) {
+                    return {
+                        clicked: false,
+                        debug: 'no candidates (excl. Custom Block)',
+                        count: 0,
+                    };
+                }
+
+                const subLower = (args.sub || '').toLowerCase();
+                for (const c of candidates) {
+                    if (subLower && c.text.toLowerCase().includes(subLower)){
+                        c.el.click();
+                        return {
+                            clicked: true,
+                            debug: 'match: ' + c.text.slice(0, 40),
+                            count: candidates.length,
+                        };
+                    }
+                }
+
+                // Click first remaining candidate
+                candidates[0].el.click();
+                return {
+                    clicked: true,
+                    debug: 'first: ' + candidates[0].text.slice(0, 40),
+                    count: candidates.length,
+                    all: candidates.slice(0, 8).map(
+                        c => c.tag + '.' + c.cls.slice(0,30) +
+                        '="' + c.text.slice(0,30) + '"'
+                    ),
+                };
+            }""", {"sub": sub_type})
+
+            logger.debug(f"  Strategy C: {clicked}")
+
+            if clicked and clicked.get("clicked"):
+                time.sleep(1.0)
+
+            # Final verification
+            wrappers_after = self.page.locator(
+                "[class*='block-wrapper']"
+            ).count()
+
+            if wrappers_after > wrappers_before:
+                self.dismiss_sidebar_overlay()
+                logger.debug(
+                    f"  Block confirmed: {category}/{sub_type} "
+                    f"({wrappers_before} → {wrappers_after})"
+                )
+                return True
+            else:
+                logger.warning(
+                    f"  Block '{category}/{sub_type}' no insertado "
+                    f"({wrappers_before} → {wrappers_after}). "
+                    f"Strategies A/B/C failed"
+                )
+                self.dismiss_sidebar_overlay()
+                self.page.keyboard.press("Escape")
+                return False
+
+        except Exception as e:
+            logger.warning(f"  _select_block_from_library error: {e}")
+            try:
+                self.dismiss_sidebar_overlay()
+                self.page.keyboard.press("Escape")
+            except Exception:
+                pass
 
         return False
 
@@ -2237,6 +2588,274 @@ class RiseAutomation:
             except Exception:
                 pass
             return 0
+
+    # ── Edición de bloques via sidebar (lápiz) ──────────────────────────
+
+    def edit_block_via_pencil(
+        self, block_index: int, texts: list[str]
+    ) -> int:
+        """
+        Edita CUALQUIER bloque usando el flujo correcto de Rise 360:
+        1. Click en el bloque → selecciona → aparecen block-controls
+        2. Click en botón "content" (btn-icon--type-content) → abre sidebar
+        3. Sidebar "Edit X" tiene contenteditable para texto
+        4. Escribe el texto en los campos del sidebar
+        5. Cierra el sidebar
+
+        DOM structure (confirmed by diagnostic):
+          .block-controls__bar
+            .block-controls__config  ← DIV container (NOT a button)
+              .preview-dropdown-button  ← block type label
+              .block-controls__tools-anchor
+                BUTTON.block-controls__btn-icon--type-content  ← PENCIL
+                BUTTON.block-controls__btn-icon--type-style
+                BUTTON.block-controls__btn-icon--type-format
+
+        Returns: número de editables rellenados.
+        """
+        if not texts:
+            return 0
+
+        try:
+            wrappers = self.page.locator("[class*='block-wrapper']")
+            if block_index >= wrappers.count():
+                logger.warning(
+                    f"edit_block_via_pencil: index {block_index} fuera de "
+                    f"rango ({wrappers.count()} wrappers)"
+                )
+                return 0
+
+            wrapper = wrappers.nth(block_index)
+            wrapper.scroll_into_view_if_needed()
+            time.sleep(0.2)
+
+            # 1. Click the block to select it (reveals block-controls)
+            try:
+                wrapper.click(timeout=2_000)
+            except Exception:
+                wrapper.click(force=True)
+            time.sleep(0.4)
+
+            # 2. Check if this is a Custom Block — clicking its content
+            # button navigates away from the editor (causes DEL_LOCK).
+            # Custom Blocks have .preview-dropdown-button.skip-dropdown
+            is_custom = self.page.evaluate("""(blockIdx) => {
+                const wrappers = document.querySelectorAll(
+                    "[class*='block-wrapper']"
+                );
+                const w = wrappers[blockIdx];
+                if (!w) return false;
+                const wRect = w.getBoundingClientRect();
+                const dropdowns = document.querySelectorAll(
+                    '.preview-dropdown-button'
+                );
+                for (const dd of dropdowns) {
+                    const dRect = dd.getBoundingClientRect();
+                    if (Math.abs(dRect.top - wRect.top) < 200) {
+                        return dd.classList.contains('skip-dropdown');
+                    }
+                }
+                return false;
+            }""", block_index)
+
+            if is_custom:
+                logger.debug(
+                    f"  Block {block_index}: Custom Block — skip editing"
+                )
+                return 0
+
+            # 3. Find and click the CONTENT edit button (the pencil)
+            # Use JS to find the content button closest to this block
+            pencil_clicked = self.page.evaluate("""(blockIdx) => {
+                const wrappers = document.querySelectorAll(
+                    "[class*='block-wrapper']"
+                );
+                const w = wrappers[blockIdx];
+                if (!w) return false;
+                const wRect = w.getBoundingClientRect();
+
+                // Find all content buttons
+                const btns = document.querySelectorAll(
+                    'button.block-controls__btn-icon--type-content'
+                );
+
+                // Find the one closest to this block (within 200px)
+                let best = null;
+                let bestDist = 999999;
+                for (const btn of btns) {
+                    if (btn.offsetParent === null) continue;
+                    const bRect = btn.getBoundingClientRect();
+                    const dist = Math.abs(bRect.top - wRect.top);
+                    if (dist < bestDist && dist < 200) {
+                        bestDist = dist;
+                        best = btn;
+                    }
+                }
+
+                if (best) {
+                    best.click();
+                    return true;
+                }
+                return false;
+            }""", block_index)
+
+            if not pencil_clicked:
+                # Fallback: hover + try Playwright locator
+                wrapper.hover()
+                time.sleep(0.5)
+                content_btn = self.page.locator(
+                    "button.block-controls__btn-icon--type-content:visible"
+                )
+                if content_btn.count() > 0:
+                    content_btn.first.click()
+                    pencil_clicked = True
+                    time.sleep(0.3)
+
+            if not pencil_clicked:
+                logger.warning(
+                    f"  Block {block_index}: content button no encontrado"
+                )
+                return 0
+
+            time.sleep(0.5)
+
+            # 3. Wait for sidebar to open
+            # The sidebar gets class 'blocks-sidebar--open' and container
+            # becomes 'blocks-sidebar__container--edit'
+            sidebar = self.page.locator(
+                ".blocks-sidebar.blocks-sidebar--open"
+            )
+            try:
+                sidebar.first.wait_for(state="attached", timeout=3_000)
+            except Exception:
+                # Check if sidebar container in edit mode exists
+                edit_container = self.page.locator(
+                    ".blocks-sidebar__container--edit"
+                )
+                if edit_container.count() == 0:
+                    logger.warning(
+                        f"  Block {block_index}: sidebar no se abrió "
+                        f"después del content button"
+                    )
+                    self.page.keyboard.press("Escape")
+                    return 0
+
+            time.sleep(0.3)
+
+            # Use the edit container which is the visible part
+            edit_container = self.page.locator(
+                ".blocks-sidebar__container--edit"
+            )
+            if edit_container.count() == 0:
+                edit_container = sidebar
+
+            logger.debug(
+                f"  Block {block_index}: sidebar abierto para edición"
+            )
+
+            # 4. Find editables INSIDE THE SIDEBAR
+            sidebar_editables = edit_container.first.locator(
+                "[contenteditable='true']"
+            )
+            ed_count = sidebar_editables.count()
+
+            if ed_count == 0:
+                # Try broader search with small wait
+                time.sleep(0.5)
+                sidebar_editables = edit_container.first.locator(
+                    ".tiptap.ProseMirror[contenteditable='true'], "
+                    "[contenteditable='true'], "
+                    "textarea, "
+                    "input[type='text']"
+                )
+                ed_count = sidebar_editables.count()
+
+            if ed_count == 0:
+                logger.warning(
+                    f"  Block {block_index}: 0 editables en sidebar"
+                )
+                self._close_edit_sidebar()
+                return 0
+
+            logger.debug(
+                f"  Block {block_index}: {ed_count} editables en sidebar, "
+                f"{len(texts)} textos a llenar"
+            )
+
+            # 5. Fill each editable with corresponding text
+            edited = 0
+            for i in range(min(ed_count, len(texts))):
+                text = texts[i] if i < len(texts) else ""
+                if not text or not text.strip():
+                    continue
+                try:
+                    ed = sidebar_editables.nth(i)
+                    if not ed.is_visible(timeout=1_000):
+                        continue
+                    ed.click()
+                    time.sleep(0.1)
+                    self.page.keyboard.press("Control+a")
+                    time.sleep(0.05)
+                    self.page.keyboard.press("Delete")
+                    time.sleep(0.05)
+                    paste_large_text(self.page, text)
+                    time.sleep(0.2)
+                    edited += 1
+                except Exception as e:
+                    logger.debug(
+                        f"  Block {block_index} sidebar editable "
+                        f"{i} falló: {e}"
+                    )
+
+            # 6. Close sidebar
+            self._close_edit_sidebar()
+
+            if edited > 0:
+                logger.info(
+                    f"  [sidebar:{block_index}] {edited}/{ed_count} "
+                    f"editables rellenados via lápiz"
+                )
+
+            return edited
+
+        except Exception as e:
+            logger.warning(
+                f"  Error en edit_block_via_pencil block {block_index}: {e}"
+            )
+            try:
+                self._close_edit_sidebar()
+            except Exception:
+                pass
+            return 0
+
+    def _close_edit_sidebar(self):
+        """Close the block edit sidebar if open."""
+        try:
+            close_btn = self.page.locator(
+                ".blocks-sidebar__close:visible"
+            )
+            if close_btn.count() > 0:
+                close_btn.first.click()
+                time.sleep(0.3)
+                return
+        except Exception:
+            pass
+        try:
+            # Click the overlay to close
+            overlay = self.page.locator(
+                ".blocks-sidebar__overlay--active"
+            )
+            if overlay.count() > 0:
+                overlay.first.click(force=True)
+                time.sleep(0.3)
+                return
+        except Exception:
+            pass
+        try:
+            self.page.keyboard.press("Escape")
+            time.sleep(0.3)
+        except Exception:
+            pass
 
     # ── Guardado ──────────────────────────────────────────────────────────
 

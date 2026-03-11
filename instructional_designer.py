@@ -22,6 +22,7 @@ NUNCA reescribe ni resume.
 
 import json
 import hashlib
+import re
 import time
 from typing import Optional
 
@@ -40,58 +41,55 @@ VALID_BLOCK_TYPES = {
     "banner", "mondrian", "divider", "spacer", "continue",
 }
 
-SYSTEM_PROMPT = """Eres un diseñador instruccional senior y diseñador gráfico senior especializado en cursos Articulate Rise 360.
+SYSTEM_PROMPT = """Eres el diseñador instruccional y diseñador gráfico senior que construye cursos corporativos en Articulate Rise 360 para clientes latinoamericanos. Tu trabajo replica exactamente lo que hace un diseñador humano experto: lees el contenido del PDF y decides qué bloque Rise lo presenta mejor para el estudiante.
 
-Tu trabajo: dado el contenido parseado de UNA lección del curso y los bloques existentes en la plantilla Rise, generar el plan ÓPTIMO de distribución de bloques. Tú decides qué tipo de bloque Rise presenta mejor cada pieza de contenido.
+## REGLAS ABSOLUTAS (nunca romper bajo ninguna circunstancia):
 
-## REGLAS ABSOLUTAS (nunca romper):
-1. EL TEXTO ES VERBATIM — NUNCA reescribas, resumas o parafrasees contenido. El campo "texts" en cada acción debe contener EXACTAMENTE el texto del input, carácter por carácter.
-2. CADA pieza de contenido debe aparecer en algún lugar del plan — no se pierde nada. 0% pérdida.
-3. El plan debe ser un JSON válido con la estructura: {"plan": [array de acciones]}
-4. No incluyas explicaciones, solo el JSON.
-5. TODO EL CONTENIDO DEBE ESTAR EN ESPAÑOL. NUNCA generes texto en inglés. Si el contenido del PDF está en español, el plan debe estar 100% en español. No traduzcas, no agregues texto en inglés, no mezcles idiomas. Los únicos campos en inglés son los nombres de acciones (EDIT, ADD, KEEP) y block_type (text, heading, etc.).
+1. **TEXTO VERBATIM**: El campo "texts" de cada acción debe contener EXACTAMENTE el texto del input, carácter por carácter. NUNCA reescribas, resumas, parafrasees ni traduzcas. Si el texto tiene errores ortográficos, los conservas. Si tiene citas con formato "(Autor, 2020)", lo conservas exactamente.
 
-## CAPACIDAD CLAVE — CAMBIO DE TIPO VÍA LÁPIZ:
-El sistema puede CAMBIAR el tipo de cualquier bloque existente usando el ícono de lápiz (config).
-Esto es MUY RÁPIDO (~2 segundos) vs agregar un bloque nuevo (~15-30 segundos).
+2. **FIDELIDAD TOTAL**: Cada fragmento de contenido del input debe aparecer en algún lugar del plan. Si no sabes dónde ponerlo, úsalo en un bloque "heading". NUNCA omitas contenido.
 
-ESTRATEGIA OBLIGATORIA:
-1. Toma los primeros N bloques editables existentes (text, heading, statement, quote, list, etc.)
-2. Para cada pieza de contenido, CAMBIA el tipo del bloque existente al tipo ideal usando EDIT con block_type diferente al actual.
-3. SOLO usa ADD cuando el contenido excede la cantidad de bloques editables existentes.
+3. **TODO EN ESPAÑOL**: El contenido siempre va en español (ya viene así del PDF). Los únicos strings en inglés son nombres de acciones (EDIT, ADD, KEEP) y tipos de bloque (heading, text, flashcards, etc.).
 
-Ejemplo: si hay 10 bloques "text" y necesitas 3 headings + 5 texts + 2 statements:
-→ EDIT block 0 con block_type="heading" (el lápiz cambiará text→heading)
-→ EDIT block 1 con block_type="text"
-→ EDIT block 2 con block_type="heading"
-→ etc.
-NO crear bloques nuevos si ya hay suficientes bloques editables existentes.
+4. **RESPONDE SOLO JSON**: La respuesta es únicamente {"plan": [...]}. Sin explicaciones, sin markdown, sin texto adicional.
 
-## GUÍA DE BLOQUES RISE 360:
-- "text": Párrafos explicativos largos (>200 caracteres). El más versátil.
-- "heading": Para títulos de subtemas y frases impactantes cortas (<100 chars). Crear estructura visual.
-- "statement": Para principios clave, reglas, definiciones que merecen destacarse.
-- "quote": Para frases memorables o citas textuales cortas (<150 chars). Máximo 1-2 por lección.
-- "bulleted_list": Cuando el texto fuente YA tiene marcadores de viñeta (•, -, *, →).
-- "numbered_list": Para pasos secuenciales o items enumerados.
-- "accordion": 3-6 subtemas con estructura título+cuerpo.
-- "tabs": 2-4 categorías paralelas para comparación.
-- "flashcards": Pares concepto-definición. Usar acción FLASHCARD con front/back.
+## CÓMO LEER EL CAMPO "suggested_block"
 
-## REGLAS DE RITMO VISUAL:
-- NUNCA colocar más de 2 bloques "text" consecutivos.
-- Mezclar tipos de bloques para variedad visual.
-- Bloques interactivos en el MEDIO de la lección, no al inicio.
-- Total de bloques por lección: 8-15.
+Cada fragmento de contenido incluye un campo "suggested_block" con una sugerencia de clasificación semántica:
+- "quote_carousel" → el texto tiene cita de autor (según X, citado por Y, (Apellido, año))
+- "bulleted_list" → el texto original tiene viñetas (•, -, *, →)
+- "numbered_list" → el texto original tiene numeración (1., 2., 3.)
+- "flashcard_candidate" → el texto tiene estructura "término: definición"
+- "statement" → frase corta e impactante, menos de 180 caracteres
+- "text_table" → el texto contiene una tabla
+- "heading" → párrafo expositivo general (default)
 
-## PRIORIDAD DE ACCIONES (DE MÁS A MENOS RÁPIDA):
-1. KEEP — bloques visuales de plantilla (image, banner, divider, spacer, continue, mondrian). NUNCA eliminar.
-2. EDIT — reutilizar bloques existentes. Si el tipo actual no es el ideal, especifica el tipo deseado en block_type y el sistema lo cambiará automáticamente via lápiz. ESTA ES LA ACCIÓN MÁS EFICIENTE.
-3. ADD — SOLO cuando NO hay suficientes bloques existentes. Cada ADD toma 15-30 segundos, así que minimízalos.
-4. ADD_UX — instrucción UX (statement) ANTES de cada bloque interactivo.
-5. FLASHCARD — para bloques de flashcards.
+La sugerencia es orientativa. Puedes usarla o ignorarla si el contexto de la lección lo justifica mejor. Lo importante es el criterio pedagógico y visual.
 
-## TEXTOS UX (usar EXACTAMENTE estos strings):
+## TAXONOMÍA DE DECISIÓN: QUÉ BLOQUE USAR
+
+| Tipo de contenido | Bloque Rise | Cuándo |
+|---|---|---|
+| Párrafo expositivo | heading | Default para la mayoría del contenido. El humano usa heading para párrafos normales (53%+ de bloques). |
+| Concepto + definición | flashcards | Cuando hay pares claro término→explicación. 1-2 por lección máximo. |
+| Cita de autor | quote_carousel | Cuando el texto dice "según X", "de acuerdo con Y", o tiene (Apellido, año). |
+| Lista con viñetas | bulleted_list | Solo cuando el texto ORIGINAL ya tiene •, -, *, →. |
+| Lista numerada | numbered_list | Solo cuando el texto ORIGINAL ya tiene 1., 2., 3. o pasos. |
+| Principio clave | statement | Frases cortas e impactantes (<180 chars). Máximo 3 por lección. |
+| Dos conceptos paralelos | text_twocol | Cuando hay una comparación A vs B o dos ideas complementarias de igual peso. |
+| Tabla del PDF | text | Preservar con saltos de línea y espaciado legible. |
+| Imagen/figura del PDF | image | Placeholder con caption como texto del bloque. |
+| Separador entre secciones | divider | Con moderación, entre secciones grandes. |
+
+## REGLAS DE DISEÑO VISUAL
+
+- **Ritmo**: no más de 2 bloques del mismo tipo consecutivos (excepto heading, que es dominante).
+- **Interactividad**: cada lección debe tener al menos 1 bloque interactivo si el contenido lo permite (flashcards, quote_carousel, accordion, tabs).
+- **Posición de interactivos**: siempre en el MEDIO de la lección, nunca al inicio.
+- **ADD_UX**: agregar statement con instrucción UX ANTES de cada bloque interactivo.
+- **Proporción**: entre 8 y 20 bloques por lección. Ni muy pocas ni demasiadas.
+
+## INSTRUCCIONES UX (usar EXACTAMENTE estos textos):
 - Antes de flashcards: "Da clic en cada tarjeta para ver su información al reverso"
 - Antes de accordion: "Despliega cada sección para ver su contenido"
 - Antes de tabs: "Selecciona cada pestaña para explorar el contenido"
@@ -100,23 +98,58 @@ NO crear bloques nuevos si ya hay suficientes bloques editables existentes.
 - Antes de sorting: "Arrastra y ordena los elementos según corresponda"
 - Antes de labeled: "Haz clic en cada punto para ver la información"
 
-## ESQUEMA DE ACCIONES:
+## REGLAS DE PLANTILLA
 
-EDIT (reutilizar bloque existente — cambiar tipo si necesario):
+- **Banners sin editables** (editables=0): son corporativos del cliente → siempre KEEP, nunca modificar.
+- **Banners con editables**: pueden recibir el título de la lección.
+- **Wrapper blocks**: siempre KEEP (son estructurales).
+- **Estrategia EDIT > ADD**: reutilizar bloques existentes es más rápido (2s) que agregar nuevos (15-30s). Usa EDIT siempre que haya bloques disponibles. Puedes cambiar el tipo del bloque existente especificando block_type diferente al actual.
+
+## ESQUEMA DE ACCIONES
+
+KEEP — bloque visual de plantilla sin cambios:
+{"action": "KEEP", "block_type": "<tipo>", "target_index": <int>}
+
+EDIT — reutilizar bloque existente (cambia tipo si block_type difiere del actual):
 {"action": "EDIT", "block_type": "<tipo_deseado>", "target_index": <int>, "texts": ["<texto verbatim>"]}
-Nota: si block_type difiere del tipo actual del bloque, el sistema lo cambiará automáticamente.
 
-ADD (insertar bloque nuevo — SOLO si no hay bloques reutilizables):
+ADD — nuevo bloque (SOLO cuando no hay bloques existentes reutilizables):
 {"action": "ADD", "block_type": "<tipo>", "texts": ["<texto verbatim>"]}
 
-ADD_UX (instrucción UX antes de interactivo):
+ADD_UX — instrucción UX antes de bloque interactivo:
 {"action": "ADD_UX", "block_type": "statement", "texts": ["<texto UX exacto>"], "before_index": <int>}
 
-FLASHCARD (poblar sidebar de flashcards):
-{"action": "FLASHCARD", "target_index": <int>, "cards": [{"front": "<verbatim>", "back": "<verbatim>"}]}
+FLASHCARD — poblar tarjetas del sidebar:
+{"action": "FLASHCARD", "target_index": <int>, "cards": [{"front": "<término verbatim>", "back": "<definición verbatim>"}]}
 
-KEEP (bloque visual de plantilla sin cambios):
-{"action": "KEEP", "block_type": "<tipo>", "target_index": <int>}
+## EJEMPLO DE PLAN CORRECTO
+
+Input: lección sobre "Concepto y Evolución de la Cadena de Suministro"
+Plantilla tiene: [banner(0,editables=0), text(1), text(2), text(3), flashcards(4), wrapper(5)]
+Fragmentos: intro expositiva + definición SCM con cita + lista de 4 flujos + cita de Chopra y Meindl
+
+Plan correcto:
+{
+  "plan": [
+    {"action": "KEEP", "block_type": "banner", "target_index": 0},
+    {"action": "EDIT", "block_type": "heading", "target_index": 1,
+     "texts": ["En el entorno competitivo actual, las organizaciones enfrentan el desafío constante de optimizar sus procesos para satisfacer las necesidades del cliente al menor costo posible."]},
+    {"action": "EDIT", "block_type": "heading", "target_index": 2,
+     "texts": ["Más que una simple evolución de la logística tradicional, el SCM representa un enfoque integral que articula decisiones operativas, tácticas y estratégicas, abarcando desde la gestión de proveedores hasta la entrega final."]},
+    {"action": "EDIT", "block_type": "quote_carousel", "target_index": 3,
+     "texts": ["Según Chopra y Meindl (2016), una cadena de suministro eficiente y flexible es uno de los pilares fundamentales para alcanzar niveles superiores de productividad, rentabilidad y diferenciación."]},
+    {"action": "ADD_UX", "block_type": "statement",
+     "texts": ["Da clic en cada tarjeta para ver su información al reverso"], "before_index": 4},
+    {"action": "FLASHCARD", "target_index": 4,
+     "cards": [
+       {"front": "Supply Chain Management (SCM)", "back": "Red dinámica de organizaciones, procesos y recursos que colaboran en la planificación, ejecución y control de actividades destinadas a satisfacer las necesidades del cliente final."},
+       {"front": "Flujo de información", "back": "Datos sobre demanda, inventarios y pedidos que fluyen en ambas direcciones entre los actores de la cadena."},
+       {"front": "Flujo financiero", "back": "Movimiento de pagos, créditos y condiciones financieras entre los actores de la cadena."},
+       {"front": "Flujo de materiales", "back": "Movimiento físico de productos desde proveedores hasta el cliente final, incluyendo logística inversa."}
+     ]},
+    {"action": "KEEP", "block_type": "wrapper", "target_index": 5}
+  ]
+}
 
 Responde ÚNICAMENTE con el JSON. Sin explicaciones, sin markdown, sin texto adicional."""
 
@@ -137,6 +170,7 @@ Genera el plan óptimo para esta lección.
 - Usa ADD para contenido que no cabe en bloques existentes.
 - Si hay un bloque flashcards en la plantilla Y el contenido tiene pares concepto-definición, crea una acción FLASHCARD.
 - Agrega ADD_UX antes de cada bloque interactivo.
+- Cada fragmento de contenido incluye un campo "suggested_block" con sugerencia semántica. Úsala como guía, pero aplica tu criterio de diseñador si el contexto lo justifica mejor.
 - Responde ÚNICAMENTE con {{"plan": [...]}}"""
 
 
@@ -321,17 +355,22 @@ class InstructionalDesigner:
             for b in existing_blocks
         ]
 
-        # Simplificar content_groups (mantener todo el texto verbatim)
+        # Pre-clasificar contenido semánticamente
+        classified_groups = self._pre_classify_content(content_groups)
+
+        # Simplificar content_groups (mantener texto verbatim + suggested_block)
         content_simplified = []
-        for g in content_groups:
+        for g in classified_groups:
             item = {}
             title = g.get("title", "").strip()
             text = g.get("text", "").strip()
+            suggested = g.get("suggested_block", "heading")
             if title:
                 item["title"] = title
             if text:
                 item["text"] = text
-            if item:
+            item["suggested_block"] = suggested
+            if item.get("title") or item.get("text"):
                 content_simplified.append(item)
 
         return USER_PROMPT_TEMPLATE.format(
@@ -445,57 +484,120 @@ class InstructionalDesigner:
         content_groups: list[dict],
     ) -> list[dict]:
         """
-        Safety net: verifica que TODO el contenido del PDF aparece en el plan.
-        Si la IA omitió algo, lo agrega como ADD text al final.
+        Safety net mejorado: verifica que TODO el contenido del PDF
+        aparece en el plan. Usa múltiples estrategias de comparación
+        con normalización para detectar textos partidos o reformateados.
         """
-        # Recopilar todos los textos ya en el plan
-        plan_text_prefixes = set()
+        # Recopilar todos los textos ya en el plan (normalizados)
+        plan_texts_normalized = set()
         for action in plan:
             for t in action.get("texts", []):
-                if t and len(t) >= 30:
-                    plan_text_prefixes.add(t[:50])
+                if t and len(t) >= 20:
+                    normalized = re.sub(
+                        r"[\s\.\,\;\:\-]+", " ", t.lower()
+                    ).strip()
+                    for i in range(0, min(len(normalized), 100), 20):
+                        plan_texts_normalized.add(normalized[i:i + 20])
             for card in action.get("cards", []):
                 back = card.get("back", "")
-                if back and len(back) >= 30:
-                    plan_text_prefixes.add(back[:50])
+                if back and len(back) >= 20:
+                    normalized = re.sub(
+                        r"[\s\.\,\;\:\-]+", " ", back.lower()
+                    ).strip()
+                    plan_texts_normalized.add(normalized[:20])
 
-        # Verificar cada content_group
         missing_count = 0
         for group in content_groups:
             text = group.get("text", "").strip()
             if not text or len(text) < 30:
                 continue
 
-            # Buscar si el texto (o su inicio) aparece en el plan
-            prefix = text[:50]
-            found = prefix in plan_text_prefixes
+            normalized = re.sub(
+                r"[\s\.\,\;\:\-]+", " ", text.lower()
+            ).strip()
+            fragment = normalized[:20]
 
-            if not found:
-                # Buscar parcialmente (la IA pudo haber dividido el texto)
-                found = any(
-                    prefix[:25] in tp
-                    for tp in plan_text_prefixes
-                )
-
-            if not found:
+            if fragment not in plan_texts_normalized:
                 logger.warning(
-                    f"  [IA] Contenido no encontrado en plan — "
-                    f"agregando: '{text[:40]}...'"
+                    f"  [IA] Contenido faltante detectado — "
+                    f"agregando: '{text[:50]}...'"
                 )
                 plan.append({
                     "action": "ADD",
-                    "block_type": "text",
+                    "block_type": "heading",
                     "texts": [text],
                 })
                 missing_count += 1
 
         if missing_count > 0:
             logger.warning(
-                f"  [IA] Se agregaron {missing_count} fragmentos "
-                f"faltantes como texto"
+                f"  [IA] Safety net activado: {missing_count} fragmentos "
+                f"agregados como heading"
             )
 
         return plan
+
+    # ── Pre-clasificación semántica ─────────────────────────────────────
+
+    def _pre_classify_content(
+        self, content_groups: list[dict]
+    ) -> list[dict]:
+        """
+        Analiza semánticamente cada fragmento ANTES de enviarlo a Groq.
+        Añade campo 'suggested_block' para orientar la decisión de la IA.
+        La IA puede ignorar la sugerencia si el contexto lo justifica.
+        """
+        classified = []
+
+        for group in content_groups:
+            text = group.get("text", "").strip()
+            title = group.get("title", "").strip()
+            suggestion = "heading"  # default: patrón humano dominante
+
+            if not text:
+                classified.append({**group, "suggested_block": "heading"})
+                continue
+
+            # Cita de autor → quote_carousel
+            if re.search(
+                r"(según|citado por|de acuerdo con|afirma|señala|plantea|indica)\s+\w+",
+                text, re.IGNORECASE,
+            ) or re.search(r"\(\w[\w\s]+,\s*\d{4}\)", text):
+                suggestion = "quote_carousel"
+
+            # Lista numerada → numbered_list
+            elif re.search(
+                r"^\s*\d+[\.\)]\s+\w", text, re.MULTILINE
+            ) and text.count("\n") >= 2:
+                suggestion = "numbered_list"
+
+            # Lista con viñetas → bulleted_list
+            elif re.search(
+                r"^\s*[•\-\*→▪]\s+\w", text, re.MULTILINE
+            ) and text.count("\n") >= 2:
+                suggestion = "bulleted_list"
+
+            # Definición corta (término: definición) → flashcard_candidate
+            elif re.search(
+                r"^[A-ZÁÉÍÓÚÑ][^:]{3,50}:\s+[A-ZÁÉÍÓÚÑ]", text
+            ) and len(text) < 500 and text.count("\n") < 3:
+                suggestion = "flashcard_candidate"
+
+            # Frase corta impactante → statement
+            elif (
+                len(text) < 180
+                and not title
+                and not re.search(r"[•\-\*\d+\.]", text[:10])
+            ):
+                suggestion = "statement"
+
+            # Tabla (contiene pipes o tabs con datos) → text_table
+            elif re.search(r"\|.+\|", text) or text.count("\t") > 3:
+                suggestion = "text_table"
+
+            classified.append({**group, "suggested_block": suggestion})
+
+        return classified
 
     # ── Utilidades ───────────────────────────────────────────────────────
 

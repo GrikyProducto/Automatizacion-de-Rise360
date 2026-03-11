@@ -528,6 +528,8 @@ class ContentBuilder:
         self._course_url = self.rise.page.url.split("?")[0].split("#")[0]
         if "/lesson/" in self._course_url:
             self._course_url = self._course_url.split("/lesson/")[0]
+        # Also store on rise object so go_back_to_outline can use it
+        self.rise.course_url = self._course_url
         logger.info(f"URL del curso: {self._course_url}")
 
         # Set course title from PDF content (not filename)
@@ -560,7 +562,7 @@ class ContentBuilder:
         needed_lessons = max(lesson_map.keys()) + 1 if lesson_map else total_lessons
         logger.info(f"Mapeo: {len(lesson_map)} lecciones necesarias")
 
-        # PHASE: Scale lessons if needed
+        # PHASE: Scale lessons if needed (retry up to 3 times, NEVER truncate)
         if needed_lessons > total_lessons:
             self._progress(
                 f"Escalando lecciones: {total_lessons} → {needed_lessons}...",
@@ -569,18 +571,33 @@ class ContentBuilder:
             logger.info(
                 f"Escalando lecciones: {total_lessons} → {needed_lessons}"
             )
-            if self.rise.ensure_lesson_count(needed_lessons):
-                total_lessons = self.rise.page.locator(
-                    "a:has-text('Edit Content')"
-                ).count()
-                logger.info(f"Lecciones después de escalar: {total_lessons}")
-            else:
-                logger.warning("No se pudieron crear todas las lecciones necesarias")
-                # Rebuild map with available lessons
-                total_lessons = self.rise.page.locator(
-                    "a:has-text('Edit Content')"
-                ).count()
-                lesson_map = self._build_lesson_map(topics, total_lessons)
+            scale_success = False
+            for attempt in range(1, 4):
+                logger.info(
+                    f"Intento {attempt}/3 de ensure_lesson_count({needed_lessons})"
+                )
+                if self.rise.ensure_lesson_count(needed_lessons):
+                    total_lessons = self.rise.page.locator(
+                        "a:has-text('Edit Content')"
+                    ).count()
+                    logger.info(
+                        f"Lecciones después de escalar: {total_lessons}"
+                    )
+                    scale_success = True
+                    break
+                if attempt < 3:
+                    logger.warning(
+                        f"Intento {attempt} falló, reintentando en 2s..."
+                    )
+                    time.sleep(2)
+                    self._ensure_on_outline()
+
+            if not scale_success:
+                raise RuntimeError(
+                    f"No se pudieron crear {needed_lessons} lecciones "
+                    f"necesarias. La plantilla tiene {total_lessons}. "
+                    f"Verifica que tienes permisos de edición."
+                )
 
         progress_per = 30 / max(len(lesson_map), 1)
 
@@ -601,9 +618,7 @@ class ContentBuilder:
             else:
                 formatted_title = title
             self.rise.rename_lesson(lesson_idx, formatted_title)
-            time.sleep(0.5)
-            # Ensure we're still on the outline after each rename
-            self._ensure_on_outline()
+            time.sleep(0.3)
         logger.info("Todas las lecciones renombradas")
 
         # PASS 2: Edit content per lesson
@@ -1350,11 +1365,18 @@ class ContentBuilder:
             "bulleted_list", "numbered_list", "note",
         }
 
+        # Track last processed block index so ADDs go in sequential order
+        last_processed_index = 0
+        # Offset to account for newly added blocks shifting indices
+        add_offset = 0
+
         # ── Execute plan linearly, action by action ─────────────────────
         for action in plan:
             act = action.get("action", "")
 
             if act == "KEEP":
+                target_idx = action.get("target_index", last_processed_index)
+                last_processed_index = max(last_processed_index, target_idx + add_offset)
                 continue
 
             elif act == "EDIT":
@@ -1365,23 +1387,24 @@ class ContentBuilder:
                 if target_idx < 0 or not texts:
                     continue
 
+                # Adjust for blocks added before this index
+                adjusted_idx = target_idx + add_offset
                 current_type = existing_type_map.get(target_idx, "unknown")
 
-                # Change block type via pencil icon if needed
-                if (current_type != desired_type
-                        and desired_type in changeable_types
-                        and current_type in changeable_types):
+                # Change block type first if needed (uses pencil dropdown)
+                if desired_type in changeable_types and current_type != desired_type:
                     changed = self.rise.change_block_type(
-                        target_idx, desired_type
+                        adjusted_idx, desired_type
                     )
                     if changed:
                         logger.info(
-                            f"  ✎ [{target_idx}] {current_type} → {desired_type}"
+                            f"  ✎ [{adjusted_idx}] {current_type} → {desired_type}"
                         )
 
-                # Fill editables with content
-                edited = self._fill_block_content(target_idx, texts)
+                # Fill via pencil → sidebar (handles everything internally)
+                edited = self._fill_block_content(adjusted_idx, texts)
                 total_edited += edited
+                last_processed_index = max(last_processed_index, adjusted_idx)
 
             elif act in ("ADD", "ADD_UX"):
                 desired_type = action.get("block_type", "text")
@@ -1389,24 +1412,51 @@ class ContentBuilder:
                 if not texts:
                     continue
 
-                # Find safe insertion point
-                insertion_idx = self._find_safe_insertion_point(
-                    existing_blocks
-                )
+                # ADD_UX: insert before a specific interactive block
+                # ADD: insert after the last processed block (sequential)
+                if act == "ADD_UX" and "before_index" in action:
+                    # Re-catalog to find current position of interactive block
+                    original_before = action["before_index"]
+                    target_type = existing_type_map.get(original_before, "")
+                    current_blocks = self.rise._catalog_blocks_in_editor()
+                    insertion_idx = last_processed_index  # fallback
+                    for cb in current_blocks:
+                        if cb["type"] == target_type and cb["index"] >= original_before:
+                            insertion_idx = max(0, cb["index"] - 1)
+                            break
+                else:
+                    insertion_idx = last_processed_index
                 if self.rise.add_block_at_position(
                     insertion_idx, desired_type
                 ):
-                    time.sleep(0.3)
-                    # Re-catalog to find the new block
-                    new_blocks = self.rise._catalog_blocks_in_editor()
-                    for nb in new_blocks:
-                        if (nb["index"] >= insertion_idx
-                                and nb["type"] != "continue"):
-                            edited = self._fill_block_content(
-                                nb["index"], texts
-                            )
-                            total_edited += edited
+                    time.sleep(1.0)  # Wait for Rise 360 to render new block
+                    self.rise.dismiss_sidebar_overlay()
+                    add_offset += 1
+                    new_block_idx = insertion_idx + 1
+
+                    # Fill via pencil → sidebar (handles everything)
+                    edited = 0
+                    for fill_attempt in range(2):
+                        edited = self._fill_block_content(
+                            new_block_idx, texts
+                        )
+                        if edited > 0:
                             break
+                        if fill_attempt == 0:
+                            time.sleep(1.0)  # Extra wait for editables
+                            self.rise.dismiss_sidebar_overlay()
+                    if edited == 0:
+                        logger.warning(
+                            f"  ADD: bloque '{desired_type}' creado en pos "
+                            f"{new_block_idx} pero sin editables rellenados"
+                        )
+                    total_edited += edited
+                    last_processed_index = new_block_idx
+                else:
+                    logger.warning(
+                        f"  ADD falló en posición {insertion_idx} "
+                        f"para tipo '{desired_type}'"
+                    )
 
             elif act == "FLASHCARD":
                 cards = action.get("cards", [])
@@ -1414,8 +1464,9 @@ class ContentBuilder:
                 if not cards:
                     continue
                 if target_idx >= 0:
+                    adjusted_fc_idx = target_idx + add_offset
                     edited = self.rise.edit_flashcard_sidebar(
-                        target_idx, cards
+                        adjusted_fc_idx, cards
                     )
                 else:
                     # Find first flashcard block
@@ -1464,102 +1515,21 @@ class ContentBuilder:
     def _fill_block_content(
         self, block_idx: int, texts: list[str]
     ) -> int:
-        """Fill a block's editables with the given texts. Returns count edited."""
+        """
+        Fill a block's editables using the PENCIL → SIDEBAR workflow.
+        This is the correct Rise 360 way: click pencil opens a sidebar
+        panel ("Edit Paragraph", "Edit Statement", etc.) with editable
+        fields where the content goes.
+
+        Delegates entirely to rise.edit_block_via_pencil() which handles
+        the full workflow: click block → click pencil → sidebar opens →
+        fill editables in sidebar → close sidebar.
+
+        Returns count edited.
+        """
         if not texts:
             return 0
-
-        wrappers = self.rise.page.locator("[class*='block-wrapper']")
-        if block_idx >= wrappers.count():
-            return 0
-
-        try:
-            wrapper = wrappers.nth(block_idx)
-            wrapper.scroll_into_view_if_needed()
-            time.sleep(0.15)
-
-            try:
-                wrapper.click(timeout=2_000)
-            except Exception:
-                try:
-                    wrapper.click(force=True)
-                except Exception:
-                    return 0
-            time.sleep(0.2)
-
-            # Check block type for interactive handling
-            cls = ""
-            try:
-                cls = wrapper.get_attribute("class") or ""
-            except Exception:
-                pass
-
-            block_type = self.rise._extract_block_type_from_class(cls)
-
-            if block_type in ("quote_carousel", "accordion", "tabs"):
-                edited = self._edit_interactive_block(
-                    wrapper, block_type, block_idx, texts, 0
-                )
-                try:
-                    self.rise.page.keyboard.press("Escape")
-                except Exception:
-                    pass
-                if edited > 0:
-                    logger.info(
-                        f"  [{block_type}:{block_idx}] "
-                        f"{edited} editables (interactive)"
-                    )
-                return edited
-
-            editables = wrapper.locator("[contenteditable='true']")
-            count = editables.count()
-
-            if count == 0:
-                self.rise.page.keyboard.press("Escape")
-                return 0
-
-            edited = 0
-            for i in range(min(count, len(texts))):
-                text = texts[i] if i < len(texts) else ""
-                if not text or not text.strip():
-                    continue
-                try:
-                    ed = editables.nth(i)
-                    if not ed.is_visible(timeout=500):
-                        continue
-                    ed.click()
-                    time.sleep(0.05)
-                    self.rise.page.keyboard.press("Control+a")
-                    self.rise.page.keyboard.press("Delete")
-                    time.sleep(0.05)
-                    paste_large_text(self.rise.page, text)
-                    time.sleep(0.15)
-                    edited += 1
-                except Exception as e:
-                    logger.debug(
-                        f"  Block {block_idx} editable {i} falló: {e}"
-                    )
-                    try:
-                        self.rise.page.keyboard.press("Escape")
-                    except Exception:
-                        pass
-
-            if edited > 0:
-                logger.info(
-                    f"  [{block_type}:{block_idx}] {edited}/{count} editables"
-                )
-
-            self.rise.page.keyboard.press("Escape")
-            time.sleep(0.1)
-            return edited
-
-        except Exception as e:
-            logger.warning(f"  Error en block {block_idx}: {e}")
-            try:
-                self.rise.page.keyboard.press("Escape")
-                self.rise.dismiss_sidebar_overlay()
-            except Exception:
-                pass
-            return 0
+        return self.rise.edit_block_via_pencil(block_idx, texts)
 
     # ── Interactive Block Editing ──────────────────────────────────────────
 
