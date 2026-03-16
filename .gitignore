@@ -1,0 +1,37 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Claude
+.claude/
+
+# Assets
+assets/
+
+#Data
+data/
+
+# Runtime output
+logs/
+screenshots/
+
+# Datos sensibles
+data/content_cache.json
+
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
