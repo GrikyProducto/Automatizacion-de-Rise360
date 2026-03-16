@@ -19,17 +19,21 @@ Crear una aplicación Python que automatice la creación de cursos en Articulate
 
 ### 1. `config.py` — Fuente única de verdad
 ```python
-# Credenciales Rise 360
-EMAIL = "info@griky.co"
-PASSWORD = "GrikyRise2026!"
+# Credenciales Rise 360 (ver .env)
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+EMAIL = os.getenv("RISE_EMAIL")
+PASSWORD = os.getenv("RISE_PASSWORD")
 
 # URLs
 RISE_BASE_URL = "https://rise.articulate.com"
 RISE_DASHBOARD_URL = "https://rise.articulate.com/manage/all-content"
 TEMPLATE_URL = "https://rise.articulate.com/authoring/TEMPLATE_ID"
 
-# Groq API
-GROQ_API_KEY = "gsk_..."
+# Groq API (ver .env)
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = "llama-3.3-70b-versatile"
 GROQ_ENABLED = True
 GROQ_MAX_TOKENS = 4096
